@@ -228,28 +228,45 @@ lexer = lex.lex()
 names = { }
 stack = []
 
-def p_statement(t):
-    '''execution : statement
-            | statement execution '''
+def p_body(t):
+    '''body : LBRACKET compound_statement RBRACKET '''
+    t[0] = t[2]
+
+def p_execution(t):
+    '''execution : compound_statement
+            | body'''
+    if t[1] == '{':
+        t[0] = t[2]
+    else:
+        t[0] = t[1]
+
+def p_compound_statement(t):
+    '''compound_statement :
+            | stmt
+            | stmt SCOLON
+            | compound_statement stmt SCOLON
+            | compound_statement stmt '''
     if len(t) == 2:
+        t[0] = t[1]
+    elif t[2] == ';':
         t[0] = t[1]
     else:
         t[0] = [t[1], t[2]]
 
 def p_statement_drop(t):
-    'statement : DROP SCOLON'
+    'stmt : DROP '
     stack.pop(-1)
 
 def p_statement_dup(t):
-    'statement : DUP SCOLON'
+    'stmt : DUP '
     stack = stack + stack[-1:]
 
 def p_statement_swap(t):
-    'statement : SWAP SCOLON'
+    'stmt : SWAP '
     stack[0], stack[1] = stack[1], stack[0]
 
 def p_statement_unit(t):
-    'statement : UNIT SCOLON'
+    'stmt : UNIT '
     stack.append(Unit)
 
 def p_bool(t):
@@ -268,12 +285,12 @@ def p_statement_value(t):
         t[0] = t[1]
 
 def p_statement_generic_comparison(t):
-    '''statement : EQ SCOLON
-        | NEQ SCOLON
-        | LT SCOLON
-        | GT SCOLON
-        | LE SCOLON
-        | GE SCOLON '''
+    '''stmt : EQ
+        | NEQ
+        | LT
+        | GT
+        | LE
+        | GE  '''
     assert isinstance(stack[-1], Int)
     generic_comparison = t[1]
     if generic_comparison == 'EQ':
@@ -290,9 +307,9 @@ def p_statement_generic_comparison(t):
         stack[-1] = Bool(stack[-1] >= 0)
 
 def p_boolean_comparison(t):
-    '''statement : OR SCOLON
-        | AND SCOLON
-        | XOR SCOLON '''
+    '''stmt : OR
+        | AND
+        | XOR  '''
     bool_comparison = t[1]
     first = stack.pop(-1)
     second = stack.pop(-1)
@@ -317,7 +334,7 @@ def p_boolean_comparison(t):
         print('invalid stack state')
 
 def p_compare_operation(t):
-    '''statement : COMPARE SCOLON'''
+    '''stmt : COMPARE '''
     top = stack.pop(-1)
     if type(top) in (Int, Nat):
         value2 = stack.pop(-1)
@@ -329,14 +346,14 @@ def p_compare_operation(t):
         print('Invalid Stack State')
 
 def p_integer_operations(t):
-    '''statement : NEG SCOLON
-         | ABS SCOLON
-         | ADD SCOLON
-         | SUB SCOLON
-         | MUL SCOLON
-         | EDIV SCOLON
-         | LSL SCOLON
-         | LSR SCOLON '''
+    '''stmt : NEG
+         | ABS
+         | ADD
+         | SUB
+         | MUL
+         | EDIV
+         | LSL
+         | LSR  '''
     integer_operator = t[1]
     value = stack.pop(-1)
     assert type(value) in (Nat, Int)
@@ -369,9 +386,9 @@ def p_integer_operations(t):
         print('invalid stack state')
 
 def p_string_operations(t):
-    '''statement : CONCAT SCOLON
-            | SIZE SCOLON
-            | SLICE SCOLON '''
+    '''stmt : CONCAT
+            | SIZE
+            | SLICE  '''
     if t[1] == 'CONCAT':
         first = stack.pop(-1)
         second = stack.pop(-1)
@@ -389,9 +406,9 @@ def p_string_operations(t):
         stack.append(third.slice(first, second))
 
 def p_pair_operations(t):
-    '''statement : PAIR SCOLON
-            | CAR SCOLON
-            | CDR SCOLON '''
+    '''stmt : PAIR
+            | CAR
+            | CDR  '''
     pair_operation = t[1]
     first = stack.pop(-1)
     if pair_operation == 'PAIR':
@@ -408,9 +425,9 @@ def p_pair_operations(t):
         stack.append(first.right)
 
 def p_set_operations(t):
-    '''statement : EMPTY_SET TYPE SCOLON
-            | MEM SCOLON
-            | UPDATE SCOLON '''
+    '''stmt : EMPTY_SET TYPE
+            | MEM
+            | UPDATE  '''
     if t[1] == 'EMPTY_SET':
         stack.append(Set(t[2]))
     elif t[1] == 'MEM':
@@ -426,8 +443,8 @@ def p_set_operations(t):
         stack.append(stack_set.update(elt, bool))
 
 def p_option_operations(t):
-    '''statement : SOME SCOLON
-            | NONE TYPE SCOLON '''
+    '''stmt : SOME
+            | NONE TYPE  '''
     top = stack.pop(-1)
     if t[1] == 'SOME':
         stack.append(Some(top))
@@ -435,14 +452,14 @@ def p_option_operations(t):
         stack.append(NoneType(t[2]))
 
 def p_union_operations(t):
-    '''statement : LEFT TYPE SCOLON
-            | RIGHT TYPE SCOLON '''
+    '''stmt : LEFT TYPE
+            | RIGHT TYPE  '''
     top = stack.pop(-1)
     stack.append(Or(top, t[2], side=t[1]))
 
 def p_list_operations(t):
-    '''statement : CONS SCOLON
-            | NIL TYPE SCOLON '''
+    '''stmt : CONS
+            | NIL TYPE  '''
     if t[1] == 'NIL':
         stack.append(List(t[2]))
     else:
@@ -452,7 +469,7 @@ def p_list_operations(t):
         stack.append(list.cons(top))
 
 def p_boolean_not(t):
-    'statement : NOT SCOLON'
+    'stmt : NOT '
     bool_comparison = t[1]
     first = stack.pop(-1)
     if isinstance(first, Bool):
@@ -484,7 +501,7 @@ def p_statement_type(t):
         t[0] = Pair(t[3], t[4])
 
 def p_statement_push(t):
-    'statement : PUSH TYPE value SCOLON'
+    'stmt : PUSH TYPE value '
     value = None
     if t[2] == Nat:
         value = Nat(t[3])
@@ -502,7 +519,7 @@ def p_statement_push(t):
         print('type not implemented')
 
 def p_statement_failwith(t):
-    'statement : FAILWITH SCOLON'
+    'stmt : FAILWITH '
     top = stack[-1]
     print(f'fail with {top}')
     print('new stack\n\n')
@@ -514,10 +531,14 @@ def p_error(t):
 
 if __name__ == '__main__':
     parser = yacc.yacc()
-
     while True:
         try:
+            open = False
+            text = ''
             s = input('stack > ')   # Use raw_input on Python 2
+            # while s != '':
+            #     text += s
+            #     s = input()
         except EOFError:
              break
         parser.parse(s)
