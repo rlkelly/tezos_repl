@@ -13,7 +13,7 @@ Rule 2     execution -> compound_statement SCOLON
 Rule 3     execution -> body
 Rule 4     compound_statement -> stmt
 Rule 5     compound_statement -> compound_statement SCOLON stmt
-Rule 6     compound_statement -> compound_statement SCOLON stmt SCOLON
+Rule 6     body -> LBRACKET compound_statement SCOLON RBRACKET
 Rule 7     body -> LBRACKET compound_statement RBRACKET
 Rule 8     body -> LBRACKET RBRACKET
 Rule 9     stmt -> LAMBDA TYPE TYPE body
@@ -97,7 +97,7 @@ GET                  :
 GT                   : 23
 INT                  : 57
 LAMBDA               : 9
-LBRACKET             : 7 8
+LBRACKET             : 6 7 8
 LE                   : 24
 LEFT                 : 49
 LPAIR                : 60
@@ -118,10 +118,10 @@ OR                   : 26
 PAIR                 : 41
 PAIR_CONSTRUCTOR     : 19
 PUSH                 : 61
-RBRACKET             : 7 8
+RBRACKET             : 6 7 8
 RIGHT                : 50
 RPARENS              : 19 60
-SCOLON               : 2 5 6 6
+SCOLON               : 2 5 6
 SIZE                 : 39
 SLICE                : 40
 SOME                 : 47
@@ -142,7 +142,7 @@ body                 : 3 9
 bool                 : 17
 compound_statement   : 1 2 5 6 7
 execution            : 0
-stmt                 : 4 5 6
+stmt                 : 4 5
 value                : 19 19 61
 
 Parsing method: LALR
@@ -155,7 +155,7 @@ state 0
     (3) execution -> . body
     (4) compound_statement -> . stmt
     (5) compound_statement -> . compound_statement SCOLON stmt
-    (6) compound_statement -> . compound_statement SCOLON stmt SCOLON
+    (6) body -> . LBRACKET compound_statement SCOLON RBRACKET
     (7) body -> . LBRACKET compound_statement RBRACKET
     (8) body -> . LBRACKET RBRACKET
     (9) stmt -> . LAMBDA TYPE TYPE body
@@ -261,7 +261,6 @@ state 2
     (1) execution -> compound_statement .
     (2) execution -> compound_statement . SCOLON
     (5) compound_statement -> compound_statement . SCOLON stmt
-    (6) compound_statement -> compound_statement . SCOLON stmt SCOLON
 
     $end            reduce using rule 1 (execution -> compound_statement .)
     SCOLON          shift and go to state 48
@@ -285,11 +284,11 @@ state 4
 
 state 5
 
+    (6) body -> LBRACKET . compound_statement SCOLON RBRACKET
     (7) body -> LBRACKET . compound_statement RBRACKET
     (8) body -> LBRACKET . RBRACKET
     (4) compound_statement -> . stmt
     (5) compound_statement -> . compound_statement SCOLON stmt
-    (6) compound_statement -> . compound_statement SCOLON stmt SCOLON
     (9) stmt -> . LAMBDA TYPE TYPE body
     (10) stmt -> . DROP
     (11) stmt -> . DUP
@@ -832,7 +831,6 @@ state 48
 
     (2) execution -> compound_statement SCOLON .
     (5) compound_statement -> compound_statement SCOLON . stmt
-    (6) compound_statement -> compound_statement SCOLON . stmt SCOLON
     (9) stmt -> . LAMBDA TYPE TYPE body
     (10) stmt -> . DROP
     (11) stmt -> . DUP
@@ -924,12 +922,12 @@ state 48
 
 state 49
 
+    (6) body -> LBRACKET compound_statement . SCOLON RBRACKET
     (7) body -> LBRACKET compound_statement . RBRACKET
     (5) compound_statement -> compound_statement . SCOLON stmt
-    (6) compound_statement -> compound_statement . SCOLON stmt SCOLON
 
-    RBRACKET        shift and go to state 65
-    SCOLON          shift and go to state 66
+    SCOLON          shift and go to state 65
+    RBRACKET        shift and go to state 66
 
 
 state 50
@@ -1139,29 +1137,16 @@ state 63
 state 64
 
     (5) compound_statement -> compound_statement SCOLON stmt .
-    (6) compound_statement -> compound_statement SCOLON stmt . SCOLON
 
-  ! shift/reduce conflict for SCOLON resolved as shift
+    SCOLON          reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
     $end            reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
     RBRACKET        reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
-    SCOLON          shift and go to state 76
-
-  ! SCOLON          [ reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .) ]
 
 
 state 65
 
-    (7) body -> LBRACKET compound_statement RBRACKET .
-
-    $end            reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
-    SCOLON          reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
-    RBRACKET        reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
-
-
-state 66
-
+    (6) body -> LBRACKET compound_statement SCOLON . RBRACKET
     (5) compound_statement -> compound_statement SCOLON . stmt
-    (6) compound_statement -> compound_statement SCOLON . stmt SCOLON
     (9) stmt -> . LAMBDA TYPE TYPE body
     (10) stmt -> . DROP
     (11) stmt -> . DUP
@@ -1205,6 +1190,7 @@ state 66
     (61) stmt -> . PUSH TYPE value
     (62) stmt -> . FAILWITH
 
+    RBRACKET        shift and go to state 76
     LAMBDA          shift and go to state 6
     DROP            shift and go to state 7
     DUP             shift and go to state 8
@@ -1250,9 +1236,19 @@ state 66
 
     stmt                           shift and go to state 64
 
+state 66
+
+    (7) body -> LBRACKET compound_statement RBRACKET .
+
+    $end            reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
+    SCOLON          reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
+    RBRACKET        reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
+
+
 state 67
 
     (9) stmt -> LAMBDA TYPE TYPE . body
+    (6) body -> . LBRACKET compound_statement SCOLON RBRACKET
     (7) body -> . LBRACKET compound_statement RBRACKET
     (8) body -> . LBRACKET RBRACKET
 
@@ -1372,11 +1368,11 @@ state 75
 
 state 76
 
-    (6) compound_statement -> compound_statement SCOLON stmt SCOLON .
+    (6) body -> LBRACKET compound_statement SCOLON RBRACKET .
 
-    SCOLON          reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
-    $end            reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
-    RBRACKET        reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
+    $end            reduce using rule 6 (body -> LBRACKET compound_statement SCOLON RBRACKET .)
+    SCOLON          reduce using rule 6 (body -> LBRACKET compound_statement SCOLON RBRACKET .)
+    RBRACKET        reduce using rule 6 (body -> LBRACKET compound_statement SCOLON RBRACKET .)
 
 
 state 77
@@ -1494,7 +1490,3 @@ state 84
     FALSE           reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
     RPARENS         reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for SCOLON in state 64 resolved as shift

@@ -246,17 +246,17 @@ def p_execution(t):
 
 def p_compound_statement(t):
     '''compound_statement : stmt
-            | compound_statement SCOLON stmt
-            | compound_statement SCOLON stmt SCOLON'''
+            | compound_statement SCOLON stmt'''
     if len(t) <= 2:
         t[0] = t[1]
     else:
         t[0] = [t[1], t[3]]
 
 def p_body(t):
-    '''body : LBRACKET compound_statement RBRACKET
+    '''body : LBRACKET compound_statement SCOLON RBRACKET
+            | LBRACKET compound_statement RBRACKET
             | LBRACKET RBRACKET'''
-    if len(t) == 4:
+    if len(t) >= 4:
         t[0] = t[2]
     else:
         t[0] = NoneType
@@ -267,8 +267,11 @@ def p_lambda_statement(t):
     print(stack[-1].body)
 
 def p_statement_drop(t):
-    'stmt : DROP '
-    stack.pop(-1)
+    'stmt : DROP'
+    def exec_drop(stack):
+        stack.pop(-1)
+        return stack
+    t[0] = exec_drop
 
 def p_statement_dup(t):
     'stmt : DUP '
@@ -368,74 +371,82 @@ def p_integer_operations(t):
          | LSL
          | LSR  '''
     integer_operator = t[1]
-    value = stack.pop(-1)
-    assert type(value) in (Nat, Int)
-    if integer_operator == 'NEG':
-        stack.append(value.neg())
-    elif integer_operator == 'ABS':
-        stack.append(value.abs())
-    elif integer_operator == 'ADD':
-        value2 = stack.pop(-1)
-        stack.append(value.add(value2))
-    elif integer_operator == 'SUB':
-        value2 = stack.pop(-1)
-        stack.append(value.add(value2.neg()))
-    elif integer_operator == 'MUL':
-        value2 = stack.pop(-1)
-        stack.append(value.mul(value2))
-    elif integer_operator == 'EDIV':
-        value2 = stack.pop(-1)
-        stack.append(value.ediv(value2))
-    elif integer_operator == 'LSL':
-        value2 = stack.pop(-1)
-        assert isinstance(value, Nat)
-        stack.append(value.lsl(value2))
-    elif integer_operator == 'LSR':
-        value2 = stack.pop(-1)
-        assert isinstance(value, Nat)
-        stack.append(value.lsr(value2))
-    else:
-        # TODO: better error
-        print('invalid stack state')
+    def exec_integer_op(stack):
+        value = stack.pop(-1)
+        assert type(value) in (Nat, Int)
+        if integer_operator == 'NEG':
+            stack.append(value.neg())
+        elif integer_operator == 'ABS':
+            stack.append(value.abs())
+        elif integer_operator == 'ADD':
+            value2 = stack.pop(-1)
+            stack.append(value.add(value2))
+        elif integer_operator == 'SUB':
+            value2 = stack.pop(-1)
+            stack.append(value.add(value2.neg()))
+        elif integer_operator == 'MUL':
+            value2 = stack.pop(-1)
+            stack.append(value.mul(value2))
+        elif integer_operator == 'EDIV':
+            value2 = stack.pop(-1)
+            stack.append(value.ediv(value2))
+        elif integer_operator == 'LSL':
+            value2 = stack.pop(-1)
+            assert isinstance(value, Nat)
+            stack.append(value.lsl(value2))
+        elif integer_operator == 'LSR':
+            value2 = stack.pop(-1)
+            assert isinstance(value, Nat)
+            stack.append(value.lsr(value2))
+        else:
+            # TODO: better error
+            print('invalid stack state')
+        return stack
+    t[0] = exec_integer_op
 
 def p_string_operations(t):
     '''stmt : CONCAT
             | SIZE
             | SLICE '''
-    if t[1] == 'CONCAT':
-        first = stack.pop(-1)
-        second = stack.pop(-1)
-        assert isinstance(first, String) and isinstance(second, String)
-        stack.append(first.concat(second))
-    elif t[1] == 'SIZE':
-        first = stack.pop(-1)
-        assert type(first) in (String, Set, List) # TODO: Factor this to seperate call
-        stack.append(first.size())
-    elif t[1] == 'SLICE':
-        first = stack.pop(-1)
-        second = stack.pop(-1)
-        third = stack.pop(-1)
-        assert isinstance(first, Nat) and isinstance(second, Nat) and isinstance(third, String)
-        stack.append(third.slice(first, second))
+    string_operation = t[1]
+    def exec_string_op(stack):
+        if string_operation == 'CONCAT':
+            first = stack.pop(-1)
+            second = stack.pop(-1)
+            assert isinstance(first, String) and isinstance(second, String)
+            stack.append(first.concat(second))
+        elif string_operation == 'SIZE':
+            first = stack.pop(-1)
+            assert type(first) in (String, Set, List) # TODO: Factor this to seperate call
+            stack.append(first.size())
+        elif string_operation == 'SLICE':
+            first = stack.pop(-1)
+            second = stack.pop(-1)
+            third = stack.pop(-1)
+            assert isinstance(first, Nat) and isinstance(second, Nat) and isinstance(third, String)
+            stack.append(third.slice(first, second))
+    t[0] = exec_string_op
 
 def p_pair_operations(t):
     '''stmt : PAIR
             | CAR
-            | CDR  '''
+            | CDR '''
     pair_operation = t[1]
-    first = stack.pop(-1)
-    if pair_operation == 'PAIR':
-        second = stack.pop(-1)
-        stack.append(Pair(first, second))
-        return
-    if not isinstance(first, Pair):
-        print('invalid stack state')
-        return
-
-    if pair_operation == 'CAR':
-        stack.append(first.left)
-    elif pair_operation == 'CDR':
-        stack.append(first.right)
+    def exec_pair_operation(stack):
+        first = stack.pop(-1)
+        if pair_operation == 'PAIR':
+            second = stack.pop(-1)
+            stack.append(Pair(first, second))
+            return
+        if not isinstance(first, Pair):
+            print('invalid stack state')
+            return
+        if pair_operation == 'CAR':
+            stack.append(first.left)
+        elif pair_operation == 'CDR':
+            stack.append(first.right)
+        return stack
+    t[0] = exec_pair_operation
 
 def p_set_operations(t):
     '''stmt : EMPTY_SET TYPE
@@ -530,22 +541,27 @@ def p_statement_type(t):
 
 def p_statement_push(t):
     'stmt : PUSH TYPE value'
-    value = None
-    if t[2] == Nat:
-        value = Nat(t[3])
-    elif t[2] == Int:
-        value = Int(t[3])
-    elif t[2] == Bool:
-        value = Bool(t[3])
-    elif t[2] == String:
-        value = String(t[3])
-    elif isinstance(t[2], Pair):
-        value = t[2]((t[3][0], t[3][1]))
-    if value:
-        t[0] = ['PUSH', t[2], t[3]]
-        stack.append(value)
-    else:
-        print('type not implemented')
+    stack_type = t[2]
+    val = t[3]
+    def exec_push(stack):
+        value = None
+        if stack_type == Nat:
+            value = Nat(val)
+        elif stack_type == Int:
+            value = Int(val)
+        elif stack_type == Bool:
+            value = Bool(val)
+        elif stack_type == String:
+            value = String(val)
+        elif isinstance(stack_type, Pair):
+            value = stack_type((val[0], val[1]))
+        if value:
+            t[0] = ['PUSH', stack_type, value]
+            stack.append(value)
+        else:
+            print('type not implemented')
+        return stack
+    t[0] = exec_push
 
 def p_statement_failwith(t):
     'stmt : FAILWITH '
