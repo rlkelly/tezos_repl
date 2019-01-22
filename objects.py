@@ -196,7 +196,8 @@ class Number(int, Tezos):
         self.value = self.value & other.value
         return self
 
-    def bit_not(self):
+    def flip(self):
+        # bit not
         self.value = ~self.value
         return Int(self.value)
 

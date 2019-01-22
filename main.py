@@ -1,7 +1,8 @@
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        NoneType, Pair, String, Bytes, Set, List, Or, Lambda)
+        NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
+        deep_compare)
 
 
 tokens = (
@@ -235,28 +236,35 @@ def p_execution(t):
             | body'''
     # stmt is allowed for the repl
     t[0] = t[1]
+    try:
+        # if type(t[0]) == list:
+        #     for stmt in t[0]:
+        #         stmt()
+        t[0](stack)
+    except:
+        pass
 
 def p_compound_statement(t):
     '''compound_statement : stmt
-            | compound_statement SCOLON stmt'''
+            | compound_statement SCOLON stmt
+            | compound_statement SCOLON stmt SCOLON'''
     if len(t) <= 2:
         t[0] = t[1]
     else:
-        print(t[1], t[3])
         t[0] = [t[1], t[3]]
 
 def p_body(t):
     '''body : LBRACKET compound_statement RBRACKET
             | LBRACKET RBRACKET'''
-    print(len(t))
     if len(t) == 4:
         t[0] = t[2]
     else:
         t[0] = NoneType
+
 def p_lambda_statement(t):
     '''stmt : LAMBDA TYPE TYPE body'''
-    print('body', t[1], t[2], t[3], t[4])
     stack.append(Lambda(t[2], t[3], t[4]))
+    print(stack[-1].body)
 
 def p_statement_drop(t):
     'stmt : DROP '
@@ -339,7 +347,7 @@ def p_boolean_comparison(t):
         print('invalid stack state')
 
 def p_compare_operation(t):
-    '''stmt : COMPARE '''
+    'stmt : COMPARE'
     top = stack.pop(-1)
     if type(top) in (Int, Nat):
         value2 = stack.pop(-1)
@@ -393,7 +401,7 @@ def p_integer_operations(t):
 def p_string_operations(t):
     '''stmt : CONCAT
             | SIZE
-            | SLICE  '''
+            | SLICE '''
     if t[1] == 'CONCAT':
         first = stack.pop(-1)
         second = stack.pop(-1)
@@ -432,7 +440,7 @@ def p_pair_operations(t):
 def p_set_operations(t):
     '''stmt : EMPTY_SET TYPE
             | MEM
-            | UPDATE  '''
+            | UPDATE '''
     if t[1] == 'EMPTY_SET':
         stack.append(Set(t[2]))
     elif t[1] == 'MEM':
@@ -449,7 +457,7 @@ def p_set_operations(t):
 
 def p_option_operations(t):
     '''stmt : SOME
-            | NONE TYPE  '''
+            | NONE TYPE '''
     top = stack.pop(-1)
     if t[1] == 'SOME':
         stack.append(Some(top))
@@ -458,7 +466,7 @@ def p_option_operations(t):
 
 def p_union_operations(t):
     '''stmt : LEFT TYPE
-            | RIGHT TYPE  '''
+            | RIGHT TYPE '''
     top = stack.pop(-1)
     new_or = Or(type(top), t[2], side=t[1])
     new_or.add_value(top)
@@ -466,7 +474,7 @@ def p_union_operations(t):
 
 def p_list_operations(t):
     '''stmt : CONS
-            | NIL TYPE  '''
+            | NIL TYPE '''
     if t[1] == 'NIL':
         stack.append(List(t[2]))
     else:
@@ -476,16 +484,17 @@ def p_list_operations(t):
         stack.append(list.cons(top))
 
 def p_boolean_not(t):
-    'stmt : NOT '
-    bool_comparison = t[1]
-    first = stack.pop(-1)
-    if isinstance(first, Bool):
-        stack.append(first.flip())
-    elif type(first) in (Nat, Int):
-        stack.append(first.bit_not())
-    else:
-        # TODO: better error
-        print('invalid stack state')
+    'stmt : NOT'
+    def exec_not(stack):
+        print('stack', stack)
+        first = stack.pop(-1)
+        if type(first) in (Bool, Nat, Int):
+            stack.append(first.flip())
+        else:
+            # TODO: better error
+            print('invalid stack state')
+        return stack
+    t[0] = exec_not
 
 def p_exec(t):
     'stmt : EXEC'
@@ -493,6 +502,11 @@ def p_exec(t):
     lam_func = stack.pop(-1)
     assert isinstance(lam_func, Lambda)
     assert deep_compare(arg, lam_func.inputs)
+    ministack = [arg]
+    for func in lam_func.body:
+        ministack = func(ministack)
+    assert len(ministack) == 1
+    stack.append(ministack[0])
 
 def p_statement_type(t):
     '''TYPE : NAT
@@ -515,7 +529,7 @@ def p_statement_type(t):
         t[0] = Pair(t[3], t[4])
 
 def p_statement_push(t):
-    'stmt : PUSH TYPE value '
+    'stmt : PUSH TYPE value'
     value = None
     if t[2] == Nat:
         value = Nat(t[3])

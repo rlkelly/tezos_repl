@@ -13,136 +13,137 @@ Rule 2     execution -> compound_statement SCOLON
 Rule 3     execution -> body
 Rule 4     compound_statement -> stmt
 Rule 5     compound_statement -> compound_statement SCOLON stmt
-Rule 6     body -> LBRACKET compound_statement RBRACKET
-Rule 7     body -> LBRACKET RBRACKET
-Rule 8     stmt -> LAMBDA TYPE TYPE body
-Rule 9     stmt -> DROP
-Rule 10    stmt -> DUP
-Rule 11    stmt -> SWAP
-Rule 12    stmt -> UNIT
-Rule 13    bool -> TRUE
-Rule 14    bool -> FALSE
-Rule 15    value -> NUMBER
-Rule 16    value -> bool
-Rule 17    value -> TEXT
-Rule 18    value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS
-Rule 19    stmt -> EQ
-Rule 20    stmt -> NEQ
-Rule 21    stmt -> LT
-Rule 22    stmt -> GT
-Rule 23    stmt -> LE
-Rule 24    stmt -> GE
-Rule 25    stmt -> OR
-Rule 26    stmt -> AND
-Rule 27    stmt -> XOR
-Rule 28    stmt -> COMPARE
-Rule 29    stmt -> NEG
-Rule 30    stmt -> ABS
-Rule 31    stmt -> ADD
-Rule 32    stmt -> SUB
-Rule 33    stmt -> MUL
-Rule 34    stmt -> EDIV
-Rule 35    stmt -> LSL
-Rule 36    stmt -> LSR
-Rule 37    stmt -> CONCAT
-Rule 38    stmt -> SIZE
-Rule 39    stmt -> SLICE
-Rule 40    stmt -> PAIR
-Rule 41    stmt -> CAR
-Rule 42    stmt -> CDR
-Rule 43    stmt -> EMPTY_SET TYPE
-Rule 44    stmt -> MEM
-Rule 45    stmt -> UPDATE
-Rule 46    stmt -> SOME
-Rule 47    stmt -> NONE TYPE
-Rule 48    stmt -> LEFT TYPE
-Rule 49    stmt -> RIGHT TYPE
-Rule 50    stmt -> CONS
-Rule 51    stmt -> NIL TYPE
-Rule 52    stmt -> NOT
-Rule 53    stmt -> EXEC
-Rule 54    TYPE -> NAT
-Rule 55    TYPE -> STRING
-Rule 56    TYPE -> INT
-Rule 57    TYPE -> BOOL
-Rule 58    TYPE -> BYTES
-Rule 59    TYPE -> LPARENS LPAIR TYPE TYPE RPARENS
-Rule 60    stmt -> PUSH TYPE value
-Rule 61    stmt -> FAILWITH
+Rule 6     compound_statement -> compound_statement SCOLON stmt SCOLON
+Rule 7     body -> LBRACKET compound_statement RBRACKET
+Rule 8     body -> LBRACKET RBRACKET
+Rule 9     stmt -> LAMBDA TYPE TYPE body
+Rule 10    stmt -> DROP
+Rule 11    stmt -> DUP
+Rule 12    stmt -> SWAP
+Rule 13    stmt -> UNIT
+Rule 14    bool -> TRUE
+Rule 15    bool -> FALSE
+Rule 16    value -> NUMBER
+Rule 17    value -> bool
+Rule 18    value -> TEXT
+Rule 19    value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS
+Rule 20    stmt -> EQ
+Rule 21    stmt -> NEQ
+Rule 22    stmt -> LT
+Rule 23    stmt -> GT
+Rule 24    stmt -> LE
+Rule 25    stmt -> GE
+Rule 26    stmt -> OR
+Rule 27    stmt -> AND
+Rule 28    stmt -> XOR
+Rule 29    stmt -> COMPARE
+Rule 30    stmt -> NEG
+Rule 31    stmt -> ABS
+Rule 32    stmt -> ADD
+Rule 33    stmt -> SUB
+Rule 34    stmt -> MUL
+Rule 35    stmt -> EDIV
+Rule 36    stmt -> LSL
+Rule 37    stmt -> LSR
+Rule 38    stmt -> CONCAT
+Rule 39    stmt -> SIZE
+Rule 40    stmt -> SLICE
+Rule 41    stmt -> PAIR
+Rule 42    stmt -> CAR
+Rule 43    stmt -> CDR
+Rule 44    stmt -> EMPTY_SET TYPE
+Rule 45    stmt -> MEM
+Rule 46    stmt -> UPDATE
+Rule 47    stmt -> SOME
+Rule 48    stmt -> NONE TYPE
+Rule 49    stmt -> LEFT TYPE
+Rule 50    stmt -> RIGHT TYPE
+Rule 51    stmt -> CONS
+Rule 52    stmt -> NIL TYPE
+Rule 53    stmt -> NOT
+Rule 54    stmt -> EXEC
+Rule 55    TYPE -> NAT
+Rule 56    TYPE -> STRING
+Rule 57    TYPE -> INT
+Rule 58    TYPE -> BOOL
+Rule 59    TYPE -> BYTES
+Rule 60    TYPE -> LPARENS LPAIR TYPE TYPE RPARENS
+Rule 61    stmt -> PUSH TYPE value
+Rule 62    stmt -> FAILWITH
 
 Terminals, with rules where they appear
 
-ABS                  : 30
-ADD                  : 31
-AND                  : 26
-BOOL                 : 57
-BYTES                : 58
-CAR                  : 41
-CDR                  : 42
-COMPARE              : 28
-CONCAT               : 37
-CONS                 : 50
-DROP                 : 9
-DUP                  : 10
-EDIV                 : 34
+ABS                  : 31
+ADD                  : 32
+AND                  : 27
+BOOL                 : 58
+BYTES                : 59
+CAR                  : 42
+CDR                  : 43
+COMPARE              : 29
+CONCAT               : 38
+CONS                 : 51
+DROP                 : 10
+DUP                  : 11
+EDIV                 : 35
 EMPTY_MAP            : 
-EMPTY_SET            : 43
-EQ                   : 19
-EXEC                 : 53
-FAILWITH             : 61
-FALSE                : 14
-GE                   : 24
+EMPTY_SET            : 44
+EQ                   : 20
+EXEC                 : 54
+FAILWITH             : 62
+FALSE                : 15
+GE                   : 25
 GET                  : 
-GT                   : 22
-INT                  : 56
-LAMBDA               : 8
-LBRACKET             : 6 7
-LE                   : 23
-LEFT                 : 48
-LPAIR                : 59
-LPARENS              : 18 59
-LSL                  : 35
-LSR                  : 36
-LT                   : 21
-MEM                  : 44
-MUL                  : 33
-NAT                  : 54
-NEG                  : 29
-NEQ                  : 20
-NIL                  : 51
-NONE                 : 47
-NOT                  : 52
-NUMBER               : 15
-OR                   : 25
-PAIR                 : 40
-PAIR_CONSTRUCTOR     : 18
-PUSH                 : 60
-RBRACKET             : 6 7
-RIGHT                : 49
-RPARENS              : 18 59
-SCOLON               : 2 5
-SIZE                 : 38
-SLICE                : 39
-SOME                 : 46
-STRING               : 55
-SUB                  : 32
-SWAP                 : 11
-TEXT                 : 17
-TRUE                 : 13
-UNIT                 : 12
-UPDATE               : 45
-XOR                  : 27
+GT                   : 23
+INT                  : 57
+LAMBDA               : 9
+LBRACKET             : 7 8
+LE                   : 24
+LEFT                 : 49
+LPAIR                : 60
+LPARENS              : 19 60
+LSL                  : 36
+LSR                  : 37
+LT                   : 22
+MEM                  : 45
+MUL                  : 34
+NAT                  : 55
+NEG                  : 30
+NEQ                  : 21
+NIL                  : 52
+NONE                 : 48
+NOT                  : 53
+NUMBER               : 16
+OR                   : 26
+PAIR                 : 41
+PAIR_CONSTRUCTOR     : 19
+PUSH                 : 61
+RBRACKET             : 7 8
+RIGHT                : 50
+RPARENS              : 19 60
+SCOLON               : 2 5 6 6
+SIZE                 : 39
+SLICE                : 40
+SOME                 : 47
+STRING               : 56
+SUB                  : 33
+SWAP                 : 12
+TEXT                 : 18
+TRUE                 : 14
+UNIT                 : 13
+UPDATE               : 46
+XOR                  : 28
 error                : 
 
 Nonterminals, with rules where they appear
 
-TYPE                 : 8 8 43 47 48 49 51 59 59 60
-body                 : 3 8
-bool                 : 16
-compound_statement   : 1 2 5 6
+TYPE                 : 9 9 44 48 49 50 52 60 60 61
+body                 : 3 9
+bool                 : 17
+compound_statement   : 1 2 5 6 7
 execution            : 0
-stmt                 : 4 5
-value                : 18 18 60
+stmt                 : 4 5 6
+value                : 19 19 61
 
 Parsing method: LALR
 
@@ -154,50 +155,51 @@ state 0
     (3) execution -> . body
     (4) compound_statement -> . stmt
     (5) compound_statement -> . compound_statement SCOLON stmt
-    (6) body -> . LBRACKET compound_statement RBRACKET
-    (7) body -> . LBRACKET RBRACKET
-    (8) stmt -> . LAMBDA TYPE TYPE body
-    (9) stmt -> . DROP
-    (10) stmt -> . DUP
-    (11) stmt -> . SWAP
-    (12) stmt -> . UNIT
-    (19) stmt -> . EQ
-    (20) stmt -> . NEQ
-    (21) stmt -> . LT
-    (22) stmt -> . GT
-    (23) stmt -> . LE
-    (24) stmt -> . GE
-    (25) stmt -> . OR
-    (26) stmt -> . AND
-    (27) stmt -> . XOR
-    (28) stmt -> . COMPARE
-    (29) stmt -> . NEG
-    (30) stmt -> . ABS
-    (31) stmt -> . ADD
-    (32) stmt -> . SUB
-    (33) stmt -> . MUL
-    (34) stmt -> . EDIV
-    (35) stmt -> . LSL
-    (36) stmt -> . LSR
-    (37) stmt -> . CONCAT
-    (38) stmt -> . SIZE
-    (39) stmt -> . SLICE
-    (40) stmt -> . PAIR
-    (41) stmt -> . CAR
-    (42) stmt -> . CDR
-    (43) stmt -> . EMPTY_SET TYPE
-    (44) stmt -> . MEM
-    (45) stmt -> . UPDATE
-    (46) stmt -> . SOME
-    (47) stmt -> . NONE TYPE
-    (48) stmt -> . LEFT TYPE
-    (49) stmt -> . RIGHT TYPE
-    (50) stmt -> . CONS
-    (51) stmt -> . NIL TYPE
-    (52) stmt -> . NOT
-    (53) stmt -> . EXEC
-    (60) stmt -> . PUSH TYPE value
-    (61) stmt -> . FAILWITH
+    (6) compound_statement -> . compound_statement SCOLON stmt SCOLON
+    (7) body -> . LBRACKET compound_statement RBRACKET
+    (8) body -> . LBRACKET RBRACKET
+    (9) stmt -> . LAMBDA TYPE TYPE body
+    (10) stmt -> . DROP
+    (11) stmt -> . DUP
+    (12) stmt -> . SWAP
+    (13) stmt -> . UNIT
+    (20) stmt -> . EQ
+    (21) stmt -> . NEQ
+    (22) stmt -> . LT
+    (23) stmt -> . GT
+    (24) stmt -> . LE
+    (25) stmt -> . GE
+    (26) stmt -> . OR
+    (27) stmt -> . AND
+    (28) stmt -> . XOR
+    (29) stmt -> . COMPARE
+    (30) stmt -> . NEG
+    (31) stmt -> . ABS
+    (32) stmt -> . ADD
+    (33) stmt -> . SUB
+    (34) stmt -> . MUL
+    (35) stmt -> . EDIV
+    (36) stmt -> . LSL
+    (37) stmt -> . LSR
+    (38) stmt -> . CONCAT
+    (39) stmt -> . SIZE
+    (40) stmt -> . SLICE
+    (41) stmt -> . PAIR
+    (42) stmt -> . CAR
+    (43) stmt -> . CDR
+    (44) stmt -> . EMPTY_SET TYPE
+    (45) stmt -> . MEM
+    (46) stmt -> . UPDATE
+    (47) stmt -> . SOME
+    (48) stmt -> . NONE TYPE
+    (49) stmt -> . LEFT TYPE
+    (50) stmt -> . RIGHT TYPE
+    (51) stmt -> . CONS
+    (52) stmt -> . NIL TYPE
+    (53) stmt -> . NOT
+    (54) stmt -> . EXEC
+    (61) stmt -> . PUSH TYPE value
+    (62) stmt -> . FAILWITH
 
     LBRACKET        shift and go to state 5
     LAMBDA          shift and go to state 6
@@ -259,6 +261,7 @@ state 2
     (1) execution -> compound_statement .
     (2) execution -> compound_statement . SCOLON
     (5) compound_statement -> compound_statement . SCOLON stmt
+    (6) compound_statement -> compound_statement . SCOLON stmt SCOLON
 
     $end            reduce using rule 1 (execution -> compound_statement .)
     SCOLON          shift and go to state 48
@@ -282,52 +285,53 @@ state 4
 
 state 5
 
-    (6) body -> LBRACKET . compound_statement RBRACKET
-    (7) body -> LBRACKET . RBRACKET
+    (7) body -> LBRACKET . compound_statement RBRACKET
+    (8) body -> LBRACKET . RBRACKET
     (4) compound_statement -> . stmt
     (5) compound_statement -> . compound_statement SCOLON stmt
-    (8) stmt -> . LAMBDA TYPE TYPE body
-    (9) stmt -> . DROP
-    (10) stmt -> . DUP
-    (11) stmt -> . SWAP
-    (12) stmt -> . UNIT
-    (19) stmt -> . EQ
-    (20) stmt -> . NEQ
-    (21) stmt -> . LT
-    (22) stmt -> . GT
-    (23) stmt -> . LE
-    (24) stmt -> . GE
-    (25) stmt -> . OR
-    (26) stmt -> . AND
-    (27) stmt -> . XOR
-    (28) stmt -> . COMPARE
-    (29) stmt -> . NEG
-    (30) stmt -> . ABS
-    (31) stmt -> . ADD
-    (32) stmt -> . SUB
-    (33) stmt -> . MUL
-    (34) stmt -> . EDIV
-    (35) stmt -> . LSL
-    (36) stmt -> . LSR
-    (37) stmt -> . CONCAT
-    (38) stmt -> . SIZE
-    (39) stmt -> . SLICE
-    (40) stmt -> . PAIR
-    (41) stmt -> . CAR
-    (42) stmt -> . CDR
-    (43) stmt -> . EMPTY_SET TYPE
-    (44) stmt -> . MEM
-    (45) stmt -> . UPDATE
-    (46) stmt -> . SOME
-    (47) stmt -> . NONE TYPE
-    (48) stmt -> . LEFT TYPE
-    (49) stmt -> . RIGHT TYPE
-    (50) stmt -> . CONS
-    (51) stmt -> . NIL TYPE
-    (52) stmt -> . NOT
-    (53) stmt -> . EXEC
-    (60) stmt -> . PUSH TYPE value
-    (61) stmt -> . FAILWITH
+    (6) compound_statement -> . compound_statement SCOLON stmt SCOLON
+    (9) stmt -> . LAMBDA TYPE TYPE body
+    (10) stmt -> . DROP
+    (11) stmt -> . DUP
+    (12) stmt -> . SWAP
+    (13) stmt -> . UNIT
+    (20) stmt -> . EQ
+    (21) stmt -> . NEQ
+    (22) stmt -> . LT
+    (23) stmt -> . GT
+    (24) stmt -> . LE
+    (25) stmt -> . GE
+    (26) stmt -> . OR
+    (27) stmt -> . AND
+    (28) stmt -> . XOR
+    (29) stmt -> . COMPARE
+    (30) stmt -> . NEG
+    (31) stmt -> . ABS
+    (32) stmt -> . ADD
+    (33) stmt -> . SUB
+    (34) stmt -> . MUL
+    (35) stmt -> . EDIV
+    (36) stmt -> . LSL
+    (37) stmt -> . LSR
+    (38) stmt -> . CONCAT
+    (39) stmt -> . SIZE
+    (40) stmt -> . SLICE
+    (41) stmt -> . PAIR
+    (42) stmt -> . CAR
+    (43) stmt -> . CDR
+    (44) stmt -> . EMPTY_SET TYPE
+    (45) stmt -> . MEM
+    (46) stmt -> . UPDATE
+    (47) stmt -> . SOME
+    (48) stmt -> . NONE TYPE
+    (49) stmt -> . LEFT TYPE
+    (50) stmt -> . RIGHT TYPE
+    (51) stmt -> . CONS
+    (52) stmt -> . NIL TYPE
+    (53) stmt -> . NOT
+    (54) stmt -> . EXEC
+    (61) stmt -> . PUSH TYPE value
+    (62) stmt -> . FAILWITH
 
     RBRACKET        shift and go to state 50
     LAMBDA          shift and go to state 6
@@ -378,13 +382,13 @@ state 5
 
 state 6
 
-    (8) stmt -> LAMBDA . TYPE TYPE body
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (9) stmt -> LAMBDA . TYPE TYPE body
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -397,265 +401,265 @@ state 6
 
 state 7
 
-    (9) stmt -> DROP .
+    (10) stmt -> DROP .
 
-    SCOLON          reduce using rule 9 (stmt -> DROP .)
-    $end            reduce using rule 9 (stmt -> DROP .)
-    RBRACKET        reduce using rule 9 (stmt -> DROP .)
+    SCOLON          reduce using rule 10 (stmt -> DROP .)
+    $end            reduce using rule 10 (stmt -> DROP .)
+    RBRACKET        reduce using rule 10 (stmt -> DROP .)
 
 
 state 8
 
-    (10) stmt -> DUP .
+    (11) stmt -> DUP .
 
-    SCOLON          reduce using rule 10 (stmt -> DUP .)
-    $end            reduce using rule 10 (stmt -> DUP .)
-    RBRACKET        reduce using rule 10 (stmt -> DUP .)
+    SCOLON          reduce using rule 11 (stmt -> DUP .)
+    $end            reduce using rule 11 (stmt -> DUP .)
+    RBRACKET        reduce using rule 11 (stmt -> DUP .)
 
 
 state 9
 
-    (11) stmt -> SWAP .
+    (12) stmt -> SWAP .
 
-    SCOLON          reduce using rule 11 (stmt -> SWAP .)
-    $end            reduce using rule 11 (stmt -> SWAP .)
-    RBRACKET        reduce using rule 11 (stmt -> SWAP .)
+    SCOLON          reduce using rule 12 (stmt -> SWAP .)
+    $end            reduce using rule 12 (stmt -> SWAP .)
+    RBRACKET        reduce using rule 12 (stmt -> SWAP .)
 
 
 state 10
 
-    (12) stmt -> UNIT .
+    (13) stmt -> UNIT .
 
-    SCOLON          reduce using rule 12 (stmt -> UNIT .)
-    $end            reduce using rule 12 (stmt -> UNIT .)
-    RBRACKET        reduce using rule 12 (stmt -> UNIT .)
+    SCOLON          reduce using rule 13 (stmt -> UNIT .)
+    $end            reduce using rule 13 (stmt -> UNIT .)
+    RBRACKET        reduce using rule 13 (stmt -> UNIT .)
 
 
 state 11
 
-    (19) stmt -> EQ .
+    (20) stmt -> EQ .
 
-    SCOLON          reduce using rule 19 (stmt -> EQ .)
-    $end            reduce using rule 19 (stmt -> EQ .)
-    RBRACKET        reduce using rule 19 (stmt -> EQ .)
+    SCOLON          reduce using rule 20 (stmt -> EQ .)
+    $end            reduce using rule 20 (stmt -> EQ .)
+    RBRACKET        reduce using rule 20 (stmt -> EQ .)
 
 
 state 12
 
-    (20) stmt -> NEQ .
+    (21) stmt -> NEQ .
 
-    SCOLON          reduce using rule 20 (stmt -> NEQ .)
-    $end            reduce using rule 20 (stmt -> NEQ .)
-    RBRACKET        reduce using rule 20 (stmt -> NEQ .)
+    SCOLON          reduce using rule 21 (stmt -> NEQ .)
+    $end            reduce using rule 21 (stmt -> NEQ .)
+    RBRACKET        reduce using rule 21 (stmt -> NEQ .)
 
 
 state 13
 
-    (21) stmt -> LT .
+    (22) stmt -> LT .
 
-    SCOLON          reduce using rule 21 (stmt -> LT .)
-    $end            reduce using rule 21 (stmt -> LT .)
-    RBRACKET        reduce using rule 21 (stmt -> LT .)
+    SCOLON          reduce using rule 22 (stmt -> LT .)
+    $end            reduce using rule 22 (stmt -> LT .)
+    RBRACKET        reduce using rule 22 (stmt -> LT .)
 
 
 state 14
 
-    (22) stmt -> GT .
+    (23) stmt -> GT .
 
-    SCOLON          reduce using rule 22 (stmt -> GT .)
-    $end            reduce using rule 22 (stmt -> GT .)
-    RBRACKET        reduce using rule 22 (stmt -> GT .)
+    SCOLON          reduce using rule 23 (stmt -> GT .)
+    $end            reduce using rule 23 (stmt -> GT .)
+    RBRACKET        reduce using rule 23 (stmt -> GT .)
 
 
 state 15
 
-    (23) stmt -> LE .
+    (24) stmt -> LE .
 
-    SCOLON          reduce using rule 23 (stmt -> LE .)
-    $end            reduce using rule 23 (stmt -> LE .)
-    RBRACKET        reduce using rule 23 (stmt -> LE .)
+    SCOLON          reduce using rule 24 (stmt -> LE .)
+    $end            reduce using rule 24 (stmt -> LE .)
+    RBRACKET        reduce using rule 24 (stmt -> LE .)
 
 
 state 16
 
-    (24) stmt -> GE .
+    (25) stmt -> GE .
 
-    SCOLON          reduce using rule 24 (stmt -> GE .)
-    $end            reduce using rule 24 (stmt -> GE .)
-    RBRACKET        reduce using rule 24 (stmt -> GE .)
+    SCOLON          reduce using rule 25 (stmt -> GE .)
+    $end            reduce using rule 25 (stmt -> GE .)
+    RBRACKET        reduce using rule 25 (stmt -> GE .)
 
 
 state 17
 
-    (25) stmt -> OR .
+    (26) stmt -> OR .
 
-    SCOLON          reduce using rule 25 (stmt -> OR .)
-    $end            reduce using rule 25 (stmt -> OR .)
-    RBRACKET        reduce using rule 25 (stmt -> OR .)
+    SCOLON          reduce using rule 26 (stmt -> OR .)
+    $end            reduce using rule 26 (stmt -> OR .)
+    RBRACKET        reduce using rule 26 (stmt -> OR .)
 
 
 state 18
 
-    (26) stmt -> AND .
+    (27) stmt -> AND .
 
-    SCOLON          reduce using rule 26 (stmt -> AND .)
-    $end            reduce using rule 26 (stmt -> AND .)
-    RBRACKET        reduce using rule 26 (stmt -> AND .)
+    SCOLON          reduce using rule 27 (stmt -> AND .)
+    $end            reduce using rule 27 (stmt -> AND .)
+    RBRACKET        reduce using rule 27 (stmt -> AND .)
 
 
 state 19
 
-    (27) stmt -> XOR .
+    (28) stmt -> XOR .
 
-    SCOLON          reduce using rule 27 (stmt -> XOR .)
-    $end            reduce using rule 27 (stmt -> XOR .)
-    RBRACKET        reduce using rule 27 (stmt -> XOR .)
+    SCOLON          reduce using rule 28 (stmt -> XOR .)
+    $end            reduce using rule 28 (stmt -> XOR .)
+    RBRACKET        reduce using rule 28 (stmt -> XOR .)
 
 
 state 20
 
-    (28) stmt -> COMPARE .
+    (29) stmt -> COMPARE .
 
-    SCOLON          reduce using rule 28 (stmt -> COMPARE .)
-    $end            reduce using rule 28 (stmt -> COMPARE .)
-    RBRACKET        reduce using rule 28 (stmt -> COMPARE .)
+    SCOLON          reduce using rule 29 (stmt -> COMPARE .)
+    $end            reduce using rule 29 (stmt -> COMPARE .)
+    RBRACKET        reduce using rule 29 (stmt -> COMPARE .)
 
 
 state 21
 
-    (29) stmt -> NEG .
+    (30) stmt -> NEG .
 
-    SCOLON          reduce using rule 29 (stmt -> NEG .)
-    $end            reduce using rule 29 (stmt -> NEG .)
-    RBRACKET        reduce using rule 29 (stmt -> NEG .)
+    SCOLON          reduce using rule 30 (stmt -> NEG .)
+    $end            reduce using rule 30 (stmt -> NEG .)
+    RBRACKET        reduce using rule 30 (stmt -> NEG .)
 
 
 state 22
 
-    (30) stmt -> ABS .
+    (31) stmt -> ABS .
 
-    SCOLON          reduce using rule 30 (stmt -> ABS .)
-    $end            reduce using rule 30 (stmt -> ABS .)
-    RBRACKET        reduce using rule 30 (stmt -> ABS .)
+    SCOLON          reduce using rule 31 (stmt -> ABS .)
+    $end            reduce using rule 31 (stmt -> ABS .)
+    RBRACKET        reduce using rule 31 (stmt -> ABS .)
 
 
 state 23
 
-    (31) stmt -> ADD .
+    (32) stmt -> ADD .
 
-    SCOLON          reduce using rule 31 (stmt -> ADD .)
-    $end            reduce using rule 31 (stmt -> ADD .)
-    RBRACKET        reduce using rule 31 (stmt -> ADD .)
+    SCOLON          reduce using rule 32 (stmt -> ADD .)
+    $end            reduce using rule 32 (stmt -> ADD .)
+    RBRACKET        reduce using rule 32 (stmt -> ADD .)
 
 
 state 24
 
-    (32) stmt -> SUB .
+    (33) stmt -> SUB .
 
-    SCOLON          reduce using rule 32 (stmt -> SUB .)
-    $end            reduce using rule 32 (stmt -> SUB .)
-    RBRACKET        reduce using rule 32 (stmt -> SUB .)
+    SCOLON          reduce using rule 33 (stmt -> SUB .)
+    $end            reduce using rule 33 (stmt -> SUB .)
+    RBRACKET        reduce using rule 33 (stmt -> SUB .)
 
 
 state 25
 
-    (33) stmt -> MUL .
+    (34) stmt -> MUL .
 
-    SCOLON          reduce using rule 33 (stmt -> MUL .)
-    $end            reduce using rule 33 (stmt -> MUL .)
-    RBRACKET        reduce using rule 33 (stmt -> MUL .)
+    SCOLON          reduce using rule 34 (stmt -> MUL .)
+    $end            reduce using rule 34 (stmt -> MUL .)
+    RBRACKET        reduce using rule 34 (stmt -> MUL .)
 
 
 state 26
 
-    (34) stmt -> EDIV .
+    (35) stmt -> EDIV .
 
-    SCOLON          reduce using rule 34 (stmt -> EDIV .)
-    $end            reduce using rule 34 (stmt -> EDIV .)
-    RBRACKET        reduce using rule 34 (stmt -> EDIV .)
+    SCOLON          reduce using rule 35 (stmt -> EDIV .)
+    $end            reduce using rule 35 (stmt -> EDIV .)
+    RBRACKET        reduce using rule 35 (stmt -> EDIV .)
 
 
 state 27
 
-    (35) stmt -> LSL .
+    (36) stmt -> LSL .
 
-    SCOLON          reduce using rule 35 (stmt -> LSL .)
-    $end            reduce using rule 35 (stmt -> LSL .)
-    RBRACKET        reduce using rule 35 (stmt -> LSL .)
+    SCOLON          reduce using rule 36 (stmt -> LSL .)
+    $end            reduce using rule 36 (stmt -> LSL .)
+    RBRACKET        reduce using rule 36 (stmt -> LSL .)
 
 
 state 28
 
-    (36) stmt -> LSR .
+    (37) stmt -> LSR .
 
-    SCOLON          reduce using rule 36 (stmt -> LSR .)
-    $end            reduce using rule 36 (stmt -> LSR .)
-    RBRACKET        reduce using rule 36 (stmt -> LSR .)
+    SCOLON          reduce using rule 37 (stmt -> LSR .)
+    $end            reduce using rule 37 (stmt -> LSR .)
+    RBRACKET        reduce using rule 37 (stmt -> LSR .)
 
 
 state 29
 
-    (37) stmt -> CONCAT .
+    (38) stmt -> CONCAT .
 
-    SCOLON          reduce using rule 37 (stmt -> CONCAT .)
-    $end            reduce using rule 37 (stmt -> CONCAT .)
-    RBRACKET        reduce using rule 37 (stmt -> CONCAT .)
+    SCOLON          reduce using rule 38 (stmt -> CONCAT .)
+    $end            reduce using rule 38 (stmt -> CONCAT .)
+    RBRACKET        reduce using rule 38 (stmt -> CONCAT .)
 
 
 state 30
 
-    (38) stmt -> SIZE .
+    (39) stmt -> SIZE .
 
-    SCOLON          reduce using rule 38 (stmt -> SIZE .)
-    $end            reduce using rule 38 (stmt -> SIZE .)
-    RBRACKET        reduce using rule 38 (stmt -> SIZE .)
+    SCOLON          reduce using rule 39 (stmt -> SIZE .)
+    $end            reduce using rule 39 (stmt -> SIZE .)
+    RBRACKET        reduce using rule 39 (stmt -> SIZE .)
 
 
 state 31
 
-    (39) stmt -> SLICE .
+    (40) stmt -> SLICE .
 
-    SCOLON          reduce using rule 39 (stmt -> SLICE .)
-    $end            reduce using rule 39 (stmt -> SLICE .)
-    RBRACKET        reduce using rule 39 (stmt -> SLICE .)
+    SCOLON          reduce using rule 40 (stmt -> SLICE .)
+    $end            reduce using rule 40 (stmt -> SLICE .)
+    RBRACKET        reduce using rule 40 (stmt -> SLICE .)
 
 
 state 32
 
-    (40) stmt -> PAIR .
+    (41) stmt -> PAIR .
 
-    SCOLON          reduce using rule 40 (stmt -> PAIR .)
-    $end            reduce using rule 40 (stmt -> PAIR .)
-    RBRACKET        reduce using rule 40 (stmt -> PAIR .)
+    SCOLON          reduce using rule 41 (stmt -> PAIR .)
+    $end            reduce using rule 41 (stmt -> PAIR .)
+    RBRACKET        reduce using rule 41 (stmt -> PAIR .)
 
 
 state 33
 
-    (41) stmt -> CAR .
+    (42) stmt -> CAR .
 
-    SCOLON          reduce using rule 41 (stmt -> CAR .)
-    $end            reduce using rule 41 (stmt -> CAR .)
-    RBRACKET        reduce using rule 41 (stmt -> CAR .)
+    SCOLON          reduce using rule 42 (stmt -> CAR .)
+    $end            reduce using rule 42 (stmt -> CAR .)
+    RBRACKET        reduce using rule 42 (stmt -> CAR .)
 
 
 state 34
 
-    (42) stmt -> CDR .
+    (43) stmt -> CDR .
 
-    SCOLON          reduce using rule 42 (stmt -> CDR .)
-    $end            reduce using rule 42 (stmt -> CDR .)
-    RBRACKET        reduce using rule 42 (stmt -> CDR .)
+    SCOLON          reduce using rule 43 (stmt -> CDR .)
+    $end            reduce using rule 43 (stmt -> CDR .)
+    RBRACKET        reduce using rule 43 (stmt -> CDR .)
 
 
 state 35
 
-    (43) stmt -> EMPTY_SET . TYPE
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (44) stmt -> EMPTY_SET . TYPE
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -668,40 +672,40 @@ state 35
 
 state 36
 
-    (44) stmt -> MEM .
+    (45) stmt -> MEM .
 
-    SCOLON          reduce using rule 44 (stmt -> MEM .)
-    $end            reduce using rule 44 (stmt -> MEM .)
-    RBRACKET        reduce using rule 44 (stmt -> MEM .)
+    SCOLON          reduce using rule 45 (stmt -> MEM .)
+    $end            reduce using rule 45 (stmt -> MEM .)
+    RBRACKET        reduce using rule 45 (stmt -> MEM .)
 
 
 state 37
 
-    (45) stmt -> UPDATE .
+    (46) stmt -> UPDATE .
 
-    SCOLON          reduce using rule 45 (stmt -> UPDATE .)
-    $end            reduce using rule 45 (stmt -> UPDATE .)
-    RBRACKET        reduce using rule 45 (stmt -> UPDATE .)
+    SCOLON          reduce using rule 46 (stmt -> UPDATE .)
+    $end            reduce using rule 46 (stmt -> UPDATE .)
+    RBRACKET        reduce using rule 46 (stmt -> UPDATE .)
 
 
 state 38
 
-    (46) stmt -> SOME .
+    (47) stmt -> SOME .
 
-    SCOLON          reduce using rule 46 (stmt -> SOME .)
-    $end            reduce using rule 46 (stmt -> SOME .)
-    RBRACKET        reduce using rule 46 (stmt -> SOME .)
+    SCOLON          reduce using rule 47 (stmt -> SOME .)
+    $end            reduce using rule 47 (stmt -> SOME .)
+    RBRACKET        reduce using rule 47 (stmt -> SOME .)
 
 
 state 39
 
-    (47) stmt -> NONE . TYPE
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (48) stmt -> NONE . TYPE
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -714,13 +718,13 @@ state 39
 
 state 40
 
-    (48) stmt -> LEFT . TYPE
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (49) stmt -> LEFT . TYPE
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -733,13 +737,13 @@ state 40
 
 state 41
 
-    (49) stmt -> RIGHT . TYPE
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (50) stmt -> RIGHT . TYPE
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -752,22 +756,22 @@ state 41
 
 state 42
 
-    (50) stmt -> CONS .
+    (51) stmt -> CONS .
 
-    SCOLON          reduce using rule 50 (stmt -> CONS .)
-    $end            reduce using rule 50 (stmt -> CONS .)
-    RBRACKET        reduce using rule 50 (stmt -> CONS .)
+    SCOLON          reduce using rule 51 (stmt -> CONS .)
+    $end            reduce using rule 51 (stmt -> CONS .)
+    RBRACKET        reduce using rule 51 (stmt -> CONS .)
 
 
 state 43
 
-    (51) stmt -> NIL . TYPE
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (52) stmt -> NIL . TYPE
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -780,31 +784,31 @@ state 43
 
 state 44
 
-    (52) stmt -> NOT .
+    (53) stmt -> NOT .
 
-    SCOLON          reduce using rule 52 (stmt -> NOT .)
-    $end            reduce using rule 52 (stmt -> NOT .)
-    RBRACKET        reduce using rule 52 (stmt -> NOT .)
+    SCOLON          reduce using rule 53 (stmt -> NOT .)
+    $end            reduce using rule 53 (stmt -> NOT .)
+    RBRACKET        reduce using rule 53 (stmt -> NOT .)
 
 
 state 45
 
-    (53) stmt -> EXEC .
+    (54) stmt -> EXEC .
 
-    SCOLON          reduce using rule 53 (stmt -> EXEC .)
-    $end            reduce using rule 53 (stmt -> EXEC .)
-    RBRACKET        reduce using rule 53 (stmt -> EXEC .)
+    SCOLON          reduce using rule 54 (stmt -> EXEC .)
+    $end            reduce using rule 54 (stmt -> EXEC .)
+    RBRACKET        reduce using rule 54 (stmt -> EXEC .)
 
 
 state 46
 
-    (60) stmt -> PUSH . TYPE value
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (61) stmt -> PUSH . TYPE value
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -817,59 +821,60 @@ state 46
 
 state 47
 
-    (61) stmt -> FAILWITH .
+    (62) stmt -> FAILWITH .
 
-    SCOLON          reduce using rule 61 (stmt -> FAILWITH .)
-    $end            reduce using rule 61 (stmt -> FAILWITH .)
-    RBRACKET        reduce using rule 61 (stmt -> FAILWITH .)
+    SCOLON          reduce using rule 62 (stmt -> FAILWITH .)
+    $end            reduce using rule 62 (stmt -> FAILWITH .)
+    RBRACKET        reduce using rule 62 (stmt -> FAILWITH .)
 
 
 state 48
 
     (2) execution -> compound_statement SCOLON .
     (5) compound_statement -> compound_statement SCOLON . stmt
-    (8) stmt -> . LAMBDA TYPE TYPE body
-    (9) stmt -> . DROP
-    (10) stmt -> . DUP
-    (11) stmt -> . SWAP
-    (12) stmt -> . UNIT
-    (19) stmt -> . EQ
-    (20) stmt -> . NEQ
-    (21) stmt -> . LT
-    (22) stmt -> . GT
-    (23) stmt -> . LE
-    (24) stmt -> . GE
-    (25) stmt -> . OR
-    (26) stmt -> . AND
-    (27) stmt -> . XOR
-    (28) stmt -> . COMPARE
-    (29) stmt -> . NEG
-    (30) stmt -> . ABS
-    (31) stmt -> . ADD
-    (32) stmt -> . SUB
-    (33) stmt -> . MUL
-    (34) stmt -> . EDIV
-    (35) stmt -> . LSL
-    (36) stmt -> . LSR
-    (37) stmt -> . CONCAT
-    (38) stmt -> . SIZE
-    (39) stmt -> . SLICE
-    (40) stmt -> . PAIR
-    (41) stmt -> . CAR
-    (42) stmt -> . CDR
-    (43) stmt -> . EMPTY_SET TYPE
-    (44) stmt -> . MEM
-    (45) stmt -> . UPDATE
-    (46) stmt -> . SOME
-    (47) stmt -> . NONE TYPE
-    (48) stmt -> . LEFT TYPE
-    (49) stmt -> . RIGHT TYPE
-    (50) stmt -> . CONS
-    (51) stmt -> . NIL TYPE
-    (52) stmt -> . NOT
-    (53) stmt -> . EXEC
-    (60) stmt -> . PUSH TYPE value
-    (61) stmt -> . FAILWITH
+    (6) compound_statement -> compound_statement SCOLON . stmt SCOLON
+    (9) stmt -> . LAMBDA TYPE TYPE body
+    (10) stmt -> . DROP
+    (11) stmt -> . DUP
+    (12) stmt -> . SWAP
+    (13) stmt -> . UNIT
+    (20) stmt -> . EQ
+    (21) stmt -> . NEQ
+    (22) stmt -> . LT
+    (23) stmt -> . GT
+    (24) stmt -> . LE
+    (25) stmt -> . GE
+    (26) stmt -> . OR
+    (27) stmt -> . AND
+    (28) stmt -> . XOR
+    (29) stmt -> . COMPARE
+    (30) stmt -> . NEG
+    (31) stmt -> . ABS
+    (32) stmt -> . ADD
+    (33) stmt -> . SUB
+    (34) stmt -> . MUL
+    (35) stmt -> . EDIV
+    (36) stmt -> . LSL
+    (37) stmt -> . LSR
+    (38) stmt -> . CONCAT
+    (39) stmt -> . SIZE
+    (40) stmt -> . SLICE
+    (41) stmt -> . PAIR
+    (42) stmt -> . CAR
+    (43) stmt -> . CDR
+    (44) stmt -> . EMPTY_SET TYPE
+    (45) stmt -> . MEM
+    (46) stmt -> . UPDATE
+    (47) stmt -> . SOME
+    (48) stmt -> . NONE TYPE
+    (49) stmt -> . LEFT TYPE
+    (50) stmt -> . RIGHT TYPE
+    (51) stmt -> . CONS
+    (52) stmt -> . NIL TYPE
+    (53) stmt -> . NOT
+    (54) stmt -> . EXEC
+    (61) stmt -> . PUSH TYPE value
+    (62) stmt -> . FAILWITH
 
     $end            reduce using rule 2 (execution -> compound_statement SCOLON .)
     LAMBDA          shift and go to state 6
@@ -919,8 +924,9 @@ state 48
 
 state 49
 
-    (6) body -> LBRACKET compound_statement . RBRACKET
+    (7) body -> LBRACKET compound_statement . RBRACKET
     (5) compound_statement -> compound_statement . SCOLON stmt
+    (6) compound_statement -> compound_statement . SCOLON stmt SCOLON
 
     RBRACKET        shift and go to state 65
     SCOLON          shift and go to state 66
@@ -928,22 +934,22 @@ state 49
 
 state 50
 
-    (7) body -> LBRACKET RBRACKET .
+    (8) body -> LBRACKET RBRACKET .
 
-    $end            reduce using rule 7 (body -> LBRACKET RBRACKET .)
-    SCOLON          reduce using rule 7 (body -> LBRACKET RBRACKET .)
-    RBRACKET        reduce using rule 7 (body -> LBRACKET RBRACKET .)
+    $end            reduce using rule 8 (body -> LBRACKET RBRACKET .)
+    SCOLON          reduce using rule 8 (body -> LBRACKET RBRACKET .)
+    RBRACKET        reduce using rule 8 (body -> LBRACKET RBRACKET .)
 
 
 state 51
 
-    (8) stmt -> LAMBDA TYPE . TYPE body
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (9) stmt -> LAMBDA TYPE . TYPE body
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -956,170 +962,170 @@ state 51
 
 state 52
 
-    (54) TYPE -> NAT .
+    (55) TYPE -> NAT .
 
-    NAT             reduce using rule 54 (TYPE -> NAT .)
-    STRING          reduce using rule 54 (TYPE -> NAT .)
-    INT             reduce using rule 54 (TYPE -> NAT .)
-    BOOL            reduce using rule 54 (TYPE -> NAT .)
-    BYTES           reduce using rule 54 (TYPE -> NAT .)
-    LPARENS         reduce using rule 54 (TYPE -> NAT .)
-    SCOLON          reduce using rule 54 (TYPE -> NAT .)
-    $end            reduce using rule 54 (TYPE -> NAT .)
-    RBRACKET        reduce using rule 54 (TYPE -> NAT .)
-    NUMBER          reduce using rule 54 (TYPE -> NAT .)
-    TEXT            reduce using rule 54 (TYPE -> NAT .)
-    TRUE            reduce using rule 54 (TYPE -> NAT .)
-    FALSE           reduce using rule 54 (TYPE -> NAT .)
-    LBRACKET        reduce using rule 54 (TYPE -> NAT .)
-    RPARENS         reduce using rule 54 (TYPE -> NAT .)
+    NAT             reduce using rule 55 (TYPE -> NAT .)
+    STRING          reduce using rule 55 (TYPE -> NAT .)
+    INT             reduce using rule 55 (TYPE -> NAT .)
+    BOOL            reduce using rule 55 (TYPE -> NAT .)
+    BYTES           reduce using rule 55 (TYPE -> NAT .)
+    LPARENS         reduce using rule 55 (TYPE -> NAT .)
+    SCOLON          reduce using rule 55 (TYPE -> NAT .)
+    $end            reduce using rule 55 (TYPE -> NAT .)
+    RBRACKET        reduce using rule 55 (TYPE -> NAT .)
+    NUMBER          reduce using rule 55 (TYPE -> NAT .)
+    TEXT            reduce using rule 55 (TYPE -> NAT .)
+    TRUE            reduce using rule 55 (TYPE -> NAT .)
+    FALSE           reduce using rule 55 (TYPE -> NAT .)
+    LBRACKET        reduce using rule 55 (TYPE -> NAT .)
+    RPARENS         reduce using rule 55 (TYPE -> NAT .)
 
 
 state 53
 
-    (55) TYPE -> STRING .
+    (56) TYPE -> STRING .
 
-    NAT             reduce using rule 55 (TYPE -> STRING .)
-    STRING          reduce using rule 55 (TYPE -> STRING .)
-    INT             reduce using rule 55 (TYPE -> STRING .)
-    BOOL            reduce using rule 55 (TYPE -> STRING .)
-    BYTES           reduce using rule 55 (TYPE -> STRING .)
-    LPARENS         reduce using rule 55 (TYPE -> STRING .)
-    SCOLON          reduce using rule 55 (TYPE -> STRING .)
-    $end            reduce using rule 55 (TYPE -> STRING .)
-    RBRACKET        reduce using rule 55 (TYPE -> STRING .)
-    NUMBER          reduce using rule 55 (TYPE -> STRING .)
-    TEXT            reduce using rule 55 (TYPE -> STRING .)
-    TRUE            reduce using rule 55 (TYPE -> STRING .)
-    FALSE           reduce using rule 55 (TYPE -> STRING .)
-    LBRACKET        reduce using rule 55 (TYPE -> STRING .)
-    RPARENS         reduce using rule 55 (TYPE -> STRING .)
+    NAT             reduce using rule 56 (TYPE -> STRING .)
+    STRING          reduce using rule 56 (TYPE -> STRING .)
+    INT             reduce using rule 56 (TYPE -> STRING .)
+    BOOL            reduce using rule 56 (TYPE -> STRING .)
+    BYTES           reduce using rule 56 (TYPE -> STRING .)
+    LPARENS         reduce using rule 56 (TYPE -> STRING .)
+    SCOLON          reduce using rule 56 (TYPE -> STRING .)
+    $end            reduce using rule 56 (TYPE -> STRING .)
+    RBRACKET        reduce using rule 56 (TYPE -> STRING .)
+    NUMBER          reduce using rule 56 (TYPE -> STRING .)
+    TEXT            reduce using rule 56 (TYPE -> STRING .)
+    TRUE            reduce using rule 56 (TYPE -> STRING .)
+    FALSE           reduce using rule 56 (TYPE -> STRING .)
+    LBRACKET        reduce using rule 56 (TYPE -> STRING .)
+    RPARENS         reduce using rule 56 (TYPE -> STRING .)
 
 
 state 54
 
-    (56) TYPE -> INT .
+    (57) TYPE -> INT .
 
-    NAT             reduce using rule 56 (TYPE -> INT .)
-    STRING          reduce using rule 56 (TYPE -> INT .)
-    INT             reduce using rule 56 (TYPE -> INT .)
-    BOOL            reduce using rule 56 (TYPE -> INT .)
-    BYTES           reduce using rule 56 (TYPE -> INT .)
-    LPARENS         reduce using rule 56 (TYPE -> INT .)
-    SCOLON          reduce using rule 56 (TYPE -> INT .)
-    $end            reduce using rule 56 (TYPE -> INT .)
-    RBRACKET        reduce using rule 56 (TYPE -> INT .)
-    NUMBER          reduce using rule 56 (TYPE -> INT .)
-    TEXT            reduce using rule 56 (TYPE -> INT .)
-    TRUE            reduce using rule 56 (TYPE -> INT .)
-    FALSE           reduce using rule 56 (TYPE -> INT .)
-    LBRACKET        reduce using rule 56 (TYPE -> INT .)
-    RPARENS         reduce using rule 56 (TYPE -> INT .)
+    NAT             reduce using rule 57 (TYPE -> INT .)
+    STRING          reduce using rule 57 (TYPE -> INT .)
+    INT             reduce using rule 57 (TYPE -> INT .)
+    BOOL            reduce using rule 57 (TYPE -> INT .)
+    BYTES           reduce using rule 57 (TYPE -> INT .)
+    LPARENS         reduce using rule 57 (TYPE -> INT .)
+    SCOLON          reduce using rule 57 (TYPE -> INT .)
+    $end            reduce using rule 57 (TYPE -> INT .)
+    RBRACKET        reduce using rule 57 (TYPE -> INT .)
+    NUMBER          reduce using rule 57 (TYPE -> INT .)
+    TEXT            reduce using rule 57 (TYPE -> INT .)
+    TRUE            reduce using rule 57 (TYPE -> INT .)
+    FALSE           reduce using rule 57 (TYPE -> INT .)
+    LBRACKET        reduce using rule 57 (TYPE -> INT .)
+    RPARENS         reduce using rule 57 (TYPE -> INT .)
 
 
 state 55
 
-    (57) TYPE -> BOOL .
+    (58) TYPE -> BOOL .
 
-    NAT             reduce using rule 57 (TYPE -> BOOL .)
-    STRING          reduce using rule 57 (TYPE -> BOOL .)
-    INT             reduce using rule 57 (TYPE -> BOOL .)
-    BOOL            reduce using rule 57 (TYPE -> BOOL .)
-    BYTES           reduce using rule 57 (TYPE -> BOOL .)
-    LPARENS         reduce using rule 57 (TYPE -> BOOL .)
-    SCOLON          reduce using rule 57 (TYPE -> BOOL .)
-    $end            reduce using rule 57 (TYPE -> BOOL .)
-    RBRACKET        reduce using rule 57 (TYPE -> BOOL .)
-    NUMBER          reduce using rule 57 (TYPE -> BOOL .)
-    TEXT            reduce using rule 57 (TYPE -> BOOL .)
-    TRUE            reduce using rule 57 (TYPE -> BOOL .)
-    FALSE           reduce using rule 57 (TYPE -> BOOL .)
-    LBRACKET        reduce using rule 57 (TYPE -> BOOL .)
-    RPARENS         reduce using rule 57 (TYPE -> BOOL .)
+    NAT             reduce using rule 58 (TYPE -> BOOL .)
+    STRING          reduce using rule 58 (TYPE -> BOOL .)
+    INT             reduce using rule 58 (TYPE -> BOOL .)
+    BOOL            reduce using rule 58 (TYPE -> BOOL .)
+    BYTES           reduce using rule 58 (TYPE -> BOOL .)
+    LPARENS         reduce using rule 58 (TYPE -> BOOL .)
+    SCOLON          reduce using rule 58 (TYPE -> BOOL .)
+    $end            reduce using rule 58 (TYPE -> BOOL .)
+    RBRACKET        reduce using rule 58 (TYPE -> BOOL .)
+    NUMBER          reduce using rule 58 (TYPE -> BOOL .)
+    TEXT            reduce using rule 58 (TYPE -> BOOL .)
+    TRUE            reduce using rule 58 (TYPE -> BOOL .)
+    FALSE           reduce using rule 58 (TYPE -> BOOL .)
+    LBRACKET        reduce using rule 58 (TYPE -> BOOL .)
+    RPARENS         reduce using rule 58 (TYPE -> BOOL .)
 
 
 state 56
 
-    (58) TYPE -> BYTES .
+    (59) TYPE -> BYTES .
 
-    NAT             reduce using rule 58 (TYPE -> BYTES .)
-    STRING          reduce using rule 58 (TYPE -> BYTES .)
-    INT             reduce using rule 58 (TYPE -> BYTES .)
-    BOOL            reduce using rule 58 (TYPE -> BYTES .)
-    BYTES           reduce using rule 58 (TYPE -> BYTES .)
-    LPARENS         reduce using rule 58 (TYPE -> BYTES .)
-    SCOLON          reduce using rule 58 (TYPE -> BYTES .)
-    $end            reduce using rule 58 (TYPE -> BYTES .)
-    RBRACKET        reduce using rule 58 (TYPE -> BYTES .)
-    NUMBER          reduce using rule 58 (TYPE -> BYTES .)
-    TEXT            reduce using rule 58 (TYPE -> BYTES .)
-    TRUE            reduce using rule 58 (TYPE -> BYTES .)
-    FALSE           reduce using rule 58 (TYPE -> BYTES .)
-    LBRACKET        reduce using rule 58 (TYPE -> BYTES .)
-    RPARENS         reduce using rule 58 (TYPE -> BYTES .)
+    NAT             reduce using rule 59 (TYPE -> BYTES .)
+    STRING          reduce using rule 59 (TYPE -> BYTES .)
+    INT             reduce using rule 59 (TYPE -> BYTES .)
+    BOOL            reduce using rule 59 (TYPE -> BYTES .)
+    BYTES           reduce using rule 59 (TYPE -> BYTES .)
+    LPARENS         reduce using rule 59 (TYPE -> BYTES .)
+    SCOLON          reduce using rule 59 (TYPE -> BYTES .)
+    $end            reduce using rule 59 (TYPE -> BYTES .)
+    RBRACKET        reduce using rule 59 (TYPE -> BYTES .)
+    NUMBER          reduce using rule 59 (TYPE -> BYTES .)
+    TEXT            reduce using rule 59 (TYPE -> BYTES .)
+    TRUE            reduce using rule 59 (TYPE -> BYTES .)
+    FALSE           reduce using rule 59 (TYPE -> BYTES .)
+    LBRACKET        reduce using rule 59 (TYPE -> BYTES .)
+    RPARENS         reduce using rule 59 (TYPE -> BYTES .)
 
 
 state 57
 
-    (59) TYPE -> LPARENS . LPAIR TYPE TYPE RPARENS
+    (60) TYPE -> LPARENS . LPAIR TYPE TYPE RPARENS
 
     LPAIR           shift and go to state 68
 
 
 state 58
 
-    (43) stmt -> EMPTY_SET TYPE .
+    (44) stmt -> EMPTY_SET TYPE .
 
-    SCOLON          reduce using rule 43 (stmt -> EMPTY_SET TYPE .)
-    $end            reduce using rule 43 (stmt -> EMPTY_SET TYPE .)
-    RBRACKET        reduce using rule 43 (stmt -> EMPTY_SET TYPE .)
+    SCOLON          reduce using rule 44 (stmt -> EMPTY_SET TYPE .)
+    $end            reduce using rule 44 (stmt -> EMPTY_SET TYPE .)
+    RBRACKET        reduce using rule 44 (stmt -> EMPTY_SET TYPE .)
 
 
 state 59
 
-    (47) stmt -> NONE TYPE .
+    (48) stmt -> NONE TYPE .
 
-    SCOLON          reduce using rule 47 (stmt -> NONE TYPE .)
-    $end            reduce using rule 47 (stmt -> NONE TYPE .)
-    RBRACKET        reduce using rule 47 (stmt -> NONE TYPE .)
+    SCOLON          reduce using rule 48 (stmt -> NONE TYPE .)
+    $end            reduce using rule 48 (stmt -> NONE TYPE .)
+    RBRACKET        reduce using rule 48 (stmt -> NONE TYPE .)
 
 
 state 60
 
-    (48) stmt -> LEFT TYPE .
+    (49) stmt -> LEFT TYPE .
 
-    SCOLON          reduce using rule 48 (stmt -> LEFT TYPE .)
-    $end            reduce using rule 48 (stmt -> LEFT TYPE .)
-    RBRACKET        reduce using rule 48 (stmt -> LEFT TYPE .)
+    SCOLON          reduce using rule 49 (stmt -> LEFT TYPE .)
+    $end            reduce using rule 49 (stmt -> LEFT TYPE .)
+    RBRACKET        reduce using rule 49 (stmt -> LEFT TYPE .)
 
 
 state 61
 
-    (49) stmt -> RIGHT TYPE .
+    (50) stmt -> RIGHT TYPE .
 
-    SCOLON          reduce using rule 49 (stmt -> RIGHT TYPE .)
-    $end            reduce using rule 49 (stmt -> RIGHT TYPE .)
-    RBRACKET        reduce using rule 49 (stmt -> RIGHT TYPE .)
+    SCOLON          reduce using rule 50 (stmt -> RIGHT TYPE .)
+    $end            reduce using rule 50 (stmt -> RIGHT TYPE .)
+    RBRACKET        reduce using rule 50 (stmt -> RIGHT TYPE .)
 
 
 state 62
 
-    (51) stmt -> NIL TYPE .
+    (52) stmt -> NIL TYPE .
 
-    SCOLON          reduce using rule 51 (stmt -> NIL TYPE .)
-    $end            reduce using rule 51 (stmt -> NIL TYPE .)
-    RBRACKET        reduce using rule 51 (stmt -> NIL TYPE .)
+    SCOLON          reduce using rule 52 (stmt -> NIL TYPE .)
+    $end            reduce using rule 52 (stmt -> NIL TYPE .)
+    RBRACKET        reduce using rule 52 (stmt -> NIL TYPE .)
 
 
 state 63
 
-    (60) stmt -> PUSH TYPE . value
-    (15) value -> . NUMBER
-    (16) value -> . bool
-    (17) value -> . TEXT
-    (18) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (13) bool -> . TRUE
-    (14) bool -> . FALSE
+    (61) stmt -> PUSH TYPE . value
+    (16) value -> . NUMBER
+    (17) value -> . bool
+    (18) value -> . TEXT
+    (19) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (14) bool -> . TRUE
+    (15) bool -> . FALSE
 
     NUMBER          shift and go to state 70
     TEXT            shift and go to state 72
@@ -1133,66 +1139,71 @@ state 63
 state 64
 
     (5) compound_statement -> compound_statement SCOLON stmt .
+    (6) compound_statement -> compound_statement SCOLON stmt . SCOLON
 
-    SCOLON          reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
+  ! shift/reduce conflict for SCOLON resolved as shift
     $end            reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
     RBRACKET        reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .)
+    SCOLON          shift and go to state 76
+
+  ! SCOLON          [ reduce using rule 5 (compound_statement -> compound_statement SCOLON stmt .) ]
 
 
 state 65
 
-    (6) body -> LBRACKET compound_statement RBRACKET .
+    (7) body -> LBRACKET compound_statement RBRACKET .
 
-    $end            reduce using rule 6 (body -> LBRACKET compound_statement RBRACKET .)
-    SCOLON          reduce using rule 6 (body -> LBRACKET compound_statement RBRACKET .)
-    RBRACKET        reduce using rule 6 (body -> LBRACKET compound_statement RBRACKET .)
+    $end            reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
+    SCOLON          reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
+    RBRACKET        reduce using rule 7 (body -> LBRACKET compound_statement RBRACKET .)
 
 
 state 66
 
     (5) compound_statement -> compound_statement SCOLON . stmt
-    (8) stmt -> . LAMBDA TYPE TYPE body
-    (9) stmt -> . DROP
-    (10) stmt -> . DUP
-    (11) stmt -> . SWAP
-    (12) stmt -> . UNIT
-    (19) stmt -> . EQ
-    (20) stmt -> . NEQ
-    (21) stmt -> . LT
-    (22) stmt -> . GT
-    (23) stmt -> . LE
-    (24) stmt -> . GE
-    (25) stmt -> . OR
-    (26) stmt -> . AND
-    (27) stmt -> . XOR
-    (28) stmt -> . COMPARE
-    (29) stmt -> . NEG
-    (30) stmt -> . ABS
-    (31) stmt -> . ADD
-    (32) stmt -> . SUB
-    (33) stmt -> . MUL
-    (34) stmt -> . EDIV
-    (35) stmt -> . LSL
-    (36) stmt -> . LSR
-    (37) stmt -> . CONCAT
-    (38) stmt -> . SIZE
-    (39) stmt -> . SLICE
-    (40) stmt -> . PAIR
-    (41) stmt -> . CAR
-    (42) stmt -> . CDR
-    (43) stmt -> . EMPTY_SET TYPE
-    (44) stmt -> . MEM
-    (45) stmt -> . UPDATE
-    (46) stmt -> . SOME
-    (47) stmt -> . NONE TYPE
-    (48) stmt -> . LEFT TYPE
-    (49) stmt -> . RIGHT TYPE
-    (50) stmt -> . CONS
-    (51) stmt -> . NIL TYPE
-    (52) stmt -> . NOT
-    (53) stmt -> . EXEC
-    (60) stmt -> . PUSH TYPE value
-    (61) stmt -> . FAILWITH
+    (6) compound_statement -> compound_statement SCOLON . stmt SCOLON
+    (9) stmt -> . LAMBDA TYPE TYPE body
+    (10) stmt -> . DROP
+    (11) stmt -> . DUP
+    (12) stmt -> . SWAP
+    (13) stmt -> . UNIT
+    (20) stmt -> . EQ
+    (21) stmt -> . NEQ
+    (22) stmt -> . LT
+    (23) stmt -> . GT
+    (24) stmt -> . LE
+    (25) stmt -> . GE
+    (26) stmt -> . OR
+    (27) stmt -> . AND
+    (28) stmt -> . XOR
+    (29) stmt -> . COMPARE
+    (30) stmt -> . NEG
+    (31) stmt -> . ABS
+    (32) stmt -> . ADD
+    (33) stmt -> . SUB
+    (34) stmt -> . MUL
+    (35) stmt -> . EDIV
+    (36) stmt -> . LSL
+    (37) stmt -> . LSR
+    (38) stmt -> . CONCAT
+    (39) stmt -> . SIZE
+    (40) stmt -> . SLICE
+    (41) stmt -> . PAIR
+    (42) stmt -> . CAR
+    (43) stmt -> . CDR
+    (44) stmt -> . EMPTY_SET TYPE
+    (45) stmt -> . MEM
+    (46) stmt -> . UPDATE
+    (47) stmt -> . SOME
+    (48) stmt -> . NONE TYPE
+    (49) stmt -> . LEFT TYPE
+    (50) stmt -> . RIGHT TYPE
+    (51) stmt -> . CONS
+    (52) stmt -> . NIL TYPE
+    (53) stmt -> . NOT
+    (54) stmt -> . EXEC
+    (61) stmt -> . PUSH TYPE value
+    (62) stmt -> . FAILWITH
 
     LAMBDA          shift and go to state 6
     DROP            shift and go to state 7
@@ -1241,23 +1252,23 @@ state 66
 
 state 67
 
-    (8) stmt -> LAMBDA TYPE TYPE . body
-    (6) body -> . LBRACKET compound_statement RBRACKET
-    (7) body -> . LBRACKET RBRACKET
+    (9) stmt -> LAMBDA TYPE TYPE . body
+    (7) body -> . LBRACKET compound_statement RBRACKET
+    (8) body -> . LBRACKET RBRACKET
 
     LBRACKET        shift and go to state 5
 
-    body                           shift and go to state 76
+    body                           shift and go to state 77
 
 state 68
 
-    (59) TYPE -> LPARENS LPAIR . TYPE TYPE RPARENS
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (60) TYPE -> LPARENS LPAIR . TYPE TYPE RPARENS
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -1266,117 +1277,126 @@ state 68
     BYTES           shift and go to state 56
     LPARENS         shift and go to state 57
 
-    TYPE                           shift and go to state 77
+    TYPE                           shift and go to state 78
 
 state 69
 
-    (60) stmt -> PUSH TYPE value .
+    (61) stmt -> PUSH TYPE value .
 
-    SCOLON          reduce using rule 60 (stmt -> PUSH TYPE value .)
-    $end            reduce using rule 60 (stmt -> PUSH TYPE value .)
-    RBRACKET        reduce using rule 60 (stmt -> PUSH TYPE value .)
+    SCOLON          reduce using rule 61 (stmt -> PUSH TYPE value .)
+    $end            reduce using rule 61 (stmt -> PUSH TYPE value .)
+    RBRACKET        reduce using rule 61 (stmt -> PUSH TYPE value .)
 
 
 state 70
 
-    (15) value -> NUMBER .
+    (16) value -> NUMBER .
 
-    SCOLON          reduce using rule 15 (value -> NUMBER .)
-    $end            reduce using rule 15 (value -> NUMBER .)
-    RBRACKET        reduce using rule 15 (value -> NUMBER .)
-    NUMBER          reduce using rule 15 (value -> NUMBER .)
-    TEXT            reduce using rule 15 (value -> NUMBER .)
-    LPARENS         reduce using rule 15 (value -> NUMBER .)
-    TRUE            reduce using rule 15 (value -> NUMBER .)
-    FALSE           reduce using rule 15 (value -> NUMBER .)
-    RPARENS         reduce using rule 15 (value -> NUMBER .)
+    SCOLON          reduce using rule 16 (value -> NUMBER .)
+    $end            reduce using rule 16 (value -> NUMBER .)
+    RBRACKET        reduce using rule 16 (value -> NUMBER .)
+    NUMBER          reduce using rule 16 (value -> NUMBER .)
+    TEXT            reduce using rule 16 (value -> NUMBER .)
+    LPARENS         reduce using rule 16 (value -> NUMBER .)
+    TRUE            reduce using rule 16 (value -> NUMBER .)
+    FALSE           reduce using rule 16 (value -> NUMBER .)
+    RPARENS         reduce using rule 16 (value -> NUMBER .)
 
 
 state 71
 
-    (16) value -> bool .
+    (17) value -> bool .
 
-    SCOLON          reduce using rule 16 (value -> bool .)
-    $end            reduce using rule 16 (value -> bool .)
-    RBRACKET        reduce using rule 16 (value -> bool .)
-    NUMBER          reduce using rule 16 (value -> bool .)
-    TEXT            reduce using rule 16 (value -> bool .)
-    LPARENS         reduce using rule 16 (value -> bool .)
-    TRUE            reduce using rule 16 (value -> bool .)
-    FALSE           reduce using rule 16 (value -> bool .)
-    RPARENS         reduce using rule 16 (value -> bool .)
+    SCOLON          reduce using rule 17 (value -> bool .)
+    $end            reduce using rule 17 (value -> bool .)
+    RBRACKET        reduce using rule 17 (value -> bool .)
+    NUMBER          reduce using rule 17 (value -> bool .)
+    TEXT            reduce using rule 17 (value -> bool .)
+    LPARENS         reduce using rule 17 (value -> bool .)
+    TRUE            reduce using rule 17 (value -> bool .)
+    FALSE           reduce using rule 17 (value -> bool .)
+    RPARENS         reduce using rule 17 (value -> bool .)
 
 
 state 72
 
-    (17) value -> TEXT .
+    (18) value -> TEXT .
 
-    SCOLON          reduce using rule 17 (value -> TEXT .)
-    $end            reduce using rule 17 (value -> TEXT .)
-    RBRACKET        reduce using rule 17 (value -> TEXT .)
-    NUMBER          reduce using rule 17 (value -> TEXT .)
-    TEXT            reduce using rule 17 (value -> TEXT .)
-    LPARENS         reduce using rule 17 (value -> TEXT .)
-    TRUE            reduce using rule 17 (value -> TEXT .)
-    FALSE           reduce using rule 17 (value -> TEXT .)
-    RPARENS         reduce using rule 17 (value -> TEXT .)
+    SCOLON          reduce using rule 18 (value -> TEXT .)
+    $end            reduce using rule 18 (value -> TEXT .)
+    RBRACKET        reduce using rule 18 (value -> TEXT .)
+    NUMBER          reduce using rule 18 (value -> TEXT .)
+    TEXT            reduce using rule 18 (value -> TEXT .)
+    LPARENS         reduce using rule 18 (value -> TEXT .)
+    TRUE            reduce using rule 18 (value -> TEXT .)
+    FALSE           reduce using rule 18 (value -> TEXT .)
+    RPARENS         reduce using rule 18 (value -> TEXT .)
 
 
 state 73
 
-    (18) value -> LPARENS . PAIR_CONSTRUCTOR value value RPARENS
+    (19) value -> LPARENS . PAIR_CONSTRUCTOR value value RPARENS
 
-    PAIR_CONSTRUCTOR shift and go to state 78
+    PAIR_CONSTRUCTOR shift and go to state 79
 
 
 state 74
 
-    (13) bool -> TRUE .
+    (14) bool -> TRUE .
 
-    SCOLON          reduce using rule 13 (bool -> TRUE .)
-    $end            reduce using rule 13 (bool -> TRUE .)
-    RBRACKET        reduce using rule 13 (bool -> TRUE .)
-    NUMBER          reduce using rule 13 (bool -> TRUE .)
-    TEXT            reduce using rule 13 (bool -> TRUE .)
-    LPARENS         reduce using rule 13 (bool -> TRUE .)
-    TRUE            reduce using rule 13 (bool -> TRUE .)
-    FALSE           reduce using rule 13 (bool -> TRUE .)
-    RPARENS         reduce using rule 13 (bool -> TRUE .)
+    SCOLON          reduce using rule 14 (bool -> TRUE .)
+    $end            reduce using rule 14 (bool -> TRUE .)
+    RBRACKET        reduce using rule 14 (bool -> TRUE .)
+    NUMBER          reduce using rule 14 (bool -> TRUE .)
+    TEXT            reduce using rule 14 (bool -> TRUE .)
+    LPARENS         reduce using rule 14 (bool -> TRUE .)
+    TRUE            reduce using rule 14 (bool -> TRUE .)
+    FALSE           reduce using rule 14 (bool -> TRUE .)
+    RPARENS         reduce using rule 14 (bool -> TRUE .)
 
 
 state 75
 
-    (14) bool -> FALSE .
+    (15) bool -> FALSE .
 
-    SCOLON          reduce using rule 14 (bool -> FALSE .)
-    $end            reduce using rule 14 (bool -> FALSE .)
-    RBRACKET        reduce using rule 14 (bool -> FALSE .)
-    NUMBER          reduce using rule 14 (bool -> FALSE .)
-    TEXT            reduce using rule 14 (bool -> FALSE .)
-    LPARENS         reduce using rule 14 (bool -> FALSE .)
-    TRUE            reduce using rule 14 (bool -> FALSE .)
-    FALSE           reduce using rule 14 (bool -> FALSE .)
-    RPARENS         reduce using rule 14 (bool -> FALSE .)
+    SCOLON          reduce using rule 15 (bool -> FALSE .)
+    $end            reduce using rule 15 (bool -> FALSE .)
+    RBRACKET        reduce using rule 15 (bool -> FALSE .)
+    NUMBER          reduce using rule 15 (bool -> FALSE .)
+    TEXT            reduce using rule 15 (bool -> FALSE .)
+    LPARENS         reduce using rule 15 (bool -> FALSE .)
+    TRUE            reduce using rule 15 (bool -> FALSE .)
+    FALSE           reduce using rule 15 (bool -> FALSE .)
+    RPARENS         reduce using rule 15 (bool -> FALSE .)
 
 
 state 76
 
-    (8) stmt -> LAMBDA TYPE TYPE body .
+    (6) compound_statement -> compound_statement SCOLON stmt SCOLON .
 
-    SCOLON          reduce using rule 8 (stmt -> LAMBDA TYPE TYPE body .)
-    $end            reduce using rule 8 (stmt -> LAMBDA TYPE TYPE body .)
-    RBRACKET        reduce using rule 8 (stmt -> LAMBDA TYPE TYPE body .)
+    SCOLON          reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
+    $end            reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
+    RBRACKET        reduce using rule 6 (compound_statement -> compound_statement SCOLON stmt SCOLON .)
 
 
 state 77
 
-    (59) TYPE -> LPARENS LPAIR TYPE . TYPE RPARENS
-    (54) TYPE -> . NAT
-    (55) TYPE -> . STRING
-    (56) TYPE -> . INT
-    (57) TYPE -> . BOOL
-    (58) TYPE -> . BYTES
-    (59) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (9) stmt -> LAMBDA TYPE TYPE body .
+
+    SCOLON          reduce using rule 9 (stmt -> LAMBDA TYPE TYPE body .)
+    $end            reduce using rule 9 (stmt -> LAMBDA TYPE TYPE body .)
+    RBRACKET        reduce using rule 9 (stmt -> LAMBDA TYPE TYPE body .)
+
+
+state 78
+
+    (60) TYPE -> LPARENS LPAIR TYPE . TYPE RPARENS
+    (55) TYPE -> . NAT
+    (56) TYPE -> . STRING
+    (57) TYPE -> . INT
+    (58) TYPE -> . BOOL
+    (59) TYPE -> . BYTES
+    (60) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
     NAT             shift and go to state 52
     STRING          shift and go to state 53
@@ -1385,43 +1405,17 @@ state 77
     BYTES           shift and go to state 56
     LPARENS         shift and go to state 57
 
-    TYPE                           shift and go to state 79
-
-state 78
-
-    (18) value -> LPARENS PAIR_CONSTRUCTOR . value value RPARENS
-    (15) value -> . NUMBER
-    (16) value -> . bool
-    (17) value -> . TEXT
-    (18) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (13) bool -> . TRUE
-    (14) bool -> . FALSE
-
-    NUMBER          shift and go to state 70
-    TEXT            shift and go to state 72
-    LPARENS         shift and go to state 73
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 75
-
-    value                          shift and go to state 80
-    bool                           shift and go to state 71
+    TYPE                           shift and go to state 80
 
 state 79
 
-    (59) TYPE -> LPARENS LPAIR TYPE TYPE . RPARENS
-
-    RPARENS         shift and go to state 81
-
-
-state 80
-
-    (18) value -> LPARENS PAIR_CONSTRUCTOR value . value RPARENS
-    (15) value -> . NUMBER
-    (16) value -> . bool
-    (17) value -> . TEXT
-    (18) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (13) bool -> . TRUE
-    (14) bool -> . FALSE
+    (19) value -> LPARENS PAIR_CONSTRUCTOR . value value RPARENS
+    (16) value -> . NUMBER
+    (17) value -> . bool
+    (18) value -> . TEXT
+    (19) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (14) bool -> . TRUE
+    (15) bool -> . FALSE
 
     NUMBER          shift and go to state 70
     TEXT            shift and go to state 72
@@ -1429,48 +1423,78 @@ state 80
     TRUE            shift and go to state 74
     FALSE           shift and go to state 75
 
-    value                          shift and go to state 82
+    value                          shift and go to state 81
     bool                           shift and go to state 71
+
+state 80
+
+    (60) TYPE -> LPARENS LPAIR TYPE TYPE . RPARENS
+
+    RPARENS         shift and go to state 82
+
 
 state 81
 
-    (59) TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .
+    (19) value -> LPARENS PAIR_CONSTRUCTOR value . value RPARENS
+    (16) value -> . NUMBER
+    (17) value -> . bool
+    (18) value -> . TEXT
+    (19) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (14) bool -> . TRUE
+    (15) bool -> . FALSE
 
-    NAT             reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    STRING          reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    INT             reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    BOOL            reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    BYTES           reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    LPARENS         reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    SCOLON          reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    $end            reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    RBRACKET        reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    NUMBER          reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    TEXT            reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    TRUE            reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    FALSE           reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    LBRACKET        reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    RPARENS         reduce using rule 59 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    NUMBER          shift and go to state 70
+    TEXT            shift and go to state 72
+    LPARENS         shift and go to state 73
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 75
 
+    value                          shift and go to state 83
+    bool                           shift and go to state 71
 
 state 82
 
-    (18) value -> LPARENS PAIR_CONSTRUCTOR value value . RPARENS
+    (60) TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .
 
-    RPARENS         shift and go to state 83
+    NAT             reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    STRING          reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    INT             reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    BOOL            reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    BYTES           reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    LPARENS         reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    SCOLON          reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    $end            reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    RBRACKET        reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    NUMBER          reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    TEXT            reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    TRUE            reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    FALSE           reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    LBRACKET        reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    RPARENS         reduce using rule 60 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
 
 
 state 83
 
-    (18) value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .
+    (19) value -> LPARENS PAIR_CONSTRUCTOR value value . RPARENS
 
-    SCOLON          reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    $end            reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    RBRACKET        reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    NUMBER          reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    TEXT            reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    LPARENS         reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    TRUE            reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    FALSE           reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    RPARENS         reduce using rule 18 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    RPARENS         shift and go to state 84
 
+
+state 84
+
+    (19) value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .
+
+    SCOLON          reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    $end            reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    RBRACKET        reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    NUMBER          reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    TEXT            reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    LPARENS         reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    TRUE            reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    FALSE           reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    RPARENS         reduce using rule 19 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SCOLON in state 64 resolved as shift
