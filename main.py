@@ -509,15 +509,18 @@ def p_boolean_not(t):
 
 def p_exec(t):
     'stmt : EXEC'
-    arg = stack.pop(-1)
-    lam_func = stack.pop(-1)
-    assert isinstance(lam_func, Lambda)
-    assert deep_compare(arg, lam_func.inputs)
-    ministack = [arg]
-    for func in lam_func.body:
-        ministack = func(ministack)
-    assert len(ministack) == 1
-    stack.append(ministack[0])
+    def func_exec(stack):
+        arg = stack.pop(-1)
+        lam_func = stack.pop(-1)
+        assert isinstance(lam_func, Lambda)
+        assert deep_compare(arg, lam_func.inputs)
+        ministack = [arg]
+        for func in lam_func.body:
+            ministack = func(ministack)
+        assert len(ministack) == 1
+        stack.append(ministack[0])
+        return stack
+    t[0] = func_exec
 
 def p_statement_type(t):
     '''TYPE : NAT
