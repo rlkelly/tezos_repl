@@ -33,14 +33,13 @@ class List(Tezos):
 class Or(Tezos):
     def __init__(self, value, left, right):
         self.left, self.right = left, right
+        self.value = value
         if isinstance(value, left):
-            self.value = value
-            self.left = True
-            self.right = False
+            self.isleft = True
+            self.isright = False
         elif isinstance(value, right):
-            self.left = None
-            self.left = False
-            self.right = True
+            self.isleft = False
+            self.isright = True
         else:
             print('invalid stack state')
 
