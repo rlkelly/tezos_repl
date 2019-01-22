@@ -31,13 +31,18 @@ class List(Tezos):
 
 
 class Or(Tezos):
-    def __init__(self, value, left=True):
-        if left:
-            self.left = value
-            self.right = None
-        else:
+    def __init__(self, value, left, right):
+        self.left, self.right = left, right
+        if isinstance(value, left):
+            self.value = value
+            self.left = True
+            self.right = False
+        elif isinstance(value, right):
             self.left = None
-            self.right = Value
+            self.left = False
+            self.right = True
+        else:
+            print('invalid stack state')
 
 
 class NoneType(Tezos):
@@ -105,6 +110,7 @@ class Set:
 
     def __repr__(self):
         return f'Set:{self.set_type.__name__}:{self.value}'
+
 
 class Some(Tezos):
     def __init__(self):

@@ -1,5 +1,5 @@
 from objects import (Unit, Nat, Int, Bool,
-        Pair, String, Bytes, Set, List)
+        Pair, String, Bytes, Set, List, Or)
 
 
 tokens = (
@@ -74,7 +74,10 @@ tokens = (
     # IF_NONE bt bf
 
     ### Union Operations
-    # TODO: ALL
+    'LEFT',
+    'RIGHT',
+    # 'IF_LEFT',
+    # 'IF_RIGHT',
 
     ### Operations on Lists
     'CONS',
@@ -160,6 +163,10 @@ t_UPDATE        = 'UPDATE'
 t_SOME          = 'SOME'
 t_NONE          = 'NONE'
 
+### Union Operations
+t_LEFT          = 'LEFT'
+t_RIGHT         = 'RIGHT'
+
 ### List Operations
 t_CONS          = 'CONS'
 t_NIL           = 'NIL'
@@ -175,6 +182,8 @@ t_FALSE       = 'False'
 t_TEXT        = '".*"'
 t_LBRACKET    = '{'
 t_RBRACKET    = '}'
+t_LPARENS     = '('
+t_RPARENS     = ')'
 
 def t_NUMBER(t):
     r'-?\d+'
@@ -396,6 +405,15 @@ def p_option_operations(t):
         stack.append(Some(top))
     else:
         stack.append(NoneType(t[2]))
+
+def p_union_operations(t):
+    '''statement : LEFT LPARENS TYPE TYPE RPARENS
+            | RIGHT LPARENS TYPE TYPE RPARENS '''
+    top = stack.pop(-1)
+    if t[1] == 'LEFT':
+        stack.append(Or(top, t[3], t[4]))
+    else:
+        stack.append(Or(top, t[3], t[4]))
 
 def p_list_operations(t):
     '''statement : CONS
