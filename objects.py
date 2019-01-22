@@ -1,18 +1,19 @@
 def deep_compare(first, second):
-    if type(first) != second:
-        print(type(first), second)
+    try:
+        if type(first) == Pair:
+            assert deep_compare(first.left, second.left_type)
+            assert deep_compare(first.right, second.right_type)
+            return True
+        if type(first) == Or:
+            assert type(first.left) == second.left
+            assert type(first.right) == second.right
+            assert first.isleft == second.isleft
+            assert deep_compare(first.value, second.value)
+            return True
+        if type(first) != second:
+            return False
+    except AssertionError:
         return False
-    if type(first) == Pair:
-        assert deep_compare(first.left, second.left_type)
-        assert deep_compare(first.right, second.right_type)
-    if type(first) == Or:
-        assert type(first.left) == second.left
-        assert type(first.right) == second.right
-        assert first.isleft == second.isleft
-        assert deep_compare(first.value, second.value)
-    # except AssertionError as e:
-    #     print(e)
-    #     return False
     return True
 
 class Tezos:
@@ -299,7 +300,10 @@ class String(Tezos):
 
 if __name__ == '__main__':
     p = Pair(Nat, Nat)
-    second = Pair(Nat, Nat)
     p.add_values(3, 4)
-    print(p.left)
-    print(deep_compare(p, second))
+
+    second = Pair(Nat, Nat)
+    third = Pair(Nat, int)
+
+    assert deep_compare(p, second)
+    assert not deep_compare(p, third)
