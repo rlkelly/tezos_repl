@@ -119,7 +119,7 @@ class Some(Tezos):
         self.value = value
 
 
-class Pair(Tezos):
+class Pair:
     def __init__(self, first, second):
         self.left = first
         self.right = second
@@ -210,6 +210,9 @@ class Int(Number, Tezos):
         self.value = value
 
     def __repr__(self):
+        return f'int:{self.value}'
+
+    def __str__(self):
         return f'int:{self.value}'
 
 

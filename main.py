@@ -96,6 +96,8 @@ tokens = (
     'INT',
     'BOOL',
     'BYTES',
+    'LPAIR',
+    'PAIR_CONSTRUCTOR',
 
     'TRUE',
     'FALSE',
@@ -189,6 +191,12 @@ t_LBRACKET    = '{'
 t_RBRACKET    = '}'
 t_LPARENS     = '\('
 t_RPARENS     = '\)'
+t_LPAIR       = 'pair'
+t_PAIR_CONSTRUCTOR = 'Pair'
+
+def t_comment(t):
+    r"[ ]*\043[^\n]*"  # \043 is '#'
+    pass
 
 def t_NUMBER(t):
     r'-?\d+'
@@ -242,8 +250,12 @@ def p_bool(t):
 def p_statement_value(t):
     '''value : NUMBER
         | bool
-        | TEXT '''
-    t[0] = t[1]
+        | TEXT
+        | LPARENS PAIR_CONSTRUCTOR value value RPARENS '''
+    if t[1] == '(':
+        t[0] = (t[3], t[4])
+    else:
+        t[0] = t[1]
 
 def p_statement_generic_comparison(t):
     '''statement : EQ
@@ -446,7 +458,8 @@ def p_statement_type(t):
         | STRING
         | INT
         | BOOL
-        | BYTES '''
+        | BYTES
+        | LPARENS LPAIR TYPE TYPE RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
     elif t[1] == 'string':
@@ -457,6 +470,8 @@ def p_statement_type(t):
         t[0] = Bool
     elif t[1] == 'bytes':
         t[0] = Bytes
+    elif t[1] == '(':
+        t[0] = Pair(t[3], t[4])
 
 def p_statement_push(t):
     'statement : PUSH TYPE value'
@@ -469,6 +484,8 @@ def p_statement_push(t):
         value = Bool(t[3])
     elif t[2] == String:
         value = String(t[3])
+    elif isinstance(t[2], Pair):
+        value = Pair(t[2].left(t[3][0]), t[2].right(t[3][1]))
     if value:
         stack.append(value)
     else:
@@ -482,7 +499,8 @@ def p_statement_failwith(t):
     stack = []
 
 def p_error(t):
-    print("Syntax error at '%s'" % t.value)
+    if t:
+        print("Syntax error at '%s'" % t.value)
 
 if __name__ == '__main__':
     parser = yacc.yacc()
