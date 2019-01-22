@@ -526,7 +526,7 @@ def p_statement_push(t):
     elif t[2] == String:
         value = String(t[3])
     elif isinstance(t[2], Pair):
-        value = t[2].add_values(t[3][0], t[3][1])
+        value = t[2]((t[3][0], t[3][1]))
     if value:
         t[0] = ['PUSH', t[2], t[3]]
         stack.append(value)

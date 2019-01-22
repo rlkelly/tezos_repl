@@ -154,12 +154,18 @@ class Pair:
         self.left = None
         self.right = None
 
-    def add_values(self, left, right):
-        self.left = self.left_type(left)
-        self.right = self.right_type(right)
+    def __call__(self, values):
+        self.left = self.left_type(values[0])
+        self.right = self.right_type(values[1])
+        return self
+
+    def __getitem__(self, ix):
+        if ix == 0:
+            return self.left
+        return self.right
 
     def __repr__(self):
-        return f'PAIR:({self.left_type}:{self.left}, second:{self.right})'
+        return f'PAIR:(left:{self.left_type}:{self.left}, right:{self.right_type}:{self.right})'
 
 
 class Number(int, Tezos):
@@ -300,10 +306,19 @@ class String(Tezos):
 
 if __name__ == '__main__':
     p = Pair(Nat, Nat)
-    p.add_values(3, 4)
+    p((3, 4))
 
     second = Pair(Nat, Nat)
     third = Pair(Nat, int)
 
     assert deep_compare(p, second)
+    assert not deep_compare(p, third)
+
+    p2 = Pair(Pair(Nat, Nat), Int)
+    p2((p, 4))
+
+    second = Pair(Pair(Nat, Nat), Int)
+    third = Pair(Nat, int)
+
+    assert deep_compare(p2, second)
     assert not deep_compare(p, third)
