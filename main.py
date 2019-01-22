@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Pair, String, Bytes, Set, List, Or, Lambda)
+        NoneType, Pair, String, Bytes, Set, List, Or, Lambda)
 
 
 tokens = (
@@ -14,6 +14,7 @@ tokens = (
     'SWAP',
     'PUSH',
     'LAMBDA',
+    'EXEC',
 
     'LBRACKET',
     'RBRACKET',
@@ -126,6 +127,7 @@ t_UNIT        = 'UNIT'
 t_FAILWITH    = 'FAILWITH'
 t_PUSH        = 'PUSH'
 t_LAMBDA      = 'LAMBDA'
+t_EXEC        = 'EXEC'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -225,42 +227,36 @@ def t_error(t):
 import ply.lex as lex
 lexer = lex.lex()
 
-# dictionary of names
-names = { }
 stack = []
 
 def p_execution(t):
     '''execution : compound_statement
-            | stmt
+            | compound_statement SCOLON
             | body'''
     # stmt is allowed for the repl
-    if t[1] == '{':
-        t[0] = t[2]
-    else:
-        t[0] = t[1]
+    t[0] = t[1]
 
 def p_compound_statement(t):
-    '''compound_statement : statement
-            | compound_statement statement
-            | compound_statement stmt'''
-    if len(t) == 2:
-        t[0] = t[1]
-    elif t[2] == ';':
+    '''compound_statement : stmt
+            | compound_statement SCOLON stmt'''
+    if len(t) <= 2:
         t[0] = t[1]
     else:
-        t[0] = [t[1], t[2]]
+        print(t[1], t[3])
+        t[0] = [t[1], t[3]]
 
 def p_body(t):
-    '''body : LBRACKET compound_statement RBRACKET '''
-    t[0] = t[2]
-
-# def p_lambda_statement(t):
-#     '''stmt : LAMBDA type type body'''
-#     t[0] = Lambda(t[2], t[3], t[4])
-
-def p_statement(t):
-    '''statement : stmt SCOLON'''
-    t[0] = t[1]
+    '''body : LBRACKET compound_statement RBRACKET
+            | LBRACKET RBRACKET'''
+    print(len(t))
+    if len(t) == 4:
+        t[0] = t[2]
+    else:
+        t[0] = NoneType
+def p_lambda_statement(t):
+    '''stmt : LAMBDA TYPE TYPE body'''
+    print('body', t[1], t[2], t[3], t[4])
+    stack.append(Lambda(t[2], t[3], t[4]))
 
 def p_statement_drop(t):
     'stmt : DROP '
@@ -464,7 +460,9 @@ def p_union_operations(t):
     '''stmt : LEFT TYPE
             | RIGHT TYPE  '''
     top = stack.pop(-1)
-    stack.append(Or(top, t[2], side=t[1]))
+    new_or = Or(type(top), t[2], side=t[1])
+    new_or.add_value(top)
+    stack.append(new_or)
 
 def p_list_operations(t):
     '''stmt : CONS
@@ -488,6 +486,13 @@ def p_boolean_not(t):
     else:
         # TODO: better error
         print('invalid stack state')
+
+def p_exec(t):
+    'stmt : EXEC'
+    arg = stack.pop(-1)
+    lam_func = stack.pop(-1)
+    assert isinstance(lam_func, Lambda)
+    assert deep_compare(arg, lam_func.inputs)
 
 def p_statement_type(t):
     '''TYPE : NAT
@@ -521,8 +526,9 @@ def p_statement_push(t):
     elif t[2] == String:
         value = String(t[3])
     elif isinstance(t[2], Pair):
-        value = Pair(t[2].left(t[3][0]), t[2].right(t[3][1]))
+        value = t[2].add_values(t[3][0], t[3][1])
     if value:
+        t[0] = ['PUSH', t[2], t[3]]
         stack.append(value)
     else:
         print('type not implemented')

@@ -1,3 +1,20 @@
+def deep_compare(first, second):
+    if type(first) != second:
+        print(type(first), second)
+        return False
+    if type(first) == Pair:
+        assert deep_compare(first.left, second.left_type)
+        assert deep_compare(first.right, second.right_type)
+    if type(first) == Or:
+        assert type(first.left) == second.left
+        assert type(first.right) == second.right
+        assert first.isleft == second.isleft
+        assert deep_compare(first.value, second.value)
+    # except AssertionError as e:
+    #     print(e)
+    #     return False
+    return True
+
 class Tezos:
     value = None
     def __hash__(self):
@@ -38,14 +55,17 @@ class List(Tezos):
 
 
 class Or(Tezos):
-    def __init__(self, value, other_type, side):
+    def __init__(self, left_type, right_type):
+        self.left_type = left_type
+        self.right_type = right_type
+    def add_value(self, value, side):
         self.value = value
         if side == 'LEFT':
-            self.left, self.right = type(value), other_type
+            assert type(value) == self.left_type
             self.isleft = True
             self.isright = False
         else:
-            self.left, self.right = other_type, type(value)
+            assert type(value) == self.right_type
             self.isleft = False
             self.isright = True
 
@@ -128,11 +148,17 @@ class Some(Tezos):
 
 class Pair:
     def __init__(self, first, second):
-        self.left = first
-        self.right = second
+        self.left_type = first
+        self.right_type = second
+        self.left = None
+        self.right = None
+
+    def add_values(self, left, right):
+        self.left = self.left_type(left)
+        self.right = self.right_type(right)
 
     def __repr__(self):
-        return f'PAIR:(first:{self.left}, second:{self.right})'
+        return f'PAIR:({self.left_type}:{self.left}, second:{self.right})'
 
 
 class Number(int, Tezos):
@@ -269,3 +295,11 @@ class String(Tezos):
 
     def __str__(self):
         return 'STRING'
+
+
+if __name__ == '__main__':
+    p = Pair(Nat, Nat)
+    second = Pair(Nat, Nat)
+    p.add_values(3, 4)
+    print(p.left)
+    print(deep_compare(p, second))
