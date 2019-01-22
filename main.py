@@ -1,4 +1,6 @@
-from objects import Unit, Nat, Int, Bool, Pair, String, Bytes, Set, List
+from objects import (Unit, Nat, Int, Bool,
+        Pair, String, Bytes, Set, List)
+
 
 tokens = (
     # reserved words
