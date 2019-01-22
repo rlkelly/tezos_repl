@@ -9,922 +9,2908 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> statement
-Rule 1     statement -> DROP
-Rule 2     statement -> DUP
-Rule 3     statement -> SWAP
-Rule 4     statement -> UNIT
-Rule 5     bool -> TRUE
-Rule 6     bool -> FALSE
-Rule 7     value -> NUMBER
-Rule 8     value -> bool
-Rule 9     value -> TEXT
-Rule 10    value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS
-Rule 11    statement -> EQ
-Rule 12    statement -> NEQ
-Rule 13    statement -> LT
-Rule 14    statement -> GT
-Rule 15    statement -> LE
-Rule 16    statement -> GE
-Rule 17    statement -> OR
-Rule 18    statement -> AND
-Rule 19    statement -> XOR
-Rule 20    statement -> COMPARE
-Rule 21    statement -> NEG
-Rule 22    statement -> ABS
-Rule 23    statement -> ADD
-Rule 24    statement -> SUB
-Rule 25    statement -> MUL
-Rule 26    statement -> EDIV
-Rule 27    statement -> LSL
-Rule 28    statement -> LSR
-Rule 29    statement -> CONCAT
-Rule 30    statement -> SIZE
-Rule 31    statement -> SLICE
-Rule 32    statement -> PAIR
-Rule 33    statement -> CAR
-Rule 34    statement -> CDR
-Rule 35    statement -> EMPTY_SET TYPE
-Rule 36    statement -> MEM
-Rule 37    statement -> UPDATE
-Rule 38    statement -> SOME
-Rule 39    statement -> NONE TYPE
-Rule 40    statement -> LEFT TYPE
-Rule 41    statement -> RIGHT TYPE
-Rule 42    statement -> CONS
-Rule 43    statement -> NIL TYPE
-Rule 44    statement -> NOT
-Rule 45    TYPE -> NAT
-Rule 46    TYPE -> STRING
-Rule 47    TYPE -> INT
-Rule 48    TYPE -> BOOL
-Rule 49    TYPE -> BYTES
-Rule 50    TYPE -> LPARENS LPAIR TYPE TYPE RPARENS
-Rule 51    statement -> PUSH TYPE value
-Rule 52    statement -> FAILWITH
+Rule 0     S' -> execution
+Rule 1     execution -> statement
+Rule 2     execution -> statement execution
+Rule 3     statement -> DROP SCOLON
+Rule 4     statement -> DUP SCOLON
+Rule 5     statement -> SWAP SCOLON
+Rule 6     statement -> UNIT SCOLON
+Rule 7     bool -> TRUE
+Rule 8     bool -> FALSE
+Rule 9     value -> NUMBER
+Rule 10    value -> bool
+Rule 11    value -> TEXT
+Rule 12    value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS
+Rule 13    statement -> EQ SCOLON
+Rule 14    statement -> NEQ SCOLON
+Rule 15    statement -> LT SCOLON
+Rule 16    statement -> GT SCOLON
+Rule 17    statement -> LE SCOLON
+Rule 18    statement -> GE SCOLON
+Rule 19    statement -> OR SCOLON
+Rule 20    statement -> AND SCOLON
+Rule 21    statement -> XOR SCOLON
+Rule 22    statement -> COMPARE SCOLON
+Rule 23    statement -> NEG SCOLON
+Rule 24    statement -> ABS SCOLON
+Rule 25    statement -> ADD SCOLON
+Rule 26    statement -> SUB SCOLON
+Rule 27    statement -> MUL SCOLON
+Rule 28    statement -> EDIV SCOLON
+Rule 29    statement -> LSL SCOLON
+Rule 30    statement -> LSR SCOLON
+Rule 31    statement -> CONCAT SCOLON
+Rule 32    statement -> SIZE SCOLON
+Rule 33    statement -> SLICE SCOLON
+Rule 34    statement -> PAIR SCOLON
+Rule 35    statement -> CAR SCOLON
+Rule 36    statement -> CDR SCOLON
+Rule 37    statement -> EMPTY_SET TYPE SCOLON
+Rule 38    statement -> MEM SCOLON
+Rule 39    statement -> UPDATE SCOLON
+Rule 40    statement -> SOME SCOLON
+Rule 41    statement -> NONE TYPE SCOLON
+Rule 42    statement -> LEFT TYPE SCOLON
+Rule 43    statement -> RIGHT TYPE SCOLON
+Rule 44    statement -> CONS SCOLON
+Rule 45    statement -> NIL TYPE SCOLON
+Rule 46    statement -> NOT SCOLON
+Rule 47    TYPE -> NAT
+Rule 48    TYPE -> STRING
+Rule 49    TYPE -> INT
+Rule 50    TYPE -> BOOL
+Rule 51    TYPE -> BYTES
+Rule 52    TYPE -> LPARENS LPAIR TYPE TYPE RPARENS
+Rule 53    statement -> PUSH TYPE value SCOLON
+Rule 54    statement -> FAILWITH SCOLON
 
 Terminals, with rules where they appear
 
-ABS                  : 22
-ADD                  : 23
-AND                  : 18
-BOOL                 : 48
-BYTES                : 49
-CAR                  : 33
-CDR                  : 34
-COMPARE              : 20
-CONCAT               : 29
-CONS                 : 42
-DROP                 : 1
-DUP                  : 2
-EDIV                 : 26
+ABS                  : 24
+ADD                  : 25
+AND                  : 20
+BOOL                 : 50
+BYTES                : 51
+CAR                  : 35
+CDR                  : 36
+COMPARE              : 22
+CONCAT               : 31
+CONS                 : 44
+DROP                 : 3
+DUP                  : 4
+EDIV                 : 28
 EMPTY_MAP            : 
-EMPTY_SET            : 35
-EQ                   : 11
-FAILWITH             : 52
-FALSE                : 6
-GE                   : 16
+EMPTY_SET            : 37
+EQ                   : 13
+FAILWITH             : 54
+FALSE                : 8
+GE                   : 18
 GET                  : 
-GT                   : 14
-INT                  : 47
+GT                   : 16
+INT                  : 49
 LBRACKET             : 
-LE                   : 15
-LEFT                 : 40
-LPAIR                : 50
-LPARENS              : 10 50
-LSL                  : 27
-LSR                  : 28
-LT                   : 13
-MEM                  : 36
-MUL                  : 25
-NAT                  : 45
-NEG                  : 21
-NEQ                  : 12
-NIL                  : 43
-NONE                 : 39
-NOT                  : 44
-NUMBER               : 7
-OR                   : 17
-PAIR                 : 32
-PAIR_CONSTRUCTOR     : 10
-PUSH                 : 51
+LE                   : 17
+LEFT                 : 42
+LPAIR                : 52
+LPARENS              : 12 52
+LSL                  : 29
+LSR                  : 30
+LT                   : 15
+MEM                  : 38
+MUL                  : 27
+NAT                  : 47
+NEG                  : 23
+NEQ                  : 14
+NIL                  : 45
+NONE                 : 41
+NOT                  : 46
+NUMBER               : 9
+OR                   : 19
+PAIR                 : 34
+PAIR_CONSTRUCTOR     : 12
+PUSH                 : 53
 RBRACKET             : 
-RIGHT                : 41
-RPARENS              : 10 50
-SIZE                 : 30
-SLICE                : 31
-SOME                 : 38
-STRING               : 46
-SUB                  : 24
-SWAP                 : 3
-TEXT                 : 9
-TRUE                 : 5
-UNIT                 : 4
-UPDATE               : 37
-XOR                  : 19
+RIGHT                : 43
+RPARENS              : 12 52
+SCOLON               : 3 4 5 6 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 53 54
+SIZE                 : 32
+SLICE                : 33
+SOME                 : 40
+STRING               : 48
+SUB                  : 26
+SWAP                 : 5
+TEXT                 : 11
+TRUE                 : 7
+UNIT                 : 6
+UPDATE               : 39
+XOR                  : 21
 error                : 
 
 Nonterminals, with rules where they appear
 
-TYPE                 : 35 39 40 41 43 50 50 51
-bool                 : 8
-statement            : 0
-value                : 10 10 51
+TYPE                 : 37 41 42 43 45 52 52 53
+bool                 : 10
+execution            : 2 0
+statement            : 1 2
+value                : 12 12 53
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . statement
-    (1) statement -> . DROP
-    (2) statement -> . DUP
-    (3) statement -> . SWAP
-    (4) statement -> . UNIT
-    (11) statement -> . EQ
-    (12) statement -> . NEQ
-    (13) statement -> . LT
-    (14) statement -> . GT
-    (15) statement -> . LE
-    (16) statement -> . GE
-    (17) statement -> . OR
-    (18) statement -> . AND
-    (19) statement -> . XOR
-    (20) statement -> . COMPARE
-    (21) statement -> . NEG
-    (22) statement -> . ABS
-    (23) statement -> . ADD
-    (24) statement -> . SUB
-    (25) statement -> . MUL
-    (26) statement -> . EDIV
-    (27) statement -> . LSL
-    (28) statement -> . LSR
-    (29) statement -> . CONCAT
-    (30) statement -> . SIZE
-    (31) statement -> . SLICE
-    (32) statement -> . PAIR
-    (33) statement -> . CAR
-    (34) statement -> . CDR
-    (35) statement -> . EMPTY_SET TYPE
-    (36) statement -> . MEM
-    (37) statement -> . UPDATE
-    (38) statement -> . SOME
-    (39) statement -> . NONE TYPE
-    (40) statement -> . LEFT TYPE
-    (41) statement -> . RIGHT TYPE
-    (42) statement -> . CONS
-    (43) statement -> . NIL TYPE
-    (44) statement -> . NOT
-    (51) statement -> . PUSH TYPE value
-    (52) statement -> . FAILWITH
+    (0) S' -> . execution
+    (1) execution -> . statement
+    (2) execution -> . statement execution
+    (3) statement -> . DROP SCOLON
+    (4) statement -> . DUP SCOLON
+    (5) statement -> . SWAP SCOLON
+    (6) statement -> . UNIT SCOLON
+    (13) statement -> . EQ SCOLON
+    (14) statement -> . NEQ SCOLON
+    (15) statement -> . LT SCOLON
+    (16) statement -> . GT SCOLON
+    (17) statement -> . LE SCOLON
+    (18) statement -> . GE SCOLON
+    (19) statement -> . OR SCOLON
+    (20) statement -> . AND SCOLON
+    (21) statement -> . XOR SCOLON
+    (22) statement -> . COMPARE SCOLON
+    (23) statement -> . NEG SCOLON
+    (24) statement -> . ABS SCOLON
+    (25) statement -> . ADD SCOLON
+    (26) statement -> . SUB SCOLON
+    (27) statement -> . MUL SCOLON
+    (28) statement -> . EDIV SCOLON
+    (29) statement -> . LSL SCOLON
+    (30) statement -> . LSR SCOLON
+    (31) statement -> . CONCAT SCOLON
+    (32) statement -> . SIZE SCOLON
+    (33) statement -> . SLICE SCOLON
+    (34) statement -> . PAIR SCOLON
+    (35) statement -> . CAR SCOLON
+    (36) statement -> . CDR SCOLON
+    (37) statement -> . EMPTY_SET TYPE SCOLON
+    (38) statement -> . MEM SCOLON
+    (39) statement -> . UPDATE SCOLON
+    (40) statement -> . SOME SCOLON
+    (41) statement -> . NONE TYPE SCOLON
+    (42) statement -> . LEFT TYPE SCOLON
+    (43) statement -> . RIGHT TYPE SCOLON
+    (44) statement -> . CONS SCOLON
+    (45) statement -> . NIL TYPE SCOLON
+    (46) statement -> . NOT SCOLON
+    (53) statement -> . PUSH TYPE value SCOLON
+    (54) statement -> . FAILWITH SCOLON
 
-    DROP            shift and go to state 2
-    DUP             shift and go to state 3
-    SWAP            shift and go to state 4
-    UNIT            shift and go to state 5
-    EQ              shift and go to state 6
-    NEQ             shift and go to state 7
-    LT              shift and go to state 8
-    GT              shift and go to state 9
-    LE              shift and go to state 10
-    GE              shift and go to state 11
-    OR              shift and go to state 12
-    AND             shift and go to state 13
-    XOR             shift and go to state 14
-    COMPARE         shift and go to state 15
-    NEG             shift and go to state 16
-    ABS             shift and go to state 17
-    ADD             shift and go to state 18
-    SUB             shift and go to state 19
-    MUL             shift and go to state 20
-    EDIV            shift and go to state 21
-    LSL             shift and go to state 22
-    LSR             shift and go to state 23
-    CONCAT          shift and go to state 24
-    SIZE            shift and go to state 25
-    SLICE           shift and go to state 26
-    PAIR            shift and go to state 27
-    CAR             shift and go to state 28
-    CDR             shift and go to state 29
-    EMPTY_SET       shift and go to state 30
-    MEM             shift and go to state 31
-    UPDATE          shift and go to state 32
-    SOME            shift and go to state 33
-    NONE            shift and go to state 34
-    LEFT            shift and go to state 35
-    RIGHT           shift and go to state 36
-    CONS            shift and go to state 37
-    NIL             shift and go to state 38
-    NOT             shift and go to state 39
-    PUSH            shift and go to state 40
-    FAILWITH        shift and go to state 41
+    DROP            shift and go to state 3
+    DUP             shift and go to state 4
+    SWAP            shift and go to state 5
+    UNIT            shift and go to state 6
+    EQ              shift and go to state 7
+    NEQ             shift and go to state 8
+    LT              shift and go to state 9
+    GT              shift and go to state 10
+    LE              shift and go to state 11
+    GE              shift and go to state 12
+    OR              shift and go to state 13
+    AND             shift and go to state 14
+    XOR             shift and go to state 15
+    COMPARE         shift and go to state 16
+    NEG             shift and go to state 17
+    ABS             shift and go to state 18
+    ADD             shift and go to state 19
+    SUB             shift and go to state 20
+    MUL             shift and go to state 21
+    EDIV            shift and go to state 22
+    LSL             shift and go to state 23
+    LSR             shift and go to state 24
+    CONCAT          shift and go to state 25
+    SIZE            shift and go to state 26
+    SLICE           shift and go to state 27
+    PAIR            shift and go to state 28
+    CAR             shift and go to state 29
+    CDR             shift and go to state 30
+    EMPTY_SET       shift and go to state 31
+    MEM             shift and go to state 32
+    UPDATE          shift and go to state 33
+    SOME            shift and go to state 34
+    NONE            shift and go to state 35
+    LEFT            shift and go to state 36
+    RIGHT           shift and go to state 37
+    CONS            shift and go to state 38
+    NIL             shift and go to state 39
+    NOT             shift and go to state 40
+    PUSH            shift and go to state 41
+    FAILWITH        shift and go to state 42
 
-    statement                      shift and go to state 1
+    execution                      shift and go to state 1
+    statement                      shift and go to state 2
 
 state 1
 
-    (0) S' -> statement .
+    (0) S' -> execution .
 
 
 
 state 2
 
-    (1) statement -> DROP .
+    (1) execution -> statement .
+    (2) execution -> statement . execution
+    (1) execution -> . statement
+    (2) execution -> . statement execution
+    (3) statement -> . DROP SCOLON
+    (4) statement -> . DUP SCOLON
+    (5) statement -> . SWAP SCOLON
+    (6) statement -> . UNIT SCOLON
+    (13) statement -> . EQ SCOLON
+    (14) statement -> . NEQ SCOLON
+    (15) statement -> . LT SCOLON
+    (16) statement -> . GT SCOLON
+    (17) statement -> . LE SCOLON
+    (18) statement -> . GE SCOLON
+    (19) statement -> . OR SCOLON
+    (20) statement -> . AND SCOLON
+    (21) statement -> . XOR SCOLON
+    (22) statement -> . COMPARE SCOLON
+    (23) statement -> . NEG SCOLON
+    (24) statement -> . ABS SCOLON
+    (25) statement -> . ADD SCOLON
+    (26) statement -> . SUB SCOLON
+    (27) statement -> . MUL SCOLON
+    (28) statement -> . EDIV SCOLON
+    (29) statement -> . LSL SCOLON
+    (30) statement -> . LSR SCOLON
+    (31) statement -> . CONCAT SCOLON
+    (32) statement -> . SIZE SCOLON
+    (33) statement -> . SLICE SCOLON
+    (34) statement -> . PAIR SCOLON
+    (35) statement -> . CAR SCOLON
+    (36) statement -> . CDR SCOLON
+    (37) statement -> . EMPTY_SET TYPE SCOLON
+    (38) statement -> . MEM SCOLON
+    (39) statement -> . UPDATE SCOLON
+    (40) statement -> . SOME SCOLON
+    (41) statement -> . NONE TYPE SCOLON
+    (42) statement -> . LEFT TYPE SCOLON
+    (43) statement -> . RIGHT TYPE SCOLON
+    (44) statement -> . CONS SCOLON
+    (45) statement -> . NIL TYPE SCOLON
+    (46) statement -> . NOT SCOLON
+    (53) statement -> . PUSH TYPE value SCOLON
+    (54) statement -> . FAILWITH SCOLON
 
-    $end            reduce using rule 1 (statement -> DROP .)
+    $end            reduce using rule 1 (execution -> statement .)
+    DROP            shift and go to state 3
+    DUP             shift and go to state 4
+    SWAP            shift and go to state 5
+    UNIT            shift and go to state 6
+    EQ              shift and go to state 7
+    NEQ             shift and go to state 8
+    LT              shift and go to state 9
+    GT              shift and go to state 10
+    LE              shift and go to state 11
+    GE              shift and go to state 12
+    OR              shift and go to state 13
+    AND             shift and go to state 14
+    XOR             shift and go to state 15
+    COMPARE         shift and go to state 16
+    NEG             shift and go to state 17
+    ABS             shift and go to state 18
+    ADD             shift and go to state 19
+    SUB             shift and go to state 20
+    MUL             shift and go to state 21
+    EDIV            shift and go to state 22
+    LSL             shift and go to state 23
+    LSR             shift and go to state 24
+    CONCAT          shift and go to state 25
+    SIZE            shift and go to state 26
+    SLICE           shift and go to state 27
+    PAIR            shift and go to state 28
+    CAR             shift and go to state 29
+    CDR             shift and go to state 30
+    EMPTY_SET       shift and go to state 31
+    MEM             shift and go to state 32
+    UPDATE          shift and go to state 33
+    SOME            shift and go to state 34
+    NONE            shift and go to state 35
+    LEFT            shift and go to state 36
+    RIGHT           shift and go to state 37
+    CONS            shift and go to state 38
+    NIL             shift and go to state 39
+    NOT             shift and go to state 40
+    PUSH            shift and go to state 41
+    FAILWITH        shift and go to state 42
 
+    statement                      shift and go to state 2
+    execution                      shift and go to state 43
 
 state 3
 
-    (2) statement -> DUP .
+    (3) statement -> DROP . SCOLON
 
-    $end            reduce using rule 2 (statement -> DUP .)
+    SCOLON          shift and go to state 44
 
 
 state 4
 
-    (3) statement -> SWAP .
+    (4) statement -> DUP . SCOLON
 
-    $end            reduce using rule 3 (statement -> SWAP .)
+    SCOLON          shift and go to state 45
 
 
 state 5
 
-    (4) statement -> UNIT .
+    (5) statement -> SWAP . SCOLON
 
-    $end            reduce using rule 4 (statement -> UNIT .)
+    SCOLON          shift and go to state 46
 
 
 state 6
 
-    (11) statement -> EQ .
+    (6) statement -> UNIT . SCOLON
 
-    $end            reduce using rule 11 (statement -> EQ .)
+    SCOLON          shift and go to state 47
 
 
 state 7
 
-    (12) statement -> NEQ .
+    (13) statement -> EQ . SCOLON
 
-    $end            reduce using rule 12 (statement -> NEQ .)
+    SCOLON          shift and go to state 48
 
 
 state 8
 
-    (13) statement -> LT .
+    (14) statement -> NEQ . SCOLON
 
-    $end            reduce using rule 13 (statement -> LT .)
+    SCOLON          shift and go to state 49
 
 
 state 9
 
-    (14) statement -> GT .
+    (15) statement -> LT . SCOLON
 
-    $end            reduce using rule 14 (statement -> GT .)
+    SCOLON          shift and go to state 50
 
 
 state 10
 
-    (15) statement -> LE .
+    (16) statement -> GT . SCOLON
 
-    $end            reduce using rule 15 (statement -> LE .)
+    SCOLON          shift and go to state 51
 
 
 state 11
 
-    (16) statement -> GE .
+    (17) statement -> LE . SCOLON
 
-    $end            reduce using rule 16 (statement -> GE .)
+    SCOLON          shift and go to state 52
 
 
 state 12
 
-    (17) statement -> OR .
+    (18) statement -> GE . SCOLON
 
-    $end            reduce using rule 17 (statement -> OR .)
+    SCOLON          shift and go to state 53
 
 
 state 13
 
-    (18) statement -> AND .
+    (19) statement -> OR . SCOLON
 
-    $end            reduce using rule 18 (statement -> AND .)
+    SCOLON          shift and go to state 54
 
 
 state 14
 
-    (19) statement -> XOR .
+    (20) statement -> AND . SCOLON
 
-    $end            reduce using rule 19 (statement -> XOR .)
+    SCOLON          shift and go to state 55
 
 
 state 15
 
-    (20) statement -> COMPARE .
+    (21) statement -> XOR . SCOLON
 
-    $end            reduce using rule 20 (statement -> COMPARE .)
+    SCOLON          shift and go to state 56
 
 
 state 16
 
-    (21) statement -> NEG .
+    (22) statement -> COMPARE . SCOLON
 
-    $end            reduce using rule 21 (statement -> NEG .)
+    SCOLON          shift and go to state 57
 
 
 state 17
 
-    (22) statement -> ABS .
+    (23) statement -> NEG . SCOLON
 
-    $end            reduce using rule 22 (statement -> ABS .)
+    SCOLON          shift and go to state 58
 
 
 state 18
 
-    (23) statement -> ADD .
+    (24) statement -> ABS . SCOLON
 
-    $end            reduce using rule 23 (statement -> ADD .)
+    SCOLON          shift and go to state 59
 
 
 state 19
 
-    (24) statement -> SUB .
+    (25) statement -> ADD . SCOLON
 
-    $end            reduce using rule 24 (statement -> SUB .)
+    SCOLON          shift and go to state 60
 
 
 state 20
 
-    (25) statement -> MUL .
+    (26) statement -> SUB . SCOLON
 
-    $end            reduce using rule 25 (statement -> MUL .)
+    SCOLON          shift and go to state 61
 
 
 state 21
 
-    (26) statement -> EDIV .
+    (27) statement -> MUL . SCOLON
 
-    $end            reduce using rule 26 (statement -> EDIV .)
+    SCOLON          shift and go to state 62
 
 
 state 22
 
-    (27) statement -> LSL .
+    (28) statement -> EDIV . SCOLON
 
-    $end            reduce using rule 27 (statement -> LSL .)
+    SCOLON          shift and go to state 63
 
 
 state 23
 
-    (28) statement -> LSR .
+    (29) statement -> LSL . SCOLON
 
-    $end            reduce using rule 28 (statement -> LSR .)
+    SCOLON          shift and go to state 64
 
 
 state 24
 
-    (29) statement -> CONCAT .
+    (30) statement -> LSR . SCOLON
 
-    $end            reduce using rule 29 (statement -> CONCAT .)
+    SCOLON          shift and go to state 65
 
 
 state 25
 
-    (30) statement -> SIZE .
+    (31) statement -> CONCAT . SCOLON
 
-    $end            reduce using rule 30 (statement -> SIZE .)
+    SCOLON          shift and go to state 66
 
 
 state 26
 
-    (31) statement -> SLICE .
+    (32) statement -> SIZE . SCOLON
 
-    $end            reduce using rule 31 (statement -> SLICE .)
+    SCOLON          shift and go to state 67
 
 
 state 27
 
-    (32) statement -> PAIR .
+    (33) statement -> SLICE . SCOLON
 
-    $end            reduce using rule 32 (statement -> PAIR .)
+    SCOLON          shift and go to state 68
 
 
 state 28
 
-    (33) statement -> CAR .
+    (34) statement -> PAIR . SCOLON
 
-    $end            reduce using rule 33 (statement -> CAR .)
+    SCOLON          shift and go to state 69
 
 
 state 29
 
-    (34) statement -> CDR .
+    (35) statement -> CAR . SCOLON
 
-    $end            reduce using rule 34 (statement -> CDR .)
+    SCOLON          shift and go to state 70
 
 
 state 30
 
-    (35) statement -> EMPTY_SET . TYPE
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (36) statement -> CDR . SCOLON
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    SCOLON          shift and go to state 71
 
-    TYPE                           shift and go to state 42
 
 state 31
 
-    (36) statement -> MEM .
+    (37) statement -> EMPTY_SET . TYPE SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    $end            reduce using rule 36 (statement -> MEM .)
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
+    TYPE                           shift and go to state 72
 
 state 32
 
-    (37) statement -> UPDATE .
+    (38) statement -> MEM . SCOLON
 
-    $end            reduce using rule 37 (statement -> UPDATE .)
+    SCOLON          shift and go to state 79
 
 
 state 33
 
-    (38) statement -> SOME .
+    (39) statement -> UPDATE . SCOLON
 
-    $end            reduce using rule 38 (statement -> SOME .)
+    SCOLON          shift and go to state 80
 
 
 state 34
 
-    (39) statement -> NONE . TYPE
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (40) statement -> SOME . SCOLON
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    SCOLON          shift and go to state 81
 
-    TYPE                           shift and go to state 49
 
 state 35
 
-    (40) statement -> LEFT . TYPE
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (41) statement -> NONE . TYPE SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
-    TYPE                           shift and go to state 50
+    TYPE                           shift and go to state 82
 
 state 36
 
-    (41) statement -> RIGHT . TYPE
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (42) statement -> LEFT . TYPE SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
-    TYPE                           shift and go to state 51
+    TYPE                           shift and go to state 83
 
 state 37
 
-    (42) statement -> CONS .
+    (43) statement -> RIGHT . TYPE SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    $end            reduce using rule 42 (statement -> CONS .)
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
+    TYPE                           shift and go to state 84
 
 state 38
 
-    (43) statement -> NIL . TYPE
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (44) statement -> CONS . SCOLON
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    SCOLON          shift and go to state 85
 
-    TYPE                           shift and go to state 52
 
 state 39
 
-    (44) statement -> NOT .
+    (45) statement -> NIL . TYPE SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    $end            reduce using rule 44 (statement -> NOT .)
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
+    TYPE                           shift and go to state 86
 
 state 40
 
-    (51) statement -> PUSH . TYPE value
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (46) statement -> NOT . SCOLON
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    SCOLON          shift and go to state 87
 
-    TYPE                           shift and go to state 53
 
 state 41
 
-    (52) statement -> FAILWITH .
+    (53) statement -> PUSH . TYPE value SCOLON
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
 
-    $end            reduce using rule 52 (statement -> FAILWITH .)
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
 
+    TYPE                           shift and go to state 88
 
 state 42
 
-    (35) statement -> EMPTY_SET TYPE .
+    (54) statement -> FAILWITH . SCOLON
 
-    $end            reduce using rule 35 (statement -> EMPTY_SET TYPE .)
+    SCOLON          shift and go to state 89
 
 
 state 43
 
-    (45) TYPE -> NAT .
+    (2) execution -> statement execution .
 
-    $end            reduce using rule 45 (TYPE -> NAT .)
-    NUMBER          reduce using rule 45 (TYPE -> NAT .)
-    TEXT            reduce using rule 45 (TYPE -> NAT .)
-    LPARENS         reduce using rule 45 (TYPE -> NAT .)
-    TRUE            reduce using rule 45 (TYPE -> NAT .)
-    FALSE           reduce using rule 45 (TYPE -> NAT .)
-    NAT             reduce using rule 45 (TYPE -> NAT .)
-    STRING          reduce using rule 45 (TYPE -> NAT .)
-    INT             reduce using rule 45 (TYPE -> NAT .)
-    BOOL            reduce using rule 45 (TYPE -> NAT .)
-    BYTES           reduce using rule 45 (TYPE -> NAT .)
-    RPARENS         reduce using rule 45 (TYPE -> NAT .)
+    $end            reduce using rule 2 (execution -> statement execution .)
 
 
 state 44
 
-    (46) TYPE -> STRING .
+    (3) statement -> DROP SCOLON .
 
-    $end            reduce using rule 46 (TYPE -> STRING .)
-    NUMBER          reduce using rule 46 (TYPE -> STRING .)
-    TEXT            reduce using rule 46 (TYPE -> STRING .)
-    LPARENS         reduce using rule 46 (TYPE -> STRING .)
-    TRUE            reduce using rule 46 (TYPE -> STRING .)
-    FALSE           reduce using rule 46 (TYPE -> STRING .)
-    NAT             reduce using rule 46 (TYPE -> STRING .)
-    STRING          reduce using rule 46 (TYPE -> STRING .)
-    INT             reduce using rule 46 (TYPE -> STRING .)
-    BOOL            reduce using rule 46 (TYPE -> STRING .)
-    BYTES           reduce using rule 46 (TYPE -> STRING .)
-    RPARENS         reduce using rule 46 (TYPE -> STRING .)
+    DROP            reduce using rule 3 (statement -> DROP SCOLON .)
+    DUP             reduce using rule 3 (statement -> DROP SCOLON .)
+    SWAP            reduce using rule 3 (statement -> DROP SCOLON .)
+    UNIT            reduce using rule 3 (statement -> DROP SCOLON .)
+    EQ              reduce using rule 3 (statement -> DROP SCOLON .)
+    NEQ             reduce using rule 3 (statement -> DROP SCOLON .)
+    LT              reduce using rule 3 (statement -> DROP SCOLON .)
+    GT              reduce using rule 3 (statement -> DROP SCOLON .)
+    LE              reduce using rule 3 (statement -> DROP SCOLON .)
+    GE              reduce using rule 3 (statement -> DROP SCOLON .)
+    OR              reduce using rule 3 (statement -> DROP SCOLON .)
+    AND             reduce using rule 3 (statement -> DROP SCOLON .)
+    XOR             reduce using rule 3 (statement -> DROP SCOLON .)
+    COMPARE         reduce using rule 3 (statement -> DROP SCOLON .)
+    NEG             reduce using rule 3 (statement -> DROP SCOLON .)
+    ABS             reduce using rule 3 (statement -> DROP SCOLON .)
+    ADD             reduce using rule 3 (statement -> DROP SCOLON .)
+    SUB             reduce using rule 3 (statement -> DROP SCOLON .)
+    MUL             reduce using rule 3 (statement -> DROP SCOLON .)
+    EDIV            reduce using rule 3 (statement -> DROP SCOLON .)
+    LSL             reduce using rule 3 (statement -> DROP SCOLON .)
+    LSR             reduce using rule 3 (statement -> DROP SCOLON .)
+    CONCAT          reduce using rule 3 (statement -> DROP SCOLON .)
+    SIZE            reduce using rule 3 (statement -> DROP SCOLON .)
+    SLICE           reduce using rule 3 (statement -> DROP SCOLON .)
+    PAIR            reduce using rule 3 (statement -> DROP SCOLON .)
+    CAR             reduce using rule 3 (statement -> DROP SCOLON .)
+    CDR             reduce using rule 3 (statement -> DROP SCOLON .)
+    EMPTY_SET       reduce using rule 3 (statement -> DROP SCOLON .)
+    MEM             reduce using rule 3 (statement -> DROP SCOLON .)
+    UPDATE          reduce using rule 3 (statement -> DROP SCOLON .)
+    SOME            reduce using rule 3 (statement -> DROP SCOLON .)
+    NONE            reduce using rule 3 (statement -> DROP SCOLON .)
+    LEFT            reduce using rule 3 (statement -> DROP SCOLON .)
+    RIGHT           reduce using rule 3 (statement -> DROP SCOLON .)
+    CONS            reduce using rule 3 (statement -> DROP SCOLON .)
+    NIL             reduce using rule 3 (statement -> DROP SCOLON .)
+    NOT             reduce using rule 3 (statement -> DROP SCOLON .)
+    PUSH            reduce using rule 3 (statement -> DROP SCOLON .)
+    FAILWITH        reduce using rule 3 (statement -> DROP SCOLON .)
+    $end            reduce using rule 3 (statement -> DROP SCOLON .)
 
 
 state 45
 
-    (47) TYPE -> INT .
+    (4) statement -> DUP SCOLON .
 
-    $end            reduce using rule 47 (TYPE -> INT .)
-    NUMBER          reduce using rule 47 (TYPE -> INT .)
-    TEXT            reduce using rule 47 (TYPE -> INT .)
-    LPARENS         reduce using rule 47 (TYPE -> INT .)
-    TRUE            reduce using rule 47 (TYPE -> INT .)
-    FALSE           reduce using rule 47 (TYPE -> INT .)
-    NAT             reduce using rule 47 (TYPE -> INT .)
-    STRING          reduce using rule 47 (TYPE -> INT .)
-    INT             reduce using rule 47 (TYPE -> INT .)
-    BOOL            reduce using rule 47 (TYPE -> INT .)
-    BYTES           reduce using rule 47 (TYPE -> INT .)
-    RPARENS         reduce using rule 47 (TYPE -> INT .)
+    DROP            reduce using rule 4 (statement -> DUP SCOLON .)
+    DUP             reduce using rule 4 (statement -> DUP SCOLON .)
+    SWAP            reduce using rule 4 (statement -> DUP SCOLON .)
+    UNIT            reduce using rule 4 (statement -> DUP SCOLON .)
+    EQ              reduce using rule 4 (statement -> DUP SCOLON .)
+    NEQ             reduce using rule 4 (statement -> DUP SCOLON .)
+    LT              reduce using rule 4 (statement -> DUP SCOLON .)
+    GT              reduce using rule 4 (statement -> DUP SCOLON .)
+    LE              reduce using rule 4 (statement -> DUP SCOLON .)
+    GE              reduce using rule 4 (statement -> DUP SCOLON .)
+    OR              reduce using rule 4 (statement -> DUP SCOLON .)
+    AND             reduce using rule 4 (statement -> DUP SCOLON .)
+    XOR             reduce using rule 4 (statement -> DUP SCOLON .)
+    COMPARE         reduce using rule 4 (statement -> DUP SCOLON .)
+    NEG             reduce using rule 4 (statement -> DUP SCOLON .)
+    ABS             reduce using rule 4 (statement -> DUP SCOLON .)
+    ADD             reduce using rule 4 (statement -> DUP SCOLON .)
+    SUB             reduce using rule 4 (statement -> DUP SCOLON .)
+    MUL             reduce using rule 4 (statement -> DUP SCOLON .)
+    EDIV            reduce using rule 4 (statement -> DUP SCOLON .)
+    LSL             reduce using rule 4 (statement -> DUP SCOLON .)
+    LSR             reduce using rule 4 (statement -> DUP SCOLON .)
+    CONCAT          reduce using rule 4 (statement -> DUP SCOLON .)
+    SIZE            reduce using rule 4 (statement -> DUP SCOLON .)
+    SLICE           reduce using rule 4 (statement -> DUP SCOLON .)
+    PAIR            reduce using rule 4 (statement -> DUP SCOLON .)
+    CAR             reduce using rule 4 (statement -> DUP SCOLON .)
+    CDR             reduce using rule 4 (statement -> DUP SCOLON .)
+    EMPTY_SET       reduce using rule 4 (statement -> DUP SCOLON .)
+    MEM             reduce using rule 4 (statement -> DUP SCOLON .)
+    UPDATE          reduce using rule 4 (statement -> DUP SCOLON .)
+    SOME            reduce using rule 4 (statement -> DUP SCOLON .)
+    NONE            reduce using rule 4 (statement -> DUP SCOLON .)
+    LEFT            reduce using rule 4 (statement -> DUP SCOLON .)
+    RIGHT           reduce using rule 4 (statement -> DUP SCOLON .)
+    CONS            reduce using rule 4 (statement -> DUP SCOLON .)
+    NIL             reduce using rule 4 (statement -> DUP SCOLON .)
+    NOT             reduce using rule 4 (statement -> DUP SCOLON .)
+    PUSH            reduce using rule 4 (statement -> DUP SCOLON .)
+    FAILWITH        reduce using rule 4 (statement -> DUP SCOLON .)
+    $end            reduce using rule 4 (statement -> DUP SCOLON .)
 
 
 state 46
 
-    (48) TYPE -> BOOL .
+    (5) statement -> SWAP SCOLON .
 
-    $end            reduce using rule 48 (TYPE -> BOOL .)
-    NUMBER          reduce using rule 48 (TYPE -> BOOL .)
-    TEXT            reduce using rule 48 (TYPE -> BOOL .)
-    LPARENS         reduce using rule 48 (TYPE -> BOOL .)
-    TRUE            reduce using rule 48 (TYPE -> BOOL .)
-    FALSE           reduce using rule 48 (TYPE -> BOOL .)
-    NAT             reduce using rule 48 (TYPE -> BOOL .)
-    STRING          reduce using rule 48 (TYPE -> BOOL .)
-    INT             reduce using rule 48 (TYPE -> BOOL .)
-    BOOL            reduce using rule 48 (TYPE -> BOOL .)
-    BYTES           reduce using rule 48 (TYPE -> BOOL .)
-    RPARENS         reduce using rule 48 (TYPE -> BOOL .)
+    DROP            reduce using rule 5 (statement -> SWAP SCOLON .)
+    DUP             reduce using rule 5 (statement -> SWAP SCOLON .)
+    SWAP            reduce using rule 5 (statement -> SWAP SCOLON .)
+    UNIT            reduce using rule 5 (statement -> SWAP SCOLON .)
+    EQ              reduce using rule 5 (statement -> SWAP SCOLON .)
+    NEQ             reduce using rule 5 (statement -> SWAP SCOLON .)
+    LT              reduce using rule 5 (statement -> SWAP SCOLON .)
+    GT              reduce using rule 5 (statement -> SWAP SCOLON .)
+    LE              reduce using rule 5 (statement -> SWAP SCOLON .)
+    GE              reduce using rule 5 (statement -> SWAP SCOLON .)
+    OR              reduce using rule 5 (statement -> SWAP SCOLON .)
+    AND             reduce using rule 5 (statement -> SWAP SCOLON .)
+    XOR             reduce using rule 5 (statement -> SWAP SCOLON .)
+    COMPARE         reduce using rule 5 (statement -> SWAP SCOLON .)
+    NEG             reduce using rule 5 (statement -> SWAP SCOLON .)
+    ABS             reduce using rule 5 (statement -> SWAP SCOLON .)
+    ADD             reduce using rule 5 (statement -> SWAP SCOLON .)
+    SUB             reduce using rule 5 (statement -> SWAP SCOLON .)
+    MUL             reduce using rule 5 (statement -> SWAP SCOLON .)
+    EDIV            reduce using rule 5 (statement -> SWAP SCOLON .)
+    LSL             reduce using rule 5 (statement -> SWAP SCOLON .)
+    LSR             reduce using rule 5 (statement -> SWAP SCOLON .)
+    CONCAT          reduce using rule 5 (statement -> SWAP SCOLON .)
+    SIZE            reduce using rule 5 (statement -> SWAP SCOLON .)
+    SLICE           reduce using rule 5 (statement -> SWAP SCOLON .)
+    PAIR            reduce using rule 5 (statement -> SWAP SCOLON .)
+    CAR             reduce using rule 5 (statement -> SWAP SCOLON .)
+    CDR             reduce using rule 5 (statement -> SWAP SCOLON .)
+    EMPTY_SET       reduce using rule 5 (statement -> SWAP SCOLON .)
+    MEM             reduce using rule 5 (statement -> SWAP SCOLON .)
+    UPDATE          reduce using rule 5 (statement -> SWAP SCOLON .)
+    SOME            reduce using rule 5 (statement -> SWAP SCOLON .)
+    NONE            reduce using rule 5 (statement -> SWAP SCOLON .)
+    LEFT            reduce using rule 5 (statement -> SWAP SCOLON .)
+    RIGHT           reduce using rule 5 (statement -> SWAP SCOLON .)
+    CONS            reduce using rule 5 (statement -> SWAP SCOLON .)
+    NIL             reduce using rule 5 (statement -> SWAP SCOLON .)
+    NOT             reduce using rule 5 (statement -> SWAP SCOLON .)
+    PUSH            reduce using rule 5 (statement -> SWAP SCOLON .)
+    FAILWITH        reduce using rule 5 (statement -> SWAP SCOLON .)
+    $end            reduce using rule 5 (statement -> SWAP SCOLON .)
 
 
 state 47
 
-    (49) TYPE -> BYTES .
+    (6) statement -> UNIT SCOLON .
 
-    $end            reduce using rule 49 (TYPE -> BYTES .)
-    NUMBER          reduce using rule 49 (TYPE -> BYTES .)
-    TEXT            reduce using rule 49 (TYPE -> BYTES .)
-    LPARENS         reduce using rule 49 (TYPE -> BYTES .)
-    TRUE            reduce using rule 49 (TYPE -> BYTES .)
-    FALSE           reduce using rule 49 (TYPE -> BYTES .)
-    NAT             reduce using rule 49 (TYPE -> BYTES .)
-    STRING          reduce using rule 49 (TYPE -> BYTES .)
-    INT             reduce using rule 49 (TYPE -> BYTES .)
-    BOOL            reduce using rule 49 (TYPE -> BYTES .)
-    BYTES           reduce using rule 49 (TYPE -> BYTES .)
-    RPARENS         reduce using rule 49 (TYPE -> BYTES .)
+    DROP            reduce using rule 6 (statement -> UNIT SCOLON .)
+    DUP             reduce using rule 6 (statement -> UNIT SCOLON .)
+    SWAP            reduce using rule 6 (statement -> UNIT SCOLON .)
+    UNIT            reduce using rule 6 (statement -> UNIT SCOLON .)
+    EQ              reduce using rule 6 (statement -> UNIT SCOLON .)
+    NEQ             reduce using rule 6 (statement -> UNIT SCOLON .)
+    LT              reduce using rule 6 (statement -> UNIT SCOLON .)
+    GT              reduce using rule 6 (statement -> UNIT SCOLON .)
+    LE              reduce using rule 6 (statement -> UNIT SCOLON .)
+    GE              reduce using rule 6 (statement -> UNIT SCOLON .)
+    OR              reduce using rule 6 (statement -> UNIT SCOLON .)
+    AND             reduce using rule 6 (statement -> UNIT SCOLON .)
+    XOR             reduce using rule 6 (statement -> UNIT SCOLON .)
+    COMPARE         reduce using rule 6 (statement -> UNIT SCOLON .)
+    NEG             reduce using rule 6 (statement -> UNIT SCOLON .)
+    ABS             reduce using rule 6 (statement -> UNIT SCOLON .)
+    ADD             reduce using rule 6 (statement -> UNIT SCOLON .)
+    SUB             reduce using rule 6 (statement -> UNIT SCOLON .)
+    MUL             reduce using rule 6 (statement -> UNIT SCOLON .)
+    EDIV            reduce using rule 6 (statement -> UNIT SCOLON .)
+    LSL             reduce using rule 6 (statement -> UNIT SCOLON .)
+    LSR             reduce using rule 6 (statement -> UNIT SCOLON .)
+    CONCAT          reduce using rule 6 (statement -> UNIT SCOLON .)
+    SIZE            reduce using rule 6 (statement -> UNIT SCOLON .)
+    SLICE           reduce using rule 6 (statement -> UNIT SCOLON .)
+    PAIR            reduce using rule 6 (statement -> UNIT SCOLON .)
+    CAR             reduce using rule 6 (statement -> UNIT SCOLON .)
+    CDR             reduce using rule 6 (statement -> UNIT SCOLON .)
+    EMPTY_SET       reduce using rule 6 (statement -> UNIT SCOLON .)
+    MEM             reduce using rule 6 (statement -> UNIT SCOLON .)
+    UPDATE          reduce using rule 6 (statement -> UNIT SCOLON .)
+    SOME            reduce using rule 6 (statement -> UNIT SCOLON .)
+    NONE            reduce using rule 6 (statement -> UNIT SCOLON .)
+    LEFT            reduce using rule 6 (statement -> UNIT SCOLON .)
+    RIGHT           reduce using rule 6 (statement -> UNIT SCOLON .)
+    CONS            reduce using rule 6 (statement -> UNIT SCOLON .)
+    NIL             reduce using rule 6 (statement -> UNIT SCOLON .)
+    NOT             reduce using rule 6 (statement -> UNIT SCOLON .)
+    PUSH            reduce using rule 6 (statement -> UNIT SCOLON .)
+    FAILWITH        reduce using rule 6 (statement -> UNIT SCOLON .)
+    $end            reduce using rule 6 (statement -> UNIT SCOLON .)
 
 
 state 48
 
-    (50) TYPE -> LPARENS . LPAIR TYPE TYPE RPARENS
+    (13) statement -> EQ SCOLON .
 
-    LPAIR           shift and go to state 54
+    DROP            reduce using rule 13 (statement -> EQ SCOLON .)
+    DUP             reduce using rule 13 (statement -> EQ SCOLON .)
+    SWAP            reduce using rule 13 (statement -> EQ SCOLON .)
+    UNIT            reduce using rule 13 (statement -> EQ SCOLON .)
+    EQ              reduce using rule 13 (statement -> EQ SCOLON .)
+    NEQ             reduce using rule 13 (statement -> EQ SCOLON .)
+    LT              reduce using rule 13 (statement -> EQ SCOLON .)
+    GT              reduce using rule 13 (statement -> EQ SCOLON .)
+    LE              reduce using rule 13 (statement -> EQ SCOLON .)
+    GE              reduce using rule 13 (statement -> EQ SCOLON .)
+    OR              reduce using rule 13 (statement -> EQ SCOLON .)
+    AND             reduce using rule 13 (statement -> EQ SCOLON .)
+    XOR             reduce using rule 13 (statement -> EQ SCOLON .)
+    COMPARE         reduce using rule 13 (statement -> EQ SCOLON .)
+    NEG             reduce using rule 13 (statement -> EQ SCOLON .)
+    ABS             reduce using rule 13 (statement -> EQ SCOLON .)
+    ADD             reduce using rule 13 (statement -> EQ SCOLON .)
+    SUB             reduce using rule 13 (statement -> EQ SCOLON .)
+    MUL             reduce using rule 13 (statement -> EQ SCOLON .)
+    EDIV            reduce using rule 13 (statement -> EQ SCOLON .)
+    LSL             reduce using rule 13 (statement -> EQ SCOLON .)
+    LSR             reduce using rule 13 (statement -> EQ SCOLON .)
+    CONCAT          reduce using rule 13 (statement -> EQ SCOLON .)
+    SIZE            reduce using rule 13 (statement -> EQ SCOLON .)
+    SLICE           reduce using rule 13 (statement -> EQ SCOLON .)
+    PAIR            reduce using rule 13 (statement -> EQ SCOLON .)
+    CAR             reduce using rule 13 (statement -> EQ SCOLON .)
+    CDR             reduce using rule 13 (statement -> EQ SCOLON .)
+    EMPTY_SET       reduce using rule 13 (statement -> EQ SCOLON .)
+    MEM             reduce using rule 13 (statement -> EQ SCOLON .)
+    UPDATE          reduce using rule 13 (statement -> EQ SCOLON .)
+    SOME            reduce using rule 13 (statement -> EQ SCOLON .)
+    NONE            reduce using rule 13 (statement -> EQ SCOLON .)
+    LEFT            reduce using rule 13 (statement -> EQ SCOLON .)
+    RIGHT           reduce using rule 13 (statement -> EQ SCOLON .)
+    CONS            reduce using rule 13 (statement -> EQ SCOLON .)
+    NIL             reduce using rule 13 (statement -> EQ SCOLON .)
+    NOT             reduce using rule 13 (statement -> EQ SCOLON .)
+    PUSH            reduce using rule 13 (statement -> EQ SCOLON .)
+    FAILWITH        reduce using rule 13 (statement -> EQ SCOLON .)
+    $end            reduce using rule 13 (statement -> EQ SCOLON .)
 
 
 state 49
 
-    (39) statement -> NONE TYPE .
+    (14) statement -> NEQ SCOLON .
 
-    $end            reduce using rule 39 (statement -> NONE TYPE .)
+    DROP            reduce using rule 14 (statement -> NEQ SCOLON .)
+    DUP             reduce using rule 14 (statement -> NEQ SCOLON .)
+    SWAP            reduce using rule 14 (statement -> NEQ SCOLON .)
+    UNIT            reduce using rule 14 (statement -> NEQ SCOLON .)
+    EQ              reduce using rule 14 (statement -> NEQ SCOLON .)
+    NEQ             reduce using rule 14 (statement -> NEQ SCOLON .)
+    LT              reduce using rule 14 (statement -> NEQ SCOLON .)
+    GT              reduce using rule 14 (statement -> NEQ SCOLON .)
+    LE              reduce using rule 14 (statement -> NEQ SCOLON .)
+    GE              reduce using rule 14 (statement -> NEQ SCOLON .)
+    OR              reduce using rule 14 (statement -> NEQ SCOLON .)
+    AND             reduce using rule 14 (statement -> NEQ SCOLON .)
+    XOR             reduce using rule 14 (statement -> NEQ SCOLON .)
+    COMPARE         reduce using rule 14 (statement -> NEQ SCOLON .)
+    NEG             reduce using rule 14 (statement -> NEQ SCOLON .)
+    ABS             reduce using rule 14 (statement -> NEQ SCOLON .)
+    ADD             reduce using rule 14 (statement -> NEQ SCOLON .)
+    SUB             reduce using rule 14 (statement -> NEQ SCOLON .)
+    MUL             reduce using rule 14 (statement -> NEQ SCOLON .)
+    EDIV            reduce using rule 14 (statement -> NEQ SCOLON .)
+    LSL             reduce using rule 14 (statement -> NEQ SCOLON .)
+    LSR             reduce using rule 14 (statement -> NEQ SCOLON .)
+    CONCAT          reduce using rule 14 (statement -> NEQ SCOLON .)
+    SIZE            reduce using rule 14 (statement -> NEQ SCOLON .)
+    SLICE           reduce using rule 14 (statement -> NEQ SCOLON .)
+    PAIR            reduce using rule 14 (statement -> NEQ SCOLON .)
+    CAR             reduce using rule 14 (statement -> NEQ SCOLON .)
+    CDR             reduce using rule 14 (statement -> NEQ SCOLON .)
+    EMPTY_SET       reduce using rule 14 (statement -> NEQ SCOLON .)
+    MEM             reduce using rule 14 (statement -> NEQ SCOLON .)
+    UPDATE          reduce using rule 14 (statement -> NEQ SCOLON .)
+    SOME            reduce using rule 14 (statement -> NEQ SCOLON .)
+    NONE            reduce using rule 14 (statement -> NEQ SCOLON .)
+    LEFT            reduce using rule 14 (statement -> NEQ SCOLON .)
+    RIGHT           reduce using rule 14 (statement -> NEQ SCOLON .)
+    CONS            reduce using rule 14 (statement -> NEQ SCOLON .)
+    NIL             reduce using rule 14 (statement -> NEQ SCOLON .)
+    NOT             reduce using rule 14 (statement -> NEQ SCOLON .)
+    PUSH            reduce using rule 14 (statement -> NEQ SCOLON .)
+    FAILWITH        reduce using rule 14 (statement -> NEQ SCOLON .)
+    $end            reduce using rule 14 (statement -> NEQ SCOLON .)
 
 
 state 50
 
-    (40) statement -> LEFT TYPE .
+    (15) statement -> LT SCOLON .
 
-    $end            reduce using rule 40 (statement -> LEFT TYPE .)
+    DROP            reduce using rule 15 (statement -> LT SCOLON .)
+    DUP             reduce using rule 15 (statement -> LT SCOLON .)
+    SWAP            reduce using rule 15 (statement -> LT SCOLON .)
+    UNIT            reduce using rule 15 (statement -> LT SCOLON .)
+    EQ              reduce using rule 15 (statement -> LT SCOLON .)
+    NEQ             reduce using rule 15 (statement -> LT SCOLON .)
+    LT              reduce using rule 15 (statement -> LT SCOLON .)
+    GT              reduce using rule 15 (statement -> LT SCOLON .)
+    LE              reduce using rule 15 (statement -> LT SCOLON .)
+    GE              reduce using rule 15 (statement -> LT SCOLON .)
+    OR              reduce using rule 15 (statement -> LT SCOLON .)
+    AND             reduce using rule 15 (statement -> LT SCOLON .)
+    XOR             reduce using rule 15 (statement -> LT SCOLON .)
+    COMPARE         reduce using rule 15 (statement -> LT SCOLON .)
+    NEG             reduce using rule 15 (statement -> LT SCOLON .)
+    ABS             reduce using rule 15 (statement -> LT SCOLON .)
+    ADD             reduce using rule 15 (statement -> LT SCOLON .)
+    SUB             reduce using rule 15 (statement -> LT SCOLON .)
+    MUL             reduce using rule 15 (statement -> LT SCOLON .)
+    EDIV            reduce using rule 15 (statement -> LT SCOLON .)
+    LSL             reduce using rule 15 (statement -> LT SCOLON .)
+    LSR             reduce using rule 15 (statement -> LT SCOLON .)
+    CONCAT          reduce using rule 15 (statement -> LT SCOLON .)
+    SIZE            reduce using rule 15 (statement -> LT SCOLON .)
+    SLICE           reduce using rule 15 (statement -> LT SCOLON .)
+    PAIR            reduce using rule 15 (statement -> LT SCOLON .)
+    CAR             reduce using rule 15 (statement -> LT SCOLON .)
+    CDR             reduce using rule 15 (statement -> LT SCOLON .)
+    EMPTY_SET       reduce using rule 15 (statement -> LT SCOLON .)
+    MEM             reduce using rule 15 (statement -> LT SCOLON .)
+    UPDATE          reduce using rule 15 (statement -> LT SCOLON .)
+    SOME            reduce using rule 15 (statement -> LT SCOLON .)
+    NONE            reduce using rule 15 (statement -> LT SCOLON .)
+    LEFT            reduce using rule 15 (statement -> LT SCOLON .)
+    RIGHT           reduce using rule 15 (statement -> LT SCOLON .)
+    CONS            reduce using rule 15 (statement -> LT SCOLON .)
+    NIL             reduce using rule 15 (statement -> LT SCOLON .)
+    NOT             reduce using rule 15 (statement -> LT SCOLON .)
+    PUSH            reduce using rule 15 (statement -> LT SCOLON .)
+    FAILWITH        reduce using rule 15 (statement -> LT SCOLON .)
+    $end            reduce using rule 15 (statement -> LT SCOLON .)
 
 
 state 51
 
-    (41) statement -> RIGHT TYPE .
+    (16) statement -> GT SCOLON .
 
-    $end            reduce using rule 41 (statement -> RIGHT TYPE .)
+    DROP            reduce using rule 16 (statement -> GT SCOLON .)
+    DUP             reduce using rule 16 (statement -> GT SCOLON .)
+    SWAP            reduce using rule 16 (statement -> GT SCOLON .)
+    UNIT            reduce using rule 16 (statement -> GT SCOLON .)
+    EQ              reduce using rule 16 (statement -> GT SCOLON .)
+    NEQ             reduce using rule 16 (statement -> GT SCOLON .)
+    LT              reduce using rule 16 (statement -> GT SCOLON .)
+    GT              reduce using rule 16 (statement -> GT SCOLON .)
+    LE              reduce using rule 16 (statement -> GT SCOLON .)
+    GE              reduce using rule 16 (statement -> GT SCOLON .)
+    OR              reduce using rule 16 (statement -> GT SCOLON .)
+    AND             reduce using rule 16 (statement -> GT SCOLON .)
+    XOR             reduce using rule 16 (statement -> GT SCOLON .)
+    COMPARE         reduce using rule 16 (statement -> GT SCOLON .)
+    NEG             reduce using rule 16 (statement -> GT SCOLON .)
+    ABS             reduce using rule 16 (statement -> GT SCOLON .)
+    ADD             reduce using rule 16 (statement -> GT SCOLON .)
+    SUB             reduce using rule 16 (statement -> GT SCOLON .)
+    MUL             reduce using rule 16 (statement -> GT SCOLON .)
+    EDIV            reduce using rule 16 (statement -> GT SCOLON .)
+    LSL             reduce using rule 16 (statement -> GT SCOLON .)
+    LSR             reduce using rule 16 (statement -> GT SCOLON .)
+    CONCAT          reduce using rule 16 (statement -> GT SCOLON .)
+    SIZE            reduce using rule 16 (statement -> GT SCOLON .)
+    SLICE           reduce using rule 16 (statement -> GT SCOLON .)
+    PAIR            reduce using rule 16 (statement -> GT SCOLON .)
+    CAR             reduce using rule 16 (statement -> GT SCOLON .)
+    CDR             reduce using rule 16 (statement -> GT SCOLON .)
+    EMPTY_SET       reduce using rule 16 (statement -> GT SCOLON .)
+    MEM             reduce using rule 16 (statement -> GT SCOLON .)
+    UPDATE          reduce using rule 16 (statement -> GT SCOLON .)
+    SOME            reduce using rule 16 (statement -> GT SCOLON .)
+    NONE            reduce using rule 16 (statement -> GT SCOLON .)
+    LEFT            reduce using rule 16 (statement -> GT SCOLON .)
+    RIGHT           reduce using rule 16 (statement -> GT SCOLON .)
+    CONS            reduce using rule 16 (statement -> GT SCOLON .)
+    NIL             reduce using rule 16 (statement -> GT SCOLON .)
+    NOT             reduce using rule 16 (statement -> GT SCOLON .)
+    PUSH            reduce using rule 16 (statement -> GT SCOLON .)
+    FAILWITH        reduce using rule 16 (statement -> GT SCOLON .)
+    $end            reduce using rule 16 (statement -> GT SCOLON .)
 
 
 state 52
 
-    (43) statement -> NIL TYPE .
+    (17) statement -> LE SCOLON .
 
-    $end            reduce using rule 43 (statement -> NIL TYPE .)
+    DROP            reduce using rule 17 (statement -> LE SCOLON .)
+    DUP             reduce using rule 17 (statement -> LE SCOLON .)
+    SWAP            reduce using rule 17 (statement -> LE SCOLON .)
+    UNIT            reduce using rule 17 (statement -> LE SCOLON .)
+    EQ              reduce using rule 17 (statement -> LE SCOLON .)
+    NEQ             reduce using rule 17 (statement -> LE SCOLON .)
+    LT              reduce using rule 17 (statement -> LE SCOLON .)
+    GT              reduce using rule 17 (statement -> LE SCOLON .)
+    LE              reduce using rule 17 (statement -> LE SCOLON .)
+    GE              reduce using rule 17 (statement -> LE SCOLON .)
+    OR              reduce using rule 17 (statement -> LE SCOLON .)
+    AND             reduce using rule 17 (statement -> LE SCOLON .)
+    XOR             reduce using rule 17 (statement -> LE SCOLON .)
+    COMPARE         reduce using rule 17 (statement -> LE SCOLON .)
+    NEG             reduce using rule 17 (statement -> LE SCOLON .)
+    ABS             reduce using rule 17 (statement -> LE SCOLON .)
+    ADD             reduce using rule 17 (statement -> LE SCOLON .)
+    SUB             reduce using rule 17 (statement -> LE SCOLON .)
+    MUL             reduce using rule 17 (statement -> LE SCOLON .)
+    EDIV            reduce using rule 17 (statement -> LE SCOLON .)
+    LSL             reduce using rule 17 (statement -> LE SCOLON .)
+    LSR             reduce using rule 17 (statement -> LE SCOLON .)
+    CONCAT          reduce using rule 17 (statement -> LE SCOLON .)
+    SIZE            reduce using rule 17 (statement -> LE SCOLON .)
+    SLICE           reduce using rule 17 (statement -> LE SCOLON .)
+    PAIR            reduce using rule 17 (statement -> LE SCOLON .)
+    CAR             reduce using rule 17 (statement -> LE SCOLON .)
+    CDR             reduce using rule 17 (statement -> LE SCOLON .)
+    EMPTY_SET       reduce using rule 17 (statement -> LE SCOLON .)
+    MEM             reduce using rule 17 (statement -> LE SCOLON .)
+    UPDATE          reduce using rule 17 (statement -> LE SCOLON .)
+    SOME            reduce using rule 17 (statement -> LE SCOLON .)
+    NONE            reduce using rule 17 (statement -> LE SCOLON .)
+    LEFT            reduce using rule 17 (statement -> LE SCOLON .)
+    RIGHT           reduce using rule 17 (statement -> LE SCOLON .)
+    CONS            reduce using rule 17 (statement -> LE SCOLON .)
+    NIL             reduce using rule 17 (statement -> LE SCOLON .)
+    NOT             reduce using rule 17 (statement -> LE SCOLON .)
+    PUSH            reduce using rule 17 (statement -> LE SCOLON .)
+    FAILWITH        reduce using rule 17 (statement -> LE SCOLON .)
+    $end            reduce using rule 17 (statement -> LE SCOLON .)
 
 
 state 53
 
-    (51) statement -> PUSH TYPE . value
-    (7) value -> . NUMBER
-    (8) value -> . bool
-    (9) value -> . TEXT
-    (10) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (5) bool -> . TRUE
-    (6) bool -> . FALSE
+    (18) statement -> GE SCOLON .
 
-    NUMBER          shift and go to state 56
-    TEXT            shift and go to state 58
-    LPARENS         shift and go to state 59
-    TRUE            shift and go to state 60
-    FALSE           shift and go to state 61
+    DROP            reduce using rule 18 (statement -> GE SCOLON .)
+    DUP             reduce using rule 18 (statement -> GE SCOLON .)
+    SWAP            reduce using rule 18 (statement -> GE SCOLON .)
+    UNIT            reduce using rule 18 (statement -> GE SCOLON .)
+    EQ              reduce using rule 18 (statement -> GE SCOLON .)
+    NEQ             reduce using rule 18 (statement -> GE SCOLON .)
+    LT              reduce using rule 18 (statement -> GE SCOLON .)
+    GT              reduce using rule 18 (statement -> GE SCOLON .)
+    LE              reduce using rule 18 (statement -> GE SCOLON .)
+    GE              reduce using rule 18 (statement -> GE SCOLON .)
+    OR              reduce using rule 18 (statement -> GE SCOLON .)
+    AND             reduce using rule 18 (statement -> GE SCOLON .)
+    XOR             reduce using rule 18 (statement -> GE SCOLON .)
+    COMPARE         reduce using rule 18 (statement -> GE SCOLON .)
+    NEG             reduce using rule 18 (statement -> GE SCOLON .)
+    ABS             reduce using rule 18 (statement -> GE SCOLON .)
+    ADD             reduce using rule 18 (statement -> GE SCOLON .)
+    SUB             reduce using rule 18 (statement -> GE SCOLON .)
+    MUL             reduce using rule 18 (statement -> GE SCOLON .)
+    EDIV            reduce using rule 18 (statement -> GE SCOLON .)
+    LSL             reduce using rule 18 (statement -> GE SCOLON .)
+    LSR             reduce using rule 18 (statement -> GE SCOLON .)
+    CONCAT          reduce using rule 18 (statement -> GE SCOLON .)
+    SIZE            reduce using rule 18 (statement -> GE SCOLON .)
+    SLICE           reduce using rule 18 (statement -> GE SCOLON .)
+    PAIR            reduce using rule 18 (statement -> GE SCOLON .)
+    CAR             reduce using rule 18 (statement -> GE SCOLON .)
+    CDR             reduce using rule 18 (statement -> GE SCOLON .)
+    EMPTY_SET       reduce using rule 18 (statement -> GE SCOLON .)
+    MEM             reduce using rule 18 (statement -> GE SCOLON .)
+    UPDATE          reduce using rule 18 (statement -> GE SCOLON .)
+    SOME            reduce using rule 18 (statement -> GE SCOLON .)
+    NONE            reduce using rule 18 (statement -> GE SCOLON .)
+    LEFT            reduce using rule 18 (statement -> GE SCOLON .)
+    RIGHT           reduce using rule 18 (statement -> GE SCOLON .)
+    CONS            reduce using rule 18 (statement -> GE SCOLON .)
+    NIL             reduce using rule 18 (statement -> GE SCOLON .)
+    NOT             reduce using rule 18 (statement -> GE SCOLON .)
+    PUSH            reduce using rule 18 (statement -> GE SCOLON .)
+    FAILWITH        reduce using rule 18 (statement -> GE SCOLON .)
+    $end            reduce using rule 18 (statement -> GE SCOLON .)
 
-    value                          shift and go to state 55
-    bool                           shift and go to state 57
 
 state 54
 
-    (50) TYPE -> LPARENS LPAIR . TYPE TYPE RPARENS
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (19) statement -> OR SCOLON .
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    DROP            reduce using rule 19 (statement -> OR SCOLON .)
+    DUP             reduce using rule 19 (statement -> OR SCOLON .)
+    SWAP            reduce using rule 19 (statement -> OR SCOLON .)
+    UNIT            reduce using rule 19 (statement -> OR SCOLON .)
+    EQ              reduce using rule 19 (statement -> OR SCOLON .)
+    NEQ             reduce using rule 19 (statement -> OR SCOLON .)
+    LT              reduce using rule 19 (statement -> OR SCOLON .)
+    GT              reduce using rule 19 (statement -> OR SCOLON .)
+    LE              reduce using rule 19 (statement -> OR SCOLON .)
+    GE              reduce using rule 19 (statement -> OR SCOLON .)
+    OR              reduce using rule 19 (statement -> OR SCOLON .)
+    AND             reduce using rule 19 (statement -> OR SCOLON .)
+    XOR             reduce using rule 19 (statement -> OR SCOLON .)
+    COMPARE         reduce using rule 19 (statement -> OR SCOLON .)
+    NEG             reduce using rule 19 (statement -> OR SCOLON .)
+    ABS             reduce using rule 19 (statement -> OR SCOLON .)
+    ADD             reduce using rule 19 (statement -> OR SCOLON .)
+    SUB             reduce using rule 19 (statement -> OR SCOLON .)
+    MUL             reduce using rule 19 (statement -> OR SCOLON .)
+    EDIV            reduce using rule 19 (statement -> OR SCOLON .)
+    LSL             reduce using rule 19 (statement -> OR SCOLON .)
+    LSR             reduce using rule 19 (statement -> OR SCOLON .)
+    CONCAT          reduce using rule 19 (statement -> OR SCOLON .)
+    SIZE            reduce using rule 19 (statement -> OR SCOLON .)
+    SLICE           reduce using rule 19 (statement -> OR SCOLON .)
+    PAIR            reduce using rule 19 (statement -> OR SCOLON .)
+    CAR             reduce using rule 19 (statement -> OR SCOLON .)
+    CDR             reduce using rule 19 (statement -> OR SCOLON .)
+    EMPTY_SET       reduce using rule 19 (statement -> OR SCOLON .)
+    MEM             reduce using rule 19 (statement -> OR SCOLON .)
+    UPDATE          reduce using rule 19 (statement -> OR SCOLON .)
+    SOME            reduce using rule 19 (statement -> OR SCOLON .)
+    NONE            reduce using rule 19 (statement -> OR SCOLON .)
+    LEFT            reduce using rule 19 (statement -> OR SCOLON .)
+    RIGHT           reduce using rule 19 (statement -> OR SCOLON .)
+    CONS            reduce using rule 19 (statement -> OR SCOLON .)
+    NIL             reduce using rule 19 (statement -> OR SCOLON .)
+    NOT             reduce using rule 19 (statement -> OR SCOLON .)
+    PUSH            reduce using rule 19 (statement -> OR SCOLON .)
+    FAILWITH        reduce using rule 19 (statement -> OR SCOLON .)
+    $end            reduce using rule 19 (statement -> OR SCOLON .)
 
-    TYPE                           shift and go to state 62
 
 state 55
 
-    (51) statement -> PUSH TYPE value .
+    (20) statement -> AND SCOLON .
 
-    $end            reduce using rule 51 (statement -> PUSH TYPE value .)
+    DROP            reduce using rule 20 (statement -> AND SCOLON .)
+    DUP             reduce using rule 20 (statement -> AND SCOLON .)
+    SWAP            reduce using rule 20 (statement -> AND SCOLON .)
+    UNIT            reduce using rule 20 (statement -> AND SCOLON .)
+    EQ              reduce using rule 20 (statement -> AND SCOLON .)
+    NEQ             reduce using rule 20 (statement -> AND SCOLON .)
+    LT              reduce using rule 20 (statement -> AND SCOLON .)
+    GT              reduce using rule 20 (statement -> AND SCOLON .)
+    LE              reduce using rule 20 (statement -> AND SCOLON .)
+    GE              reduce using rule 20 (statement -> AND SCOLON .)
+    OR              reduce using rule 20 (statement -> AND SCOLON .)
+    AND             reduce using rule 20 (statement -> AND SCOLON .)
+    XOR             reduce using rule 20 (statement -> AND SCOLON .)
+    COMPARE         reduce using rule 20 (statement -> AND SCOLON .)
+    NEG             reduce using rule 20 (statement -> AND SCOLON .)
+    ABS             reduce using rule 20 (statement -> AND SCOLON .)
+    ADD             reduce using rule 20 (statement -> AND SCOLON .)
+    SUB             reduce using rule 20 (statement -> AND SCOLON .)
+    MUL             reduce using rule 20 (statement -> AND SCOLON .)
+    EDIV            reduce using rule 20 (statement -> AND SCOLON .)
+    LSL             reduce using rule 20 (statement -> AND SCOLON .)
+    LSR             reduce using rule 20 (statement -> AND SCOLON .)
+    CONCAT          reduce using rule 20 (statement -> AND SCOLON .)
+    SIZE            reduce using rule 20 (statement -> AND SCOLON .)
+    SLICE           reduce using rule 20 (statement -> AND SCOLON .)
+    PAIR            reduce using rule 20 (statement -> AND SCOLON .)
+    CAR             reduce using rule 20 (statement -> AND SCOLON .)
+    CDR             reduce using rule 20 (statement -> AND SCOLON .)
+    EMPTY_SET       reduce using rule 20 (statement -> AND SCOLON .)
+    MEM             reduce using rule 20 (statement -> AND SCOLON .)
+    UPDATE          reduce using rule 20 (statement -> AND SCOLON .)
+    SOME            reduce using rule 20 (statement -> AND SCOLON .)
+    NONE            reduce using rule 20 (statement -> AND SCOLON .)
+    LEFT            reduce using rule 20 (statement -> AND SCOLON .)
+    RIGHT           reduce using rule 20 (statement -> AND SCOLON .)
+    CONS            reduce using rule 20 (statement -> AND SCOLON .)
+    NIL             reduce using rule 20 (statement -> AND SCOLON .)
+    NOT             reduce using rule 20 (statement -> AND SCOLON .)
+    PUSH            reduce using rule 20 (statement -> AND SCOLON .)
+    FAILWITH        reduce using rule 20 (statement -> AND SCOLON .)
+    $end            reduce using rule 20 (statement -> AND SCOLON .)
 
 
 state 56
 
-    (7) value -> NUMBER .
+    (21) statement -> XOR SCOLON .
 
-    $end            reduce using rule 7 (value -> NUMBER .)
-    NUMBER          reduce using rule 7 (value -> NUMBER .)
-    TEXT            reduce using rule 7 (value -> NUMBER .)
-    LPARENS         reduce using rule 7 (value -> NUMBER .)
-    TRUE            reduce using rule 7 (value -> NUMBER .)
-    FALSE           reduce using rule 7 (value -> NUMBER .)
-    RPARENS         reduce using rule 7 (value -> NUMBER .)
+    DROP            reduce using rule 21 (statement -> XOR SCOLON .)
+    DUP             reduce using rule 21 (statement -> XOR SCOLON .)
+    SWAP            reduce using rule 21 (statement -> XOR SCOLON .)
+    UNIT            reduce using rule 21 (statement -> XOR SCOLON .)
+    EQ              reduce using rule 21 (statement -> XOR SCOLON .)
+    NEQ             reduce using rule 21 (statement -> XOR SCOLON .)
+    LT              reduce using rule 21 (statement -> XOR SCOLON .)
+    GT              reduce using rule 21 (statement -> XOR SCOLON .)
+    LE              reduce using rule 21 (statement -> XOR SCOLON .)
+    GE              reduce using rule 21 (statement -> XOR SCOLON .)
+    OR              reduce using rule 21 (statement -> XOR SCOLON .)
+    AND             reduce using rule 21 (statement -> XOR SCOLON .)
+    XOR             reduce using rule 21 (statement -> XOR SCOLON .)
+    COMPARE         reduce using rule 21 (statement -> XOR SCOLON .)
+    NEG             reduce using rule 21 (statement -> XOR SCOLON .)
+    ABS             reduce using rule 21 (statement -> XOR SCOLON .)
+    ADD             reduce using rule 21 (statement -> XOR SCOLON .)
+    SUB             reduce using rule 21 (statement -> XOR SCOLON .)
+    MUL             reduce using rule 21 (statement -> XOR SCOLON .)
+    EDIV            reduce using rule 21 (statement -> XOR SCOLON .)
+    LSL             reduce using rule 21 (statement -> XOR SCOLON .)
+    LSR             reduce using rule 21 (statement -> XOR SCOLON .)
+    CONCAT          reduce using rule 21 (statement -> XOR SCOLON .)
+    SIZE            reduce using rule 21 (statement -> XOR SCOLON .)
+    SLICE           reduce using rule 21 (statement -> XOR SCOLON .)
+    PAIR            reduce using rule 21 (statement -> XOR SCOLON .)
+    CAR             reduce using rule 21 (statement -> XOR SCOLON .)
+    CDR             reduce using rule 21 (statement -> XOR SCOLON .)
+    EMPTY_SET       reduce using rule 21 (statement -> XOR SCOLON .)
+    MEM             reduce using rule 21 (statement -> XOR SCOLON .)
+    UPDATE          reduce using rule 21 (statement -> XOR SCOLON .)
+    SOME            reduce using rule 21 (statement -> XOR SCOLON .)
+    NONE            reduce using rule 21 (statement -> XOR SCOLON .)
+    LEFT            reduce using rule 21 (statement -> XOR SCOLON .)
+    RIGHT           reduce using rule 21 (statement -> XOR SCOLON .)
+    CONS            reduce using rule 21 (statement -> XOR SCOLON .)
+    NIL             reduce using rule 21 (statement -> XOR SCOLON .)
+    NOT             reduce using rule 21 (statement -> XOR SCOLON .)
+    PUSH            reduce using rule 21 (statement -> XOR SCOLON .)
+    FAILWITH        reduce using rule 21 (statement -> XOR SCOLON .)
+    $end            reduce using rule 21 (statement -> XOR SCOLON .)
 
 
 state 57
 
-    (8) value -> bool .
+    (22) statement -> COMPARE SCOLON .
 
-    $end            reduce using rule 8 (value -> bool .)
-    NUMBER          reduce using rule 8 (value -> bool .)
-    TEXT            reduce using rule 8 (value -> bool .)
-    LPARENS         reduce using rule 8 (value -> bool .)
-    TRUE            reduce using rule 8 (value -> bool .)
-    FALSE           reduce using rule 8 (value -> bool .)
-    RPARENS         reduce using rule 8 (value -> bool .)
+    DROP            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    DUP             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    SWAP            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    UNIT            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    EQ              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    NEQ             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    LT              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    GT              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    LE              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    GE              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    OR              reduce using rule 22 (statement -> COMPARE SCOLON .)
+    AND             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    XOR             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    COMPARE         reduce using rule 22 (statement -> COMPARE SCOLON .)
+    NEG             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    ABS             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    ADD             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    SUB             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    MUL             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    EDIV            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    LSL             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    LSR             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    CONCAT          reduce using rule 22 (statement -> COMPARE SCOLON .)
+    SIZE            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    SLICE           reduce using rule 22 (statement -> COMPARE SCOLON .)
+    PAIR            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    CAR             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    CDR             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    EMPTY_SET       reduce using rule 22 (statement -> COMPARE SCOLON .)
+    MEM             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    UPDATE          reduce using rule 22 (statement -> COMPARE SCOLON .)
+    SOME            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    NONE            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    LEFT            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    RIGHT           reduce using rule 22 (statement -> COMPARE SCOLON .)
+    CONS            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    NIL             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    NOT             reduce using rule 22 (statement -> COMPARE SCOLON .)
+    PUSH            reduce using rule 22 (statement -> COMPARE SCOLON .)
+    FAILWITH        reduce using rule 22 (statement -> COMPARE SCOLON .)
+    $end            reduce using rule 22 (statement -> COMPARE SCOLON .)
 
 
 state 58
 
-    (9) value -> TEXT .
+    (23) statement -> NEG SCOLON .
 
-    $end            reduce using rule 9 (value -> TEXT .)
-    NUMBER          reduce using rule 9 (value -> TEXT .)
-    TEXT            reduce using rule 9 (value -> TEXT .)
-    LPARENS         reduce using rule 9 (value -> TEXT .)
-    TRUE            reduce using rule 9 (value -> TEXT .)
-    FALSE           reduce using rule 9 (value -> TEXT .)
-    RPARENS         reduce using rule 9 (value -> TEXT .)
+    DROP            reduce using rule 23 (statement -> NEG SCOLON .)
+    DUP             reduce using rule 23 (statement -> NEG SCOLON .)
+    SWAP            reduce using rule 23 (statement -> NEG SCOLON .)
+    UNIT            reduce using rule 23 (statement -> NEG SCOLON .)
+    EQ              reduce using rule 23 (statement -> NEG SCOLON .)
+    NEQ             reduce using rule 23 (statement -> NEG SCOLON .)
+    LT              reduce using rule 23 (statement -> NEG SCOLON .)
+    GT              reduce using rule 23 (statement -> NEG SCOLON .)
+    LE              reduce using rule 23 (statement -> NEG SCOLON .)
+    GE              reduce using rule 23 (statement -> NEG SCOLON .)
+    OR              reduce using rule 23 (statement -> NEG SCOLON .)
+    AND             reduce using rule 23 (statement -> NEG SCOLON .)
+    XOR             reduce using rule 23 (statement -> NEG SCOLON .)
+    COMPARE         reduce using rule 23 (statement -> NEG SCOLON .)
+    NEG             reduce using rule 23 (statement -> NEG SCOLON .)
+    ABS             reduce using rule 23 (statement -> NEG SCOLON .)
+    ADD             reduce using rule 23 (statement -> NEG SCOLON .)
+    SUB             reduce using rule 23 (statement -> NEG SCOLON .)
+    MUL             reduce using rule 23 (statement -> NEG SCOLON .)
+    EDIV            reduce using rule 23 (statement -> NEG SCOLON .)
+    LSL             reduce using rule 23 (statement -> NEG SCOLON .)
+    LSR             reduce using rule 23 (statement -> NEG SCOLON .)
+    CONCAT          reduce using rule 23 (statement -> NEG SCOLON .)
+    SIZE            reduce using rule 23 (statement -> NEG SCOLON .)
+    SLICE           reduce using rule 23 (statement -> NEG SCOLON .)
+    PAIR            reduce using rule 23 (statement -> NEG SCOLON .)
+    CAR             reduce using rule 23 (statement -> NEG SCOLON .)
+    CDR             reduce using rule 23 (statement -> NEG SCOLON .)
+    EMPTY_SET       reduce using rule 23 (statement -> NEG SCOLON .)
+    MEM             reduce using rule 23 (statement -> NEG SCOLON .)
+    UPDATE          reduce using rule 23 (statement -> NEG SCOLON .)
+    SOME            reduce using rule 23 (statement -> NEG SCOLON .)
+    NONE            reduce using rule 23 (statement -> NEG SCOLON .)
+    LEFT            reduce using rule 23 (statement -> NEG SCOLON .)
+    RIGHT           reduce using rule 23 (statement -> NEG SCOLON .)
+    CONS            reduce using rule 23 (statement -> NEG SCOLON .)
+    NIL             reduce using rule 23 (statement -> NEG SCOLON .)
+    NOT             reduce using rule 23 (statement -> NEG SCOLON .)
+    PUSH            reduce using rule 23 (statement -> NEG SCOLON .)
+    FAILWITH        reduce using rule 23 (statement -> NEG SCOLON .)
+    $end            reduce using rule 23 (statement -> NEG SCOLON .)
 
 
 state 59
 
-    (10) value -> LPARENS . PAIR_CONSTRUCTOR value value RPARENS
+    (24) statement -> ABS SCOLON .
 
-    PAIR_CONSTRUCTOR shift and go to state 63
+    DROP            reduce using rule 24 (statement -> ABS SCOLON .)
+    DUP             reduce using rule 24 (statement -> ABS SCOLON .)
+    SWAP            reduce using rule 24 (statement -> ABS SCOLON .)
+    UNIT            reduce using rule 24 (statement -> ABS SCOLON .)
+    EQ              reduce using rule 24 (statement -> ABS SCOLON .)
+    NEQ             reduce using rule 24 (statement -> ABS SCOLON .)
+    LT              reduce using rule 24 (statement -> ABS SCOLON .)
+    GT              reduce using rule 24 (statement -> ABS SCOLON .)
+    LE              reduce using rule 24 (statement -> ABS SCOLON .)
+    GE              reduce using rule 24 (statement -> ABS SCOLON .)
+    OR              reduce using rule 24 (statement -> ABS SCOLON .)
+    AND             reduce using rule 24 (statement -> ABS SCOLON .)
+    XOR             reduce using rule 24 (statement -> ABS SCOLON .)
+    COMPARE         reduce using rule 24 (statement -> ABS SCOLON .)
+    NEG             reduce using rule 24 (statement -> ABS SCOLON .)
+    ABS             reduce using rule 24 (statement -> ABS SCOLON .)
+    ADD             reduce using rule 24 (statement -> ABS SCOLON .)
+    SUB             reduce using rule 24 (statement -> ABS SCOLON .)
+    MUL             reduce using rule 24 (statement -> ABS SCOLON .)
+    EDIV            reduce using rule 24 (statement -> ABS SCOLON .)
+    LSL             reduce using rule 24 (statement -> ABS SCOLON .)
+    LSR             reduce using rule 24 (statement -> ABS SCOLON .)
+    CONCAT          reduce using rule 24 (statement -> ABS SCOLON .)
+    SIZE            reduce using rule 24 (statement -> ABS SCOLON .)
+    SLICE           reduce using rule 24 (statement -> ABS SCOLON .)
+    PAIR            reduce using rule 24 (statement -> ABS SCOLON .)
+    CAR             reduce using rule 24 (statement -> ABS SCOLON .)
+    CDR             reduce using rule 24 (statement -> ABS SCOLON .)
+    EMPTY_SET       reduce using rule 24 (statement -> ABS SCOLON .)
+    MEM             reduce using rule 24 (statement -> ABS SCOLON .)
+    UPDATE          reduce using rule 24 (statement -> ABS SCOLON .)
+    SOME            reduce using rule 24 (statement -> ABS SCOLON .)
+    NONE            reduce using rule 24 (statement -> ABS SCOLON .)
+    LEFT            reduce using rule 24 (statement -> ABS SCOLON .)
+    RIGHT           reduce using rule 24 (statement -> ABS SCOLON .)
+    CONS            reduce using rule 24 (statement -> ABS SCOLON .)
+    NIL             reduce using rule 24 (statement -> ABS SCOLON .)
+    NOT             reduce using rule 24 (statement -> ABS SCOLON .)
+    PUSH            reduce using rule 24 (statement -> ABS SCOLON .)
+    FAILWITH        reduce using rule 24 (statement -> ABS SCOLON .)
+    $end            reduce using rule 24 (statement -> ABS SCOLON .)
 
 
 state 60
 
-    (5) bool -> TRUE .
+    (25) statement -> ADD SCOLON .
 
-    $end            reduce using rule 5 (bool -> TRUE .)
-    NUMBER          reduce using rule 5 (bool -> TRUE .)
-    TEXT            reduce using rule 5 (bool -> TRUE .)
-    LPARENS         reduce using rule 5 (bool -> TRUE .)
-    TRUE            reduce using rule 5 (bool -> TRUE .)
-    FALSE           reduce using rule 5 (bool -> TRUE .)
-    RPARENS         reduce using rule 5 (bool -> TRUE .)
+    DROP            reduce using rule 25 (statement -> ADD SCOLON .)
+    DUP             reduce using rule 25 (statement -> ADD SCOLON .)
+    SWAP            reduce using rule 25 (statement -> ADD SCOLON .)
+    UNIT            reduce using rule 25 (statement -> ADD SCOLON .)
+    EQ              reduce using rule 25 (statement -> ADD SCOLON .)
+    NEQ             reduce using rule 25 (statement -> ADD SCOLON .)
+    LT              reduce using rule 25 (statement -> ADD SCOLON .)
+    GT              reduce using rule 25 (statement -> ADD SCOLON .)
+    LE              reduce using rule 25 (statement -> ADD SCOLON .)
+    GE              reduce using rule 25 (statement -> ADD SCOLON .)
+    OR              reduce using rule 25 (statement -> ADD SCOLON .)
+    AND             reduce using rule 25 (statement -> ADD SCOLON .)
+    XOR             reduce using rule 25 (statement -> ADD SCOLON .)
+    COMPARE         reduce using rule 25 (statement -> ADD SCOLON .)
+    NEG             reduce using rule 25 (statement -> ADD SCOLON .)
+    ABS             reduce using rule 25 (statement -> ADD SCOLON .)
+    ADD             reduce using rule 25 (statement -> ADD SCOLON .)
+    SUB             reduce using rule 25 (statement -> ADD SCOLON .)
+    MUL             reduce using rule 25 (statement -> ADD SCOLON .)
+    EDIV            reduce using rule 25 (statement -> ADD SCOLON .)
+    LSL             reduce using rule 25 (statement -> ADD SCOLON .)
+    LSR             reduce using rule 25 (statement -> ADD SCOLON .)
+    CONCAT          reduce using rule 25 (statement -> ADD SCOLON .)
+    SIZE            reduce using rule 25 (statement -> ADD SCOLON .)
+    SLICE           reduce using rule 25 (statement -> ADD SCOLON .)
+    PAIR            reduce using rule 25 (statement -> ADD SCOLON .)
+    CAR             reduce using rule 25 (statement -> ADD SCOLON .)
+    CDR             reduce using rule 25 (statement -> ADD SCOLON .)
+    EMPTY_SET       reduce using rule 25 (statement -> ADD SCOLON .)
+    MEM             reduce using rule 25 (statement -> ADD SCOLON .)
+    UPDATE          reduce using rule 25 (statement -> ADD SCOLON .)
+    SOME            reduce using rule 25 (statement -> ADD SCOLON .)
+    NONE            reduce using rule 25 (statement -> ADD SCOLON .)
+    LEFT            reduce using rule 25 (statement -> ADD SCOLON .)
+    RIGHT           reduce using rule 25 (statement -> ADD SCOLON .)
+    CONS            reduce using rule 25 (statement -> ADD SCOLON .)
+    NIL             reduce using rule 25 (statement -> ADD SCOLON .)
+    NOT             reduce using rule 25 (statement -> ADD SCOLON .)
+    PUSH            reduce using rule 25 (statement -> ADD SCOLON .)
+    FAILWITH        reduce using rule 25 (statement -> ADD SCOLON .)
+    $end            reduce using rule 25 (statement -> ADD SCOLON .)
 
 
 state 61
 
-    (6) bool -> FALSE .
+    (26) statement -> SUB SCOLON .
 
-    $end            reduce using rule 6 (bool -> FALSE .)
-    NUMBER          reduce using rule 6 (bool -> FALSE .)
-    TEXT            reduce using rule 6 (bool -> FALSE .)
-    LPARENS         reduce using rule 6 (bool -> FALSE .)
-    TRUE            reduce using rule 6 (bool -> FALSE .)
-    FALSE           reduce using rule 6 (bool -> FALSE .)
-    RPARENS         reduce using rule 6 (bool -> FALSE .)
+    DROP            reduce using rule 26 (statement -> SUB SCOLON .)
+    DUP             reduce using rule 26 (statement -> SUB SCOLON .)
+    SWAP            reduce using rule 26 (statement -> SUB SCOLON .)
+    UNIT            reduce using rule 26 (statement -> SUB SCOLON .)
+    EQ              reduce using rule 26 (statement -> SUB SCOLON .)
+    NEQ             reduce using rule 26 (statement -> SUB SCOLON .)
+    LT              reduce using rule 26 (statement -> SUB SCOLON .)
+    GT              reduce using rule 26 (statement -> SUB SCOLON .)
+    LE              reduce using rule 26 (statement -> SUB SCOLON .)
+    GE              reduce using rule 26 (statement -> SUB SCOLON .)
+    OR              reduce using rule 26 (statement -> SUB SCOLON .)
+    AND             reduce using rule 26 (statement -> SUB SCOLON .)
+    XOR             reduce using rule 26 (statement -> SUB SCOLON .)
+    COMPARE         reduce using rule 26 (statement -> SUB SCOLON .)
+    NEG             reduce using rule 26 (statement -> SUB SCOLON .)
+    ABS             reduce using rule 26 (statement -> SUB SCOLON .)
+    ADD             reduce using rule 26 (statement -> SUB SCOLON .)
+    SUB             reduce using rule 26 (statement -> SUB SCOLON .)
+    MUL             reduce using rule 26 (statement -> SUB SCOLON .)
+    EDIV            reduce using rule 26 (statement -> SUB SCOLON .)
+    LSL             reduce using rule 26 (statement -> SUB SCOLON .)
+    LSR             reduce using rule 26 (statement -> SUB SCOLON .)
+    CONCAT          reduce using rule 26 (statement -> SUB SCOLON .)
+    SIZE            reduce using rule 26 (statement -> SUB SCOLON .)
+    SLICE           reduce using rule 26 (statement -> SUB SCOLON .)
+    PAIR            reduce using rule 26 (statement -> SUB SCOLON .)
+    CAR             reduce using rule 26 (statement -> SUB SCOLON .)
+    CDR             reduce using rule 26 (statement -> SUB SCOLON .)
+    EMPTY_SET       reduce using rule 26 (statement -> SUB SCOLON .)
+    MEM             reduce using rule 26 (statement -> SUB SCOLON .)
+    UPDATE          reduce using rule 26 (statement -> SUB SCOLON .)
+    SOME            reduce using rule 26 (statement -> SUB SCOLON .)
+    NONE            reduce using rule 26 (statement -> SUB SCOLON .)
+    LEFT            reduce using rule 26 (statement -> SUB SCOLON .)
+    RIGHT           reduce using rule 26 (statement -> SUB SCOLON .)
+    CONS            reduce using rule 26 (statement -> SUB SCOLON .)
+    NIL             reduce using rule 26 (statement -> SUB SCOLON .)
+    NOT             reduce using rule 26 (statement -> SUB SCOLON .)
+    PUSH            reduce using rule 26 (statement -> SUB SCOLON .)
+    FAILWITH        reduce using rule 26 (statement -> SUB SCOLON .)
+    $end            reduce using rule 26 (statement -> SUB SCOLON .)
 
 
 state 62
 
-    (50) TYPE -> LPARENS LPAIR TYPE . TYPE RPARENS
-    (45) TYPE -> . NAT
-    (46) TYPE -> . STRING
-    (47) TYPE -> . INT
-    (48) TYPE -> . BOOL
-    (49) TYPE -> . BYTES
-    (50) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+    (27) statement -> MUL SCOLON .
 
-    NAT             shift and go to state 43
-    STRING          shift and go to state 44
-    INT             shift and go to state 45
-    BOOL            shift and go to state 46
-    BYTES           shift and go to state 47
-    LPARENS         shift and go to state 48
+    DROP            reduce using rule 27 (statement -> MUL SCOLON .)
+    DUP             reduce using rule 27 (statement -> MUL SCOLON .)
+    SWAP            reduce using rule 27 (statement -> MUL SCOLON .)
+    UNIT            reduce using rule 27 (statement -> MUL SCOLON .)
+    EQ              reduce using rule 27 (statement -> MUL SCOLON .)
+    NEQ             reduce using rule 27 (statement -> MUL SCOLON .)
+    LT              reduce using rule 27 (statement -> MUL SCOLON .)
+    GT              reduce using rule 27 (statement -> MUL SCOLON .)
+    LE              reduce using rule 27 (statement -> MUL SCOLON .)
+    GE              reduce using rule 27 (statement -> MUL SCOLON .)
+    OR              reduce using rule 27 (statement -> MUL SCOLON .)
+    AND             reduce using rule 27 (statement -> MUL SCOLON .)
+    XOR             reduce using rule 27 (statement -> MUL SCOLON .)
+    COMPARE         reduce using rule 27 (statement -> MUL SCOLON .)
+    NEG             reduce using rule 27 (statement -> MUL SCOLON .)
+    ABS             reduce using rule 27 (statement -> MUL SCOLON .)
+    ADD             reduce using rule 27 (statement -> MUL SCOLON .)
+    SUB             reduce using rule 27 (statement -> MUL SCOLON .)
+    MUL             reduce using rule 27 (statement -> MUL SCOLON .)
+    EDIV            reduce using rule 27 (statement -> MUL SCOLON .)
+    LSL             reduce using rule 27 (statement -> MUL SCOLON .)
+    LSR             reduce using rule 27 (statement -> MUL SCOLON .)
+    CONCAT          reduce using rule 27 (statement -> MUL SCOLON .)
+    SIZE            reduce using rule 27 (statement -> MUL SCOLON .)
+    SLICE           reduce using rule 27 (statement -> MUL SCOLON .)
+    PAIR            reduce using rule 27 (statement -> MUL SCOLON .)
+    CAR             reduce using rule 27 (statement -> MUL SCOLON .)
+    CDR             reduce using rule 27 (statement -> MUL SCOLON .)
+    EMPTY_SET       reduce using rule 27 (statement -> MUL SCOLON .)
+    MEM             reduce using rule 27 (statement -> MUL SCOLON .)
+    UPDATE          reduce using rule 27 (statement -> MUL SCOLON .)
+    SOME            reduce using rule 27 (statement -> MUL SCOLON .)
+    NONE            reduce using rule 27 (statement -> MUL SCOLON .)
+    LEFT            reduce using rule 27 (statement -> MUL SCOLON .)
+    RIGHT           reduce using rule 27 (statement -> MUL SCOLON .)
+    CONS            reduce using rule 27 (statement -> MUL SCOLON .)
+    NIL             reduce using rule 27 (statement -> MUL SCOLON .)
+    NOT             reduce using rule 27 (statement -> MUL SCOLON .)
+    PUSH            reduce using rule 27 (statement -> MUL SCOLON .)
+    FAILWITH        reduce using rule 27 (statement -> MUL SCOLON .)
+    $end            reduce using rule 27 (statement -> MUL SCOLON .)
 
-    TYPE                           shift and go to state 64
 
 state 63
 
-    (10) value -> LPARENS PAIR_CONSTRUCTOR . value value RPARENS
-    (7) value -> . NUMBER
-    (8) value -> . bool
-    (9) value -> . TEXT
-    (10) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (5) bool -> . TRUE
-    (6) bool -> . FALSE
+    (28) statement -> EDIV SCOLON .
 
-    NUMBER          shift and go to state 56
-    TEXT            shift and go to state 58
-    LPARENS         shift and go to state 59
-    TRUE            shift and go to state 60
-    FALSE           shift and go to state 61
+    DROP            reduce using rule 28 (statement -> EDIV SCOLON .)
+    DUP             reduce using rule 28 (statement -> EDIV SCOLON .)
+    SWAP            reduce using rule 28 (statement -> EDIV SCOLON .)
+    UNIT            reduce using rule 28 (statement -> EDIV SCOLON .)
+    EQ              reduce using rule 28 (statement -> EDIV SCOLON .)
+    NEQ             reduce using rule 28 (statement -> EDIV SCOLON .)
+    LT              reduce using rule 28 (statement -> EDIV SCOLON .)
+    GT              reduce using rule 28 (statement -> EDIV SCOLON .)
+    LE              reduce using rule 28 (statement -> EDIV SCOLON .)
+    GE              reduce using rule 28 (statement -> EDIV SCOLON .)
+    OR              reduce using rule 28 (statement -> EDIV SCOLON .)
+    AND             reduce using rule 28 (statement -> EDIV SCOLON .)
+    XOR             reduce using rule 28 (statement -> EDIV SCOLON .)
+    COMPARE         reduce using rule 28 (statement -> EDIV SCOLON .)
+    NEG             reduce using rule 28 (statement -> EDIV SCOLON .)
+    ABS             reduce using rule 28 (statement -> EDIV SCOLON .)
+    ADD             reduce using rule 28 (statement -> EDIV SCOLON .)
+    SUB             reduce using rule 28 (statement -> EDIV SCOLON .)
+    MUL             reduce using rule 28 (statement -> EDIV SCOLON .)
+    EDIV            reduce using rule 28 (statement -> EDIV SCOLON .)
+    LSL             reduce using rule 28 (statement -> EDIV SCOLON .)
+    LSR             reduce using rule 28 (statement -> EDIV SCOLON .)
+    CONCAT          reduce using rule 28 (statement -> EDIV SCOLON .)
+    SIZE            reduce using rule 28 (statement -> EDIV SCOLON .)
+    SLICE           reduce using rule 28 (statement -> EDIV SCOLON .)
+    PAIR            reduce using rule 28 (statement -> EDIV SCOLON .)
+    CAR             reduce using rule 28 (statement -> EDIV SCOLON .)
+    CDR             reduce using rule 28 (statement -> EDIV SCOLON .)
+    EMPTY_SET       reduce using rule 28 (statement -> EDIV SCOLON .)
+    MEM             reduce using rule 28 (statement -> EDIV SCOLON .)
+    UPDATE          reduce using rule 28 (statement -> EDIV SCOLON .)
+    SOME            reduce using rule 28 (statement -> EDIV SCOLON .)
+    NONE            reduce using rule 28 (statement -> EDIV SCOLON .)
+    LEFT            reduce using rule 28 (statement -> EDIV SCOLON .)
+    RIGHT           reduce using rule 28 (statement -> EDIV SCOLON .)
+    CONS            reduce using rule 28 (statement -> EDIV SCOLON .)
+    NIL             reduce using rule 28 (statement -> EDIV SCOLON .)
+    NOT             reduce using rule 28 (statement -> EDIV SCOLON .)
+    PUSH            reduce using rule 28 (statement -> EDIV SCOLON .)
+    FAILWITH        reduce using rule 28 (statement -> EDIV SCOLON .)
+    $end            reduce using rule 28 (statement -> EDIV SCOLON .)
 
-    value                          shift and go to state 65
-    bool                           shift and go to state 57
 
 state 64
 
-    (50) TYPE -> LPARENS LPAIR TYPE TYPE . RPARENS
+    (29) statement -> LSL SCOLON .
 
-    RPARENS         shift and go to state 66
+    DROP            reduce using rule 29 (statement -> LSL SCOLON .)
+    DUP             reduce using rule 29 (statement -> LSL SCOLON .)
+    SWAP            reduce using rule 29 (statement -> LSL SCOLON .)
+    UNIT            reduce using rule 29 (statement -> LSL SCOLON .)
+    EQ              reduce using rule 29 (statement -> LSL SCOLON .)
+    NEQ             reduce using rule 29 (statement -> LSL SCOLON .)
+    LT              reduce using rule 29 (statement -> LSL SCOLON .)
+    GT              reduce using rule 29 (statement -> LSL SCOLON .)
+    LE              reduce using rule 29 (statement -> LSL SCOLON .)
+    GE              reduce using rule 29 (statement -> LSL SCOLON .)
+    OR              reduce using rule 29 (statement -> LSL SCOLON .)
+    AND             reduce using rule 29 (statement -> LSL SCOLON .)
+    XOR             reduce using rule 29 (statement -> LSL SCOLON .)
+    COMPARE         reduce using rule 29 (statement -> LSL SCOLON .)
+    NEG             reduce using rule 29 (statement -> LSL SCOLON .)
+    ABS             reduce using rule 29 (statement -> LSL SCOLON .)
+    ADD             reduce using rule 29 (statement -> LSL SCOLON .)
+    SUB             reduce using rule 29 (statement -> LSL SCOLON .)
+    MUL             reduce using rule 29 (statement -> LSL SCOLON .)
+    EDIV            reduce using rule 29 (statement -> LSL SCOLON .)
+    LSL             reduce using rule 29 (statement -> LSL SCOLON .)
+    LSR             reduce using rule 29 (statement -> LSL SCOLON .)
+    CONCAT          reduce using rule 29 (statement -> LSL SCOLON .)
+    SIZE            reduce using rule 29 (statement -> LSL SCOLON .)
+    SLICE           reduce using rule 29 (statement -> LSL SCOLON .)
+    PAIR            reduce using rule 29 (statement -> LSL SCOLON .)
+    CAR             reduce using rule 29 (statement -> LSL SCOLON .)
+    CDR             reduce using rule 29 (statement -> LSL SCOLON .)
+    EMPTY_SET       reduce using rule 29 (statement -> LSL SCOLON .)
+    MEM             reduce using rule 29 (statement -> LSL SCOLON .)
+    UPDATE          reduce using rule 29 (statement -> LSL SCOLON .)
+    SOME            reduce using rule 29 (statement -> LSL SCOLON .)
+    NONE            reduce using rule 29 (statement -> LSL SCOLON .)
+    LEFT            reduce using rule 29 (statement -> LSL SCOLON .)
+    RIGHT           reduce using rule 29 (statement -> LSL SCOLON .)
+    CONS            reduce using rule 29 (statement -> LSL SCOLON .)
+    NIL             reduce using rule 29 (statement -> LSL SCOLON .)
+    NOT             reduce using rule 29 (statement -> LSL SCOLON .)
+    PUSH            reduce using rule 29 (statement -> LSL SCOLON .)
+    FAILWITH        reduce using rule 29 (statement -> LSL SCOLON .)
+    $end            reduce using rule 29 (statement -> LSL SCOLON .)
 
 
 state 65
 
-    (10) value -> LPARENS PAIR_CONSTRUCTOR value . value RPARENS
-    (7) value -> . NUMBER
-    (8) value -> . bool
-    (9) value -> . TEXT
-    (10) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
-    (5) bool -> . TRUE
-    (6) bool -> . FALSE
+    (30) statement -> LSR SCOLON .
 
-    NUMBER          shift and go to state 56
-    TEXT            shift and go to state 58
-    LPARENS         shift and go to state 59
-    TRUE            shift and go to state 60
-    FALSE           shift and go to state 61
+    DROP            reduce using rule 30 (statement -> LSR SCOLON .)
+    DUP             reduce using rule 30 (statement -> LSR SCOLON .)
+    SWAP            reduce using rule 30 (statement -> LSR SCOLON .)
+    UNIT            reduce using rule 30 (statement -> LSR SCOLON .)
+    EQ              reduce using rule 30 (statement -> LSR SCOLON .)
+    NEQ             reduce using rule 30 (statement -> LSR SCOLON .)
+    LT              reduce using rule 30 (statement -> LSR SCOLON .)
+    GT              reduce using rule 30 (statement -> LSR SCOLON .)
+    LE              reduce using rule 30 (statement -> LSR SCOLON .)
+    GE              reduce using rule 30 (statement -> LSR SCOLON .)
+    OR              reduce using rule 30 (statement -> LSR SCOLON .)
+    AND             reduce using rule 30 (statement -> LSR SCOLON .)
+    XOR             reduce using rule 30 (statement -> LSR SCOLON .)
+    COMPARE         reduce using rule 30 (statement -> LSR SCOLON .)
+    NEG             reduce using rule 30 (statement -> LSR SCOLON .)
+    ABS             reduce using rule 30 (statement -> LSR SCOLON .)
+    ADD             reduce using rule 30 (statement -> LSR SCOLON .)
+    SUB             reduce using rule 30 (statement -> LSR SCOLON .)
+    MUL             reduce using rule 30 (statement -> LSR SCOLON .)
+    EDIV            reduce using rule 30 (statement -> LSR SCOLON .)
+    LSL             reduce using rule 30 (statement -> LSR SCOLON .)
+    LSR             reduce using rule 30 (statement -> LSR SCOLON .)
+    CONCAT          reduce using rule 30 (statement -> LSR SCOLON .)
+    SIZE            reduce using rule 30 (statement -> LSR SCOLON .)
+    SLICE           reduce using rule 30 (statement -> LSR SCOLON .)
+    PAIR            reduce using rule 30 (statement -> LSR SCOLON .)
+    CAR             reduce using rule 30 (statement -> LSR SCOLON .)
+    CDR             reduce using rule 30 (statement -> LSR SCOLON .)
+    EMPTY_SET       reduce using rule 30 (statement -> LSR SCOLON .)
+    MEM             reduce using rule 30 (statement -> LSR SCOLON .)
+    UPDATE          reduce using rule 30 (statement -> LSR SCOLON .)
+    SOME            reduce using rule 30 (statement -> LSR SCOLON .)
+    NONE            reduce using rule 30 (statement -> LSR SCOLON .)
+    LEFT            reduce using rule 30 (statement -> LSR SCOLON .)
+    RIGHT           reduce using rule 30 (statement -> LSR SCOLON .)
+    CONS            reduce using rule 30 (statement -> LSR SCOLON .)
+    NIL             reduce using rule 30 (statement -> LSR SCOLON .)
+    NOT             reduce using rule 30 (statement -> LSR SCOLON .)
+    PUSH            reduce using rule 30 (statement -> LSR SCOLON .)
+    FAILWITH        reduce using rule 30 (statement -> LSR SCOLON .)
+    $end            reduce using rule 30 (statement -> LSR SCOLON .)
 
-    value                          shift and go to state 67
-    bool                           shift and go to state 57
 
 state 66
 
-    (50) TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .
+    (31) statement -> CONCAT SCOLON .
 
-    $end            reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    NUMBER          reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    TEXT            reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    LPARENS         reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    TRUE            reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    FALSE           reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    NAT             reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    STRING          reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    INT             reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    BOOL            reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    BYTES           reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
-    RPARENS         reduce using rule 50 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    DROP            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    DUP             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    SWAP            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    UNIT            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    EQ              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    NEQ             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    LT              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    GT              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    LE              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    GE              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    OR              reduce using rule 31 (statement -> CONCAT SCOLON .)
+    AND             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    XOR             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    COMPARE         reduce using rule 31 (statement -> CONCAT SCOLON .)
+    NEG             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    ABS             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    ADD             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    SUB             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    MUL             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    EDIV            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    LSL             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    LSR             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    CONCAT          reduce using rule 31 (statement -> CONCAT SCOLON .)
+    SIZE            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    SLICE           reduce using rule 31 (statement -> CONCAT SCOLON .)
+    PAIR            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    CAR             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    CDR             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    EMPTY_SET       reduce using rule 31 (statement -> CONCAT SCOLON .)
+    MEM             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    UPDATE          reduce using rule 31 (statement -> CONCAT SCOLON .)
+    SOME            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    NONE            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    LEFT            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    RIGHT           reduce using rule 31 (statement -> CONCAT SCOLON .)
+    CONS            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    NIL             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    NOT             reduce using rule 31 (statement -> CONCAT SCOLON .)
+    PUSH            reduce using rule 31 (statement -> CONCAT SCOLON .)
+    FAILWITH        reduce using rule 31 (statement -> CONCAT SCOLON .)
+    $end            reduce using rule 31 (statement -> CONCAT SCOLON .)
 
 
 state 67
 
-    (10) value -> LPARENS PAIR_CONSTRUCTOR value value . RPARENS
+    (32) statement -> SIZE SCOLON .
 
-    RPARENS         shift and go to state 68
+    DROP            reduce using rule 32 (statement -> SIZE SCOLON .)
+    DUP             reduce using rule 32 (statement -> SIZE SCOLON .)
+    SWAP            reduce using rule 32 (statement -> SIZE SCOLON .)
+    UNIT            reduce using rule 32 (statement -> SIZE SCOLON .)
+    EQ              reduce using rule 32 (statement -> SIZE SCOLON .)
+    NEQ             reduce using rule 32 (statement -> SIZE SCOLON .)
+    LT              reduce using rule 32 (statement -> SIZE SCOLON .)
+    GT              reduce using rule 32 (statement -> SIZE SCOLON .)
+    LE              reduce using rule 32 (statement -> SIZE SCOLON .)
+    GE              reduce using rule 32 (statement -> SIZE SCOLON .)
+    OR              reduce using rule 32 (statement -> SIZE SCOLON .)
+    AND             reduce using rule 32 (statement -> SIZE SCOLON .)
+    XOR             reduce using rule 32 (statement -> SIZE SCOLON .)
+    COMPARE         reduce using rule 32 (statement -> SIZE SCOLON .)
+    NEG             reduce using rule 32 (statement -> SIZE SCOLON .)
+    ABS             reduce using rule 32 (statement -> SIZE SCOLON .)
+    ADD             reduce using rule 32 (statement -> SIZE SCOLON .)
+    SUB             reduce using rule 32 (statement -> SIZE SCOLON .)
+    MUL             reduce using rule 32 (statement -> SIZE SCOLON .)
+    EDIV            reduce using rule 32 (statement -> SIZE SCOLON .)
+    LSL             reduce using rule 32 (statement -> SIZE SCOLON .)
+    LSR             reduce using rule 32 (statement -> SIZE SCOLON .)
+    CONCAT          reduce using rule 32 (statement -> SIZE SCOLON .)
+    SIZE            reduce using rule 32 (statement -> SIZE SCOLON .)
+    SLICE           reduce using rule 32 (statement -> SIZE SCOLON .)
+    PAIR            reduce using rule 32 (statement -> SIZE SCOLON .)
+    CAR             reduce using rule 32 (statement -> SIZE SCOLON .)
+    CDR             reduce using rule 32 (statement -> SIZE SCOLON .)
+    EMPTY_SET       reduce using rule 32 (statement -> SIZE SCOLON .)
+    MEM             reduce using rule 32 (statement -> SIZE SCOLON .)
+    UPDATE          reduce using rule 32 (statement -> SIZE SCOLON .)
+    SOME            reduce using rule 32 (statement -> SIZE SCOLON .)
+    NONE            reduce using rule 32 (statement -> SIZE SCOLON .)
+    LEFT            reduce using rule 32 (statement -> SIZE SCOLON .)
+    RIGHT           reduce using rule 32 (statement -> SIZE SCOLON .)
+    CONS            reduce using rule 32 (statement -> SIZE SCOLON .)
+    NIL             reduce using rule 32 (statement -> SIZE SCOLON .)
+    NOT             reduce using rule 32 (statement -> SIZE SCOLON .)
+    PUSH            reduce using rule 32 (statement -> SIZE SCOLON .)
+    FAILWITH        reduce using rule 32 (statement -> SIZE SCOLON .)
+    $end            reduce using rule 32 (statement -> SIZE SCOLON .)
 
 
 state 68
 
-    (10) value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .
+    (33) statement -> SLICE SCOLON .
 
-    $end            reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    NUMBER          reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    TEXT            reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    LPARENS         reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    TRUE            reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    FALSE           reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
-    RPARENS         reduce using rule 10 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    DROP            reduce using rule 33 (statement -> SLICE SCOLON .)
+    DUP             reduce using rule 33 (statement -> SLICE SCOLON .)
+    SWAP            reduce using rule 33 (statement -> SLICE SCOLON .)
+    UNIT            reduce using rule 33 (statement -> SLICE SCOLON .)
+    EQ              reduce using rule 33 (statement -> SLICE SCOLON .)
+    NEQ             reduce using rule 33 (statement -> SLICE SCOLON .)
+    LT              reduce using rule 33 (statement -> SLICE SCOLON .)
+    GT              reduce using rule 33 (statement -> SLICE SCOLON .)
+    LE              reduce using rule 33 (statement -> SLICE SCOLON .)
+    GE              reduce using rule 33 (statement -> SLICE SCOLON .)
+    OR              reduce using rule 33 (statement -> SLICE SCOLON .)
+    AND             reduce using rule 33 (statement -> SLICE SCOLON .)
+    XOR             reduce using rule 33 (statement -> SLICE SCOLON .)
+    COMPARE         reduce using rule 33 (statement -> SLICE SCOLON .)
+    NEG             reduce using rule 33 (statement -> SLICE SCOLON .)
+    ABS             reduce using rule 33 (statement -> SLICE SCOLON .)
+    ADD             reduce using rule 33 (statement -> SLICE SCOLON .)
+    SUB             reduce using rule 33 (statement -> SLICE SCOLON .)
+    MUL             reduce using rule 33 (statement -> SLICE SCOLON .)
+    EDIV            reduce using rule 33 (statement -> SLICE SCOLON .)
+    LSL             reduce using rule 33 (statement -> SLICE SCOLON .)
+    LSR             reduce using rule 33 (statement -> SLICE SCOLON .)
+    CONCAT          reduce using rule 33 (statement -> SLICE SCOLON .)
+    SIZE            reduce using rule 33 (statement -> SLICE SCOLON .)
+    SLICE           reduce using rule 33 (statement -> SLICE SCOLON .)
+    PAIR            reduce using rule 33 (statement -> SLICE SCOLON .)
+    CAR             reduce using rule 33 (statement -> SLICE SCOLON .)
+    CDR             reduce using rule 33 (statement -> SLICE SCOLON .)
+    EMPTY_SET       reduce using rule 33 (statement -> SLICE SCOLON .)
+    MEM             reduce using rule 33 (statement -> SLICE SCOLON .)
+    UPDATE          reduce using rule 33 (statement -> SLICE SCOLON .)
+    SOME            reduce using rule 33 (statement -> SLICE SCOLON .)
+    NONE            reduce using rule 33 (statement -> SLICE SCOLON .)
+    LEFT            reduce using rule 33 (statement -> SLICE SCOLON .)
+    RIGHT           reduce using rule 33 (statement -> SLICE SCOLON .)
+    CONS            reduce using rule 33 (statement -> SLICE SCOLON .)
+    NIL             reduce using rule 33 (statement -> SLICE SCOLON .)
+    NOT             reduce using rule 33 (statement -> SLICE SCOLON .)
+    PUSH            reduce using rule 33 (statement -> SLICE SCOLON .)
+    FAILWITH        reduce using rule 33 (statement -> SLICE SCOLON .)
+    $end            reduce using rule 33 (statement -> SLICE SCOLON .)
+
+
+state 69
+
+    (34) statement -> PAIR SCOLON .
+
+    DROP            reduce using rule 34 (statement -> PAIR SCOLON .)
+    DUP             reduce using rule 34 (statement -> PAIR SCOLON .)
+    SWAP            reduce using rule 34 (statement -> PAIR SCOLON .)
+    UNIT            reduce using rule 34 (statement -> PAIR SCOLON .)
+    EQ              reduce using rule 34 (statement -> PAIR SCOLON .)
+    NEQ             reduce using rule 34 (statement -> PAIR SCOLON .)
+    LT              reduce using rule 34 (statement -> PAIR SCOLON .)
+    GT              reduce using rule 34 (statement -> PAIR SCOLON .)
+    LE              reduce using rule 34 (statement -> PAIR SCOLON .)
+    GE              reduce using rule 34 (statement -> PAIR SCOLON .)
+    OR              reduce using rule 34 (statement -> PAIR SCOLON .)
+    AND             reduce using rule 34 (statement -> PAIR SCOLON .)
+    XOR             reduce using rule 34 (statement -> PAIR SCOLON .)
+    COMPARE         reduce using rule 34 (statement -> PAIR SCOLON .)
+    NEG             reduce using rule 34 (statement -> PAIR SCOLON .)
+    ABS             reduce using rule 34 (statement -> PAIR SCOLON .)
+    ADD             reduce using rule 34 (statement -> PAIR SCOLON .)
+    SUB             reduce using rule 34 (statement -> PAIR SCOLON .)
+    MUL             reduce using rule 34 (statement -> PAIR SCOLON .)
+    EDIV            reduce using rule 34 (statement -> PAIR SCOLON .)
+    LSL             reduce using rule 34 (statement -> PAIR SCOLON .)
+    LSR             reduce using rule 34 (statement -> PAIR SCOLON .)
+    CONCAT          reduce using rule 34 (statement -> PAIR SCOLON .)
+    SIZE            reduce using rule 34 (statement -> PAIR SCOLON .)
+    SLICE           reduce using rule 34 (statement -> PAIR SCOLON .)
+    PAIR            reduce using rule 34 (statement -> PAIR SCOLON .)
+    CAR             reduce using rule 34 (statement -> PAIR SCOLON .)
+    CDR             reduce using rule 34 (statement -> PAIR SCOLON .)
+    EMPTY_SET       reduce using rule 34 (statement -> PAIR SCOLON .)
+    MEM             reduce using rule 34 (statement -> PAIR SCOLON .)
+    UPDATE          reduce using rule 34 (statement -> PAIR SCOLON .)
+    SOME            reduce using rule 34 (statement -> PAIR SCOLON .)
+    NONE            reduce using rule 34 (statement -> PAIR SCOLON .)
+    LEFT            reduce using rule 34 (statement -> PAIR SCOLON .)
+    RIGHT           reduce using rule 34 (statement -> PAIR SCOLON .)
+    CONS            reduce using rule 34 (statement -> PAIR SCOLON .)
+    NIL             reduce using rule 34 (statement -> PAIR SCOLON .)
+    NOT             reduce using rule 34 (statement -> PAIR SCOLON .)
+    PUSH            reduce using rule 34 (statement -> PAIR SCOLON .)
+    FAILWITH        reduce using rule 34 (statement -> PAIR SCOLON .)
+    $end            reduce using rule 34 (statement -> PAIR SCOLON .)
+
+
+state 70
+
+    (35) statement -> CAR SCOLON .
+
+    DROP            reduce using rule 35 (statement -> CAR SCOLON .)
+    DUP             reduce using rule 35 (statement -> CAR SCOLON .)
+    SWAP            reduce using rule 35 (statement -> CAR SCOLON .)
+    UNIT            reduce using rule 35 (statement -> CAR SCOLON .)
+    EQ              reduce using rule 35 (statement -> CAR SCOLON .)
+    NEQ             reduce using rule 35 (statement -> CAR SCOLON .)
+    LT              reduce using rule 35 (statement -> CAR SCOLON .)
+    GT              reduce using rule 35 (statement -> CAR SCOLON .)
+    LE              reduce using rule 35 (statement -> CAR SCOLON .)
+    GE              reduce using rule 35 (statement -> CAR SCOLON .)
+    OR              reduce using rule 35 (statement -> CAR SCOLON .)
+    AND             reduce using rule 35 (statement -> CAR SCOLON .)
+    XOR             reduce using rule 35 (statement -> CAR SCOLON .)
+    COMPARE         reduce using rule 35 (statement -> CAR SCOLON .)
+    NEG             reduce using rule 35 (statement -> CAR SCOLON .)
+    ABS             reduce using rule 35 (statement -> CAR SCOLON .)
+    ADD             reduce using rule 35 (statement -> CAR SCOLON .)
+    SUB             reduce using rule 35 (statement -> CAR SCOLON .)
+    MUL             reduce using rule 35 (statement -> CAR SCOLON .)
+    EDIV            reduce using rule 35 (statement -> CAR SCOLON .)
+    LSL             reduce using rule 35 (statement -> CAR SCOLON .)
+    LSR             reduce using rule 35 (statement -> CAR SCOLON .)
+    CONCAT          reduce using rule 35 (statement -> CAR SCOLON .)
+    SIZE            reduce using rule 35 (statement -> CAR SCOLON .)
+    SLICE           reduce using rule 35 (statement -> CAR SCOLON .)
+    PAIR            reduce using rule 35 (statement -> CAR SCOLON .)
+    CAR             reduce using rule 35 (statement -> CAR SCOLON .)
+    CDR             reduce using rule 35 (statement -> CAR SCOLON .)
+    EMPTY_SET       reduce using rule 35 (statement -> CAR SCOLON .)
+    MEM             reduce using rule 35 (statement -> CAR SCOLON .)
+    UPDATE          reduce using rule 35 (statement -> CAR SCOLON .)
+    SOME            reduce using rule 35 (statement -> CAR SCOLON .)
+    NONE            reduce using rule 35 (statement -> CAR SCOLON .)
+    LEFT            reduce using rule 35 (statement -> CAR SCOLON .)
+    RIGHT           reduce using rule 35 (statement -> CAR SCOLON .)
+    CONS            reduce using rule 35 (statement -> CAR SCOLON .)
+    NIL             reduce using rule 35 (statement -> CAR SCOLON .)
+    NOT             reduce using rule 35 (statement -> CAR SCOLON .)
+    PUSH            reduce using rule 35 (statement -> CAR SCOLON .)
+    FAILWITH        reduce using rule 35 (statement -> CAR SCOLON .)
+    $end            reduce using rule 35 (statement -> CAR SCOLON .)
+
+
+state 71
+
+    (36) statement -> CDR SCOLON .
+
+    DROP            reduce using rule 36 (statement -> CDR SCOLON .)
+    DUP             reduce using rule 36 (statement -> CDR SCOLON .)
+    SWAP            reduce using rule 36 (statement -> CDR SCOLON .)
+    UNIT            reduce using rule 36 (statement -> CDR SCOLON .)
+    EQ              reduce using rule 36 (statement -> CDR SCOLON .)
+    NEQ             reduce using rule 36 (statement -> CDR SCOLON .)
+    LT              reduce using rule 36 (statement -> CDR SCOLON .)
+    GT              reduce using rule 36 (statement -> CDR SCOLON .)
+    LE              reduce using rule 36 (statement -> CDR SCOLON .)
+    GE              reduce using rule 36 (statement -> CDR SCOLON .)
+    OR              reduce using rule 36 (statement -> CDR SCOLON .)
+    AND             reduce using rule 36 (statement -> CDR SCOLON .)
+    XOR             reduce using rule 36 (statement -> CDR SCOLON .)
+    COMPARE         reduce using rule 36 (statement -> CDR SCOLON .)
+    NEG             reduce using rule 36 (statement -> CDR SCOLON .)
+    ABS             reduce using rule 36 (statement -> CDR SCOLON .)
+    ADD             reduce using rule 36 (statement -> CDR SCOLON .)
+    SUB             reduce using rule 36 (statement -> CDR SCOLON .)
+    MUL             reduce using rule 36 (statement -> CDR SCOLON .)
+    EDIV            reduce using rule 36 (statement -> CDR SCOLON .)
+    LSL             reduce using rule 36 (statement -> CDR SCOLON .)
+    LSR             reduce using rule 36 (statement -> CDR SCOLON .)
+    CONCAT          reduce using rule 36 (statement -> CDR SCOLON .)
+    SIZE            reduce using rule 36 (statement -> CDR SCOLON .)
+    SLICE           reduce using rule 36 (statement -> CDR SCOLON .)
+    PAIR            reduce using rule 36 (statement -> CDR SCOLON .)
+    CAR             reduce using rule 36 (statement -> CDR SCOLON .)
+    CDR             reduce using rule 36 (statement -> CDR SCOLON .)
+    EMPTY_SET       reduce using rule 36 (statement -> CDR SCOLON .)
+    MEM             reduce using rule 36 (statement -> CDR SCOLON .)
+    UPDATE          reduce using rule 36 (statement -> CDR SCOLON .)
+    SOME            reduce using rule 36 (statement -> CDR SCOLON .)
+    NONE            reduce using rule 36 (statement -> CDR SCOLON .)
+    LEFT            reduce using rule 36 (statement -> CDR SCOLON .)
+    RIGHT           reduce using rule 36 (statement -> CDR SCOLON .)
+    CONS            reduce using rule 36 (statement -> CDR SCOLON .)
+    NIL             reduce using rule 36 (statement -> CDR SCOLON .)
+    NOT             reduce using rule 36 (statement -> CDR SCOLON .)
+    PUSH            reduce using rule 36 (statement -> CDR SCOLON .)
+    FAILWITH        reduce using rule 36 (statement -> CDR SCOLON .)
+    $end            reduce using rule 36 (statement -> CDR SCOLON .)
+
+
+state 72
+
+    (37) statement -> EMPTY_SET TYPE . SCOLON
+
+    SCOLON          shift and go to state 90
+
+
+state 73
+
+    (47) TYPE -> NAT .
+
+    SCOLON          reduce using rule 47 (TYPE -> NAT .)
+    NUMBER          reduce using rule 47 (TYPE -> NAT .)
+    TEXT            reduce using rule 47 (TYPE -> NAT .)
+    LPARENS         reduce using rule 47 (TYPE -> NAT .)
+    TRUE            reduce using rule 47 (TYPE -> NAT .)
+    FALSE           reduce using rule 47 (TYPE -> NAT .)
+    NAT             reduce using rule 47 (TYPE -> NAT .)
+    STRING          reduce using rule 47 (TYPE -> NAT .)
+    INT             reduce using rule 47 (TYPE -> NAT .)
+    BOOL            reduce using rule 47 (TYPE -> NAT .)
+    BYTES           reduce using rule 47 (TYPE -> NAT .)
+    RPARENS         reduce using rule 47 (TYPE -> NAT .)
+
+
+state 74
+
+    (48) TYPE -> STRING .
+
+    SCOLON          reduce using rule 48 (TYPE -> STRING .)
+    NUMBER          reduce using rule 48 (TYPE -> STRING .)
+    TEXT            reduce using rule 48 (TYPE -> STRING .)
+    LPARENS         reduce using rule 48 (TYPE -> STRING .)
+    TRUE            reduce using rule 48 (TYPE -> STRING .)
+    FALSE           reduce using rule 48 (TYPE -> STRING .)
+    NAT             reduce using rule 48 (TYPE -> STRING .)
+    STRING          reduce using rule 48 (TYPE -> STRING .)
+    INT             reduce using rule 48 (TYPE -> STRING .)
+    BOOL            reduce using rule 48 (TYPE -> STRING .)
+    BYTES           reduce using rule 48 (TYPE -> STRING .)
+    RPARENS         reduce using rule 48 (TYPE -> STRING .)
+
+
+state 75
+
+    (49) TYPE -> INT .
+
+    SCOLON          reduce using rule 49 (TYPE -> INT .)
+    NUMBER          reduce using rule 49 (TYPE -> INT .)
+    TEXT            reduce using rule 49 (TYPE -> INT .)
+    LPARENS         reduce using rule 49 (TYPE -> INT .)
+    TRUE            reduce using rule 49 (TYPE -> INT .)
+    FALSE           reduce using rule 49 (TYPE -> INT .)
+    NAT             reduce using rule 49 (TYPE -> INT .)
+    STRING          reduce using rule 49 (TYPE -> INT .)
+    INT             reduce using rule 49 (TYPE -> INT .)
+    BOOL            reduce using rule 49 (TYPE -> INT .)
+    BYTES           reduce using rule 49 (TYPE -> INT .)
+    RPARENS         reduce using rule 49 (TYPE -> INT .)
+
+
+state 76
+
+    (50) TYPE -> BOOL .
+
+    SCOLON          reduce using rule 50 (TYPE -> BOOL .)
+    NUMBER          reduce using rule 50 (TYPE -> BOOL .)
+    TEXT            reduce using rule 50 (TYPE -> BOOL .)
+    LPARENS         reduce using rule 50 (TYPE -> BOOL .)
+    TRUE            reduce using rule 50 (TYPE -> BOOL .)
+    FALSE           reduce using rule 50 (TYPE -> BOOL .)
+    NAT             reduce using rule 50 (TYPE -> BOOL .)
+    STRING          reduce using rule 50 (TYPE -> BOOL .)
+    INT             reduce using rule 50 (TYPE -> BOOL .)
+    BOOL            reduce using rule 50 (TYPE -> BOOL .)
+    BYTES           reduce using rule 50 (TYPE -> BOOL .)
+    RPARENS         reduce using rule 50 (TYPE -> BOOL .)
+
+
+state 77
+
+    (51) TYPE -> BYTES .
+
+    SCOLON          reduce using rule 51 (TYPE -> BYTES .)
+    NUMBER          reduce using rule 51 (TYPE -> BYTES .)
+    TEXT            reduce using rule 51 (TYPE -> BYTES .)
+    LPARENS         reduce using rule 51 (TYPE -> BYTES .)
+    TRUE            reduce using rule 51 (TYPE -> BYTES .)
+    FALSE           reduce using rule 51 (TYPE -> BYTES .)
+    NAT             reduce using rule 51 (TYPE -> BYTES .)
+    STRING          reduce using rule 51 (TYPE -> BYTES .)
+    INT             reduce using rule 51 (TYPE -> BYTES .)
+    BOOL            reduce using rule 51 (TYPE -> BYTES .)
+    BYTES           reduce using rule 51 (TYPE -> BYTES .)
+    RPARENS         reduce using rule 51 (TYPE -> BYTES .)
+
+
+state 78
+
+    (52) TYPE -> LPARENS . LPAIR TYPE TYPE RPARENS
+
+    LPAIR           shift and go to state 91
+
+
+state 79
+
+    (38) statement -> MEM SCOLON .
+
+    DROP            reduce using rule 38 (statement -> MEM SCOLON .)
+    DUP             reduce using rule 38 (statement -> MEM SCOLON .)
+    SWAP            reduce using rule 38 (statement -> MEM SCOLON .)
+    UNIT            reduce using rule 38 (statement -> MEM SCOLON .)
+    EQ              reduce using rule 38 (statement -> MEM SCOLON .)
+    NEQ             reduce using rule 38 (statement -> MEM SCOLON .)
+    LT              reduce using rule 38 (statement -> MEM SCOLON .)
+    GT              reduce using rule 38 (statement -> MEM SCOLON .)
+    LE              reduce using rule 38 (statement -> MEM SCOLON .)
+    GE              reduce using rule 38 (statement -> MEM SCOLON .)
+    OR              reduce using rule 38 (statement -> MEM SCOLON .)
+    AND             reduce using rule 38 (statement -> MEM SCOLON .)
+    XOR             reduce using rule 38 (statement -> MEM SCOLON .)
+    COMPARE         reduce using rule 38 (statement -> MEM SCOLON .)
+    NEG             reduce using rule 38 (statement -> MEM SCOLON .)
+    ABS             reduce using rule 38 (statement -> MEM SCOLON .)
+    ADD             reduce using rule 38 (statement -> MEM SCOLON .)
+    SUB             reduce using rule 38 (statement -> MEM SCOLON .)
+    MUL             reduce using rule 38 (statement -> MEM SCOLON .)
+    EDIV            reduce using rule 38 (statement -> MEM SCOLON .)
+    LSL             reduce using rule 38 (statement -> MEM SCOLON .)
+    LSR             reduce using rule 38 (statement -> MEM SCOLON .)
+    CONCAT          reduce using rule 38 (statement -> MEM SCOLON .)
+    SIZE            reduce using rule 38 (statement -> MEM SCOLON .)
+    SLICE           reduce using rule 38 (statement -> MEM SCOLON .)
+    PAIR            reduce using rule 38 (statement -> MEM SCOLON .)
+    CAR             reduce using rule 38 (statement -> MEM SCOLON .)
+    CDR             reduce using rule 38 (statement -> MEM SCOLON .)
+    EMPTY_SET       reduce using rule 38 (statement -> MEM SCOLON .)
+    MEM             reduce using rule 38 (statement -> MEM SCOLON .)
+    UPDATE          reduce using rule 38 (statement -> MEM SCOLON .)
+    SOME            reduce using rule 38 (statement -> MEM SCOLON .)
+    NONE            reduce using rule 38 (statement -> MEM SCOLON .)
+    LEFT            reduce using rule 38 (statement -> MEM SCOLON .)
+    RIGHT           reduce using rule 38 (statement -> MEM SCOLON .)
+    CONS            reduce using rule 38 (statement -> MEM SCOLON .)
+    NIL             reduce using rule 38 (statement -> MEM SCOLON .)
+    NOT             reduce using rule 38 (statement -> MEM SCOLON .)
+    PUSH            reduce using rule 38 (statement -> MEM SCOLON .)
+    FAILWITH        reduce using rule 38 (statement -> MEM SCOLON .)
+    $end            reduce using rule 38 (statement -> MEM SCOLON .)
+
+
+state 80
+
+    (39) statement -> UPDATE SCOLON .
+
+    DROP            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    DUP             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    SWAP            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    UNIT            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    EQ              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    NEQ             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    LT              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    GT              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    LE              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    GE              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    OR              reduce using rule 39 (statement -> UPDATE SCOLON .)
+    AND             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    XOR             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    COMPARE         reduce using rule 39 (statement -> UPDATE SCOLON .)
+    NEG             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    ABS             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    ADD             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    SUB             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    MUL             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    EDIV            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    LSL             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    LSR             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    CONCAT          reduce using rule 39 (statement -> UPDATE SCOLON .)
+    SIZE            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    SLICE           reduce using rule 39 (statement -> UPDATE SCOLON .)
+    PAIR            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    CAR             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    CDR             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    EMPTY_SET       reduce using rule 39 (statement -> UPDATE SCOLON .)
+    MEM             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    UPDATE          reduce using rule 39 (statement -> UPDATE SCOLON .)
+    SOME            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    NONE            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    LEFT            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    RIGHT           reduce using rule 39 (statement -> UPDATE SCOLON .)
+    CONS            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    NIL             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    NOT             reduce using rule 39 (statement -> UPDATE SCOLON .)
+    PUSH            reduce using rule 39 (statement -> UPDATE SCOLON .)
+    FAILWITH        reduce using rule 39 (statement -> UPDATE SCOLON .)
+    $end            reduce using rule 39 (statement -> UPDATE SCOLON .)
+
+
+state 81
+
+    (40) statement -> SOME SCOLON .
+
+    DROP            reduce using rule 40 (statement -> SOME SCOLON .)
+    DUP             reduce using rule 40 (statement -> SOME SCOLON .)
+    SWAP            reduce using rule 40 (statement -> SOME SCOLON .)
+    UNIT            reduce using rule 40 (statement -> SOME SCOLON .)
+    EQ              reduce using rule 40 (statement -> SOME SCOLON .)
+    NEQ             reduce using rule 40 (statement -> SOME SCOLON .)
+    LT              reduce using rule 40 (statement -> SOME SCOLON .)
+    GT              reduce using rule 40 (statement -> SOME SCOLON .)
+    LE              reduce using rule 40 (statement -> SOME SCOLON .)
+    GE              reduce using rule 40 (statement -> SOME SCOLON .)
+    OR              reduce using rule 40 (statement -> SOME SCOLON .)
+    AND             reduce using rule 40 (statement -> SOME SCOLON .)
+    XOR             reduce using rule 40 (statement -> SOME SCOLON .)
+    COMPARE         reduce using rule 40 (statement -> SOME SCOLON .)
+    NEG             reduce using rule 40 (statement -> SOME SCOLON .)
+    ABS             reduce using rule 40 (statement -> SOME SCOLON .)
+    ADD             reduce using rule 40 (statement -> SOME SCOLON .)
+    SUB             reduce using rule 40 (statement -> SOME SCOLON .)
+    MUL             reduce using rule 40 (statement -> SOME SCOLON .)
+    EDIV            reduce using rule 40 (statement -> SOME SCOLON .)
+    LSL             reduce using rule 40 (statement -> SOME SCOLON .)
+    LSR             reduce using rule 40 (statement -> SOME SCOLON .)
+    CONCAT          reduce using rule 40 (statement -> SOME SCOLON .)
+    SIZE            reduce using rule 40 (statement -> SOME SCOLON .)
+    SLICE           reduce using rule 40 (statement -> SOME SCOLON .)
+    PAIR            reduce using rule 40 (statement -> SOME SCOLON .)
+    CAR             reduce using rule 40 (statement -> SOME SCOLON .)
+    CDR             reduce using rule 40 (statement -> SOME SCOLON .)
+    EMPTY_SET       reduce using rule 40 (statement -> SOME SCOLON .)
+    MEM             reduce using rule 40 (statement -> SOME SCOLON .)
+    UPDATE          reduce using rule 40 (statement -> SOME SCOLON .)
+    SOME            reduce using rule 40 (statement -> SOME SCOLON .)
+    NONE            reduce using rule 40 (statement -> SOME SCOLON .)
+    LEFT            reduce using rule 40 (statement -> SOME SCOLON .)
+    RIGHT           reduce using rule 40 (statement -> SOME SCOLON .)
+    CONS            reduce using rule 40 (statement -> SOME SCOLON .)
+    NIL             reduce using rule 40 (statement -> SOME SCOLON .)
+    NOT             reduce using rule 40 (statement -> SOME SCOLON .)
+    PUSH            reduce using rule 40 (statement -> SOME SCOLON .)
+    FAILWITH        reduce using rule 40 (statement -> SOME SCOLON .)
+    $end            reduce using rule 40 (statement -> SOME SCOLON .)
+
+
+state 82
+
+    (41) statement -> NONE TYPE . SCOLON
+
+    SCOLON          shift and go to state 92
+
+
+state 83
+
+    (42) statement -> LEFT TYPE . SCOLON
+
+    SCOLON          shift and go to state 93
+
+
+state 84
+
+    (43) statement -> RIGHT TYPE . SCOLON
+
+    SCOLON          shift and go to state 94
+
+
+state 85
+
+    (44) statement -> CONS SCOLON .
+
+    DROP            reduce using rule 44 (statement -> CONS SCOLON .)
+    DUP             reduce using rule 44 (statement -> CONS SCOLON .)
+    SWAP            reduce using rule 44 (statement -> CONS SCOLON .)
+    UNIT            reduce using rule 44 (statement -> CONS SCOLON .)
+    EQ              reduce using rule 44 (statement -> CONS SCOLON .)
+    NEQ             reduce using rule 44 (statement -> CONS SCOLON .)
+    LT              reduce using rule 44 (statement -> CONS SCOLON .)
+    GT              reduce using rule 44 (statement -> CONS SCOLON .)
+    LE              reduce using rule 44 (statement -> CONS SCOLON .)
+    GE              reduce using rule 44 (statement -> CONS SCOLON .)
+    OR              reduce using rule 44 (statement -> CONS SCOLON .)
+    AND             reduce using rule 44 (statement -> CONS SCOLON .)
+    XOR             reduce using rule 44 (statement -> CONS SCOLON .)
+    COMPARE         reduce using rule 44 (statement -> CONS SCOLON .)
+    NEG             reduce using rule 44 (statement -> CONS SCOLON .)
+    ABS             reduce using rule 44 (statement -> CONS SCOLON .)
+    ADD             reduce using rule 44 (statement -> CONS SCOLON .)
+    SUB             reduce using rule 44 (statement -> CONS SCOLON .)
+    MUL             reduce using rule 44 (statement -> CONS SCOLON .)
+    EDIV            reduce using rule 44 (statement -> CONS SCOLON .)
+    LSL             reduce using rule 44 (statement -> CONS SCOLON .)
+    LSR             reduce using rule 44 (statement -> CONS SCOLON .)
+    CONCAT          reduce using rule 44 (statement -> CONS SCOLON .)
+    SIZE            reduce using rule 44 (statement -> CONS SCOLON .)
+    SLICE           reduce using rule 44 (statement -> CONS SCOLON .)
+    PAIR            reduce using rule 44 (statement -> CONS SCOLON .)
+    CAR             reduce using rule 44 (statement -> CONS SCOLON .)
+    CDR             reduce using rule 44 (statement -> CONS SCOLON .)
+    EMPTY_SET       reduce using rule 44 (statement -> CONS SCOLON .)
+    MEM             reduce using rule 44 (statement -> CONS SCOLON .)
+    UPDATE          reduce using rule 44 (statement -> CONS SCOLON .)
+    SOME            reduce using rule 44 (statement -> CONS SCOLON .)
+    NONE            reduce using rule 44 (statement -> CONS SCOLON .)
+    LEFT            reduce using rule 44 (statement -> CONS SCOLON .)
+    RIGHT           reduce using rule 44 (statement -> CONS SCOLON .)
+    CONS            reduce using rule 44 (statement -> CONS SCOLON .)
+    NIL             reduce using rule 44 (statement -> CONS SCOLON .)
+    NOT             reduce using rule 44 (statement -> CONS SCOLON .)
+    PUSH            reduce using rule 44 (statement -> CONS SCOLON .)
+    FAILWITH        reduce using rule 44 (statement -> CONS SCOLON .)
+    $end            reduce using rule 44 (statement -> CONS SCOLON .)
+
+
+state 86
+
+    (45) statement -> NIL TYPE . SCOLON
+
+    SCOLON          shift and go to state 95
+
+
+state 87
+
+    (46) statement -> NOT SCOLON .
+
+    DROP            reduce using rule 46 (statement -> NOT SCOLON .)
+    DUP             reduce using rule 46 (statement -> NOT SCOLON .)
+    SWAP            reduce using rule 46 (statement -> NOT SCOLON .)
+    UNIT            reduce using rule 46 (statement -> NOT SCOLON .)
+    EQ              reduce using rule 46 (statement -> NOT SCOLON .)
+    NEQ             reduce using rule 46 (statement -> NOT SCOLON .)
+    LT              reduce using rule 46 (statement -> NOT SCOLON .)
+    GT              reduce using rule 46 (statement -> NOT SCOLON .)
+    LE              reduce using rule 46 (statement -> NOT SCOLON .)
+    GE              reduce using rule 46 (statement -> NOT SCOLON .)
+    OR              reduce using rule 46 (statement -> NOT SCOLON .)
+    AND             reduce using rule 46 (statement -> NOT SCOLON .)
+    XOR             reduce using rule 46 (statement -> NOT SCOLON .)
+    COMPARE         reduce using rule 46 (statement -> NOT SCOLON .)
+    NEG             reduce using rule 46 (statement -> NOT SCOLON .)
+    ABS             reduce using rule 46 (statement -> NOT SCOLON .)
+    ADD             reduce using rule 46 (statement -> NOT SCOLON .)
+    SUB             reduce using rule 46 (statement -> NOT SCOLON .)
+    MUL             reduce using rule 46 (statement -> NOT SCOLON .)
+    EDIV            reduce using rule 46 (statement -> NOT SCOLON .)
+    LSL             reduce using rule 46 (statement -> NOT SCOLON .)
+    LSR             reduce using rule 46 (statement -> NOT SCOLON .)
+    CONCAT          reduce using rule 46 (statement -> NOT SCOLON .)
+    SIZE            reduce using rule 46 (statement -> NOT SCOLON .)
+    SLICE           reduce using rule 46 (statement -> NOT SCOLON .)
+    PAIR            reduce using rule 46 (statement -> NOT SCOLON .)
+    CAR             reduce using rule 46 (statement -> NOT SCOLON .)
+    CDR             reduce using rule 46 (statement -> NOT SCOLON .)
+    EMPTY_SET       reduce using rule 46 (statement -> NOT SCOLON .)
+    MEM             reduce using rule 46 (statement -> NOT SCOLON .)
+    UPDATE          reduce using rule 46 (statement -> NOT SCOLON .)
+    SOME            reduce using rule 46 (statement -> NOT SCOLON .)
+    NONE            reduce using rule 46 (statement -> NOT SCOLON .)
+    LEFT            reduce using rule 46 (statement -> NOT SCOLON .)
+    RIGHT           reduce using rule 46 (statement -> NOT SCOLON .)
+    CONS            reduce using rule 46 (statement -> NOT SCOLON .)
+    NIL             reduce using rule 46 (statement -> NOT SCOLON .)
+    NOT             reduce using rule 46 (statement -> NOT SCOLON .)
+    PUSH            reduce using rule 46 (statement -> NOT SCOLON .)
+    FAILWITH        reduce using rule 46 (statement -> NOT SCOLON .)
+    $end            reduce using rule 46 (statement -> NOT SCOLON .)
+
+
+state 88
+
+    (53) statement -> PUSH TYPE . value SCOLON
+    (9) value -> . NUMBER
+    (10) value -> . bool
+    (11) value -> . TEXT
+    (12) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (7) bool -> . TRUE
+    (8) bool -> . FALSE
+
+    NUMBER          shift and go to state 97
+    TEXT            shift and go to state 99
+    LPARENS         shift and go to state 100
+    TRUE            shift and go to state 101
+    FALSE           shift and go to state 102
+
+    value                          shift and go to state 96
+    bool                           shift and go to state 98
+
+state 89
+
+    (54) statement -> FAILWITH SCOLON .
+
+    DROP            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    DUP             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    SWAP            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    UNIT            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    EQ              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    NEQ             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    LT              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    GT              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    LE              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    GE              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    OR              reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    AND             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    XOR             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    COMPARE         reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    NEG             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    ABS             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    ADD             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    SUB             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    MUL             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    EDIV            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    LSL             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    LSR             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    CONCAT          reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    SIZE            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    SLICE           reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    PAIR            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    CAR             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    CDR             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    EMPTY_SET       reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    MEM             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    UPDATE          reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    SOME            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    NONE            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    LEFT            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    RIGHT           reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    CONS            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    NIL             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    NOT             reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    PUSH            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    FAILWITH        reduce using rule 54 (statement -> FAILWITH SCOLON .)
+    $end            reduce using rule 54 (statement -> FAILWITH SCOLON .)
+
+
+state 90
+
+    (37) statement -> EMPTY_SET TYPE SCOLON .
+
+    DROP            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    DUP             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    SWAP            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    UNIT            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    EQ              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    NEQ             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    LT              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    GT              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    LE              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    GE              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    OR              reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    AND             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    XOR             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    COMPARE         reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    NEG             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    ABS             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    ADD             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    SUB             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    MUL             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    EDIV            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    LSL             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    LSR             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    CONCAT          reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    SIZE            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    SLICE           reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    PAIR            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    CAR             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    CDR             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    EMPTY_SET       reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    MEM             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    UPDATE          reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    SOME            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    NONE            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    LEFT            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    RIGHT           reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    CONS            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    NIL             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    NOT             reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    PUSH            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    FAILWITH        reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+    $end            reduce using rule 37 (statement -> EMPTY_SET TYPE SCOLON .)
+
+
+state 91
+
+    (52) TYPE -> LPARENS LPAIR . TYPE TYPE RPARENS
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
+
+    TYPE                           shift and go to state 103
+
+state 92
+
+    (41) statement -> NONE TYPE SCOLON .
+
+    DROP            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    DUP             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    SWAP            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    UNIT            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    EQ              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    NEQ             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    LT              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    GT              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    LE              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    GE              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    OR              reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    AND             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    XOR             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    COMPARE         reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    NEG             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    ABS             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    ADD             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    SUB             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    MUL             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    EDIV            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    LSL             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    LSR             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    CONCAT          reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    SIZE            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    SLICE           reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    PAIR            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    CAR             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    CDR             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    EMPTY_SET       reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    MEM             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    UPDATE          reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    SOME            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    NONE            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    LEFT            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    RIGHT           reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    CONS            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    NIL             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    NOT             reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    PUSH            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    FAILWITH        reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+    $end            reduce using rule 41 (statement -> NONE TYPE SCOLON .)
+
+
+state 93
+
+    (42) statement -> LEFT TYPE SCOLON .
+
+    DROP            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    DUP             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    SWAP            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    UNIT            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    EQ              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    NEQ             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    LT              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    GT              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    LE              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    GE              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    OR              reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    AND             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    XOR             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    COMPARE         reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    NEG             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    ABS             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    ADD             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    SUB             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    MUL             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    EDIV            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    LSL             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    LSR             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    CONCAT          reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    SIZE            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    SLICE           reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    PAIR            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    CAR             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    CDR             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    EMPTY_SET       reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    MEM             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    UPDATE          reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    SOME            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    NONE            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    LEFT            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    RIGHT           reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    CONS            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    NIL             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    NOT             reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    PUSH            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    FAILWITH        reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+    $end            reduce using rule 42 (statement -> LEFT TYPE SCOLON .)
+
+
+state 94
+
+    (43) statement -> RIGHT TYPE SCOLON .
+
+    DROP            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    DUP             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    SWAP            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    UNIT            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    EQ              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    NEQ             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    LT              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    GT              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    LE              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    GE              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    OR              reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    AND             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    XOR             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    COMPARE         reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    NEG             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    ABS             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    ADD             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    SUB             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    MUL             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    EDIV            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    LSL             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    LSR             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    CONCAT          reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    SIZE            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    SLICE           reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    PAIR            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    CAR             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    CDR             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    EMPTY_SET       reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    MEM             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    UPDATE          reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    SOME            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    NONE            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    LEFT            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    RIGHT           reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    CONS            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    NIL             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    NOT             reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    PUSH            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    FAILWITH        reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+    $end            reduce using rule 43 (statement -> RIGHT TYPE SCOLON .)
+
+
+state 95
+
+    (45) statement -> NIL TYPE SCOLON .
+
+    DROP            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    DUP             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    SWAP            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    UNIT            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    EQ              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    NEQ             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    LT              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    GT              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    LE              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    GE              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    OR              reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    AND             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    XOR             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    COMPARE         reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    NEG             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    ABS             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    ADD             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    SUB             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    MUL             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    EDIV            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    LSL             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    LSR             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    CONCAT          reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    SIZE            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    SLICE           reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    PAIR            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    CAR             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    CDR             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    EMPTY_SET       reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    MEM             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    UPDATE          reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    SOME            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    NONE            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    LEFT            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    RIGHT           reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    CONS            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    NIL             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    NOT             reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    PUSH            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    FAILWITH        reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+    $end            reduce using rule 45 (statement -> NIL TYPE SCOLON .)
+
+
+state 96
+
+    (53) statement -> PUSH TYPE value . SCOLON
+
+    SCOLON          shift and go to state 104
+
+
+state 97
+
+    (9) value -> NUMBER .
+
+    SCOLON          reduce using rule 9 (value -> NUMBER .)
+    NUMBER          reduce using rule 9 (value -> NUMBER .)
+    TEXT            reduce using rule 9 (value -> NUMBER .)
+    LPARENS         reduce using rule 9 (value -> NUMBER .)
+    TRUE            reduce using rule 9 (value -> NUMBER .)
+    FALSE           reduce using rule 9 (value -> NUMBER .)
+    RPARENS         reduce using rule 9 (value -> NUMBER .)
+
+
+state 98
+
+    (10) value -> bool .
+
+    SCOLON          reduce using rule 10 (value -> bool .)
+    NUMBER          reduce using rule 10 (value -> bool .)
+    TEXT            reduce using rule 10 (value -> bool .)
+    LPARENS         reduce using rule 10 (value -> bool .)
+    TRUE            reduce using rule 10 (value -> bool .)
+    FALSE           reduce using rule 10 (value -> bool .)
+    RPARENS         reduce using rule 10 (value -> bool .)
+
+
+state 99
+
+    (11) value -> TEXT .
+
+    SCOLON          reduce using rule 11 (value -> TEXT .)
+    NUMBER          reduce using rule 11 (value -> TEXT .)
+    TEXT            reduce using rule 11 (value -> TEXT .)
+    LPARENS         reduce using rule 11 (value -> TEXT .)
+    TRUE            reduce using rule 11 (value -> TEXT .)
+    FALSE           reduce using rule 11 (value -> TEXT .)
+    RPARENS         reduce using rule 11 (value -> TEXT .)
+
+
+state 100
+
+    (12) value -> LPARENS . PAIR_CONSTRUCTOR value value RPARENS
+
+    PAIR_CONSTRUCTOR shift and go to state 105
+
+
+state 101
+
+    (7) bool -> TRUE .
+
+    SCOLON          reduce using rule 7 (bool -> TRUE .)
+    NUMBER          reduce using rule 7 (bool -> TRUE .)
+    TEXT            reduce using rule 7 (bool -> TRUE .)
+    LPARENS         reduce using rule 7 (bool -> TRUE .)
+    TRUE            reduce using rule 7 (bool -> TRUE .)
+    FALSE           reduce using rule 7 (bool -> TRUE .)
+    RPARENS         reduce using rule 7 (bool -> TRUE .)
+
+
+state 102
+
+    (8) bool -> FALSE .
+
+    SCOLON          reduce using rule 8 (bool -> FALSE .)
+    NUMBER          reduce using rule 8 (bool -> FALSE .)
+    TEXT            reduce using rule 8 (bool -> FALSE .)
+    LPARENS         reduce using rule 8 (bool -> FALSE .)
+    TRUE            reduce using rule 8 (bool -> FALSE .)
+    FALSE           reduce using rule 8 (bool -> FALSE .)
+    RPARENS         reduce using rule 8 (bool -> FALSE .)
+
+
+state 103
+
+    (52) TYPE -> LPARENS LPAIR TYPE . TYPE RPARENS
+    (47) TYPE -> . NAT
+    (48) TYPE -> . STRING
+    (49) TYPE -> . INT
+    (50) TYPE -> . BOOL
+    (51) TYPE -> . BYTES
+    (52) TYPE -> . LPARENS LPAIR TYPE TYPE RPARENS
+
+    NAT             shift and go to state 73
+    STRING          shift and go to state 74
+    INT             shift and go to state 75
+    BOOL            shift and go to state 76
+    BYTES           shift and go to state 77
+    LPARENS         shift and go to state 78
+
+    TYPE                           shift and go to state 106
+
+state 104
+
+    (53) statement -> PUSH TYPE value SCOLON .
+
+    DROP            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    DUP             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    SWAP            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    UNIT            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    EQ              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    NEQ             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    LT              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    GT              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    LE              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    GE              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    OR              reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    AND             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    XOR             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    COMPARE         reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    NEG             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    ABS             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    ADD             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    SUB             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    MUL             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    EDIV            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    LSL             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    LSR             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    CONCAT          reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    SIZE            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    SLICE           reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    PAIR            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    CAR             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    CDR             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    EMPTY_SET       reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    MEM             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    UPDATE          reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    SOME            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    NONE            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    LEFT            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    RIGHT           reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    CONS            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    NIL             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    NOT             reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    PUSH            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    FAILWITH        reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+    $end            reduce using rule 53 (statement -> PUSH TYPE value SCOLON .)
+
+
+state 105
+
+    (12) value -> LPARENS PAIR_CONSTRUCTOR . value value RPARENS
+    (9) value -> . NUMBER
+    (10) value -> . bool
+    (11) value -> . TEXT
+    (12) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (7) bool -> . TRUE
+    (8) bool -> . FALSE
+
+    NUMBER          shift and go to state 97
+    TEXT            shift and go to state 99
+    LPARENS         shift and go to state 100
+    TRUE            shift and go to state 101
+    FALSE           shift and go to state 102
+
+    value                          shift and go to state 107
+    bool                           shift and go to state 98
+
+state 106
+
+    (52) TYPE -> LPARENS LPAIR TYPE TYPE . RPARENS
+
+    RPARENS         shift and go to state 108
+
+
+state 107
+
+    (12) value -> LPARENS PAIR_CONSTRUCTOR value . value RPARENS
+    (9) value -> . NUMBER
+    (10) value -> . bool
+    (11) value -> . TEXT
+    (12) value -> . LPARENS PAIR_CONSTRUCTOR value value RPARENS
+    (7) bool -> . TRUE
+    (8) bool -> . FALSE
+
+    NUMBER          shift and go to state 97
+    TEXT            shift and go to state 99
+    LPARENS         shift and go to state 100
+    TRUE            shift and go to state 101
+    FALSE           shift and go to state 102
+
+    value                          shift and go to state 109
+    bool                           shift and go to state 98
+
+state 108
+
+    (52) TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .
+
+    SCOLON          reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    NUMBER          reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    TEXT            reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    LPARENS         reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    TRUE            reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    FALSE           reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    NAT             reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    STRING          reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    INT             reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    BOOL            reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    BYTES           reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+    RPARENS         reduce using rule 52 (TYPE -> LPARENS LPAIR TYPE TYPE RPARENS .)
+
+
+state 109
+
+    (12) value -> LPARENS PAIR_CONSTRUCTOR value value . RPARENS
+
+    RPARENS         shift and go to state 110
+
+
+state 110
+
+    (12) value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .
+
+    SCOLON          reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    NUMBER          reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    TEXT            reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    LPARENS         reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    TRUE            reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    FALSE           reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
+    RPARENS         reduce using rule 12 (value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .)
 
