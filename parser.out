@@ -48,63 +48,69 @@ Rule 35    statement -> MEM
 Rule 36    statement -> UPDATE
 Rule 37    statement -> SOME
 Rule 38    statement -> NONE TYPE
-Rule 39    statement -> CONS
-Rule 40    statement -> NIL TYPE
-Rule 41    statement -> NOT
-Rule 42    TYPE -> NAT
-Rule 43    TYPE -> STRING
-Rule 44    TYPE -> INT
-Rule 45    TYPE -> BOOL
-Rule 46    TYPE -> BYTES
-Rule 47    statement -> PUSH TYPE value
-Rule 48    statement -> FAILWITH
+Rule 39    statement -> LEFT LPARENS TYPE TYPE RPARENS
+Rule 40    statement -> RIGHT LPARENS TYPE TYPE RPARENS
+Rule 41    statement -> CONS
+Rule 42    statement -> NIL TYPE
+Rule 43    statement -> NOT
+Rule 44    TYPE -> NAT
+Rule 45    TYPE -> STRING
+Rule 46    TYPE -> INT
+Rule 47    TYPE -> BOOL
+Rule 48    TYPE -> BYTES
+Rule 49    statement -> PUSH TYPE value
+Rule 50    statement -> FAILWITH
 
 Terminals, with rules where they appear
 
 ABS                  : 21
 ADD                  : 22
 AND                  : 17
-BOOL                 : 45
-BYTES                : 46
+BOOL                 : 47
+BYTES                : 48
 CAR                  : 32
 CDR                  : 33
 COMPARE              : 19
 CONCAT               : 28
-CONS                 : 39
+CONS                 : 41
 DROP                 : 1
 DUP                  : 2
 EDIV                 : 25
 EMPTY_MAP            : 
 EMPTY_SET            : 34
 EQ                   : 10
-FAILWITH             : 48
+FAILWITH             : 50
 FALSE                : 6
 GE                   : 15
 GET                  : 
 GT                   : 13
-INT                  : 44
+INT                  : 46
 LBRACKET             : 
 LE                   : 14
+LEFT                 : 39
+LPARENS              : 39 40
 LSL                  : 26
 LSR                  : 27
 LT                   : 12
 MEM                  : 35
 MUL                  : 24
-NAT                  : 42
+NAT                  : 44
 NEG                  : 20
 NEQ                  : 11
-NIL                  : 40
+NIL                  : 42
 NONE                 : 38
-NOT                  : 41
+NOT                  : 43
 NUMBER               : 7
 OR                   : 16
 PAIR                 : 31
-PUSH                 : 47
+PUSH                 : 49
 RBRACKET             : 
+RIGHT                : 40
+RPARENS              : 39 40
 SIZE                 : 29
 SLICE                : 30
 SOME                 : 37
-STRING               : 43
+STRING               : 45
 SUB                  : 23
 SWAP                 : 3
 TEXT                 : 9
@@ -116,10 +122,10 @@ error                :
 
 Nonterminals, with rules where they appear
 
-TYPE                 : 34 38 40 47
+TYPE                 : 34 38 39 39 40 40 42 49
 bool                 : 8
 statement            : 0
-value                : 47
+value                : 49
 
 Parsing method: LALR
 
@@ -159,11 +165,13 @@ state 0
     (36) statement -> . UPDATE
     (37) statement -> . SOME
     (38) statement -> . NONE TYPE
-    (39) statement -> . CONS
-    (40) statement -> . NIL TYPE
-    (41) statement -> . NOT
-    (47) statement -> . PUSH TYPE value
-    (48) statement -> . FAILWITH
+    (39) statement -> . LEFT LPARENS TYPE TYPE RPARENS
+    (40) statement -> . RIGHT LPARENS TYPE TYPE RPARENS
+    (41) statement -> . CONS
+    (42) statement -> . NIL TYPE
+    (43) statement -> . NOT
+    (49) statement -> . PUSH TYPE value
+    (50) statement -> . FAILWITH
 
     DROP            shift and go to state 2
     DUP             shift and go to state 3
@@ -198,11 +206,13 @@ state 0
     UPDATE          shift and go to state 32
     SOME            shift and go to state 33
     NONE            shift and go to state 34
-    CONS            shift and go to state 35
-    NIL             shift and go to state 36
-    NOT             shift and go to state 37
-    PUSH            shift and go to state 38
-    FAILWITH        shift and go to state 39
+    LEFT            shift and go to state 35
+    RIGHT           shift and go to state 36
+    CONS            shift and go to state 37
+    NIL             shift and go to state 38
+    NOT             shift and go to state 39
+    PUSH            shift and go to state 40
+    FAILWITH        shift and go to state 41
 
     statement                      shift and go to state 1
 
@@ -411,19 +421,19 @@ state 29
 state 30
 
     (34) statement -> EMPTY_SET . TYPE
-    (42) TYPE -> . NAT
-    (43) TYPE -> . STRING
-    (44) TYPE -> . INT
-    (45) TYPE -> . BOOL
-    (46) TYPE -> . BYTES
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
 
-    NAT             shift and go to state 41
-    STRING          shift and go to state 42
-    INT             shift and go to state 43
-    BOOL            shift and go to state 44
-    BYTES           shift and go to state 45
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
 
-    TYPE                           shift and go to state 40
+    TYPE                           shift and go to state 42
 
 state 31
 
@@ -449,206 +459,346 @@ state 33
 state 34
 
     (38) statement -> NONE . TYPE
-    (42) TYPE -> . NAT
-    (43) TYPE -> . STRING
-    (44) TYPE -> . INT
-    (45) TYPE -> . BOOL
-    (46) TYPE -> . BYTES
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
 
-    NAT             shift and go to state 41
-    STRING          shift and go to state 42
-    INT             shift and go to state 43
-    BOOL            shift and go to state 44
-    BYTES           shift and go to state 45
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
 
-    TYPE                           shift and go to state 46
+    TYPE                           shift and go to state 48
 
 state 35
 
-    (39) statement -> CONS .
+    (39) statement -> LEFT . LPARENS TYPE TYPE RPARENS
 
-    $end            reduce using rule 39 (statement -> CONS .)
+    LPARENS         shift and go to state 49
 
 
 state 36
 
-    (40) statement -> NIL . TYPE
-    (42) TYPE -> . NAT
-    (43) TYPE -> . STRING
-    (44) TYPE -> . INT
-    (45) TYPE -> . BOOL
-    (46) TYPE -> . BYTES
+    (40) statement -> RIGHT . LPARENS TYPE TYPE RPARENS
 
-    NAT             shift and go to state 41
-    STRING          shift and go to state 42
-    INT             shift and go to state 43
-    BOOL            shift and go to state 44
-    BYTES           shift and go to state 45
+    LPARENS         shift and go to state 50
 
-    TYPE                           shift and go to state 47
 
 state 37
 
-    (41) statement -> NOT .
+    (41) statement -> CONS .
 
-    $end            reduce using rule 41 (statement -> NOT .)
+    $end            reduce using rule 41 (statement -> CONS .)
 
 
 state 38
 
-    (47) statement -> PUSH . TYPE value
-    (42) TYPE -> . NAT
-    (43) TYPE -> . STRING
-    (44) TYPE -> . INT
-    (45) TYPE -> . BOOL
-    (46) TYPE -> . BYTES
+    (42) statement -> NIL . TYPE
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
 
-    NAT             shift and go to state 41
-    STRING          shift and go to state 42
-    INT             shift and go to state 43
-    BOOL            shift and go to state 44
-    BYTES           shift and go to state 45
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
 
-    TYPE                           shift and go to state 48
+    TYPE                           shift and go to state 51
 
 state 39
 
-    (48) statement -> FAILWITH .
+    (43) statement -> NOT .
 
-    $end            reduce using rule 48 (statement -> FAILWITH .)
+    $end            reduce using rule 43 (statement -> NOT .)
 
 
 state 40
+
+    (49) statement -> PUSH . TYPE value
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
+
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
+
+    TYPE                           shift and go to state 52
+
+state 41
+
+    (50) statement -> FAILWITH .
+
+    $end            reduce using rule 50 (statement -> FAILWITH .)
+
+
+state 42
 
     (34) statement -> EMPTY_SET TYPE .
 
     $end            reduce using rule 34 (statement -> EMPTY_SET TYPE .)
 
 
-state 41
-
-    (42) TYPE -> NAT .
-
-    $end            reduce using rule 42 (TYPE -> NAT .)
-    NUMBER          reduce using rule 42 (TYPE -> NAT .)
-    TEXT            reduce using rule 42 (TYPE -> NAT .)
-    TRUE            reduce using rule 42 (TYPE -> NAT .)
-    FALSE           reduce using rule 42 (TYPE -> NAT .)
-
-
-state 42
-
-    (43) TYPE -> STRING .
-
-    $end            reduce using rule 43 (TYPE -> STRING .)
-    NUMBER          reduce using rule 43 (TYPE -> STRING .)
-    TEXT            reduce using rule 43 (TYPE -> STRING .)
-    TRUE            reduce using rule 43 (TYPE -> STRING .)
-    FALSE           reduce using rule 43 (TYPE -> STRING .)
-
-
 state 43
 
-    (44) TYPE -> INT .
+    (44) TYPE -> NAT .
 
-    $end            reduce using rule 44 (TYPE -> INT .)
-    NUMBER          reduce using rule 44 (TYPE -> INT .)
-    TEXT            reduce using rule 44 (TYPE -> INT .)
-    TRUE            reduce using rule 44 (TYPE -> INT .)
-    FALSE           reduce using rule 44 (TYPE -> INT .)
+    $end            reduce using rule 44 (TYPE -> NAT .)
+    NUMBER          reduce using rule 44 (TYPE -> NAT .)
+    TEXT            reduce using rule 44 (TYPE -> NAT .)
+    TRUE            reduce using rule 44 (TYPE -> NAT .)
+    FALSE           reduce using rule 44 (TYPE -> NAT .)
+    NAT             reduce using rule 44 (TYPE -> NAT .)
+    STRING          reduce using rule 44 (TYPE -> NAT .)
+    INT             reduce using rule 44 (TYPE -> NAT .)
+    BOOL            reduce using rule 44 (TYPE -> NAT .)
+    BYTES           reduce using rule 44 (TYPE -> NAT .)
+    RPARENS         reduce using rule 44 (TYPE -> NAT .)
 
 
 state 44
 
-    (45) TYPE -> BOOL .
+    (45) TYPE -> STRING .
 
-    $end            reduce using rule 45 (TYPE -> BOOL .)
-    NUMBER          reduce using rule 45 (TYPE -> BOOL .)
-    TEXT            reduce using rule 45 (TYPE -> BOOL .)
-    TRUE            reduce using rule 45 (TYPE -> BOOL .)
-    FALSE           reduce using rule 45 (TYPE -> BOOL .)
+    $end            reduce using rule 45 (TYPE -> STRING .)
+    NUMBER          reduce using rule 45 (TYPE -> STRING .)
+    TEXT            reduce using rule 45 (TYPE -> STRING .)
+    TRUE            reduce using rule 45 (TYPE -> STRING .)
+    FALSE           reduce using rule 45 (TYPE -> STRING .)
+    NAT             reduce using rule 45 (TYPE -> STRING .)
+    STRING          reduce using rule 45 (TYPE -> STRING .)
+    INT             reduce using rule 45 (TYPE -> STRING .)
+    BOOL            reduce using rule 45 (TYPE -> STRING .)
+    BYTES           reduce using rule 45 (TYPE -> STRING .)
+    RPARENS         reduce using rule 45 (TYPE -> STRING .)
 
 
 state 45
 
-    (46) TYPE -> BYTES .
+    (46) TYPE -> INT .
 
-    $end            reduce using rule 46 (TYPE -> BYTES .)
-    NUMBER          reduce using rule 46 (TYPE -> BYTES .)
-    TEXT            reduce using rule 46 (TYPE -> BYTES .)
-    TRUE            reduce using rule 46 (TYPE -> BYTES .)
-    FALSE           reduce using rule 46 (TYPE -> BYTES .)
+    $end            reduce using rule 46 (TYPE -> INT .)
+    NUMBER          reduce using rule 46 (TYPE -> INT .)
+    TEXT            reduce using rule 46 (TYPE -> INT .)
+    TRUE            reduce using rule 46 (TYPE -> INT .)
+    FALSE           reduce using rule 46 (TYPE -> INT .)
+    NAT             reduce using rule 46 (TYPE -> INT .)
+    STRING          reduce using rule 46 (TYPE -> INT .)
+    INT             reduce using rule 46 (TYPE -> INT .)
+    BOOL            reduce using rule 46 (TYPE -> INT .)
+    BYTES           reduce using rule 46 (TYPE -> INT .)
+    RPARENS         reduce using rule 46 (TYPE -> INT .)
 
 
 state 46
+
+    (47) TYPE -> BOOL .
+
+    $end            reduce using rule 47 (TYPE -> BOOL .)
+    NUMBER          reduce using rule 47 (TYPE -> BOOL .)
+    TEXT            reduce using rule 47 (TYPE -> BOOL .)
+    TRUE            reduce using rule 47 (TYPE -> BOOL .)
+    FALSE           reduce using rule 47 (TYPE -> BOOL .)
+    NAT             reduce using rule 47 (TYPE -> BOOL .)
+    STRING          reduce using rule 47 (TYPE -> BOOL .)
+    INT             reduce using rule 47 (TYPE -> BOOL .)
+    BOOL            reduce using rule 47 (TYPE -> BOOL .)
+    BYTES           reduce using rule 47 (TYPE -> BOOL .)
+    RPARENS         reduce using rule 47 (TYPE -> BOOL .)
+
+
+state 47
+
+    (48) TYPE -> BYTES .
+
+    $end            reduce using rule 48 (TYPE -> BYTES .)
+    NUMBER          reduce using rule 48 (TYPE -> BYTES .)
+    TEXT            reduce using rule 48 (TYPE -> BYTES .)
+    TRUE            reduce using rule 48 (TYPE -> BYTES .)
+    FALSE           reduce using rule 48 (TYPE -> BYTES .)
+    NAT             reduce using rule 48 (TYPE -> BYTES .)
+    STRING          reduce using rule 48 (TYPE -> BYTES .)
+    INT             reduce using rule 48 (TYPE -> BYTES .)
+    BOOL            reduce using rule 48 (TYPE -> BYTES .)
+    BYTES           reduce using rule 48 (TYPE -> BYTES .)
+    RPARENS         reduce using rule 48 (TYPE -> BYTES .)
+
+
+state 48
 
     (38) statement -> NONE TYPE .
 
     $end            reduce using rule 38 (statement -> NONE TYPE .)
 
 
-state 47
+state 49
 
-    (40) statement -> NIL TYPE .
+    (39) statement -> LEFT LPARENS . TYPE TYPE RPARENS
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
 
-    $end            reduce using rule 40 (statement -> NIL TYPE .)
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
+
+    TYPE                           shift and go to state 53
+
+state 50
+
+    (40) statement -> RIGHT LPARENS . TYPE TYPE RPARENS
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
+
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
+
+    TYPE                           shift and go to state 54
+
+state 51
+
+    (42) statement -> NIL TYPE .
+
+    $end            reduce using rule 42 (statement -> NIL TYPE .)
 
 
-state 48
+state 52
 
-    (47) statement -> PUSH TYPE . value
+    (49) statement -> PUSH TYPE . value
     (7) value -> . NUMBER
     (8) value -> . bool
     (9) value -> . TEXT
     (5) bool -> . TRUE
     (6) bool -> . FALSE
 
-    NUMBER          shift and go to state 50
-    TEXT            shift and go to state 52
-    TRUE            shift and go to state 53
-    FALSE           shift and go to state 54
+    NUMBER          shift and go to state 56
+    TEXT            shift and go to state 58
+    TRUE            shift and go to state 59
+    FALSE           shift and go to state 60
 
-    value                          shift and go to state 49
-    bool                           shift and go to state 51
+    value                          shift and go to state 55
+    bool                           shift and go to state 57
 
-state 49
+state 53
 
-    (47) statement -> PUSH TYPE value .
+    (39) statement -> LEFT LPARENS TYPE . TYPE RPARENS
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
 
-    $end            reduce using rule 47 (statement -> PUSH TYPE value .)
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
+
+    TYPE                           shift and go to state 61
+
+state 54
+
+    (40) statement -> RIGHT LPARENS TYPE . TYPE RPARENS
+    (44) TYPE -> . NAT
+    (45) TYPE -> . STRING
+    (46) TYPE -> . INT
+    (47) TYPE -> . BOOL
+    (48) TYPE -> . BYTES
+
+    NAT             shift and go to state 43
+    STRING          shift and go to state 44
+    INT             shift and go to state 45
+    BOOL            shift and go to state 46
+    BYTES           shift and go to state 47
+
+    TYPE                           shift and go to state 62
+
+state 55
+
+    (49) statement -> PUSH TYPE value .
+
+    $end            reduce using rule 49 (statement -> PUSH TYPE value .)
 
 
-state 50
+state 56
 
     (7) value -> NUMBER .
 
     $end            reduce using rule 7 (value -> NUMBER .)
 
 
-state 51
+state 57
 
     (8) value -> bool .
 
     $end            reduce using rule 8 (value -> bool .)
 
 
-state 52
+state 58
 
     (9) value -> TEXT .
 
     $end            reduce using rule 9 (value -> TEXT .)
 
 
-state 53
+state 59
 
     (5) bool -> TRUE .
 
     $end            reduce using rule 5 (bool -> TRUE .)
 
 
-state 54
+state 60
 
     (6) bool -> FALSE .
 
     $end            reduce using rule 6 (bool -> FALSE .)
+
+
+state 61
+
+    (39) statement -> LEFT LPARENS TYPE TYPE . RPARENS
+
+    RPARENS         shift and go to state 63
+
+
+state 62
+
+    (40) statement -> RIGHT LPARENS TYPE TYPE . RPARENS
+
+    RPARENS         shift and go to state 64
+
+
+state 63
+
+    (39) statement -> LEFT LPARENS TYPE TYPE RPARENS .
+
+    $end            reduce using rule 39 (statement -> LEFT LPARENS TYPE TYPE RPARENS .)
+
+
+state 64
+
+    (40) statement -> RIGHT LPARENS TYPE TYPE RPARENS .
+
+    $end            reduce using rule 40 (statement -> RIGHT LPARENS TYPE TYPE RPARENS .)
 

@@ -1,3 +1,5 @@
+import ply.yacc as yacc
+
 from objects import (Unit, Nat, Int, Bool,
         Pair, String, Bytes, Set, List, Or)
 
@@ -107,6 +109,9 @@ tokens = (
     # 'key',
     # 'key_hash',
     # 'signature',
+
+    'LPARENS',
+    'RPARENS',
 )
 
 # Tokens
@@ -182,8 +187,8 @@ t_FALSE       = 'False'
 t_TEXT        = '".*"'
 t_LBRACKET    = '{'
 t_RBRACKET    = '}'
-t_LPARENS     = '('
-t_RPARENS     = ')'
+t_LPARENS     = '\('
+t_RPARENS     = '\)'
 
 def t_NUMBER(t):
     r'-?\d+'
@@ -370,12 +375,14 @@ def p_pair_operations(t):
     if pair_operation == 'PAIR':
         second = stack.pop(-1)
         stack.append(Pair(first, second))
+        return
     if not isinstance(first, Pair):
         print('invalid stack state')
         return
+
     if pair_operation == 'CAR':
         stack.append(first.left)
-    if pair_operation == 'CDR':
+    elif pair_operation == 'CDR':
         stack.append(first.right)
 
 def p_set_operations(t):
@@ -410,10 +417,7 @@ def p_union_operations(t):
     '''statement : LEFT LPARENS TYPE TYPE RPARENS
             | RIGHT LPARENS TYPE TYPE RPARENS '''
     top = stack.pop(-1)
-    if t[1] == 'LEFT':
-        stack.append(Or(top, t[3], t[4]))
-    else:
-        stack.append(Or(top, t[3], t[4]))
+    stack.append(Or(top, t[3], t[4], side=t[1]))
 
 def p_list_operations(t):
     '''statement : CONS
@@ -458,7 +462,6 @@ def p_statement_type(t):
 def p_statement_push(t):
     'statement : PUSH TYPE value'
     value = None
-    print(t[2])
     if t[2] == Nat:
         value = Nat(t[3])
     elif t[2] == Int:
@@ -482,13 +485,13 @@ def p_statement_failwith(t):
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
 
-import ply.yacc as yacc
-parser = yacc.yacc()
+if __name__ == '__main__':
+    parser = yacc.yacc()
 
-while True:
-    try:
-        s = input('stack > ')   # Use raw_input on Python 2
-    except EOFError:
-         break
-    parser.parse(s)
-    print(stack[::-1])
+    while True:
+        try:
+            s = input('stack > ')   # Use raw_input on Python 2
+        except EOFError:
+             break
+        parser.parse(s)
+        print(stack[::-1])

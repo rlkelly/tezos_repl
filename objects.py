@@ -31,17 +31,21 @@ class List(Tezos):
 
 
 class Or(Tezos):
-    def __init__(self, value, left, right):
+    def __init__(self, value, left, right, side):
         self.left, self.right = left, right
         self.value = value
-        if isinstance(value, left):
+        if side == 'LEFT':
+            assert isinstance(value, left)
             self.isleft = True
             self.isright = False
-        elif isinstance(value, right):
+        else:
+            assert isinstance(value, right)
             self.isleft = False
             self.isright = True
-        else:
-            print('invalid stack state')
+
+    def __repr__(self):
+        side = 'LEFT' if self.isleft else 'RIGHT'
+        return f'OR::({self.left.__name__}, {self.right.__name__})--{side}::({self.value})'
 
 
 class NoneType(Tezos):
@@ -195,6 +199,9 @@ class Nat(Number, Tezos):
         return self
 
     def __repr__(self):
+        return f'nat:{self.value}'
+
+    def __str__(self):
         return f'nat:{self.value}'
 
 

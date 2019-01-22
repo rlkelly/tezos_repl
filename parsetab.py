@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ABS ADD AND BOOL BYTES CAR CDR COMPARE CONCAT CONS DROP DUP EDIV EMPTY_MAP EMPTY_SET EQ FAILWITH FALSE GE GET GT INT LBRACKET LE LSL LSR LT MEM MUL NAT NEG NEQ NIL NONE NOT NUMBER OR PAIR PUSH RBRACKET SIZE SLICE SOME STRING SUB SWAP TEXT TRUE UNIT UPDATE XORstatement : DROPstatement : DUPstatement : SWAPstatement : UNITbool : TRUE\n        | FALSE value : NUMBER\n        | bool\n        | TEXT statement : EQ\n        | NEQ\n        | LT\n        | GT\n        | LE\n        | GE statement : OR\n        | AND\n        | XOR statement : COMPAREstatement : NEG\n         | ABS\n         | ADD\n         | SUB\n         | MUL\n         | EDIV\n         | LSL\n         | LSR statement : CONCAT\n            | SIZE\n            | SLICE statement : PAIR\n            | CAR\n            | CDR statement : EMPTY_SET TYPE\n            | MEM\n            | UPDATE statement : SOME\n            | NONE TYPE statement : CONS\n            | NIL TYPE statement : NOTTYPE : NAT\n        | STRING\n        | INT\n        | BOOL\n        | BYTES statement : PUSH TYPE valuestatement : FAILWITH'
+_lr_signature = 'ABS ADD AND BOOL BYTES CAR CDR COMPARE CONCAT CONS DROP DUP EDIV EMPTY_MAP EMPTY_SET EQ FAILWITH FALSE GE GET GT INT LBRACKET LE LEFT LPARENS LSL LSR LT MEM MUL NAT NEG NEQ NIL NONE NOT NUMBER OR PAIR PUSH RBRACKET RIGHT RPARENS SIZE SLICE SOME STRING SUB SWAP TEXT TRUE UNIT UPDATE XORstatement : DROPstatement : DUPstatement : SWAPstatement : UNITbool : TRUE\n        | FALSE value : NUMBER\n        | bool\n        | TEXT statement : EQ\n        | NEQ\n        | LT\n        | GT\n        | LE\n        | GE statement : OR\n        | AND\n        | XOR statement : COMPAREstatement : NEG\n         | ABS\n         | ADD\n         | SUB\n         | MUL\n         | EDIV\n         | LSL\n         | LSR statement : CONCAT\n            | SIZE\n            | SLICE statement : PAIR\n            | CAR\n            | CDR statement : EMPTY_SET TYPE\n            | MEM\n            | UPDATE statement : SOME\n            | NONE TYPE statement : LEFT LPARENS TYPE TYPE RPARENS\n            | RIGHT LPARENS TYPE TYPE RPARENS statement : CONS\n            | NIL TYPE statement : NOTTYPE : NAT\n        | STRING\n        | INT\n        | BOOL\n        | BYTES statement : PUSH TYPE valuestatement : FAILWITH'
     
-_lr_action_items = {'DROP':([0,],[2,]),'DUP':([0,],[3,]),'SWAP':([0,],[4,]),'UNIT':([0,],[5,]),'EQ':([0,],[6,]),'NEQ':([0,],[7,]),'LT':([0,],[8,]),'GT':([0,],[9,]),'LE':([0,],[10,]),'GE':([0,],[11,]),'OR':([0,],[12,]),'AND':([0,],[13,]),'XOR':([0,],[14,]),'COMPARE':([0,],[15,]),'NEG':([0,],[16,]),'ABS':([0,],[17,]),'ADD':([0,],[18,]),'SUB':([0,],[19,]),'MUL':([0,],[20,]),'EDIV':([0,],[21,]),'LSL':([0,],[22,]),'LSR':([0,],[23,]),'CONCAT':([0,],[24,]),'SIZE':([0,],[25,]),'SLICE':([0,],[26,]),'PAIR':([0,],[27,]),'CAR':([0,],[28,]),'CDR':([0,],[29,]),'EMPTY_SET':([0,],[30,]),'MEM':([0,],[31,]),'UPDATE':([0,],[32,]),'SOME':([0,],[33,]),'NONE':([0,],[34,]),'CONS':([0,],[35,]),'NIL':([0,],[36,]),'NOT':([0,],[37,]),'PUSH':([0,],[38,]),'FAILWITH':([0,],[39,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,31,32,33,35,37,39,40,41,42,43,44,45,46,47,49,50,51,52,53,54,],[0,-1,-2,-3,-4,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-35,-36,-37,-39,-41,-48,-34,-42,-43,-44,-45,-46,-38,-40,-47,-7,-8,-9,-5,-6,]),'NAT':([30,34,36,38,],[41,41,41,41,]),'STRING':([30,34,36,38,],[42,42,42,42,]),'INT':([30,34,36,38,],[43,43,43,43,]),'BOOL':([30,34,36,38,],[44,44,44,44,]),'BYTES':([30,34,36,38,],[45,45,45,45,]),'NUMBER':([41,42,43,44,45,48,],[-42,-43,-44,-45,-46,50,]),'TEXT':([41,42,43,44,45,48,],[-42,-43,-44,-45,-46,52,]),'TRUE':([41,42,43,44,45,48,],[-42,-43,-44,-45,-46,53,]),'FALSE':([41,42,43,44,45,48,],[-42,-43,-44,-45,-46,54,]),}
+_lr_action_items = {'DROP':([0,],[2,]),'DUP':([0,],[3,]),'SWAP':([0,],[4,]),'UNIT':([0,],[5,]),'EQ':([0,],[6,]),'NEQ':([0,],[7,]),'LT':([0,],[8,]),'GT':([0,],[9,]),'LE':([0,],[10,]),'GE':([0,],[11,]),'OR':([0,],[12,]),'AND':([0,],[13,]),'XOR':([0,],[14,]),'COMPARE':([0,],[15,]),'NEG':([0,],[16,]),'ABS':([0,],[17,]),'ADD':([0,],[18,]),'SUB':([0,],[19,]),'MUL':([0,],[20,]),'EDIV':([0,],[21,]),'LSL':([0,],[22,]),'LSR':([0,],[23,]),'CONCAT':([0,],[24,]),'SIZE':([0,],[25,]),'SLICE':([0,],[26,]),'PAIR':([0,],[27,]),'CAR':([0,],[28,]),'CDR':([0,],[29,]),'EMPTY_SET':([0,],[30,]),'MEM':([0,],[31,]),'UPDATE':([0,],[32,]),'SOME':([0,],[33,]),'NONE':([0,],[34,]),'LEFT':([0,],[35,]),'RIGHT':([0,],[36,]),'CONS':([0,],[37,]),'NIL':([0,],[38,]),'NOT':([0,],[39,]),'PUSH':([0,],[40,]),'FAILWITH':([0,],[41,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,31,32,33,37,39,41,42,43,44,45,46,47,48,51,55,56,57,58,59,60,63,64,],[0,-1,-2,-3,-4,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-35,-36,-37,-41,-43,-50,-34,-44,-45,-46,-47,-48,-38,-42,-49,-7,-8,-9,-5,-6,-39,-40,]),'NAT':([30,34,38,40,43,44,45,46,47,49,50,53,54,],[43,43,43,43,-44,-45,-46,-47,-48,43,43,43,43,]),'STRING':([30,34,38,40,43,44,45,46,47,49,50,53,54,],[44,44,44,44,-44,-45,-46,-47,-48,44,44,44,44,]),'INT':([30,34,38,40,43,44,45,46,47,49,50,53,54,],[45,45,45,45,-44,-45,-46,-47,-48,45,45,45,45,]),'BOOL':([30,34,38,40,43,44,45,46,47,49,50,53,54,],[46,46,46,46,-44,-45,-46,-47,-48,46,46,46,46,]),'BYTES':([30,34,38,40,43,44,45,46,47,49,50,53,54,],[47,47,47,47,-44,-45,-46,-47,-48,47,47,47,47,]),'LPARENS':([35,36,],[49,50,]),'NUMBER':([43,44,45,46,47,52,],[-44,-45,-46,-47,-48,56,]),'TEXT':([43,44,45,46,47,52,],[-44,-45,-46,-47,-48,58,]),'TRUE':([43,44,45,46,47,52,],[-44,-45,-46,-47,-48,59,]),'FALSE':([43,44,45,46,47,52,],[-44,-45,-46,-47,-48,60,]),'RPARENS':([43,44,45,46,47,61,62,],[-44,-45,-46,-47,-48,63,64,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[1,]),'TYPE':([30,34,36,38,],[40,46,47,48,]),'value':([48,],[49,]),'bool':([48,],[51,]),}
+_lr_goto_items = {'statement':([0,],[1,]),'TYPE':([30,34,38,40,49,50,53,54,],[42,48,51,52,53,54,61,62,]),'value':([52,],[55,]),'bool':([52,],[57,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,52 +27,54 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> DROP','statement',1,'p_statement_drop','main.py',206),
-  ('statement -> DUP','statement',1,'p_statement_dup','main.py',210),
-  ('statement -> SWAP','statement',1,'p_statement_swap','main.py',214),
-  ('statement -> UNIT','statement',1,'p_statement_unit','main.py',218),
-  ('bool -> TRUE','bool',1,'p_bool','main.py',222),
-  ('bool -> FALSE','bool',1,'p_bool','main.py',223),
-  ('value -> NUMBER','value',1,'p_statement_value','main.py',227),
-  ('value -> bool','value',1,'p_statement_value','main.py',228),
-  ('value -> TEXT','value',1,'p_statement_value','main.py',229),
-  ('statement -> EQ','statement',1,'p_statement_generic_comparison','main.py',233),
-  ('statement -> NEQ','statement',1,'p_statement_generic_comparison','main.py',234),
-  ('statement -> LT','statement',1,'p_statement_generic_comparison','main.py',235),
-  ('statement -> GT','statement',1,'p_statement_generic_comparison','main.py',236),
-  ('statement -> LE','statement',1,'p_statement_generic_comparison','main.py',237),
-  ('statement -> GE','statement',1,'p_statement_generic_comparison','main.py',238),
-  ('statement -> OR','statement',1,'p_boolean_comparison','main.py',255),
-  ('statement -> AND','statement',1,'p_boolean_comparison','main.py',256),
-  ('statement -> XOR','statement',1,'p_boolean_comparison','main.py',257),
-  ('statement -> COMPARE','statement',1,'p_compare_operation','main.py',282),
-  ('statement -> NEG','statement',1,'p_integer_operations','main.py',294),
-  ('statement -> ABS','statement',1,'p_integer_operations','main.py',295),
-  ('statement -> ADD','statement',1,'p_integer_operations','main.py',296),
-  ('statement -> SUB','statement',1,'p_integer_operations','main.py',297),
-  ('statement -> MUL','statement',1,'p_integer_operations','main.py',298),
-  ('statement -> EDIV','statement',1,'p_integer_operations','main.py',299),
-  ('statement -> LSL','statement',1,'p_integer_operations','main.py',300),
-  ('statement -> LSR','statement',1,'p_integer_operations','main.py',301),
-  ('statement -> CONCAT','statement',1,'p_string_operations','main.py',334),
-  ('statement -> SIZE','statement',1,'p_string_operations','main.py',335),
-  ('statement -> SLICE','statement',1,'p_string_operations','main.py',336),
-  ('statement -> PAIR','statement',1,'p_pair_operations','main.py',354),
-  ('statement -> CAR','statement',1,'p_pair_operations','main.py',355),
-  ('statement -> CDR','statement',1,'p_pair_operations','main.py',356),
-  ('statement -> EMPTY_SET TYPE','statement',2,'p_set_operations','main.py',371),
-  ('statement -> MEM','statement',1,'p_set_operations','main.py',372),
-  ('statement -> UPDATE','statement',1,'p_set_operations','main.py',373),
-  ('statement -> SOME','statement',1,'p_option_operations','main.py',390),
-  ('statement -> NONE TYPE','statement',2,'p_option_operations','main.py',391),
-  ('statement -> CONS','statement',1,'p_list_operations','main.py',399),
-  ('statement -> NIL TYPE','statement',2,'p_list_operations','main.py',400),
-  ('statement -> NOT','statement',1,'p_boolean_not','main.py',410),
-  ('TYPE -> NAT','TYPE',1,'p_statement_type','main.py',422),
-  ('TYPE -> STRING','TYPE',1,'p_statement_type','main.py',423),
-  ('TYPE -> INT','TYPE',1,'p_statement_type','main.py',424),
-  ('TYPE -> BOOL','TYPE',1,'p_statement_type','main.py',425),
-  ('TYPE -> BYTES','TYPE',1,'p_statement_type','main.py',426),
-  ('statement -> PUSH TYPE value','statement',3,'p_statement_push','main.py',439),
-  ('statement -> FAILWITH','statement',1,'p_statement_failwith','main.py',456),
+  ('statement -> DROP','statement',1,'p_statement_drop','main.py',220),
+  ('statement -> DUP','statement',1,'p_statement_dup','main.py',224),
+  ('statement -> SWAP','statement',1,'p_statement_swap','main.py',228),
+  ('statement -> UNIT','statement',1,'p_statement_unit','main.py',232),
+  ('bool -> TRUE','bool',1,'p_bool','main.py',236),
+  ('bool -> FALSE','bool',1,'p_bool','main.py',237),
+  ('value -> NUMBER','value',1,'p_statement_value','main.py',241),
+  ('value -> bool','value',1,'p_statement_value','main.py',242),
+  ('value -> TEXT','value',1,'p_statement_value','main.py',243),
+  ('statement -> EQ','statement',1,'p_statement_generic_comparison','main.py',247),
+  ('statement -> NEQ','statement',1,'p_statement_generic_comparison','main.py',248),
+  ('statement -> LT','statement',1,'p_statement_generic_comparison','main.py',249),
+  ('statement -> GT','statement',1,'p_statement_generic_comparison','main.py',250),
+  ('statement -> LE','statement',1,'p_statement_generic_comparison','main.py',251),
+  ('statement -> GE','statement',1,'p_statement_generic_comparison','main.py',252),
+  ('statement -> OR','statement',1,'p_boolean_comparison','main.py',269),
+  ('statement -> AND','statement',1,'p_boolean_comparison','main.py',270),
+  ('statement -> XOR','statement',1,'p_boolean_comparison','main.py',271),
+  ('statement -> COMPARE','statement',1,'p_compare_operation','main.py',296),
+  ('statement -> NEG','statement',1,'p_integer_operations','main.py',308),
+  ('statement -> ABS','statement',1,'p_integer_operations','main.py',309),
+  ('statement -> ADD','statement',1,'p_integer_operations','main.py',310),
+  ('statement -> SUB','statement',1,'p_integer_operations','main.py',311),
+  ('statement -> MUL','statement',1,'p_integer_operations','main.py',312),
+  ('statement -> EDIV','statement',1,'p_integer_operations','main.py',313),
+  ('statement -> LSL','statement',1,'p_integer_operations','main.py',314),
+  ('statement -> LSR','statement',1,'p_integer_operations','main.py',315),
+  ('statement -> CONCAT','statement',1,'p_string_operations','main.py',348),
+  ('statement -> SIZE','statement',1,'p_string_operations','main.py',349),
+  ('statement -> SLICE','statement',1,'p_string_operations','main.py',350),
+  ('statement -> PAIR','statement',1,'p_pair_operations','main.py',368),
+  ('statement -> CAR','statement',1,'p_pair_operations','main.py',369),
+  ('statement -> CDR','statement',1,'p_pair_operations','main.py',370),
+  ('statement -> EMPTY_SET TYPE','statement',2,'p_set_operations','main.py',385),
+  ('statement -> MEM','statement',1,'p_set_operations','main.py',386),
+  ('statement -> UPDATE','statement',1,'p_set_operations','main.py',387),
+  ('statement -> SOME','statement',1,'p_option_operations','main.py',404),
+  ('statement -> NONE TYPE','statement',2,'p_option_operations','main.py',405),
+  ('statement -> LEFT LPARENS TYPE TYPE RPARENS','statement',5,'p_union_operations','main.py',413),
+  ('statement -> RIGHT LPARENS TYPE TYPE RPARENS','statement',5,'p_union_operations','main.py',414),
+  ('statement -> CONS','statement',1,'p_list_operations','main.py',422),
+  ('statement -> NIL TYPE','statement',2,'p_list_operations','main.py',423),
+  ('statement -> NOT','statement',1,'p_boolean_not','main.py',433),
+  ('TYPE -> NAT','TYPE',1,'p_statement_type','main.py',445),
+  ('TYPE -> STRING','TYPE',1,'p_statement_type','main.py',446),
+  ('TYPE -> INT','TYPE',1,'p_statement_type','main.py',447),
+  ('TYPE -> BOOL','TYPE',1,'p_statement_type','main.py',448),
+  ('TYPE -> BYTES','TYPE',1,'p_statement_type','main.py',449),
+  ('statement -> PUSH TYPE value','statement',3,'p_statement_push','main.py',462),
+  ('statement -> FAILWITH','statement',1,'p_statement_failwith','main.py',479),
 ]
