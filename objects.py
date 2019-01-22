@@ -6,6 +6,13 @@ class Tezos:
         return self.value == other.value
 
 
+class Lambda:
+    def __init__(self, inputs, outputs, body):
+        self.inputs = inputs
+        self.outputs = outputs
+        self.body = body
+
+
 class Unit(Tezos):
     value = None
 

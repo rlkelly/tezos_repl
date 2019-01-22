@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Pair, String, Bytes, Set, List, Or)
+        Pair, String, Bytes, Set, List, Or, Lambda)
 
 
 tokens = (
@@ -13,7 +13,7 @@ tokens = (
     'DUP',
     'SWAP',
     'PUSH',
-    # 'LAMBDA' not implemented
+    'LAMBDA',
 
     'LBRACKET',
     'RBRACKET',
@@ -125,6 +125,7 @@ t_DUP         = 'DUP'
 t_UNIT        = 'UNIT'
 t_FAILWITH    = 'FAILWITH'
 t_PUSH        = 'PUSH'
+t_LAMBDA      = 'LAMBDA'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -228,30 +229,38 @@ lexer = lex.lex()
 names = { }
 stack = []
 
-def p_body(t):
-    '''body : LBRACKET compound_statement RBRACKET '''
-    t[0] = t[2]
-
 def p_execution(t):
     '''execution : compound_statement
+            | stmt
             | body'''
+    # stmt is allowed for the repl
     if t[1] == '{':
         t[0] = t[2]
     else:
         t[0] = t[1]
 
 def p_compound_statement(t):
-    '''compound_statement :
-            | stmt
-            | stmt SCOLON
-            | compound_statement stmt SCOLON
-            | compound_statement stmt '''
+    '''compound_statement : statement
+            | compound_statement statement
+            | compound_statement stmt'''
     if len(t) == 2:
         t[0] = t[1]
     elif t[2] == ';':
         t[0] = t[1]
     else:
         t[0] = [t[1], t[2]]
+
+def p_body(t):
+    '''body : LBRACKET compound_statement RBRACKET '''
+    t[0] = t[2]
+
+# def p_lambda_statement(t):
+#     '''stmt : LAMBDA type type body'''
+#     t[0] = Lambda(t[2], t[3], t[4])
+
+def p_statement(t):
+    '''statement : stmt SCOLON'''
+    t[0] = t[1]
 
 def p_statement_drop(t):
     'stmt : DROP '
@@ -526,8 +535,9 @@ def p_statement_failwith(t):
     stack = []
 
 def p_error(t):
+    print('syntax error')
     if t:
-        print("Syntax error at '%s'" % t.value)
+        print(f'{t.value}')
 
 if __name__ == '__main__':
     parser = yacc.yacc()
