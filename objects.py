@@ -31,15 +31,14 @@ class List(Tezos):
 
 
 class Or(Tezos):
-    def __init__(self, value, left, right, side):
-        self.left, self.right = left, right
+    def __init__(self, value, other_type, side):
         self.value = value
         if side == 'LEFT':
-            assert isinstance(value, left)
+            self.left, self.right = type(value), other_type
             self.isleft = True
             self.isright = False
         else:
-            assert isinstance(value, right)
+            self.left, self.right = other_type, type(value)
             self.isleft = False
             self.isright = True
 

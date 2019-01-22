@@ -403,7 +403,6 @@ def p_set_operations(t):
         stack_set = stack.pop(-1)
         stack.append(stack_set.update(elt, bool))
 
-
 def p_option_operations(t):
     '''statement : SOME
             | NONE TYPE '''
@@ -414,10 +413,10 @@ def p_option_operations(t):
         stack.append(NoneType(t[2]))
 
 def p_union_operations(t):
-    '''statement : LEFT LPARENS TYPE TYPE RPARENS
-            | RIGHT LPARENS TYPE TYPE RPARENS '''
+    '''statement : LEFT TYPE
+            | RIGHT TYPE '''
     top = stack.pop(-1)
-    stack.append(Or(top, t[3], t[4], side=t[1]))
+    stack.append(Or(top, t[2], side=t[1]))
 
 def p_list_operations(t):
     '''statement : CONS
