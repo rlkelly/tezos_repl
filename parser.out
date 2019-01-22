@@ -1,0 +1,395 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> DROP
+Rule 2     statement -> DUP
+Rule 3     statement -> SWAP
+Rule 4     statement -> UNIT
+Rule 5     bool -> TRUE
+Rule 6     bool -> FALSE
+Rule 7     value -> NUMBER
+Rule 8     value -> bool
+Rule 9     statement -> EQ
+Rule 10    statement -> NEQ
+Rule 11    statement -> LT
+Rule 12    statement -> GT
+Rule 13    statement -> LE
+Rule 14    statement -> GE
+Rule 15    statement -> OR
+Rule 16    statement -> AND
+Rule 17    statement -> XOR
+Rule 18    statement -> NEG
+Rule 19    statement -> ABS
+Rule 20    statement -> ADD
+Rule 21    statement -> SUB
+Rule 22    statement -> MUL
+Rule 23    statement -> EDIV
+Rule 24    statement -> NOT
+Rule 25    TYPE -> NAT
+Rule 26    TYPE -> STRING
+Rule 27    TYPE -> INT
+Rule 28    TYPE -> BOOL
+Rule 29    TYPE -> BYTES
+Rule 30    statement -> PUSH TYPE value
+Rule 31    statement -> FAILWITH
+
+Terminals, with rules where they appear
+
+ABS                  : 19
+ADD                  : 20
+AND                  : 16
+BOOL                 : 28
+BYTES                : 29
+DROP                 : 1
+DUP                  : 2
+EDIV                 : 23
+EQ                   : 9
+FAILWITH             : 31
+FALSE                : 6
+GE                   : 14
+GT                   : 12
+INT                  : 27
+LE                   : 13
+LT                   : 11
+MUL                  : 22
+NAT                  : 25
+NEG                  : 18
+NEQ                  : 10
+NOT                  : 24
+NUMBER               : 7
+OR                   : 15
+PUSH                 : 30
+STRING               : 26
+SUB                  : 21
+SWAP                 : 3
+TRUE                 : 5
+UNIT                 : 4
+XOR                  : 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+TYPE                 : 30
+bool                 : 8
+statement            : 0
+value                : 30
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . DROP
+    (2) statement -> . DUP
+    (3) statement -> . SWAP
+    (4) statement -> . UNIT
+    (9) statement -> . EQ
+    (10) statement -> . NEQ
+    (11) statement -> . LT
+    (12) statement -> . GT
+    (13) statement -> . LE
+    (14) statement -> . GE
+    (15) statement -> . OR
+    (16) statement -> . AND
+    (17) statement -> . XOR
+    (18) statement -> . NEG
+    (19) statement -> . ABS
+    (20) statement -> . ADD
+    (21) statement -> . SUB
+    (22) statement -> . MUL
+    (23) statement -> . EDIV
+    (24) statement -> . NOT
+    (30) statement -> . PUSH TYPE value
+    (31) statement -> . FAILWITH
+
+    DROP            shift and go to state 2
+    DUP             shift and go to state 3
+    SWAP            shift and go to state 4
+    UNIT            shift and go to state 5
+    EQ              shift and go to state 6
+    NEQ             shift and go to state 7
+    LT              shift and go to state 8
+    GT              shift and go to state 9
+    LE              shift and go to state 10
+    GE              shift and go to state 11
+    OR              shift and go to state 12
+    AND             shift and go to state 13
+    XOR             shift and go to state 14
+    NEG             shift and go to state 15
+    ABS             shift and go to state 16
+    ADD             shift and go to state 17
+    SUB             shift and go to state 18
+    MUL             shift and go to state 19
+    EDIV            shift and go to state 20
+    NOT             shift and go to state 21
+    PUSH            shift and go to state 22
+    FAILWITH        shift and go to state 23
+
+    statement                      shift and go to state 1
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> DROP .
+
+    $end            reduce using rule 1 (statement -> DROP .)
+
+
+state 3
+
+    (2) statement -> DUP .
+
+    $end            reduce using rule 2 (statement -> DUP .)
+
+
+state 4
+
+    (3) statement -> SWAP .
+
+    $end            reduce using rule 3 (statement -> SWAP .)
+
+
+state 5
+
+    (4) statement -> UNIT .
+
+    $end            reduce using rule 4 (statement -> UNIT .)
+
+
+state 6
+
+    (9) statement -> EQ .
+
+    $end            reduce using rule 9 (statement -> EQ .)
+
+
+state 7
+
+    (10) statement -> NEQ .
+
+    $end            reduce using rule 10 (statement -> NEQ .)
+
+
+state 8
+
+    (11) statement -> LT .
+
+    $end            reduce using rule 11 (statement -> LT .)
+
+
+state 9
+
+    (12) statement -> GT .
+
+    $end            reduce using rule 12 (statement -> GT .)
+
+
+state 10
+
+    (13) statement -> LE .
+
+    $end            reduce using rule 13 (statement -> LE .)
+
+
+state 11
+
+    (14) statement -> GE .
+
+    $end            reduce using rule 14 (statement -> GE .)
+
+
+state 12
+
+    (15) statement -> OR .
+
+    $end            reduce using rule 15 (statement -> OR .)
+
+
+state 13
+
+    (16) statement -> AND .
+
+    $end            reduce using rule 16 (statement -> AND .)
+
+
+state 14
+
+    (17) statement -> XOR .
+
+    $end            reduce using rule 17 (statement -> XOR .)
+
+
+state 15
+
+    (18) statement -> NEG .
+
+    $end            reduce using rule 18 (statement -> NEG .)
+
+
+state 16
+
+    (19) statement -> ABS .
+
+    $end            reduce using rule 19 (statement -> ABS .)
+
+
+state 17
+
+    (20) statement -> ADD .
+
+    $end            reduce using rule 20 (statement -> ADD .)
+
+
+state 18
+
+    (21) statement -> SUB .
+
+    $end            reduce using rule 21 (statement -> SUB .)
+
+
+state 19
+
+    (22) statement -> MUL .
+
+    $end            reduce using rule 22 (statement -> MUL .)
+
+
+state 20
+
+    (23) statement -> EDIV .
+
+    $end            reduce using rule 23 (statement -> EDIV .)
+
+
+state 21
+
+    (24) statement -> NOT .
+
+    $end            reduce using rule 24 (statement -> NOT .)
+
+
+state 22
+
+    (30) statement -> PUSH . TYPE value
+    (25) TYPE -> . NAT
+    (26) TYPE -> . STRING
+    (27) TYPE -> . INT
+    (28) TYPE -> . BOOL
+    (29) TYPE -> . BYTES
+
+    NAT             shift and go to state 25
+    STRING          shift and go to state 26
+    INT             shift and go to state 27
+    BOOL            shift and go to state 28
+    BYTES           shift and go to state 29
+
+    TYPE                           shift and go to state 24
+
+state 23
+
+    (31) statement -> FAILWITH .
+
+    $end            reduce using rule 31 (statement -> FAILWITH .)
+
+
+state 24
+
+    (30) statement -> PUSH TYPE . value
+    (7) value -> . NUMBER
+    (8) value -> . bool
+    (5) bool -> . TRUE
+    (6) bool -> . FALSE
+
+    NUMBER          shift and go to state 31
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+
+    value                          shift and go to state 30
+    bool                           shift and go to state 32
+
+state 25
+
+    (25) TYPE -> NAT .
+
+    NUMBER          reduce using rule 25 (TYPE -> NAT .)
+    TRUE            reduce using rule 25 (TYPE -> NAT .)
+    FALSE           reduce using rule 25 (TYPE -> NAT .)
+
+
+state 26
+
+    (26) TYPE -> STRING .
+
+    NUMBER          reduce using rule 26 (TYPE -> STRING .)
+    TRUE            reduce using rule 26 (TYPE -> STRING .)
+    FALSE           reduce using rule 26 (TYPE -> STRING .)
+
+
+state 27
+
+    (27) TYPE -> INT .
+
+    NUMBER          reduce using rule 27 (TYPE -> INT .)
+    TRUE            reduce using rule 27 (TYPE -> INT .)
+    FALSE           reduce using rule 27 (TYPE -> INT .)
+
+
+state 28
+
+    (28) TYPE -> BOOL .
+
+    NUMBER          reduce using rule 28 (TYPE -> BOOL .)
+    TRUE            reduce using rule 28 (TYPE -> BOOL .)
+    FALSE           reduce using rule 28 (TYPE -> BOOL .)
+
+
+state 29
+
+    (29) TYPE -> BYTES .
+
+    NUMBER          reduce using rule 29 (TYPE -> BYTES .)
+    TRUE            reduce using rule 29 (TYPE -> BYTES .)
+    FALSE           reduce using rule 29 (TYPE -> BYTES .)
+
+
+state 30
+
+    (30) statement -> PUSH TYPE value .
+
+    $end            reduce using rule 30 (statement -> PUSH TYPE value .)
+
+
+state 31
+
+    (7) value -> NUMBER .
+
+    $end            reduce using rule 7 (value -> NUMBER .)
+
+
+state 32
+
+    (8) value -> bool .
+
+    $end            reduce using rule 8 (value -> bool .)
+
+
+state 33
+
+    (5) bool -> TRUE .
+
+    $end            reduce using rule 5 (bool -> TRUE .)
+
+
+state 34
+
+    (6) bool -> FALSE .
+
+    $end            reduce using rule 6 (bool -> FALSE .)
+
