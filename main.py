@@ -265,7 +265,7 @@ def p_compound_statement(t):
     if len(t) == 2:
         t[0] = [t[1]]
     elif type(t[1]) == list:
-        t[0] = [*t[1], t[3]]
+        t[0] = t[1] + [t[3]]
     else:
         t[0] = [t[1], t[3]]
 
@@ -699,7 +699,6 @@ def p_dip(t):
     body = t[2]
     i_count = len(t[1]) - 2
     def exec_dip(stack):
-        print(stack[::-1])
         top = []
         for _ in range(i_count):
             top.append(stack.pop(-1))
