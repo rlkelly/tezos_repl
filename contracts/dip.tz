@@ -1,0 +1,14 @@
+parameter (list int);
+storage (list int);
+code { CAR;                                # Get the parameter
+       PUSH int 1;
+       SWAP;
+       PUSH int 2;
+       SWAP;
+       PUSH int 3;
+       DIIIP {DROP};
+       DIIP {DROP};
+       DIP {DROP};
+       NIL operation;
+       PAIR;
+}

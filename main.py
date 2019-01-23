@@ -18,6 +18,7 @@ tokens = (
     'PUSH',
     'LAMBDA',
     'EXEC',
+    'DIP',
 
     ### Generic Comparison
     'EQ',
@@ -129,6 +130,7 @@ t_FAILWITH    = 'FAILWITH'
 t_PUSH        = 'PUSH'
 t_LAMBDA      = 'LAMBDA'
 t_EXEC        = 'EXEC'
+t_DIP         = 'DI*P'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -277,7 +279,7 @@ def p_statement_drop(t):
 def p_statement_dup(t):
     'stmt : DUP'
     def exec_dup(stack):
-        stack = stack + stack[-1:]
+        stack.append(stack[-1])
         return stack
     t[0] = exec_dup
 
@@ -478,9 +480,13 @@ def p_set_operations(t):
             | MEM
             | UPDATE '''
     set_operation = t[1]
+    if len(t) == 3:
+        set_type = t[2]
+    else:
+        set_type = None
     def exec_set_op(stack):
         if set_operation == 'EMPTY_SET':
-            stack.append(Set(t[2]))
+            stack.append(Set(set_type))
         elif set_operation == 'MEM':
             top = stack.pop(-1)
             stack_set = stack.pop(-1)
@@ -653,6 +659,21 @@ def p_statement_type(t):
     elif t[1] == '(':
         t[0] = Pair(t[3], t[4])
 
+def p_dip(t):
+    'stmt : DIP body'
+    body = t[2]
+    i_count = len(t[1]) - 2
+    def exec_dip(stack):
+        print(stack[::-1])
+        top = []
+        for _ in range(i_count):
+            top.append(stack.pop(-1))
+        for arg in body:
+            stack = arg(stack)
+        stack.extend(top[::-1])
+        return stack
+    t[0] = exec_dip
+
 def p_statement_push(t):
     'stmt : PUSH type value'
     stack_type = t[2]
@@ -731,7 +752,7 @@ if __name__ == '__main__':
             parser.parse(code)
             print(stack[::-1])
 
-    if False:
+    if repl != 'F':
         while True:
             try:
                 open = False

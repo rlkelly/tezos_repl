@@ -210,7 +210,7 @@ class Set:
         return self
 
     def __repr__(self):
-        return f'Set:{self.set_type.__name__}:{self.value}'
+        return f'Set:{self.set_type}:{self.value}'
 
 
 class Some(Tezos):
