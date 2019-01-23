@@ -7,7 +7,6 @@ This is just a simple repl in python to interact with a michelson stack machine.
 ### TODO:
 
     - Parser for indentation
-    - Contract Functions
     - Improve Data Type Model
     - Add specialized Tezos Data Types
     - Fix (Add, Sub, Mul) types
@@ -19,3 +18,4 @@ This is just a simple repl in python to interact with a michelson stack machine.
     - Operations on timestamps
     - Cryptographic primitives
     - Compare Syntactic Sugar
+    - Assertion Macros
