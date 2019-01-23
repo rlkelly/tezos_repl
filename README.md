@@ -7,7 +7,7 @@ This is just a simple repl in python to interact with a michelson stack machine.
 ### TODO:
 
     - Parser for indentation
-    - Map/Set Operations
     - BigMap in storage
     - Contract Functions
-    - Add other Datatypes
+    - Improve Data Type Model
+    - Add specialized Tezos Data Types
