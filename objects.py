@@ -336,6 +336,14 @@ class Timestamp(Nat):
     pass
 
 
+class Address(Nat):
+    pass
+
+
+class Mutez(Nat):
+    pass
+
+
 class Int(Number, Tezos):
     def __init__(self, value):
         assert isinstance(value, int)

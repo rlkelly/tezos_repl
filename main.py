@@ -4,7 +4,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Map, BigMap, Timestamp,
+        Map, BigMap, Timestamp, Mutez
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
@@ -107,9 +107,9 @@ tokens = (
 
     # # types
     'TIMESTAMP',
-    # 'mutez',
+    'MUTEZ',
     # "contract 'param",
-    # 'address',
+    'ADDRESS',
     'OPERATION',
     # 'key',
     # 'key_hash',
@@ -208,6 +208,8 @@ t_INT         = 'int'
 t_BOOL        = 'bool'
 t_BYTES       = 'bytes'
 t_OPERATION   = 'operation'
+t_ADDRESS     = 'address'
+t_MUTEZ       = 'mutez'
 t_TIMESTAMP   = 'timestamp'
 
 t_TRUE        = 'True'
@@ -668,6 +670,7 @@ def p_statement_type(t):
         | BOOL
         | BYTES
         | OPERATION
+        | ADDRESS
         | LPARENS LPAIR type type RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
@@ -683,6 +686,10 @@ def p_statement_type(t):
         t[0] = Operation
     elif t[1] == 'timestamp':
         t[0] = Timestamp
+    elif t[1] == 'address':
+        t[0] = Address
+    elif t[1] == 'mutez':
+        t[0] = Mutez
     elif t[1] == '(':
         t[0] = Pair(t[3], t[4])
 
