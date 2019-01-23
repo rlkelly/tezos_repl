@@ -237,17 +237,14 @@ def p_execution(t):
     # stmt is allowed for the repl
     t[0] = t[1]
     print(t[0])
-    if type(t[0]) == list:
-        for stmt in t[0]:
-            stmt(stack)
-    else:
-        t[0](stack)
+    for stmt in t[0]:
+        stmt(stack)
 
 def p_compound_statement(t):
     '''compound_statement : stmt
             | compound_statement SCOLON stmt'''
     if len(t) == 2:
-        t[0] = t[1]
+        t[0] = [t[1]]
     elif type(t[1]) == list:
         t[0] = [*t[1], t[3]]
     else:
@@ -277,16 +274,25 @@ def p_statement_drop(t):
     t[0] = exec_drop
 
 def p_statement_dup(t):
-    'stmt : DUP '
-    stack = stack + stack[-1:]
+    'stmt : DUP'
+    def exec_dup(stack):
+        stack = stack + stack[-1:]
+        return stack
+    t[0] = exec_dup
 
 def p_statement_swap(t):
-    'stmt : SWAP '
-    stack[0], stack[1] = stack[1], stack[0]
+    'stmt : SWAP'
+    def exec_swap(stack):
+        stack[0], stack[1] = stack[1], stack[0]
+        return stack
+    t[0] = exec_swap
 
 def p_statement_unit(t):
-    'stmt : UNIT '
-    stack.append(Unit)
+    'stmt : UNIT'
+    def exec_unit(stack):
+        stack.append(Unit)
+        return stack
+    t[0] = exec_unit
 
 def p_bool(t):
     '''bool : TRUE
@@ -310,59 +316,68 @@ def p_statement_generic_comparison(t):
         | GT
         | LE
         | GE  '''
-    assert isinstance(stack[-1], Int)
     generic_comparison = t[1]
-    if generic_comparison == 'EQ':
-        stack[-1] = Bool(stack[-1] == 0)
-    elif generic_comparison == 'NEQ':
-        stack[-1] = Bool(stack[-1] != 0)
-    elif generic_comparison == 'LT':
-        stack[-1] = Bool(stack[-1] < 0)
-    elif generic_comparison == 'GT':
-        stack[-1] = Bool(stack[-1] > 0)
-    elif generic_comparison == 'LE':
-        stack[-1] = Bool(stack[-1] <= 0)
-    elif generic_comparison == 'GE':
-        stack[-1] = Bool(stack[-1] >= 0)
+    def exec_generic(stack):
+        assert isinstance(stack[-1], Int)
+        if generic_comparison == 'EQ':
+            stack[-1] = Bool(stack[-1] == 0)
+        elif generic_comparison == 'NEQ':
+            stack[-1] = Bool(stack[-1] != 0)
+        elif generic_comparison == 'LT':
+            stack[-1] = Bool(stack[-1] < 0)
+        elif generic_comparison == 'GT':
+            stack[-1] = Bool(stack[-1] > 0)
+        elif generic_comparison == 'LE':
+            stack[-1] = Bool(stack[-1] <= 0)
+        elif generic_comparison == 'GE':
+            stack[-1] = Bool(stack[-1] >= 0)
+        return stack
+    t[0] = exec_generic
 
 def p_boolean_comparison(t):
     '''stmt : OR
         | AND
         | XOR  '''
     bool_comparison = t[1]
-    first = stack.pop(-1)
-    second = stack.pop(-1)
-    if isinstance(first, Bool) and isinstance(second, Bool):
-        first = first.value
-        second = second.value
-        if bool_comparison == 'OR':
-            stack.append(Bool(first or second))
-        elif bool_comparison == 'AND':
-            stack.append(Bool(first and second))
-        elif bool_comparison == 'XOR':
-            stack.append(Bool(first != second))
-    elif isinstance(first, Nat) and isinstance(second, Nat):
-        if bool_comparison == 'OR':
-            stack.append(first.bit_or(second))
-        elif bool_comparison == 'AND':
-            stack.append(first.bit_and(second))
-        elif bool_comparison == 'XOR':
-            stack.append(first.bit_xor(second))
-    else:
-        # TODO: explain error better
-        print('invalid stack state')
+    def exec_bool_comparison(stack):
+        first = stack.pop(-1)
+        second = stack.pop(-1)
+        if isinstance(first, Bool) and isinstance(second, Bool):
+            first = first.value
+            second = second.value
+            if bool_comparison == 'OR':
+                stack.append(Bool(first or second))
+            elif bool_comparison == 'AND':
+                stack.append(Bool(first and second))
+            elif bool_comparison == 'XOR':
+                stack.append(Bool(first != second))
+        elif isinstance(first, Nat) and isinstance(second, Nat):
+            if bool_comparison == 'OR':
+                stack.append(first.bit_or(second))
+            elif bool_comparison == 'AND':
+                stack.append(first.bit_and(second))
+            elif bool_comparison == 'XOR':
+                stack.append(first.bit_xor(second))
+        else:
+            # TODO: explain error better
+            print('invalid stack state')
+        return stack
+    t[0] = exec_bool_comparison
 
 def p_compare_operation(t):
     'stmt : COMPARE'
-    top = stack.pop(-1)
-    if type(top) in (Int, Nat):
-        value2 = stack.pop(-1)
-        stack.append(value.compare(value2))
-    elif isintance(top, String):
-        value = stack.pop(-1)
-        stack.append(value.compare(value2))
-    else:
-        print('Invalid Stack State')
+    def exec_compare(stack):
+        top = stack.pop(-1)
+        if type(top) in (Int, Nat):
+            value2 = stack.pop(-1)
+            stack.append(value.compare(value2))
+        elif isintance(top, String):
+            value = stack.pop(-1)
+            stack.append(value.compare(value2))
+        else:
+            print('Invalid Stack State')
+        return stack
+    t[0] = exec_compare
 
 def p_integer_operations(t):
     '''stmt : NEG
@@ -455,47 +470,68 @@ def p_set_operations(t):
     '''stmt : EMPTY_SET TYPE
             | MEM
             | UPDATE '''
-    if t[1] == 'EMPTY_SET':
-        stack.append(Set(t[2]))
-    elif t[1] == 'MEM':
-        top = stack.pop(-1)
-        stack_set = stack.pop(-1)
-        assert isinstance(stack_set, Set)
-        assert isinstance(top, comparison_set.set_type)
-        stack.append(stack_set.contains(top))
-    elif t[1] == 'UPDATE':
-        elt = stack.pop(-1)
-        bool = stack.pop(-1)
-        stack_set = stack.pop(-1)
-        stack.append(stack_set.update(elt, bool))
+    set_operation = t[1]
+    def exec_set_op(stack):
+        if set_operation == 'EMPTY_SET':
+            stack.append(Set(t[2]))
+        elif set_operation == 'MEM':
+            top = stack.pop(-1)
+            stack_set = stack.pop(-1)
+            assert isinstance(stack_set, Set)
+            assert isinstance(top, comparison_set.set_type)
+            stack.append(stack_set.contains(top))
+        elif set_operation == 'UPDATE':
+            elt = stack.pop(-1)
+            bool = stack.pop(-1)
+            stack_set = stack.pop(-1)
+            stack.append(stack_set.update(elt, bool))
+        return stack
+    t[0] = exec_set_op
 
 def p_option_operations(t):
     '''stmt : SOME
             | NONE TYPE '''
-    top = stack.pop(-1)
-    if t[1] == 'SOME':
-        stack.append(Some(top))
-    else:
-        stack.append(NoneType(t[2]))
+    option_op = t[1]
+    def exec_option_op(stack):
+        top = stack.pop(-1)
+        if option_op == 'SOME':
+            stack.append(Some(top))
+        else:
+            stack.append(NoneType(t[2]))
+        return stack
+    t[0] = exec_option_op
 
 def p_union_operations(t):
     '''stmt : LEFT TYPE
             | RIGHT TYPE '''
-    top = stack.pop(-1)
-    new_or = Or(type(top), t[2], side=t[1])
-    new_or.add_value(top)
-    stack.append(new_or)
+    value_type = t[2]
+    side = t[1]
+    def exec_union_op(stack):
+        top = stack.pop(-1)
+        new_or = Or(type(top), value_type, side=side)
+        new_or.add_value(top)
+        stack.append(new_or)
+        return stack
+    t[0] = exec_union_op
 
 def p_list_operations(t):
     '''stmt : CONS
             | NIL TYPE '''
-    if t[1] == 'NIL':
-        stack.append(List(t[2]))
+    list_op = t[1]
+    if len(t) == 3:
+        list_type = t[2]
     else:
-        top = stack.pop(-1)
-        list = stack.pop(-1)
-        assert isinstance(list, List)
-        stack.append(list.cons(top))
+        list_type = None
+    def exec_list_op(stack):
+        if list_op == 'NIL':
+            stack.append(List(list_type))
+        else:
+            top = stack.pop(-1)
+            list = stack.pop(-1)
+            assert isinstance(list, List)
+            stack.append(list.cons(top))
+        return stack
+    t[0] = exec_list_op
 
 def p_boolean_not(t):
     'stmt : NOT'
@@ -570,11 +606,13 @@ def p_statement_push(t):
     t[0] = exec_push
 
 def p_statement_failwith(t):
-    'stmt : FAILWITH '
-    top = stack[-1]
-    print(f'fail with {top}')
-    print('new stack\n\n')
-    stack = []
+    'stmt : FAILWITH'
+    def exec_failwith(stack):
+        top = stack[-1]
+        print(f'fail with {top}')
+        print('new stack\n\n')
+        return []
+    t[0] = exec_failwith
 
 def p_error(t):
     print('syntax error')
