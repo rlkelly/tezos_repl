@@ -1,8 +1,10 @@
+import time
+
 import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Map,
+        Map, BigMap, Timestamp, Mutez
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
@@ -13,11 +15,13 @@ tokens = (
     'TEXT',
     'DROP',
     'FAILWITH',
+    'FAIL',
     'DUP',
     'SWAP',
     'PUSH',
     'LAMBDA',
     'EXEC',
+    'DIP',
 
     ### Generic Comparison
     'EQ',
@@ -103,14 +107,18 @@ tokens = (
     'PAIR_CONSTRUCTOR',
 
     # # types
-    # 'timestamp',
-    # 'mutez',
+    'TIMESTAMP',
+    'MUTEZ',
     # "contract 'param",
-    # 'address',
+    'ADDRESS',
     'OPERATION',
     # 'key',
     # 'key_hash',
     # 'signature',
+
+    ### Special Operations
+    'STEPS_TO_QUOTA',
+    'NOW',
 
     'LPARENS',
     'RPARENS',
@@ -129,6 +137,7 @@ t_FAILWITH    = 'FAILWITH'
 t_PUSH        = 'PUSH'
 t_LAMBDA      = 'LAMBDA'
 t_EXEC        = 'EXEC'
+t_DIP         = 'DI*P'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -190,12 +199,19 @@ t_RIGHT         = 'RIGHT'
 t_CONS          = 'CONS'
 t_NIL           = 'NIL'
 
+### Special Operations
+t_STEPS_TO_QUOTA = 'STEPS_TO_QUOTA'
+t_NOW            = 'NOW'
+
 t_NAT         = 'nat'
 t_STRING      = 'string'
 t_INT         = 'int'
 t_BOOL        = 'bool'
 t_BYTES       = 'bytes'
 t_OPERATION   = 'operation'
+t_ADDRESS     = 'address'
+t_MUTEZ       = 'mutez'
+t_TIMESTAMP   = 'timestamp'
 
 t_TRUE        = 'True'
 t_FALSE       = 'False'
@@ -236,10 +252,12 @@ def p_execution(t):
     '''execution : compound_statement
             | compound_statement SCOLON
             | body'''
+    global remaining_steps
     # stmt is allowed for the repl
     t[0] = t[1]
     for stmt in t[0]:
         stmt(stack)
+        remaining_steps -= 1
 
 def p_compound_statement(t):
     '''compound_statement : stmt
@@ -277,7 +295,7 @@ def p_statement_drop(t):
 def p_statement_dup(t):
     'stmt : DUP'
     def exec_dup(stack):
-        stack = stack + stack[-1:]
+        stack.append(stack[-1])
         return stack
     t[0] = exec_dup
 
@@ -478,9 +496,13 @@ def p_set_operations(t):
             | MEM
             | UPDATE '''
     set_operation = t[1]
+    if len(t) == 3:
+        set_type = t[2]
+    else:
+        set_type = None
     def exec_set_op(stack):
         if set_operation == 'EMPTY_SET':
-            stack.append(Set(t[2]))
+            stack.append(Set(set_type))
         elif set_operation == 'MEM':
             top = stack.pop(-1)
             stack_set = stack.pop(-1)
@@ -630,6 +652,18 @@ def p_exec(t):
         return stack
     t[0] = func_exec
 
+def p_special_operations(t):
+    '''stmt : STEPS_TO_QUOTA
+            | NOW '''
+    command = t[1]
+    def exec_special(stack):
+        if command == 'STEPS_TO_QUOTA':
+            stack.append(remaining_steps)
+        else:
+            stack.append(Timestamp(int(time.time())))
+        return stack
+    t[0] = exec_special
+
 def p_statement_type(t):
     '''type : NAT
         | STRING
@@ -637,6 +671,7 @@ def p_statement_type(t):
         | BOOL
         | BYTES
         | OPERATION
+        | ADDRESS
         | LPARENS LPAIR type type RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
@@ -650,8 +685,29 @@ def p_statement_type(t):
         t[0] = Bytes
     elif t[1] == 'operation':
         t[0] = Operation
+    elif t[1] == 'timestamp':
+        t[0] = Timestamp
+    elif t[1] == 'address':
+        t[0] = Address
+    elif t[1] == 'mutez':
+        t[0] = Mutez
     elif t[1] == '(':
         t[0] = Pair(t[3], t[4])
+
+def p_dip(t):
+    'stmt : DIP body'
+    body = t[2]
+    i_count = len(t[1]) - 2
+    def exec_dip(stack):
+        print(stack[::-1])
+        top = []
+        for _ in range(i_count):
+            top.append(stack.pop(-1))
+        for arg in body:
+            stack = arg(stack)
+        stack.extend(top[::-1])
+        return stack
+    t[0] = exec_dip
 
 def p_statement_push(t):
     'stmt : PUSH type value'
@@ -678,12 +734,18 @@ def p_statement_push(t):
     t[0] = exec_push
 
 def p_statement_failwith(t):
-    'stmt : FAILWITH'
+    '''stmt : FAILWITH
+            | FAIL'''
+    cmd = t[1]
     def exec_failwith(stack):
-        top = stack[-1]
+        if cmd == 'FAILWITH':
+            top = stack[-1]
+        else:
+            top = Unit
         print(f'fail with {top}')
         print('new stack\n\n')
         return []
+
     t[0] = exec_failwith
 
 def p_error(t):
@@ -703,6 +765,9 @@ if __name__ == '__main__':
     lexer = lex.lex()
 
     stack = []
+    QUOTA = 1000
+    remaining_steps = QUOTA
+
     repl = True
     parser = yacc.yacc()
 
@@ -731,7 +796,7 @@ if __name__ == '__main__':
             parser.parse(code)
             print(stack[::-1])
 
-    if False:
+    if repl != 'F':
         while True:
             try:
                 open = False

@@ -210,7 +210,7 @@ class Set:
         return self
 
     def __repr__(self):
-        return f'Set:{self.set_type.__name__}:{self.value}'
+        return f'Set:{self.set_type}:{self.value}'
 
 
 class Some(Tezos):
@@ -253,20 +253,21 @@ class Number(int, Tezos):
         return Number
 
     def neg(self):
+        assert type(other) in (Nat, Int)
         self.value = -self.value
-        return self
+        return Int(self.value)
 
     def abs(self):
         self.value = abs(self.value)
         return self
 
     def add(self, other):
-        assert type(other) in (Nat, Int)
+        assert type(other) in (Nat, Int, Mutez)
         self.value = self.value + other.value
         return self
 
     def mul(self, other):
-        assert type(other) in (Nat, Int)
+        assert type(other) in (Nat, Int, Mutez)
         self.value = self.value * other.value
         return self
 
@@ -330,6 +331,18 @@ class Nat(Number, Tezos):
 
     def __str__(self):
         return f'nat:{int(self.value)}'
+
+
+class Timestamp(Nat):
+    pass
+
+
+class Address(Nat):
+    pass
+
+
+class Mutez(Nat):
+    pass
 
 
 class Int(Number, Tezos):
