@@ -4,7 +4,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Map, BigMap, Timestamp, Mutez
+        Map, BigMap, Timestamp, Mutez,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
