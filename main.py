@@ -795,16 +795,14 @@ if __name__ == '__main__':
 
             parser.parse(code)
             print(stack[::-1])
-
     if repl != 'F':
         while True:
             try:
                 open = False
-                text = ''
                 s = input('stack > ')
-                # while s != '':
-                #     text += s
-                #     s = input()
+                while s.count('{') > s.count('}'):
+                    more = input()
+                    s += more
             except EOFError:
                  break
             parser.parse(s)
