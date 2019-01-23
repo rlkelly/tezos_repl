@@ -25,9 +25,9 @@ class Tezos:
 
 
 class Lambda:
-    def __init__(self, inputs, outputs, body):
-        self.inputs = inputs
-        self.outputs = outputs
+    def __init__(self, input_type, return_type, body):
+        self.input_type = input_type
+        self.return_type = return_type
         self.body = body
 
 
@@ -196,7 +196,8 @@ class Number(int, Tezos):
         self.value = self.value & other.value
         return self
 
-    def bit_not(self):
+    def flip(self):
+        # bit not
         self.value = ~self.value
         return Int(self.value)
 
