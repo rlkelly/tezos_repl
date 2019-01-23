@@ -236,19 +236,20 @@ def p_execution(t):
             | body'''
     # stmt is allowed for the repl
     t[0] = t[1]
-    try:
-        # if type(t[0]) == list:
-        #     for stmt in t[0]:
-        #         stmt()
+    print(t[0])
+    if type(t[0]) == list:
+        for stmt in t[0]:
+            stmt(stack)
+    else:
         t[0](stack)
-    except:
-        pass
 
 def p_compound_statement(t):
     '''compound_statement : stmt
             | compound_statement SCOLON stmt'''
-    if len(t) <= 2:
+    if len(t) == 2:
         t[0] = t[1]
+    elif type(t[1]) == list:
+        t[0] = [*t[1], t[3]]
     else:
         t[0] = [t[1], t[3]]
 
@@ -263,8 +264,10 @@ def p_body(t):
 
 def p_lambda_statement(t):
     '''stmt : LAMBDA TYPE TYPE body'''
-    stack.append(Lambda(t[2], t[3], t[4]))
-    print(stack[-1].body)
+    lam_func = Lambda(t[2], t[3], t[4])
+    def add_lambda(stack):
+        stack.append(lam_func)
+    t[0] = add_lambda
 
 def p_statement_drop(t):
     'stmt : DROP'
@@ -497,7 +500,6 @@ def p_list_operations(t):
 def p_boolean_not(t):
     'stmt : NOT'
     def exec_not(stack):
-        print('stack', stack)
         first = stack.pop(-1)
         if type(first) in (Bool, Nat, Int):
             stack.append(first.flip())
@@ -513,11 +515,12 @@ def p_exec(t):
         arg = stack.pop(-1)
         lam_func = stack.pop(-1)
         assert isinstance(lam_func, Lambda)
-        assert deep_compare(arg, lam_func.inputs)
+        assert deep_compare(arg, lam_func.input_type)
         ministack = [arg]
         for func in lam_func.body:
             ministack = func(ministack)
         assert len(ministack) == 1
+        assert isinstance(ministack[0], lam_func.return_type)
         stack.append(ministack[0])
         return stack
     t[0] = func_exec

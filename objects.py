@@ -25,9 +25,9 @@ class Tezos:
 
 
 class Lambda:
-    def __init__(self, inputs, outputs, body):
-        self.inputs = inputs
-        self.outputs = outputs
+    def __init__(self, input_type, return_type, body):
+        self.input_type = input_type
+        self.return_type = return_type
         self.body = body
 
 
