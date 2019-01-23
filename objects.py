@@ -31,6 +31,10 @@ class Lambda:
         self.return_type = return_type
         self.body = body
 
+    @property
+    def type(self):
+        return Lambda
+
 
 class Unit(Tezos):
     value = None
@@ -38,26 +42,59 @@ class Unit(Tezos):
     def __repr__(self):
         return 'UNIT'
 
+    @property
+    def type(self):
+        return Unit
+
 
 class Bytes(Tezos):
-    pass
+    @property
+    def type(self):
+        return Bytes
 
 
 class Operation(Tezos):
     def __init__(self):
         pass
 
+    @property
+    def type(self):
+        return Operation
+
+    def __str__(self):
+        return 'Operation'
+
+    def __repr__(self):
+        return 'Operation'
+
 class List(Tezos):
     def __init__(self, list_type):
         self.list_type = list_type
         self.value = []
+
+    @classmethod
+    def make_new(self, type, values):
+        l = List(type)
+        l.value = values
+        return l
+
+    @property
+    def type(self):
+        return self
+
+    def __call__(self, values):
+        return self
+
     def cons(self, value):
-        assert isinstance(value, list_type)
+        assert isinstance(value, self.list_type)
         self.value.append(value)
         return self
 
     def size(self):
         return Nat(len(self.value))
+
+    def __repr__(self):
+        return f'LIST:({self.list_type}, {self.value})'
 
 
 class Or(Tezos):
@@ -75,6 +112,10 @@ class Or(Tezos):
             self.isleft = False
             self.isright = True
 
+    @property
+    def type(self):
+        return Or(self.left_type, self.right_type)
+
     def __repr__(self):
         side = 'LEFT' if self.isleft else 'RIGHT'
         return f'OR::({self.left.__name__}, {self.right.__name__})--{side}::({self.value})'
@@ -85,6 +126,10 @@ class NoneType(Tezos):
 
     def __init__(self, sometype):
         self.sometype = sometype
+
+    @property
+    def type(self):
+        return self
 
     def __repr__(self):
         return 'NONE'
@@ -114,6 +159,10 @@ class Map:
         assert isinstance(obj, self.key_type)
         return Bool(obj in self.value)
 
+    @property
+    def type(self):
+        return Map(self.key_type, self.value_type)
+
 
 class BigMap(Map):
     pass
@@ -123,6 +172,10 @@ class Set:
     def __init__(self, set_type):
         self.set_type = set_type
         self.value = set()
+
+    @property
+    def type(self):
+        return Set(self.set_type)
 
     def contains(self, obj):
         # MEM
@@ -148,8 +201,12 @@ class Set:
 
 
 class Some(Tezos):
-    def __init__(self):
+    def __init__(self, value):
         self.value = value
+
+    @property
+    def type(self):
+        return self
 
 
 class Pair:
@@ -158,6 +215,10 @@ class Pair:
         self.right_type = second
         self.left = None
         self.right = None
+
+    @property
+    def type(self):
+        return Pair(self.left_type, self.right_type)
 
     def __call__(self, values):
         self.left = self.left_type(values[0])
@@ -174,6 +235,10 @@ class Pair:
 
 
 class Number(int, Tezos):
+    @property
+    def type(self):
+        return Number
+
     def neg(self):
         self.value = -self.value
         return self
@@ -233,6 +298,10 @@ class Nat(Number, Tezos):
         assert value >= 0
         self.value = value
 
+    @property
+    def type(self):
+        return Nat
+
     def bit_or(self, other):
         assert type(other) in (Nat, Int)
         self.value = self.value | other.value
@@ -255,6 +324,10 @@ class Int(Number, Tezos):
         assert isinstance(value, int)
         self.value = value
 
+    @property
+    def type(self):
+        return Int
+
     def __repr__(self):
         return f'int:{int(self.value)}'
 
@@ -266,6 +339,10 @@ class Bool(Tezos):
     def __init__(self, value):
         assert value in ('True', 'False', True, False)
         self.value = value in ('True', True)
+
+    @property
+    def type(self):
+        return Bool
 
     def flip(self):
         self.value = not self.value
@@ -279,6 +356,10 @@ class String(Tezos):
     def __init__(self, value):
         assert isinstance(value, str)
         self.value = value
+
+    @property
+    def type(self):
+        return String
 
     def concat(self, other):
         assert isinstance(other, String)

@@ -58,7 +58,7 @@ tokens = (
     'EMPTY_SET',
     'MEM',
     'UPDATE',
-    # 'ITER', # TODO: implement TODO
+    # 'ITER', # TODO: implement
     # 'SIZE',
 
     ### Map Operations
@@ -447,8 +447,8 @@ def p_pair_operations(t):
         first = stack.pop(-1)
         if pair_operation == 'PAIR':
             second = stack.pop(-1)
-            p = Pair(type(first), type(second))
-            p((first, second))
+            p = Pair(first.type, type(second))
+            p((first.value, second.value))
             stack.append(p)
             return
         if not isinstance(first, Pair):
@@ -635,28 +635,31 @@ if __name__ == '__main__':
     if args.file:
         storage = eval(args.storage)
         parameter = eval(args.parameter)
-        p = Pair(type(storage), type(parameter))
-        stack = [p((storage, parameter))]
+        print(parameter)
+        print(storage)
+        p = Pair(storage.type, parameter.type)
+        stack = [p((parameter, storage))]
         with open(f'contracts/{args.file}', 'r') as f:
             first_line = next(f)
             second_line = next(f)
             assert first_line.split(' ')[0] == 'parameter'
             assert second_line.split(' ')[0] == 'storage'
-            parameter_type = ' '.join(first_line.strip().split()[1:])
-            storage_type = ' '.join(second_line.strip().split()[1:])
+            parameter_type = ' '.join(first_line.strip().split()[1:])[:-1]
+            storage_type = ' '.join(second_line.strip().split()[1:])[:-1]
 
             print('parameter:', parameter_type)
             print('storage:', storage_type)
 
             # TODO: parse for indentation
+            # TODO: this is a kludge
             code = next(f).replace('code', '', 1)
-            code = code.replace('{', '', 1) + f.read()
+            code = '     ' + code.replace('{', '', 1) + f.read()
             code = code[::-1].replace('}', '', 1)[::-1]
 
             parser.parse(code)
             print(stack[::-1])
 
-    if repl:
+    if False:
         while True:
             try:
                 open = False
