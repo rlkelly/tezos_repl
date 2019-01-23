@@ -16,6 +16,7 @@ def deep_compare(first, second):
         return False
     return True
 
+
 class Tezos:
     value = None
     def __hash__(self):
@@ -243,10 +244,10 @@ class Nat(Number, Tezos):
         return self
 
     def __repr__(self):
-        return f'nat:{self.value}'
+        return f'nat:{int(self.value)}'
 
     def __str__(self):
-        return f'nat:{self.value}'
+        return f'nat:{int(self.value)}'
 
 
 class Int(Number, Tezos):

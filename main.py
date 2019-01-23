@@ -276,7 +276,7 @@ def p_statement_dup(t):
 def p_statement_swap(t):
     'stmt : SWAP'
     def exec_swap(stack):
-        stack[0], stack[1] = stack[1], stack[0]
+        stack[-1], stack[-2] = stack[-2], stack[-1]
         return stack
     t[0] = exec_swap
 
@@ -623,26 +623,37 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process Contract Interaction')
     parser.add_argument('--file', type=str)
     parser.add_argument('--repl', type=bool, const=True, nargs='?', default=True)
+    parser.add_argument('--storage', const=True, nargs='?', default='Nat(1)')
+    parser.add_argument('--parameter', const=True, nargs='?', default='Nat(2)')
     args = parser.parse_args()
     lexer = lex.lex()
 
     stack = []
-    parameter = None
-    storage = None
     repl = True
     parser = yacc.yacc()
 
     if args.file:
+        storage = eval(args.storage)
+        parameter = eval(args.parameter)
+        p = Pair(type(storage), type(parameter))
+        stack = [p((storage, parameter))]
         with open(f'contracts/{args.file}', 'r') as f:
             first_line = next(f)
             second_line = next(f)
             assert first_line.split(' ')[0] == 'parameter'
             assert second_line.split(' ')[0] == 'storage'
-            parameter = ' '.join(first_line.strip().split()[1:])
-            storage = ' '.join(second_line.strip().split()[1:])
-            print('parameter:', parameter)
-            print('storage:', storage)
-            parser.parse(f.read())
+            parameter_type = ' '.join(first_line.strip().split()[1:])
+            storage_type = ' '.join(second_line.strip().split()[1:])
+
+            print('parameter:', parameter_type)
+            print('storage:', storage_type)
+
+            # TODO: parse for indentation
+            code = next(f).replace('code', '', 1)
+            code = code.replace('{', '', 1) + f.read()
+            code = code[::-1].replace('}', '', 1)[::-1]
+
+            parser.parse(code)
             print(stack[::-1])
 
     if repl:
