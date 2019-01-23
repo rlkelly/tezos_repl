@@ -4,12 +4,11 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Map, Timestamp,
+        Map, BigMap, Timestamp,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
-global QUOTA
-QUOTA = 1000
+
 tokens = (
     # reserved words
     'NUMBER',

@@ -331,6 +331,7 @@ class Nat(Number, Tezos):
     def __str__(self):
         return f'nat:{int(self.value)}'
 
+
 class Timestamp(Nat):
     pass
 
