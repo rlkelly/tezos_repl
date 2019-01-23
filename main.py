@@ -2,6 +2,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
+        Map,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
@@ -58,7 +59,7 @@ tokens = (
     'EMPTY_SET',
     'MEM',
     'UPDATE',
-    # 'ITER', # TODO: implement
+    'ITER',
     # 'SIZE',
 
     ### Map Operations
@@ -66,7 +67,7 @@ tokens = (
     'GET',
     # 'MEM',
     # 'UPDATE',
-    # MAP body,
+    'MAP',
     # ITER body,
     # 'SIZE',
 
@@ -84,7 +85,7 @@ tokens = (
     ### Operations on Lists
     'CONS',
     'NIL',
-    # 'IF_CONS',
+    'IF_CONS',
     # 'MAP',
     # 'SIZE',
     # 'ITER' body
@@ -170,6 +171,13 @@ t_EMPTY_SET     = 'EMPTY_SET'
 t_MEM           = 'MEM'
 t_UPDATE        = 'UPDATE'
 
+### Map Operations
+t_EMPTY_MAP     = 'EMPTY_MAP'
+t_MAP           = 'MAP'
+t_GET           = 'GET'
+t_ITER          = 'ITER'
+t_IF_CONS       = 'IF_CONS'
+
 ### Option Operations
 t_SOME          = 'SOME'
 t_NONE          = 'NONE'
@@ -253,7 +261,7 @@ def p_body(t):
         t[0] = NoneType
 
 def p_lambda_statement(t):
-    '''stmt : LAMBDA TYPE TYPE body'''
+    '''stmt : LAMBDA type type body'''
     lam_func = Lambda(t[2], t[3], t[4])
     def add_lambda(stack):
         stack.append(lam_func)
@@ -415,10 +423,18 @@ def p_integer_operations(t):
         return stack
     t[0] = exec_integer_op
 
+def p_size_operation(t):
+    'stmt : SIZE'
+    size_operation = t[1]
+    def exec_size_op(stack):
+        first = stack.pop(-1)
+        assert type(first) in (String, Set, List, Map)
+        stack.append(first.size())
+    t[0] = exec_size_op
+
 def p_string_operations(t):
     '''stmt : CONCAT
-            | SIZE
-            | SLICE '''
+            | SLICE'''
     string_operation = t[1]
     def exec_string_op(stack):
         if string_operation == 'CONCAT':
@@ -426,10 +442,6 @@ def p_string_operations(t):
             second = stack.pop(-1)
             assert isinstance(first, String) and isinstance(second, String)
             stack.append(first.concat(second))
-        elif string_operation == 'SIZE':
-            first = stack.pop(-1)
-            assert type(first) in (String, Set, List) # TODO: Factor this to seperate call
-            stack.append(first.size())
         elif string_operation == 'SLICE':
             first = stack.pop(-1)
             second = stack.pop(-1)
@@ -462,7 +474,7 @@ def p_pair_operations(t):
     t[0] = exec_pair_operation
 
 def p_set_operations(t):
-    '''stmt : EMPTY_SET TYPE
+    '''stmt : EMPTY_SET type
             | MEM
             | UPDATE '''
     set_operation = t[1]
@@ -472,8 +484,8 @@ def p_set_operations(t):
         elif set_operation == 'MEM':
             top = stack.pop(-1)
             stack_set = stack.pop(-1)
-            assert isinstance(stack_set, Set)
-            assert isinstance(top, comparison_set.set_type)
+            assert type(stack_set) in (Set, Map)
+            assert isinstance(top, stack_set.list_type)
             stack.append(stack_set.contains(top))
         elif set_operation == 'UPDATE':
             elt = stack.pop(-1)
@@ -483,9 +495,71 @@ def p_set_operations(t):
         return stack
     t[0] = exec_set_op
 
+def p_map_operations(t):
+    '''stmt : EMPTY_MAP type type
+            | MAP body
+            | ITER body
+            | GET'''
+    map_operation = t[1]
+    second_arg = t[2]
+    if len(t) == 4:
+        third_arg = t[3]
+    else:
+        third_arg = None
+    def exec_map_op(stack):
+        if map_operation == 'EMPTY_MAP':
+            stack.append(MAP(second_arg, third_arg))
+        elif map_operation == 'MAP':
+            values = stack.pop(-1)
+            if type(values) == List:
+                list_values = values.value
+                list_type = values.list_type
+                new_list = []
+                for value in list_values:
+                    # TODO: add item get method and set type in getter
+                    ministack = stack + [list_type(value)]
+                    for arg in second_arg:
+                        ministack = arg(ministack)
+                    new_list.append(ministack.pop(-1))
+                values.value = new_list
+                stack.append(values)
+        elif map_operation == 'ITER':
+            values = stack.pop(-1)
+            if type(values) in (List, Map, Set):
+                list_values = values.value
+                list_type = values.list_type
+                for value in list_values:
+                    # TODO: add item get method and set type in getter
+                    stack.append(list_type(value))
+                    for arg in second_arg:
+                        arg(stack)
+        elif map_operation == 'GET':
+            key = stack.pop(-1)
+            mapping = stack.pop(-1)
+            assert isinstance(top, mapping.key_type)
+            stack.append(mapping.get(key))
+        return stack
+    t[0] = exec_map_op
+
+def p_if_cons(t):
+    'stmt : IF_CONS body body'
+    first_body = t[2]
+    second_body = t[3]
+
+    def exec_if_cons(stack):
+        top = stack.pop(-1)
+        assert isinstance(top, List)
+        if top.size() == 0:
+            for arg in second_body:
+                stack = arg(stack)
+        else:
+            stack.append(top)
+            for arg in first_body:
+                stack = arg(stack)
+
 def p_option_operations(t):
     '''stmt : SOME
-            | NONE TYPE '''
+            | NONE type '''
     option_op = t[1]
     def exec_option_op(stack):
         top = stack.pop(-1)
@@ -497,8 +571,8 @@ def p_option_operations(t):
     t[0] = exec_option_op
 
 def p_union_operations(t):
-    '''stmt : LEFT TYPE
-            | RIGHT TYPE '''
+    '''stmt : LEFT type
+            | RIGHT type '''
     value_type = t[2]
     side = t[1]
     def exec_union_op(stack):
@@ -511,7 +585,7 @@ def p_union_operations(t):
 
 def p_list_operations(t):
     '''stmt : CONS
-            | NIL TYPE '''
+            | NIL type '''
     list_op = t[1]
     if len(t) == 3:
         list_type = t[2]
@@ -557,13 +631,13 @@ def p_exec(t):
     t[0] = func_exec
 
 def p_statement_type(t):
-    '''TYPE : NAT
+    '''type : NAT
         | STRING
         | INT
         | BOOL
         | BYTES
         | OPERATION
-        | LPARENS LPAIR TYPE TYPE RPARENS '''
+        | LPARENS LPAIR type type RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
     elif t[1] == 'string':
@@ -580,7 +654,7 @@ def p_statement_type(t):
         t[0] = Pair(t[3], t[4])
 
 def p_statement_push(t):
-    'stmt : PUSH TYPE value'
+    'stmt : PUSH type value'
     stack_type = t[2]
     val = t[3]
     def exec_push(stack):
@@ -635,8 +709,6 @@ if __name__ == '__main__':
     if args.file:
         storage = eval(args.storage)
         parameter = eval(args.parameter)
-        print(parameter)
-        print(storage)
         p = Pair(storage.type, parameter.type)
         stack = [p((parameter, storage))]
         with open(f'contracts/{args.file}', 'r') as f:

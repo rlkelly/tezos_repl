@@ -1,3 +1,15 @@
 parameter (list int);
 storage (list int);
-code {}                              # Match the calling convetion
+code { CAR;                                # Get the parameter
+       PUSH int 1;
+       SWAP;
+       PUSH int 2;
+       SWAP;
+       PUSH int 3;
+       SWAP;
+       ITER { PUSH int 1; ADD; MUL; SWAP; };            # Map over the list adding one
+       SUB;
+       SUB;
+       NIL operation;                      # No internal op
+       PAIR
+       }                              # Match the calling convetion
