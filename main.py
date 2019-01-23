@@ -17,9 +17,6 @@ tokens = (
     'LAMBDA',
     'EXEC',
 
-    'LBRACKET',
-    'RBRACKET',
-
     ### Generic Comparison
     'EQ',
     'NEQ',
@@ -99,10 +96,9 @@ tokens = (
     'BOOL',
     'BYTES',
     'LPAIR',
-    'PAIR_CONSTRUCTOR',
-
     'TRUE',
     'FALSE',
+    'PAIR_CONSTRUCTOR',
 
     # # types
     # 'timestamp',
@@ -116,6 +112,8 @@ tokens = (
 
     'LPARENS',
     'RPARENS',
+    'LBRACKET',
+    'RBRACKET',
     'SCOLON',
 )
 
@@ -236,7 +234,6 @@ def p_execution(t):
             | body'''
     # stmt is allowed for the repl
     t[0] = t[1]
-    print(t[0])
     for stmt in t[0]:
         stmt(stack)
 
@@ -360,7 +357,7 @@ def p_boolean_comparison(t):
                 stack.append(first.bit_xor(second))
         else:
             # TODO: explain error better
-            print('invalid stack state')
+            print('Invalid Stack State')
         return stack
     t[0] = exec_bool_comparison
 
@@ -418,7 +415,7 @@ def p_integer_operations(t):
             stack.append(value.lsr(value2))
         else:
             # TODO: better error
-            print('invalid stack state')
+            print('Invalid Stack State')
         return stack
     t[0] = exec_integer_op
 
@@ -457,7 +454,7 @@ def p_pair_operations(t):
             stack.append(Pair(first, second))
             return
         if not isinstance(first, Pair):
-            print('invalid stack state')
+            print('Invalid Stack State')
             return
         if pair_operation == 'CAR':
             stack.append(first.left)
@@ -541,7 +538,7 @@ def p_boolean_not(t):
             stack.append(first.flip())
         else:
             # TODO: better error
-            print('invalid stack state')
+            print('Invalid Stack State')
         return stack
     t[0] = exec_not
 
