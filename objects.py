@@ -83,6 +83,7 @@ class List(Tezos):
         return self
 
     def __call__(self, values):
+        self.values = values
         return self
 
     def cons(self, value):
@@ -137,12 +138,16 @@ class NoneType(Tezos):
 class Map:
     def __init__(self, key_type, val_type):
         self.key_type = key_type
+        self.list_type = key_type
         self.val_type = val_type
         self.value = {}
 
     def get(self, key):
         assert isinstance(key, self.key_type)
-        return self.value[key]
+        if key in self.value:
+            return Some(self.value[key])
+        else:
+            return NoneType()
 
     def update(self, key, some_value):
         assert isinstance(key, self.key_type)
@@ -159,9 +164,16 @@ class Map:
         assert isinstance(obj, self.key_type)
         return Bool(obj in self.value)
 
+    def size(self):
+        return len(self.value)
+
     @property
     def type(self):
         return Map(self.key_type, self.value_type)
+
+    @property
+    def key_type(self):
+        return self.key_type
 
 
 class BigMap(Map):
@@ -171,6 +183,7 @@ class BigMap(Map):
 class Set:
     def __init__(self, set_type):
         self.set_type = set_type
+        self.list_type = set_type
         self.value = set()
 
     @property
@@ -381,7 +394,7 @@ class String(Tezos):
         start = begin.value
         end = end.value
         if start > len(self.value) or end > self.value:
-            return None
+            return NoneType
         return self.value[start:end]
 
     def __repr__(self):
