@@ -11,3 +11,5 @@ This is just a simple repl in python to interact with a michelson stack machine.
     - Contract Functions
     - Improve Data Type Model
     - Add specialized Tezos Data Types
+    - Annotations
+    - Macros
