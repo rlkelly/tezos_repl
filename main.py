@@ -1,12 +1,15 @@
+import time
+
 import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
-        Map,
+        Map, Timestamp,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 
-
+global QUOTA
+QUOTA = 1000
 tokens = (
     # reserved words
     'NUMBER',
@@ -104,7 +107,7 @@ tokens = (
     'PAIR_CONSTRUCTOR',
 
     # # types
-    # 'timestamp',
+    'TIMESTAMP',
     # 'mutez',
     # "contract 'param",
     # 'address',
@@ -112,6 +115,10 @@ tokens = (
     # 'key',
     # 'key_hash',
     # 'signature',
+
+    ### Special Operations
+    'STEPS_TO_QUOTA',
+    'NOW',
 
     'LPARENS',
     'RPARENS',
@@ -192,12 +199,17 @@ t_RIGHT         = 'RIGHT'
 t_CONS          = 'CONS'
 t_NIL           = 'NIL'
 
+### Special Operations
+t_STEPS_TO_QUOTA = 'STEPS_TO_QUOTA'
+t_NOW            = 'NOW'
+
 t_NAT         = 'nat'
 t_STRING      = 'string'
 t_INT         = 'int'
 t_BOOL        = 'bool'
 t_BYTES       = 'bytes'
 t_OPERATION   = 'operation'
+t_TIMESTAMP   = 'timestamp'
 
 t_TRUE        = 'True'
 t_FALSE       = 'False'
@@ -238,10 +250,12 @@ def p_execution(t):
     '''execution : compound_statement
             | compound_statement SCOLON
             | body'''
+    global remaining_steps
     # stmt is allowed for the repl
     t[0] = t[1]
     for stmt in t[0]:
         stmt(stack)
+        remaining_steps -= 1
 
 def p_compound_statement(t):
     '''compound_statement : stmt
@@ -636,6 +650,18 @@ def p_exec(t):
         return stack
     t[0] = func_exec
 
+def p_special_operations(t):
+    '''stmt : STEPS_TO_QUOTA
+            | NOW '''
+    command = t[1]
+    def exec_special(stack):
+        if command == 'STEPS_TO_QUOTA':
+            stack.append(remaining_steps)
+        else:
+            stack.append(Timestamp(int(time.time())))
+        return stack
+    t[0] = exec_special
+
 def p_statement_type(t):
     '''type : NAT
         | STRING
@@ -656,6 +682,8 @@ def p_statement_type(t):
         t[0] = Bytes
     elif t[1] == 'operation':
         t[0] = Operation
+    elif t[1] == 'timestamp':
+        t[0] = Timestamp
     elif t[1] == '(':
         t[0] = Pair(t[3], t[4])
 
@@ -724,6 +752,9 @@ if __name__ == '__main__':
     lexer = lex.lex()
 
     stack = []
+    QUOTA = 1000
+    remaining_steps = QUOTA
+
     repl = True
     parser = yacc.yacc()
 
