@@ -15,6 +15,7 @@ tokens = (
     'TEXT',
     'DROP',
     'FAILWITH',
+    'FAIL',
     'DUP',
     'SWAP',
     'PUSH',
@@ -733,12 +734,18 @@ def p_statement_push(t):
     t[0] = exec_push
 
 def p_statement_failwith(t):
-    'stmt : FAILWITH'
+    '''stmt : FAILWITH
+            | FAIL'''
+    cmd = t[1]
     def exec_failwith(stack):
-        top = stack[-1]
+        if cmd == 'FAILWITH':
+            top = stack[-1]
+        else:
+            top = Unit
         print(f'fail with {top}')
         print('new stack\n\n')
         return []
+
     t[0] = exec_failwith
 
 def p_error(t):

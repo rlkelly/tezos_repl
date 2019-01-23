@@ -253,20 +253,21 @@ class Number(int, Tezos):
         return Number
 
     def neg(self):
+        assert type(other) in (Nat, Int)
         self.value = -self.value
-        return self
+        return Int(self.value)
 
     def abs(self):
         self.value = abs(self.value)
         return self
 
     def add(self, other):
-        assert type(other) in (Nat, Int)
+        assert type(other) in (Nat, Int, Mutez)
         self.value = self.value + other.value
         return self
 
     def mul(self, other):
-        assert type(other) in (Nat, Int)
+        assert type(other) in (Nat, Int, Mutez)
         self.value = self.value * other.value
         return self
 
