@@ -1,8 +1,9 @@
+import ply.lex as lex
 import ply.yacc as yacc
 
 from objects import (Unit, Nat, Int, Bool,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
-        deep_compare)
+        Operation, deep_compare)
 
 
 tokens = (
@@ -105,7 +106,7 @@ tokens = (
     # 'mutez',
     # "contract 'param",
     # 'address',
-    # 'operation',
+    'OPERATION',
     # 'key',
     # 'key_hash',
     # 'signature',
@@ -186,6 +187,7 @@ t_STRING      = 'string'
 t_INT         = 'int'
 t_BOOL        = 'bool'
 t_BYTES       = 'bytes'
+t_OPERATION   = 'operation'
 
 t_TRUE        = 'True'
 t_FALSE       = 'False'
@@ -221,12 +223,6 @@ def t_newline(t):
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-
-# Build the lexer
-import ply.lex as lex
-lexer = lex.lex()
-
-stack = []
 
 def p_execution(t):
     '''execution : compound_statement
@@ -384,7 +380,7 @@ def p_integer_operations(t):
          | MUL
          | EDIV
          | LSL
-         | LSR  '''
+         | LSR '''
     integer_operator = t[1]
     def exec_integer_op(stack):
         value = stack.pop(-1)
@@ -451,7 +447,9 @@ def p_pair_operations(t):
         first = stack.pop(-1)
         if pair_operation == 'PAIR':
             second = stack.pop(-1)
-            stack.append(Pair(first, second))
+            p = Pair(type(first), type(second))
+            p((first, second))
+            stack.append(p)
             return
         if not isinstance(first, Pair):
             print('Invalid Stack State')
@@ -564,6 +562,7 @@ def p_statement_type(t):
         | INT
         | BOOL
         | BYTES
+        | OPERATION
         | LPARENS LPAIR TYPE TYPE RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
@@ -575,6 +574,8 @@ def p_statement_type(t):
         t[0] = Bool
     elif t[1] == 'bytes':
         t[0] = Bytes
+    elif t[1] == 'operation':
+        t[0] = Operation
     elif t[1] == '(':
         t[0] = Pair(t[3], t[4])
 
@@ -617,16 +618,43 @@ def p_error(t):
         print(f'{t.value}')
 
 if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Process Contract Interaction')
+    parser.add_argument('--file', type=str)
+    parser.add_argument('--repl', type=bool, const=True, nargs='?', default=True)
+    args = parser.parse_args()
+    lexer = lex.lex()
+
+    stack = []
+    parameter = None
+    storage = None
+    repl = True
     parser = yacc.yacc()
-    while True:
-        try:
-            open = False
-            text = ''
-            s = input('stack > ')   # Use raw_input on Python 2
-            # while s != '':
-            #     text += s
-            #     s = input()
-        except EOFError:
-             break
-        parser.parse(s)
-        print(stack[::-1])
+
+    if args.file:
+        with open(f'contracts/{args.file}', 'r') as f:
+            first_line = next(f)
+            second_line = next(f)
+            assert first_line.split(' ')[0] == 'parameter'
+            assert second_line.split(' ')[0] == 'storage'
+            parameter = ' '.join(first_line.strip().split()[1:])
+            storage = ' '.join(second_line.strip().split()[1:])
+            print('parameter:', parameter)
+            print('storage:', storage)
+            parser.parse(f.read())
+            print(stack[::-1])
+
+    if repl:
+        while True:
+            try:
+                open = False
+                text = ''
+                s = input('stack > ')
+                # while s != '':
+                #     text += s
+                #     s = input()
+            except EOFError:
+                 break
+            parser.parse(s)
+            print(stack[::-1])

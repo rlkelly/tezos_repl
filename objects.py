@@ -42,6 +42,10 @@ class Bytes(Tezos):
     pass
 
 
+class Operation(Tezos):
+    def __init__(self):
+        pass
+
 class List(Tezos):
     def __init__(self, list_type):
         self.list_type = list_type
@@ -165,7 +169,7 @@ class Pair:
         return self.right
 
     def __repr__(self):
-        return f'PAIR:(left:{self.left_type}:{self.left}, right:{self.right_type}:{self.right})'
+        return f'PAIR:(left:{self.left}, right:{self.right})'
 
 
 class Number(int, Tezos):
@@ -251,10 +255,10 @@ class Int(Number, Tezos):
         self.value = value
 
     def __repr__(self):
-        return f'int:{self.value}'
+        return f'int:{int(self.value)}'
 
     def __str__(self):
-        return f'int:{self.value}'
+        return f'int:{int(self.value)}'
 
 
 class Bool(Tezos):
