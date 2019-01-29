@@ -130,6 +130,11 @@ tokens = (
 
     ### DEBUG
     'PRINTER',
+
+    ### type decl
+    'PARAMETER',
+    'STORAGE',
+    'CODE',
 )
 
 # Tokens
@@ -230,9 +235,14 @@ t_LPAIR       = 'pair'
 t_PAIR_CONSTRUCTOR = 'Pair'
 t_SCOLON      = ';'
 
+# type decl
+t_PARAMETER   = 'parameter'
+t_STORAGE     = 'storage'
+t_CODE        = 'code'
 
 ### DEBUG
 t_PRINTER     = '%PRINT%'
+
 
 def t_comment(t):
     r"[ ]*\043[^\n]*"  # \043 is '#'
@@ -252,11 +262,35 @@ t_ignore = " \t"
 
 def t_newline(t):
     r'\n+'
-    t.lexer.lineno += t.value.count("\n")
+    pass
+    # t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+
+def p_contract(t):
+    '''contract_run : contract_decl code_decl
+        |  execution'''
+    return
+
+def p_contract_constructor(t):
+    '''contract_decl : PARAMETER type SCOLON STORAGE type SCOLON'''
+    contract_decl.update_parameters(t[2])
+    contract_decl.update_storage(t[5])
+
+def p_contract_code(t):
+    '''code_decl : CODE body'''
+    # TODO: make this depend on whether the contract should execute or is
+    # just being added to the contract stack
+    global remaining_steps
+    if True:
+        # If execute
+        t[0] = t[2]
+        for stmt in t[0]:
+            stmt(stack)
+            remaining_steps -= 1
 
 def p_execution(t):
     '''execution : compound_statement
@@ -797,6 +831,7 @@ if __name__ == '__main__':
     stack = []
     # TODO: figure out how to preserve contracts
     contract_registry = {}
+    contract_decl = Address()
     QUOTA = 1000
     remaining_steps = QUOTA
 
@@ -812,29 +847,13 @@ if __name__ == '__main__':
             validate_indent(f.read())
             f.seek(0)
 
-            first_line = next(f)
-            second_line = next(f)
-            assert first_line.split(' ')[0] == 'parameter'
-            assert second_line.split(' ')[0] == 'storage'
-            parameter_type = ' '.join(first_line.strip().split()[1:])[:-1]
-            storage_type = ' '.join(second_line.strip().split()[1:])[:-1]
-
-            print('parameter:', parameter_type)
-            print('storage:', storage_type)
-
-            # TODO: parse for indentation
-            # TODO: this is a kludge
-            code = next(f).replace('code', '', 1)
-            code = '     ' + code.replace('{', '', 1) + f.read()
-            code = code[::-1].replace('}', '', 1)[::-1]
-
+            code = f.read()
             parser.parse(code)
-            print(stack[::-1])
-            contract = Address(args.address)
-            # TODO: need to write parser for contract type declarations
-            contract.add_type(print(eval(parameter_type.capitalize())))
-            contract_registry[args.address] = contract
+            contract_decl.update_address(args.address)
+
+            contract_registry[args.address] = contract_decl
             print('contract registry:', contract_registry)
+            print(stack[::-1])
 
     if repl != 'F':
         while True:

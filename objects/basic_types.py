@@ -33,11 +33,7 @@ class NoneType(Tezos):
         return 'NONE'
 
 
-class Number(int, Tezos):
-    @property
-    def type(self):
-        return Number
-
+class Number(int):
     def neg(self):
         assert type(other) in (Nat, Int)
         self.value = -self.value
