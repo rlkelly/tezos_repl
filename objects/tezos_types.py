@@ -1,5 +1,6 @@
-from .utils import deep_compare
 from .basic_types import NoneType, Nat, Int, Tezos
+from .tezos import Tezos
+from .utils import deep_compare
 
 
 class Lambda:

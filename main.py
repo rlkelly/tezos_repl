@@ -7,7 +7,7 @@ from objects import (Unit, Nat, Int, Bool,
         Map, BigMap, Timestamp, Mutez,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
-
+from check_indents import validate_indent
 
 tokens = (
     # reserved words
@@ -776,6 +776,9 @@ if __name__ == '__main__':
         p = Pair(storage.type, parameter.type)
         stack = [p((parameter, storage))]
         with open(f'contracts/{args.file}', 'r') as f:
+            validate_indent(f.read())
+            f.seek(0)
+
             first_line = next(f)
             second_line = next(f)
             assert first_line.split(' ')[0] == 'parameter'

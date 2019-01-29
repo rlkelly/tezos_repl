@@ -1,0 +1,9 @@
+parameter int;
+storage int;
+code {DUP;                      # Duplicate
+      CAR;                      # Get the parameter
+      SWAP;
+      CDR;
+      ADD;                      # Add the two numbers
+      NIL operation;            # We put an empty list of operations on the stack
+      PAIR}                     # Create the end value

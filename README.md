@@ -6,8 +6,6 @@ This is just a simple repl in python to interact with a michelson stack machine.
 
 ### TODO:
 
-    - Parser for indentation
-    - Improve Data Type Model
     - Add specialized Tezos Data Types
     - Fix (Add, Sub, Mul) types
     - Annotations
@@ -19,3 +17,8 @@ This is just a simple repl in python to interact with a michelson stack machine.
     - Cryptographic primitives
     - Compare Syntactic Sugar
     - Assertion Macros
+    - Improve Parser for indentation
+    - Improve Data Type Model
+
+Example Command:
+    python main.py --file add_to_store.tz --parameter "Nat(3)" --storage "Nat(10)"
