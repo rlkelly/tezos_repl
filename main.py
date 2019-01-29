@@ -7,12 +7,14 @@ from objects import (Unit, Nat, Int, Bool,
         Map, BigMap, Timestamp, Mutez,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
+from objects.contract_types import Address, Contract
 from check_indents import validate_indent
 
 tokens = (
     # reserved words
     'NUMBER',
     'TEXT',
+    'CONTRACT',
     'DROP',
     'FAILWITH',
     'FAIL',
@@ -125,6 +127,9 @@ tokens = (
     'LBRACKET',
     'RBRACKET',
     'SCOLON',
+
+    ### DEBUG
+    'PRINTER',
 )
 
 # Tokens
@@ -212,6 +217,7 @@ t_OPERATION   = 'operation'
 t_ADDRESS     = 'address'
 t_MUTEZ       = 'mutez'
 t_TIMESTAMP   = 'timestamp'
+t_CONTRACT    = 'contract'
 
 t_TRUE        = 'True'
 t_FALSE       = 'False'
@@ -223,6 +229,10 @@ t_RPARENS     = '\)'
 t_LPAIR       = 'pair'
 t_PAIR_CONSTRUCTOR = 'Pair'
 t_SCOLON      = ';'
+
+
+### DEBUG
+t_PRINTER     = '%PRINT%'
 
 def t_comment(t):
     r"[ ]*\043[^\n]*"  # \043 is '#'
@@ -664,6 +674,22 @@ def p_special_operations(t):
         return stack
     t[0] = exec_special
 
+
+def p_contract_push(t):
+    '''stmt : CONTRACT type'''
+    def push_contract(stack):
+        address = stack.pop(-1)
+        if not isinstance(address, Address):
+            print('Invalid Stack State\n\n')
+            return stack
+        if contract_registry[address.value] and contract_registry[address.value].has_type(t[2]):
+            stack.append(Some(Contract(t[2])))
+        else:
+            stack.append(NoneType)
+        return stack
+    t[0] = push_contract
+
+
 def p_statement_type(t):
     '''type : NAT
         | STRING
@@ -747,6 +773,10 @@ def p_statement_failwith(t):
 
     t[0] = exec_failwith
 
+def p_printer(t):
+    'stmt : PRINTER'
+    t[0] = lambda x: print(x[::-1])
+
 def p_error(t):
     print('syntax error')
     if t:
@@ -760,10 +790,13 @@ if __name__ == '__main__':
     parser.add_argument('--repl', type=bool, const=True, nargs='?', default=True)
     parser.add_argument('--storage', const=True, nargs='?', default='Nat(1)')
     parser.add_argument('--parameter', const=True, nargs='?', default='Nat(2)')
+    parser.add_argument('--address', const=True, nargs='?', default='0000')
     args = parser.parse_args()
     lexer = lex.lex()
 
     stack = []
+    # TODO: figure out how to preserve contracts
+    contract_registry = {}
     QUOTA = 1000
     remaining_steps = QUOTA
 
@@ -797,6 +830,12 @@ if __name__ == '__main__':
 
             parser.parse(code)
             print(stack[::-1])
+            contract = Address(args.address)
+            # TODO: need to write parser for contract type declarations
+            contract.add_type(print(eval(parameter_type.capitalize())))
+            contract_registry[args.address] = contract
+            print('contract registry:', contract_registry)
+
     if repl != 'F':
         while True:
             try:

@@ -9,10 +9,6 @@ class Lambda:
         self.return_type = return_type
         self.body = body
 
-    @property
-    def type(self):
-        return Lambda
-
 
 class List(Tezos):
     def __init__(self, list_type):
@@ -25,10 +21,6 @@ class List(Tezos):
         l.value = values
         return l
 
-    @property
-    def type(self):
-        return self
-
     def __call__(self, values):
         self.values = values
         return self
@@ -40,6 +32,10 @@ class List(Tezos):
 
     def size(self):
         return Nat(len(self.value))
+
+    @property
+    def type(self):
+        return List(self.list_type)
 
     def __repr__(self):
         return f'LIST:({self.list_type}, {self.value})'
@@ -150,10 +146,6 @@ class Set:
 class Some(Tezos):
     def __init__(self, value):
         self.value = value
-
-    @property
-    def type(self):
-        return self
 
 
 class Pair:

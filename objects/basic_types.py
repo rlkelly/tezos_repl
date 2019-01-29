@@ -7,24 +7,14 @@ class Unit(Tezos):
     def __repr__(self):
         return 'UNIT'
 
-    @property
-    def type(self):
-        return Unit
-
 
 class Bytes(Tezos):
-    @property
-    def type(self):
-        return Bytes
+    pass
 
 
 class Operation(Tezos):
     def __init__(self):
         pass
-
-    @property
-    def type(self):
-        return Operation
 
     def __str__(self):
         return 'Operation'
@@ -38,10 +28,6 @@ class NoneType(Tezos):
 
     def __init__(self, sometype):
         self.sometype = sometype
-
-    @property
-    def type(self):
-        return self
 
     def __repr__(self):
         return 'NONE'
@@ -112,10 +98,6 @@ class Nat(Number, Tezos):
         assert value >= 0
         self.value = value
 
-    @property
-    def type(self):
-        return Nat
-
     def bit_or(self, other):
         assert type(other) in (Nat, Int)
         self.value = self.value | other.value
@@ -131,6 +113,10 @@ class Nat(Number, Tezos):
 
     def __str__(self):
         return f'nat:{int(self.value)}'
+
+    @property
+    def type(self):
+        return Nat
 
 
 class Timestamp(Nat):
@@ -150,25 +136,21 @@ class Int(Number, Tezos):
         assert isinstance(value, int)
         self.value = value
 
-    @property
-    def type(self):
-        return Int
-
     def __repr__(self):
         return f'int:{int(self.value)}'
 
     def __str__(self):
         return f'int:{int(self.value)}'
 
+    @property
+    def type(self):
+        return Int
+
 
 class Bool(Tezos):
     def __init__(self, value):
         assert value in ('True', 'False', True, False)
         self.value = value in ('True', True)
-
-    @property
-    def type(self):
-        return Bool
 
     def flip(self):
         self.value = not self.value
@@ -182,10 +164,6 @@ class String(Tezos):
     def __init__(self, value):
         assert isinstance(value, str)
         self.value = value
-
-    @property
-    def type(self):
-        return String
 
     def concat(self, other):
         assert isinstance(other, String)
