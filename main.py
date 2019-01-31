@@ -732,6 +732,7 @@ def p_statement_type(t):
         | BYTES
         | OPERATION
         | ADDRESS
+        | TIMESTAMP
         | LPARENS LPAIR type type RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat

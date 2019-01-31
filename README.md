@@ -8,7 +8,6 @@ Works for python3.
 ### TODO:
 
     - Add specialized Tezos Data Types
-    - Fix (Add, Sub, Mul) types
     - Annotations
     - Macros
     - Domain Specific Types

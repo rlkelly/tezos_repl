@@ -44,18 +44,14 @@ class Number(int):
         return self
 
     def add(self, other):
-        assert type(other) in (Nat, Int, Mutez)
+        assert type(other) in (Nat, Int)
         self.value = self.value + other.value
         return self
 
     def mul(self, other):
-        assert type(other) in (Nat, Int, Mutez)
+        assert type(other) in (Nat, Int)
         self.value = self.value * other.value
         return self
-
-    def ediv(self, other):
-        assert type(other) in (Nat, Int)
-        return Pair(Number(self.value // other.value), Number(self.value % other.value))
 
     def bit_and(self, other):
         assert type(other) in (Nat, Int)
@@ -104,6 +100,33 @@ class Nat(Number, Tezos):
         self.value = self.value ^ other.value
         return self
 
+    def add(self, other):
+        assert type(other) in (Nat, Int)
+        if type(other) == Timestamp:
+            return Timestamp(self.value + other.value)
+        else:
+            if isinstance(other, Nat):
+                return Nat(self.value + other.value)
+            return Int(self.value + other.value)
+
+    def sub(self, other):
+        assert type(other) in (Nat, Int)
+        if type(other) == Timestamp:
+            return Timestamp(self.value - other.value)
+        else:
+            return Int(self.value - other.value)
+
+    def mul(self, other):
+        assert type(other) in (Nat, Int, Mutez)
+        if isinstance(other, Mutez):
+            return Mutez(self.value * other.value)
+        return Nat(self.value * other.value)
+
+    def ediv(self, other):
+        if isinstance(other, Nat):
+            return Pair(Nat(self.value // other.value), Nat(self.value % other.value))
+        return Pair(Int(self.value // other.value), Nat(self.value % other.value))
+
     def __repr__(self):
         return f'nat:{int(self.value)}'
 
@@ -116,7 +139,10 @@ class Nat(Number, Tezos):
 
 
 class Timestamp(Nat):
-    pass
+    def add(self, other):
+        assert isinstance(other, Int)
+        self.value = self.value + other.value
+        return self
 
 
 class Address(Nat):
@@ -124,7 +150,31 @@ class Address(Nat):
 
 
 class Mutez(Nat):
-    pass
+    def add(self, other):
+        assert isinstance(other, Mutez)
+        return Mutez(self.value + other.value)
+
+    def sub(self, other):
+        assert isinstance(other, Mutez)
+        return Mutez(self.value - other.value)
+
+    def mul(self, other):
+        assert isinstance(other, Nat)
+        return Mutez(self.value * other.value)
+
+    def ediv(self, other):
+        assert type(other) in (Mutez, Nat)
+        if isinstance(other, Nat):
+            return Pair(Mutez(self.value // other.value), Mutez(self.value % other.value))
+        return Pair(Nat(self.value // other.value), Nat(self.value % other.value))
+
+    def compare(self, other):
+        if self.value < other.value:
+            return Int(-1)
+        if self.value == other.value:
+            return Int(0)
+        if self.value > other.value:
+            return Int(1)
 
 
 class Int(Number, Tezos):
@@ -137,6 +187,20 @@ class Int(Number, Tezos):
 
     def __str__(self):
         return f'int:{int(self.value)}'
+
+    def add(self, other):
+        assert type(other) in (Nat, Int, Timestamp)
+        if type(other) == Timestamp:
+            return Timestamp(self.value + other.value)
+        return Int(self.value + other.value)
+
+    def sub(self, other):
+        assert type(other) in (Nat, Int)
+        return Int(self.value - other.value)
+
+    def ediv(self, other):
+        assert type(other) in (Nat, Int)
+        return return Pair(Int(self.value // other.value), Nat(self.value % other.value))
 
     @property
     def type(self):
