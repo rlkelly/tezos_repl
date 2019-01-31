@@ -61,79 +61,97 @@ Rule 51    stmt -> EMPTY_MAP type type
 Rule 52    stmt -> MAP body
 Rule 53    stmt -> ITER body
 Rule 54    stmt -> GET
-Rule 55    stmt -> IF_CONS body body
-Rule 56    stmt -> SOME
-Rule 57    stmt -> NONE type
-Rule 58    stmt -> LEFT type
-Rule 59    stmt -> RIGHT type
-Rule 60    stmt -> CONS
-Rule 61    stmt -> NIL type
-Rule 62    stmt -> NOT
-Rule 63    stmt -> EXEC
-Rule 64    stmt -> STEPS_TO_QUOTA
-Rule 65    stmt -> NOW
-Rule 66    stmt -> CONTRACT type
-Rule 67    stmt -> HASH_KEY
-Rule 68    stmt -> BLAKE2B
-Rule 69    stmt -> SHA256
-Rule 70    stmt -> SHA512
-Rule 71    stmt -> CHECK_SIGNATURE
-Rule 72    type -> NAT
-Rule 73    type -> STRING
-Rule 74    type -> INT
-Rule 75    type -> BOOL
-Rule 76    type -> BYTES
-Rule 77    type -> OPERATION
-Rule 78    type -> ADDRESS
-Rule 79    type -> TIMESTAMP
-Rule 80    type -> LPARENS LPAIR type type RPARENS
-Rule 81    stmt -> DIP body
-Rule 82    stmt -> PUSH type value
-Rule 83    stmt -> FAILWITH
-Rule 84    stmt -> FAIL
-Rule 85    stmt -> PRINTER
+Rule 55    stmt -> IF_LEFT body body
+Rule 56    stmt -> IF_RIGHT body body
+Rule 57    stmt -> IF_CONS body body
+Rule 58    stmt -> SOME
+Rule 59    stmt -> NONE type
+Rule 60    stmt -> LEFT type
+Rule 61    stmt -> RIGHT type
+Rule 62    stmt -> CONS
+Rule 63    stmt -> NIL type
+Rule 64    stmt -> NOT
+Rule 65    stmt -> EXEC
+Rule 66    stmt -> STEPS_TO_QUOTA
+Rule 67    stmt -> NOW
+Rule 68    stmt -> CONTRACT type
+Rule 69    stmt -> HASH_KEY
+Rule 70    stmt -> BLAKE2B
+Rule 71    stmt -> SHA256
+Rule 72    stmt -> SHA512
+Rule 73    stmt -> CHECK_SIGNATURE
+Rule 74    type -> NAT
+Rule 75    type -> STRING
+Rule 76    type -> INT
+Rule 77    type -> BOOL
+Rule 78    type -> BYTES
+Rule 79    type -> OPERATION
+Rule 80    type -> ADDRESS
+Rule 81    type -> TIMESTAMP
+Rule 82    type -> LPARENS LPAIR type type RPARENS
+Rule 83    stmt -> DIP body
+Rule 84    stmt -> PUSH type value
+Rule 85    stmt -> ASSERT
+Rule 86    stmt -> ASSERT_EQ
+Rule 87    stmt -> ASSERT_NEQ
+Rule 88    stmt -> ASSERT_LT
+Rule 89    stmt -> ASSERT_LTE
+Rule 90    stmt -> ASSERT_GT
+Rule 91    stmt -> ASSERT_GTE
+Rule 92    stmt -> FAILWITH
+Rule 93    stmt -> FAIL
+Rule 94    stmt -> PRINTER
 
 Terminals, with rules where they appear
 
 ABS                  : 35
 ADD                  : 36
-ADDRESS              : 78
+ADDRESS              : 80
 AND                  : 31
-BLAKE2B              : 68
-BOOL                 : 75
-BYTES                : 76
+ASSERT               : 85
+ASSERT_EQ            : 86
+ASSERT_GT            : 90
+ASSERT_GTE           : 91
+ASSERT_LT            : 88
+ASSERT_LTE           : 89
+ASSERT_NEQ           : 87
+BLAKE2B              : 70
+BOOL                 : 77
+BYTES                : 78
 CAR                  : 46
 CDR                  : 47
-CHECK_SIGNATURE      : 71
+CHECK_SIGNATURE      : 73
 CODE                 : 4
 COMPARE              : 33
 CONCAT               : 43
-CONS                 : 60
-CONTRACT             : 66
-DIP                  : 81
+CONS                 : 62
+CONTRACT             : 68
+DIP                  : 83
 DROP                 : 14
 DUP                  : 15
 EDIV                 : 39
 EMPTY_MAP            : 51
 EMPTY_SET            : 48
 EQ                   : 24
-EXEC                 : 63
-FAIL                 : 84
-FAILWITH             : 83
+EXEC                 : 65
+FAIL                 : 93
+FAILWITH             : 92
 FALSE                : 19
 GE                   : 29
 GET                  : 54
 GT                   : 27
-HASH_KEY             : 67
-IF_CONS              : 55
-INT                  : 74
+HASH_KEY             : 69
+IF_CONS              : 57
+IF_LEFT              : 55
+IF_RIGHT             : 56
+INT                  : 76
 ITER                 : 53
 LAMBDA               : 13
 LBRACKET             : 10 11 12
 LE                   : 28
-LEFT                 : 58
-LPAIR                : 80
-LPARENS              : 23 80
+LEFT                 : 60
+LPAIR                : 82
+LPARENS              : 23 82
 LSL                  : 40
 LSR                  : 41
 LT                   : 26
@@ -141,37 +159,37 @@ MAP                  : 52
 MEM                  : 49
 MUL                  : 38
 MUTEZ                : 
-NAT                  : 72
+NAT                  : 74
 NEG                  : 34
 NEQ                  : 25
-NIL                  : 61
-NONE                 : 57
-NOT                  : 62
-NOW                  : 65
+NIL                  : 63
+NONE                 : 59
+NOT                  : 64
+NOW                  : 67
 NUMBER               : 20
-OPERATION            : 77
+OPERATION            : 79
 OR                   : 30
 PAIR                 : 45
 PAIR_CONSTRUCTOR     : 23
 PARAMETER            : 3
-PRINTER              : 85
-PUSH                 : 82
+PRINTER              : 94
+PUSH                 : 84
 RBRACKET             : 10 11 12
-RIGHT                : 59
-RPARENS              : 23 80
+RIGHT                : 61
+RPARENS              : 23 82
 SCOLON               : 3 3 6 9 10
-SHA256               : 69
-SHA512               : 70
+SHA256               : 71
+SHA512               : 72
 SIZE                 : 42
 SLICE                : 44
-SOME                 : 56
-STEPS_TO_QUOTA       : 64
+SOME                 : 58
+STEPS_TO_QUOTA       : 66
 STORAGE              : 3
-STRING               : 73
+STRING               : 75
 SUB                  : 37
 SWAP                 : 16
 TEXT                 : 22
-TIMESTAMP            : 79
+TIMESTAMP            : 81
 TRUE                 : 18
 UNIT                 : 17
 UPDATE               : 50
@@ -180,7 +198,7 @@ error                :
 
 Nonterminals, with rules where they appear
 
-body                 : 4 7 13 52 53 55 55 81
+body                 : 4 7 13 52 53 55 55 56 56 57 57 83
 bool                 : 21
 code_decl            : 1
 compound_statement   : 5 6 9 10 11
@@ -188,8 +206,8 @@ contract_decl        : 1
 contract_run         : 0
 execution            : 2
 stmt                 : 8 9
-type                 : 3 3 13 13 48 51 51 57 58 59 61 66 80 80 82
-value                : 23 23 82
+type                 : 3 3 13 13 48 51 51 59 60 61 63 68 82 82 84
+value                : 23 23 84
 
 Parsing method: LALR
 
@@ -243,28 +261,37 @@ state 0
     (52) stmt -> . MAP body
     (53) stmt -> . ITER body
     (54) stmt -> . GET
-    (55) stmt -> . IF_CONS body body
-    (56) stmt -> . SOME
-    (57) stmt -> . NONE type
-    (58) stmt -> . LEFT type
-    (59) stmt -> . RIGHT type
-    (60) stmt -> . CONS
-    (61) stmt -> . NIL type
-    (62) stmt -> . NOT
-    (63) stmt -> . EXEC
-    (64) stmt -> . STEPS_TO_QUOTA
-    (65) stmt -> . NOW
-    (66) stmt -> . CONTRACT type
-    (67) stmt -> . HASH_KEY
-    (68) stmt -> . BLAKE2B
-    (69) stmt -> . SHA256
-    (70) stmt -> . SHA512
-    (71) stmt -> . CHECK_SIGNATURE
-    (81) stmt -> . DIP body
-    (82) stmt -> . PUSH type value
-    (83) stmt -> . FAILWITH
-    (84) stmt -> . FAIL
-    (85) stmt -> . PRINTER
+    (55) stmt -> . IF_LEFT body body
+    (56) stmt -> . IF_RIGHT body body
+    (57) stmt -> . IF_CONS body body
+    (58) stmt -> . SOME
+    (59) stmt -> . NONE type
+    (60) stmt -> . LEFT type
+    (61) stmt -> . RIGHT type
+    (62) stmt -> . CONS
+    (63) stmt -> . NIL type
+    (64) stmt -> . NOT
+    (65) stmt -> . EXEC
+    (66) stmt -> . STEPS_TO_QUOTA
+    (67) stmt -> . NOW
+    (68) stmt -> . CONTRACT type
+    (69) stmt -> . HASH_KEY
+    (70) stmt -> . BLAKE2B
+    (71) stmt -> . SHA256
+    (72) stmt -> . SHA512
+    (73) stmt -> . CHECK_SIGNATURE
+    (83) stmt -> . DIP body
+    (84) stmt -> . PUSH type value
+    (85) stmt -> . ASSERT
+    (86) stmt -> . ASSERT_EQ
+    (87) stmt -> . ASSERT_NEQ
+    (88) stmt -> . ASSERT_LT
+    (89) stmt -> . ASSERT_LTE
+    (90) stmt -> . ASSERT_GT
+    (91) stmt -> . ASSERT_GTE
+    (92) stmt -> . FAILWITH
+    (93) stmt -> . FAIL
+    (94) stmt -> . PRINTER
 
     PARAMETER       shift and go to state 4
     LBRACKET        shift and go to state 8
@@ -304,28 +331,37 @@ state 0
     MAP             shift and go to state 42
     ITER            shift and go to state 43
     GET             shift and go to state 44
-    IF_CONS         shift and go to state 45
-    SOME            shift and go to state 46
-    NONE            shift and go to state 47
-    LEFT            shift and go to state 48
-    RIGHT           shift and go to state 49
-    CONS            shift and go to state 50
-    NIL             shift and go to state 51
-    NOT             shift and go to state 52
-    EXEC            shift and go to state 53
-    STEPS_TO_QUOTA  shift and go to state 54
-    NOW             shift and go to state 55
-    CONTRACT        shift and go to state 56
-    HASH_KEY        shift and go to state 57
-    BLAKE2B         shift and go to state 58
-    SHA256          shift and go to state 59
-    SHA512          shift and go to state 60
-    CHECK_SIGNATURE shift and go to state 61
-    DIP             shift and go to state 62
-    PUSH            shift and go to state 63
-    FAILWITH        shift and go to state 64
-    FAIL            shift and go to state 65
-    PRINTER         shift and go to state 66
+    IF_LEFT         shift and go to state 45
+    IF_RIGHT        shift and go to state 46
+    IF_CONS         shift and go to state 47
+    SOME            shift and go to state 48
+    NONE            shift and go to state 49
+    LEFT            shift and go to state 50
+    RIGHT           shift and go to state 51
+    CONS            shift and go to state 52
+    NIL             shift and go to state 53
+    NOT             shift and go to state 54
+    EXEC            shift and go to state 55
+    STEPS_TO_QUOTA  shift and go to state 56
+    NOW             shift and go to state 57
+    CONTRACT        shift and go to state 58
+    HASH_KEY        shift and go to state 59
+    BLAKE2B         shift and go to state 60
+    SHA256          shift and go to state 61
+    SHA512          shift and go to state 62
+    CHECK_SIGNATURE shift and go to state 63
+    DIP             shift and go to state 64
+    PUSH            shift and go to state 65
+    ASSERT          shift and go to state 66
+    ASSERT_EQ       shift and go to state 67
+    ASSERT_NEQ      shift and go to state 68
+    ASSERT_LT       shift and go to state 69
+    ASSERT_LTE      shift and go to state 70
+    ASSERT_GT       shift and go to state 71
+    ASSERT_GTE      shift and go to state 72
+    FAILWITH        shift and go to state 73
+    FAIL            shift and go to state 74
+    PRINTER         shift and go to state 75
 
     contract_run                   shift and go to state 1
     contract_decl                  shift and go to state 2
@@ -345,9 +381,9 @@ state 2
     (1) contract_run -> contract_decl . code_decl
     (4) code_decl -> . CODE body
 
-    CODE            shift and go to state 68
+    CODE            shift and go to state 77
 
-    code_decl                      shift and go to state 67
+    code_decl                      shift and go to state 76
 
 state 3
 
@@ -359,27 +395,27 @@ state 3
 state 4
 
     (3) contract_decl -> PARAMETER . type SCOLON STORAGE type SCOLON
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 69
+    type                           shift and go to state 78
 
 state 5
 
@@ -388,7 +424,7 @@ state 5
     (9) compound_statement -> compound_statement . SCOLON stmt
 
     $end            reduce using rule 5 (execution -> compound_statement .)
-    SCOLON          shift and go to state 79
+    SCOLON          shift and go to state 88
 
 
 state 6
@@ -450,30 +486,39 @@ state 8
     (52) stmt -> . MAP body
     (53) stmt -> . ITER body
     (54) stmt -> . GET
-    (55) stmt -> . IF_CONS body body
-    (56) stmt -> . SOME
-    (57) stmt -> . NONE type
-    (58) stmt -> . LEFT type
-    (59) stmt -> . RIGHT type
-    (60) stmt -> . CONS
-    (61) stmt -> . NIL type
-    (62) stmt -> . NOT
-    (63) stmt -> . EXEC
-    (64) stmt -> . STEPS_TO_QUOTA
-    (65) stmt -> . NOW
-    (66) stmt -> . CONTRACT type
-    (67) stmt -> . HASH_KEY
-    (68) stmt -> . BLAKE2B
-    (69) stmt -> . SHA256
-    (70) stmt -> . SHA512
-    (71) stmt -> . CHECK_SIGNATURE
-    (81) stmt -> . DIP body
-    (82) stmt -> . PUSH type value
-    (83) stmt -> . FAILWITH
-    (84) stmt -> . FAIL
-    (85) stmt -> . PRINTER
+    (55) stmt -> . IF_LEFT body body
+    (56) stmt -> . IF_RIGHT body body
+    (57) stmt -> . IF_CONS body body
+    (58) stmt -> . SOME
+    (59) stmt -> . NONE type
+    (60) stmt -> . LEFT type
+    (61) stmt -> . RIGHT type
+    (62) stmt -> . CONS
+    (63) stmt -> . NIL type
+    (64) stmt -> . NOT
+    (65) stmt -> . EXEC
+    (66) stmt -> . STEPS_TO_QUOTA
+    (67) stmt -> . NOW
+    (68) stmt -> . CONTRACT type
+    (69) stmt -> . HASH_KEY
+    (70) stmt -> . BLAKE2B
+    (71) stmt -> . SHA256
+    (72) stmt -> . SHA512
+    (73) stmt -> . CHECK_SIGNATURE
+    (83) stmt -> . DIP body
+    (84) stmt -> . PUSH type value
+    (85) stmt -> . ASSERT
+    (86) stmt -> . ASSERT_EQ
+    (87) stmt -> . ASSERT_NEQ
+    (88) stmt -> . ASSERT_LT
+    (89) stmt -> . ASSERT_LTE
+    (90) stmt -> . ASSERT_GT
+    (91) stmt -> . ASSERT_GTE
+    (92) stmt -> . FAILWITH
+    (93) stmt -> . FAIL
+    (94) stmt -> . PRINTER
 
-    RBRACKET        shift and go to state 81
+    RBRACKET        shift and go to state 90
     LAMBDA          shift and go to state 9
     DROP            shift and go to state 10
     DUP             shift and go to state 11
@@ -510,56 +555,65 @@ state 8
     MAP             shift and go to state 42
     ITER            shift and go to state 43
     GET             shift and go to state 44
-    IF_CONS         shift and go to state 45
-    SOME            shift and go to state 46
-    NONE            shift and go to state 47
-    LEFT            shift and go to state 48
-    RIGHT           shift and go to state 49
-    CONS            shift and go to state 50
-    NIL             shift and go to state 51
-    NOT             shift and go to state 52
-    EXEC            shift and go to state 53
-    STEPS_TO_QUOTA  shift and go to state 54
-    NOW             shift and go to state 55
-    CONTRACT        shift and go to state 56
-    HASH_KEY        shift and go to state 57
-    BLAKE2B         shift and go to state 58
-    SHA256          shift and go to state 59
-    SHA512          shift and go to state 60
-    CHECK_SIGNATURE shift and go to state 61
-    DIP             shift and go to state 62
-    PUSH            shift and go to state 63
-    FAILWITH        shift and go to state 64
-    FAIL            shift and go to state 65
-    PRINTER         shift and go to state 66
+    IF_LEFT         shift and go to state 45
+    IF_RIGHT        shift and go to state 46
+    IF_CONS         shift and go to state 47
+    SOME            shift and go to state 48
+    NONE            shift and go to state 49
+    LEFT            shift and go to state 50
+    RIGHT           shift and go to state 51
+    CONS            shift and go to state 52
+    NIL             shift and go to state 53
+    NOT             shift and go to state 54
+    EXEC            shift and go to state 55
+    STEPS_TO_QUOTA  shift and go to state 56
+    NOW             shift and go to state 57
+    CONTRACT        shift and go to state 58
+    HASH_KEY        shift and go to state 59
+    BLAKE2B         shift and go to state 60
+    SHA256          shift and go to state 61
+    SHA512          shift and go to state 62
+    CHECK_SIGNATURE shift and go to state 63
+    DIP             shift and go to state 64
+    PUSH            shift and go to state 65
+    ASSERT          shift and go to state 66
+    ASSERT_EQ       shift and go to state 67
+    ASSERT_NEQ      shift and go to state 68
+    ASSERT_LT       shift and go to state 69
+    ASSERT_LTE      shift and go to state 70
+    ASSERT_GT       shift and go to state 71
+    ASSERT_GTE      shift and go to state 72
+    FAILWITH        shift and go to state 73
+    FAIL            shift and go to state 74
+    PRINTER         shift and go to state 75
 
-    compound_statement             shift and go to state 80
+    compound_statement             shift and go to state 89
     stmt                           shift and go to state 7
 
 state 9
 
     (13) stmt -> LAMBDA . type type body
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 82
+    type                           shift and go to state 91
 
 state 10
 
@@ -816,27 +870,27 @@ state 37
 state 38
 
     (48) stmt -> EMPTY_SET . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 83
+    type                           shift and go to state 92
 
 state 39
 
@@ -859,27 +913,27 @@ state 40
 state 41
 
     (51) stmt -> EMPTY_MAP . type type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 84
+    type                           shift and go to state 93
 
 state 42
 
@@ -890,7 +944,7 @@ state 42
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 85
+    body                           shift and go to state 94
 
 state 43
 
@@ -901,7 +955,7 @@ state 43
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 86
+    body                           shift and go to state 95
 
 state 44
 
@@ -914,310 +968,395 @@ state 44
 
 state 45
 
-    (55) stmt -> IF_CONS . body body
+    (55) stmt -> IF_LEFT . body body
     (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
     (11) body -> . LBRACKET compound_statement RBRACKET
     (12) body -> . LBRACKET RBRACKET
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 87
+    body                           shift and go to state 96
 
 state 46
 
-    (56) stmt -> SOME .
+    (56) stmt -> IF_RIGHT . body body
+    (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
+    (11) body -> . LBRACKET compound_statement RBRACKET
+    (12) body -> . LBRACKET RBRACKET
 
-    SCOLON          reduce using rule 56 (stmt -> SOME .)
-    $end            reduce using rule 56 (stmt -> SOME .)
-    RBRACKET        reduce using rule 56 (stmt -> SOME .)
+    LBRACKET        shift and go to state 8
 
+    body                           shift and go to state 97
 
 state 47
 
-    (57) stmt -> NONE . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (57) stmt -> IF_CONS . body body
+    (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
+    (11) body -> . LBRACKET compound_statement RBRACKET
+    (12) body -> . LBRACKET RBRACKET
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    LBRACKET        shift and go to state 8
 
-    type                           shift and go to state 88
+    body                           shift and go to state 98
 
 state 48
 
-    (58) stmt -> LEFT . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (58) stmt -> SOME .
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    SCOLON          reduce using rule 58 (stmt -> SOME .)
+    $end            reduce using rule 58 (stmt -> SOME .)
+    RBRACKET        reduce using rule 58 (stmt -> SOME .)
 
-    type                           shift and go to state 89
 
 state 49
 
-    (59) stmt -> RIGHT . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (59) stmt -> NONE . type
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 90
+    type                           shift and go to state 99
 
 state 50
 
-    (60) stmt -> CONS .
+    (60) stmt -> LEFT . type
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    SCOLON          reduce using rule 60 (stmt -> CONS .)
-    $end            reduce using rule 60 (stmt -> CONS .)
-    RBRACKET        reduce using rule 60 (stmt -> CONS .)
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
+    type                           shift and go to state 100
 
 state 51
 
-    (61) stmt -> NIL . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (61) stmt -> RIGHT . type
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 91
+    type                           shift and go to state 101
 
 state 52
 
-    (62) stmt -> NOT .
+    (62) stmt -> CONS .
 
-    SCOLON          reduce using rule 62 (stmt -> NOT .)
-    $end            reduce using rule 62 (stmt -> NOT .)
-    RBRACKET        reduce using rule 62 (stmt -> NOT .)
+    SCOLON          reduce using rule 62 (stmt -> CONS .)
+    $end            reduce using rule 62 (stmt -> CONS .)
+    RBRACKET        reduce using rule 62 (stmt -> CONS .)
 
 
 state 53
 
-    (63) stmt -> EXEC .
+    (63) stmt -> NIL . type
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    SCOLON          reduce using rule 63 (stmt -> EXEC .)
-    $end            reduce using rule 63 (stmt -> EXEC .)
-    RBRACKET        reduce using rule 63 (stmt -> EXEC .)
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
+    type                           shift and go to state 102
 
 state 54
 
-    (64) stmt -> STEPS_TO_QUOTA .
+    (64) stmt -> NOT .
 
-    SCOLON          reduce using rule 64 (stmt -> STEPS_TO_QUOTA .)
-    $end            reduce using rule 64 (stmt -> STEPS_TO_QUOTA .)
-    RBRACKET        reduce using rule 64 (stmt -> STEPS_TO_QUOTA .)
+    SCOLON          reduce using rule 64 (stmt -> NOT .)
+    $end            reduce using rule 64 (stmt -> NOT .)
+    RBRACKET        reduce using rule 64 (stmt -> NOT .)
 
 
 state 55
 
-    (65) stmt -> NOW .
+    (65) stmt -> EXEC .
 
-    SCOLON          reduce using rule 65 (stmt -> NOW .)
-    $end            reduce using rule 65 (stmt -> NOW .)
-    RBRACKET        reduce using rule 65 (stmt -> NOW .)
+    SCOLON          reduce using rule 65 (stmt -> EXEC .)
+    $end            reduce using rule 65 (stmt -> EXEC .)
+    RBRACKET        reduce using rule 65 (stmt -> EXEC .)
 
 
 state 56
 
-    (66) stmt -> CONTRACT . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (66) stmt -> STEPS_TO_QUOTA .
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    SCOLON          reduce using rule 66 (stmt -> STEPS_TO_QUOTA .)
+    $end            reduce using rule 66 (stmt -> STEPS_TO_QUOTA .)
+    RBRACKET        reduce using rule 66 (stmt -> STEPS_TO_QUOTA .)
 
-    type                           shift and go to state 92
 
 state 57
 
-    (67) stmt -> HASH_KEY .
+    (67) stmt -> NOW .
 
-    SCOLON          reduce using rule 67 (stmt -> HASH_KEY .)
-    $end            reduce using rule 67 (stmt -> HASH_KEY .)
-    RBRACKET        reduce using rule 67 (stmt -> HASH_KEY .)
+    SCOLON          reduce using rule 67 (stmt -> NOW .)
+    $end            reduce using rule 67 (stmt -> NOW .)
+    RBRACKET        reduce using rule 67 (stmt -> NOW .)
 
 
 state 58
 
-    (68) stmt -> BLAKE2B .
+    (68) stmt -> CONTRACT . type
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    SCOLON          reduce using rule 68 (stmt -> BLAKE2B .)
-    $end            reduce using rule 68 (stmt -> BLAKE2B .)
-    RBRACKET        reduce using rule 68 (stmt -> BLAKE2B .)
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
+    type                           shift and go to state 103
 
 state 59
 
-    (69) stmt -> SHA256 .
+    (69) stmt -> HASH_KEY .
 
-    SCOLON          reduce using rule 69 (stmt -> SHA256 .)
-    $end            reduce using rule 69 (stmt -> SHA256 .)
-    RBRACKET        reduce using rule 69 (stmt -> SHA256 .)
+    SCOLON          reduce using rule 69 (stmt -> HASH_KEY .)
+    $end            reduce using rule 69 (stmt -> HASH_KEY .)
+    RBRACKET        reduce using rule 69 (stmt -> HASH_KEY .)
 
 
 state 60
 
-    (70) stmt -> SHA512 .
+    (70) stmt -> BLAKE2B .
 
-    SCOLON          reduce using rule 70 (stmt -> SHA512 .)
-    $end            reduce using rule 70 (stmt -> SHA512 .)
-    RBRACKET        reduce using rule 70 (stmt -> SHA512 .)
+    SCOLON          reduce using rule 70 (stmt -> BLAKE2B .)
+    $end            reduce using rule 70 (stmt -> BLAKE2B .)
+    RBRACKET        reduce using rule 70 (stmt -> BLAKE2B .)
 
 
 state 61
 
-    (71) stmt -> CHECK_SIGNATURE .
+    (71) stmt -> SHA256 .
 
-    SCOLON          reduce using rule 71 (stmt -> CHECK_SIGNATURE .)
-    $end            reduce using rule 71 (stmt -> CHECK_SIGNATURE .)
-    RBRACKET        reduce using rule 71 (stmt -> CHECK_SIGNATURE .)
+    SCOLON          reduce using rule 71 (stmt -> SHA256 .)
+    $end            reduce using rule 71 (stmt -> SHA256 .)
+    RBRACKET        reduce using rule 71 (stmt -> SHA256 .)
 
 
 state 62
 
-    (81) stmt -> DIP . body
+    (72) stmt -> SHA512 .
+
+    SCOLON          reduce using rule 72 (stmt -> SHA512 .)
+    $end            reduce using rule 72 (stmt -> SHA512 .)
+    RBRACKET        reduce using rule 72 (stmt -> SHA512 .)
+
+
+state 63
+
+    (73) stmt -> CHECK_SIGNATURE .
+
+    SCOLON          reduce using rule 73 (stmt -> CHECK_SIGNATURE .)
+    $end            reduce using rule 73 (stmt -> CHECK_SIGNATURE .)
+    RBRACKET        reduce using rule 73 (stmt -> CHECK_SIGNATURE .)
+
+
+state 64
+
+    (83) stmt -> DIP . body
     (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
     (11) body -> . LBRACKET compound_statement RBRACKET
     (12) body -> . LBRACKET RBRACKET
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 93
-
-state 63
-
-    (82) stmt -> PUSH . type value
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
-
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
-
-    type                           shift and go to state 94
-
-state 64
-
-    (83) stmt -> FAILWITH .
-
-    SCOLON          reduce using rule 83 (stmt -> FAILWITH .)
-    $end            reduce using rule 83 (stmt -> FAILWITH .)
-    RBRACKET        reduce using rule 83 (stmt -> FAILWITH .)
-
+    body                           shift and go to state 104
 
 state 65
 
-    (84) stmt -> FAIL .
+    (84) stmt -> PUSH . type value
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    SCOLON          reduce using rule 84 (stmt -> FAIL .)
-    $end            reduce using rule 84 (stmt -> FAIL .)
-    RBRACKET        reduce using rule 84 (stmt -> FAIL .)
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
+    type                           shift and go to state 105
 
 state 66
 
-    (85) stmt -> PRINTER .
+    (85) stmt -> ASSERT .
 
-    SCOLON          reduce using rule 85 (stmt -> PRINTER .)
-    $end            reduce using rule 85 (stmt -> PRINTER .)
-    RBRACKET        reduce using rule 85 (stmt -> PRINTER .)
+    SCOLON          reduce using rule 85 (stmt -> ASSERT .)
+    $end            reduce using rule 85 (stmt -> ASSERT .)
+    RBRACKET        reduce using rule 85 (stmt -> ASSERT .)
 
 
 state 67
+
+    (86) stmt -> ASSERT_EQ .
+
+    SCOLON          reduce using rule 86 (stmt -> ASSERT_EQ .)
+    $end            reduce using rule 86 (stmt -> ASSERT_EQ .)
+    RBRACKET        reduce using rule 86 (stmt -> ASSERT_EQ .)
+
+
+state 68
+
+    (87) stmt -> ASSERT_NEQ .
+
+    SCOLON          reduce using rule 87 (stmt -> ASSERT_NEQ .)
+    $end            reduce using rule 87 (stmt -> ASSERT_NEQ .)
+    RBRACKET        reduce using rule 87 (stmt -> ASSERT_NEQ .)
+
+
+state 69
+
+    (88) stmt -> ASSERT_LT .
+
+    SCOLON          reduce using rule 88 (stmt -> ASSERT_LT .)
+    $end            reduce using rule 88 (stmt -> ASSERT_LT .)
+    RBRACKET        reduce using rule 88 (stmt -> ASSERT_LT .)
+
+
+state 70
+
+    (89) stmt -> ASSERT_LTE .
+
+    SCOLON          reduce using rule 89 (stmt -> ASSERT_LTE .)
+    $end            reduce using rule 89 (stmt -> ASSERT_LTE .)
+    RBRACKET        reduce using rule 89 (stmt -> ASSERT_LTE .)
+
+
+state 71
+
+    (90) stmt -> ASSERT_GT .
+
+    SCOLON          reduce using rule 90 (stmt -> ASSERT_GT .)
+    $end            reduce using rule 90 (stmt -> ASSERT_GT .)
+    RBRACKET        reduce using rule 90 (stmt -> ASSERT_GT .)
+
+
+state 72
+
+    (91) stmt -> ASSERT_GTE .
+
+    SCOLON          reduce using rule 91 (stmt -> ASSERT_GTE .)
+    $end            reduce using rule 91 (stmt -> ASSERT_GTE .)
+    RBRACKET        reduce using rule 91 (stmt -> ASSERT_GTE .)
+
+
+state 73
+
+    (92) stmt -> FAILWITH .
+
+    SCOLON          reduce using rule 92 (stmt -> FAILWITH .)
+    $end            reduce using rule 92 (stmt -> FAILWITH .)
+    RBRACKET        reduce using rule 92 (stmt -> FAILWITH .)
+
+
+state 74
+
+    (93) stmt -> FAIL .
+
+    SCOLON          reduce using rule 93 (stmt -> FAIL .)
+    $end            reduce using rule 93 (stmt -> FAIL .)
+    RBRACKET        reduce using rule 93 (stmt -> FAIL .)
+
+
+state 75
+
+    (94) stmt -> PRINTER .
+
+    SCOLON          reduce using rule 94 (stmt -> PRINTER .)
+    $end            reduce using rule 94 (stmt -> PRINTER .)
+    RBRACKET        reduce using rule 94 (stmt -> PRINTER .)
+
+
+state 76
 
     (1) contract_run -> contract_decl code_decl .
 
     $end            reduce using rule 1 (contract_run -> contract_decl code_decl .)
 
 
-state 68
+state 77
 
     (4) code_decl -> CODE . body
     (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
@@ -1226,215 +1365,215 @@ state 68
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 95
-
-state 69
-
-    (3) contract_decl -> PARAMETER type . SCOLON STORAGE type SCOLON
-
-    SCOLON          shift and go to state 96
-
-
-state 70
-
-    (72) type -> NAT .
-
-    SCOLON          reduce using rule 72 (type -> NAT .)
-    NAT             reduce using rule 72 (type -> NAT .)
-    STRING          reduce using rule 72 (type -> NAT .)
-    INT             reduce using rule 72 (type -> NAT .)
-    BOOL            reduce using rule 72 (type -> NAT .)
-    BYTES           reduce using rule 72 (type -> NAT .)
-    OPERATION       reduce using rule 72 (type -> NAT .)
-    ADDRESS         reduce using rule 72 (type -> NAT .)
-    TIMESTAMP       reduce using rule 72 (type -> NAT .)
-    LPARENS         reduce using rule 72 (type -> NAT .)
-    $end            reduce using rule 72 (type -> NAT .)
-    RBRACKET        reduce using rule 72 (type -> NAT .)
-    NUMBER          reduce using rule 72 (type -> NAT .)
-    TEXT            reduce using rule 72 (type -> NAT .)
-    TRUE            reduce using rule 72 (type -> NAT .)
-    FALSE           reduce using rule 72 (type -> NAT .)
-    LBRACKET        reduce using rule 72 (type -> NAT .)
-    RPARENS         reduce using rule 72 (type -> NAT .)
-
-
-state 71
-
-    (73) type -> STRING .
-
-    SCOLON          reduce using rule 73 (type -> STRING .)
-    NAT             reduce using rule 73 (type -> STRING .)
-    STRING          reduce using rule 73 (type -> STRING .)
-    INT             reduce using rule 73 (type -> STRING .)
-    BOOL            reduce using rule 73 (type -> STRING .)
-    BYTES           reduce using rule 73 (type -> STRING .)
-    OPERATION       reduce using rule 73 (type -> STRING .)
-    ADDRESS         reduce using rule 73 (type -> STRING .)
-    TIMESTAMP       reduce using rule 73 (type -> STRING .)
-    LPARENS         reduce using rule 73 (type -> STRING .)
-    $end            reduce using rule 73 (type -> STRING .)
-    RBRACKET        reduce using rule 73 (type -> STRING .)
-    NUMBER          reduce using rule 73 (type -> STRING .)
-    TEXT            reduce using rule 73 (type -> STRING .)
-    TRUE            reduce using rule 73 (type -> STRING .)
-    FALSE           reduce using rule 73 (type -> STRING .)
-    LBRACKET        reduce using rule 73 (type -> STRING .)
-    RPARENS         reduce using rule 73 (type -> STRING .)
-
-
-state 72
-
-    (74) type -> INT .
-
-    SCOLON          reduce using rule 74 (type -> INT .)
-    NAT             reduce using rule 74 (type -> INT .)
-    STRING          reduce using rule 74 (type -> INT .)
-    INT             reduce using rule 74 (type -> INT .)
-    BOOL            reduce using rule 74 (type -> INT .)
-    BYTES           reduce using rule 74 (type -> INT .)
-    OPERATION       reduce using rule 74 (type -> INT .)
-    ADDRESS         reduce using rule 74 (type -> INT .)
-    TIMESTAMP       reduce using rule 74 (type -> INT .)
-    LPARENS         reduce using rule 74 (type -> INT .)
-    $end            reduce using rule 74 (type -> INT .)
-    RBRACKET        reduce using rule 74 (type -> INT .)
-    NUMBER          reduce using rule 74 (type -> INT .)
-    TEXT            reduce using rule 74 (type -> INT .)
-    TRUE            reduce using rule 74 (type -> INT .)
-    FALSE           reduce using rule 74 (type -> INT .)
-    LBRACKET        reduce using rule 74 (type -> INT .)
-    RPARENS         reduce using rule 74 (type -> INT .)
-
-
-state 73
-
-    (75) type -> BOOL .
-
-    SCOLON          reduce using rule 75 (type -> BOOL .)
-    NAT             reduce using rule 75 (type -> BOOL .)
-    STRING          reduce using rule 75 (type -> BOOL .)
-    INT             reduce using rule 75 (type -> BOOL .)
-    BOOL            reduce using rule 75 (type -> BOOL .)
-    BYTES           reduce using rule 75 (type -> BOOL .)
-    OPERATION       reduce using rule 75 (type -> BOOL .)
-    ADDRESS         reduce using rule 75 (type -> BOOL .)
-    TIMESTAMP       reduce using rule 75 (type -> BOOL .)
-    LPARENS         reduce using rule 75 (type -> BOOL .)
-    $end            reduce using rule 75 (type -> BOOL .)
-    RBRACKET        reduce using rule 75 (type -> BOOL .)
-    NUMBER          reduce using rule 75 (type -> BOOL .)
-    TEXT            reduce using rule 75 (type -> BOOL .)
-    TRUE            reduce using rule 75 (type -> BOOL .)
-    FALSE           reduce using rule 75 (type -> BOOL .)
-    LBRACKET        reduce using rule 75 (type -> BOOL .)
-    RPARENS         reduce using rule 75 (type -> BOOL .)
-
-
-state 74
-
-    (76) type -> BYTES .
-
-    SCOLON          reduce using rule 76 (type -> BYTES .)
-    NAT             reduce using rule 76 (type -> BYTES .)
-    STRING          reduce using rule 76 (type -> BYTES .)
-    INT             reduce using rule 76 (type -> BYTES .)
-    BOOL            reduce using rule 76 (type -> BYTES .)
-    BYTES           reduce using rule 76 (type -> BYTES .)
-    OPERATION       reduce using rule 76 (type -> BYTES .)
-    ADDRESS         reduce using rule 76 (type -> BYTES .)
-    TIMESTAMP       reduce using rule 76 (type -> BYTES .)
-    LPARENS         reduce using rule 76 (type -> BYTES .)
-    $end            reduce using rule 76 (type -> BYTES .)
-    RBRACKET        reduce using rule 76 (type -> BYTES .)
-    NUMBER          reduce using rule 76 (type -> BYTES .)
-    TEXT            reduce using rule 76 (type -> BYTES .)
-    TRUE            reduce using rule 76 (type -> BYTES .)
-    FALSE           reduce using rule 76 (type -> BYTES .)
-    LBRACKET        reduce using rule 76 (type -> BYTES .)
-    RPARENS         reduce using rule 76 (type -> BYTES .)
-
-
-state 75
-
-    (77) type -> OPERATION .
-
-    SCOLON          reduce using rule 77 (type -> OPERATION .)
-    NAT             reduce using rule 77 (type -> OPERATION .)
-    STRING          reduce using rule 77 (type -> OPERATION .)
-    INT             reduce using rule 77 (type -> OPERATION .)
-    BOOL            reduce using rule 77 (type -> OPERATION .)
-    BYTES           reduce using rule 77 (type -> OPERATION .)
-    OPERATION       reduce using rule 77 (type -> OPERATION .)
-    ADDRESS         reduce using rule 77 (type -> OPERATION .)
-    TIMESTAMP       reduce using rule 77 (type -> OPERATION .)
-    LPARENS         reduce using rule 77 (type -> OPERATION .)
-    $end            reduce using rule 77 (type -> OPERATION .)
-    RBRACKET        reduce using rule 77 (type -> OPERATION .)
-    NUMBER          reduce using rule 77 (type -> OPERATION .)
-    TEXT            reduce using rule 77 (type -> OPERATION .)
-    TRUE            reduce using rule 77 (type -> OPERATION .)
-    FALSE           reduce using rule 77 (type -> OPERATION .)
-    LBRACKET        reduce using rule 77 (type -> OPERATION .)
-    RPARENS         reduce using rule 77 (type -> OPERATION .)
-
-
-state 76
-
-    (78) type -> ADDRESS .
-
-    SCOLON          reduce using rule 78 (type -> ADDRESS .)
-    NAT             reduce using rule 78 (type -> ADDRESS .)
-    STRING          reduce using rule 78 (type -> ADDRESS .)
-    INT             reduce using rule 78 (type -> ADDRESS .)
-    BOOL            reduce using rule 78 (type -> ADDRESS .)
-    BYTES           reduce using rule 78 (type -> ADDRESS .)
-    OPERATION       reduce using rule 78 (type -> ADDRESS .)
-    ADDRESS         reduce using rule 78 (type -> ADDRESS .)
-    TIMESTAMP       reduce using rule 78 (type -> ADDRESS .)
-    LPARENS         reduce using rule 78 (type -> ADDRESS .)
-    $end            reduce using rule 78 (type -> ADDRESS .)
-    RBRACKET        reduce using rule 78 (type -> ADDRESS .)
-    NUMBER          reduce using rule 78 (type -> ADDRESS .)
-    TEXT            reduce using rule 78 (type -> ADDRESS .)
-    TRUE            reduce using rule 78 (type -> ADDRESS .)
-    FALSE           reduce using rule 78 (type -> ADDRESS .)
-    LBRACKET        reduce using rule 78 (type -> ADDRESS .)
-    RPARENS         reduce using rule 78 (type -> ADDRESS .)
-
-
-state 77
-
-    (79) type -> TIMESTAMP .
-
-    SCOLON          reduce using rule 79 (type -> TIMESTAMP .)
-    NAT             reduce using rule 79 (type -> TIMESTAMP .)
-    STRING          reduce using rule 79 (type -> TIMESTAMP .)
-    INT             reduce using rule 79 (type -> TIMESTAMP .)
-    BOOL            reduce using rule 79 (type -> TIMESTAMP .)
-    BYTES           reduce using rule 79 (type -> TIMESTAMP .)
-    OPERATION       reduce using rule 79 (type -> TIMESTAMP .)
-    ADDRESS         reduce using rule 79 (type -> TIMESTAMP .)
-    TIMESTAMP       reduce using rule 79 (type -> TIMESTAMP .)
-    LPARENS         reduce using rule 79 (type -> TIMESTAMP .)
-    $end            reduce using rule 79 (type -> TIMESTAMP .)
-    RBRACKET        reduce using rule 79 (type -> TIMESTAMP .)
-    NUMBER          reduce using rule 79 (type -> TIMESTAMP .)
-    TEXT            reduce using rule 79 (type -> TIMESTAMP .)
-    TRUE            reduce using rule 79 (type -> TIMESTAMP .)
-    FALSE           reduce using rule 79 (type -> TIMESTAMP .)
-    LBRACKET        reduce using rule 79 (type -> TIMESTAMP .)
-    RPARENS         reduce using rule 79 (type -> TIMESTAMP .)
-
+    body                           shift and go to state 106
 
 state 78
 
-    (80) type -> LPARENS . LPAIR type type RPARENS
+    (3) contract_decl -> PARAMETER type . SCOLON STORAGE type SCOLON
 
-    LPAIR           shift and go to state 97
+    SCOLON          shift and go to state 107
 
 
 state 79
+
+    (74) type -> NAT .
+
+    SCOLON          reduce using rule 74 (type -> NAT .)
+    NAT             reduce using rule 74 (type -> NAT .)
+    STRING          reduce using rule 74 (type -> NAT .)
+    INT             reduce using rule 74 (type -> NAT .)
+    BOOL            reduce using rule 74 (type -> NAT .)
+    BYTES           reduce using rule 74 (type -> NAT .)
+    OPERATION       reduce using rule 74 (type -> NAT .)
+    ADDRESS         reduce using rule 74 (type -> NAT .)
+    TIMESTAMP       reduce using rule 74 (type -> NAT .)
+    LPARENS         reduce using rule 74 (type -> NAT .)
+    $end            reduce using rule 74 (type -> NAT .)
+    RBRACKET        reduce using rule 74 (type -> NAT .)
+    NUMBER          reduce using rule 74 (type -> NAT .)
+    TEXT            reduce using rule 74 (type -> NAT .)
+    TRUE            reduce using rule 74 (type -> NAT .)
+    FALSE           reduce using rule 74 (type -> NAT .)
+    LBRACKET        reduce using rule 74 (type -> NAT .)
+    RPARENS         reduce using rule 74 (type -> NAT .)
+
+
+state 80
+
+    (75) type -> STRING .
+
+    SCOLON          reduce using rule 75 (type -> STRING .)
+    NAT             reduce using rule 75 (type -> STRING .)
+    STRING          reduce using rule 75 (type -> STRING .)
+    INT             reduce using rule 75 (type -> STRING .)
+    BOOL            reduce using rule 75 (type -> STRING .)
+    BYTES           reduce using rule 75 (type -> STRING .)
+    OPERATION       reduce using rule 75 (type -> STRING .)
+    ADDRESS         reduce using rule 75 (type -> STRING .)
+    TIMESTAMP       reduce using rule 75 (type -> STRING .)
+    LPARENS         reduce using rule 75 (type -> STRING .)
+    $end            reduce using rule 75 (type -> STRING .)
+    RBRACKET        reduce using rule 75 (type -> STRING .)
+    NUMBER          reduce using rule 75 (type -> STRING .)
+    TEXT            reduce using rule 75 (type -> STRING .)
+    TRUE            reduce using rule 75 (type -> STRING .)
+    FALSE           reduce using rule 75 (type -> STRING .)
+    LBRACKET        reduce using rule 75 (type -> STRING .)
+    RPARENS         reduce using rule 75 (type -> STRING .)
+
+
+state 81
+
+    (76) type -> INT .
+
+    SCOLON          reduce using rule 76 (type -> INT .)
+    NAT             reduce using rule 76 (type -> INT .)
+    STRING          reduce using rule 76 (type -> INT .)
+    INT             reduce using rule 76 (type -> INT .)
+    BOOL            reduce using rule 76 (type -> INT .)
+    BYTES           reduce using rule 76 (type -> INT .)
+    OPERATION       reduce using rule 76 (type -> INT .)
+    ADDRESS         reduce using rule 76 (type -> INT .)
+    TIMESTAMP       reduce using rule 76 (type -> INT .)
+    LPARENS         reduce using rule 76 (type -> INT .)
+    $end            reduce using rule 76 (type -> INT .)
+    RBRACKET        reduce using rule 76 (type -> INT .)
+    NUMBER          reduce using rule 76 (type -> INT .)
+    TEXT            reduce using rule 76 (type -> INT .)
+    TRUE            reduce using rule 76 (type -> INT .)
+    FALSE           reduce using rule 76 (type -> INT .)
+    LBRACKET        reduce using rule 76 (type -> INT .)
+    RPARENS         reduce using rule 76 (type -> INT .)
+
+
+state 82
+
+    (77) type -> BOOL .
+
+    SCOLON          reduce using rule 77 (type -> BOOL .)
+    NAT             reduce using rule 77 (type -> BOOL .)
+    STRING          reduce using rule 77 (type -> BOOL .)
+    INT             reduce using rule 77 (type -> BOOL .)
+    BOOL            reduce using rule 77 (type -> BOOL .)
+    BYTES           reduce using rule 77 (type -> BOOL .)
+    OPERATION       reduce using rule 77 (type -> BOOL .)
+    ADDRESS         reduce using rule 77 (type -> BOOL .)
+    TIMESTAMP       reduce using rule 77 (type -> BOOL .)
+    LPARENS         reduce using rule 77 (type -> BOOL .)
+    $end            reduce using rule 77 (type -> BOOL .)
+    RBRACKET        reduce using rule 77 (type -> BOOL .)
+    NUMBER          reduce using rule 77 (type -> BOOL .)
+    TEXT            reduce using rule 77 (type -> BOOL .)
+    TRUE            reduce using rule 77 (type -> BOOL .)
+    FALSE           reduce using rule 77 (type -> BOOL .)
+    LBRACKET        reduce using rule 77 (type -> BOOL .)
+    RPARENS         reduce using rule 77 (type -> BOOL .)
+
+
+state 83
+
+    (78) type -> BYTES .
+
+    SCOLON          reduce using rule 78 (type -> BYTES .)
+    NAT             reduce using rule 78 (type -> BYTES .)
+    STRING          reduce using rule 78 (type -> BYTES .)
+    INT             reduce using rule 78 (type -> BYTES .)
+    BOOL            reduce using rule 78 (type -> BYTES .)
+    BYTES           reduce using rule 78 (type -> BYTES .)
+    OPERATION       reduce using rule 78 (type -> BYTES .)
+    ADDRESS         reduce using rule 78 (type -> BYTES .)
+    TIMESTAMP       reduce using rule 78 (type -> BYTES .)
+    LPARENS         reduce using rule 78 (type -> BYTES .)
+    $end            reduce using rule 78 (type -> BYTES .)
+    RBRACKET        reduce using rule 78 (type -> BYTES .)
+    NUMBER          reduce using rule 78 (type -> BYTES .)
+    TEXT            reduce using rule 78 (type -> BYTES .)
+    TRUE            reduce using rule 78 (type -> BYTES .)
+    FALSE           reduce using rule 78 (type -> BYTES .)
+    LBRACKET        reduce using rule 78 (type -> BYTES .)
+    RPARENS         reduce using rule 78 (type -> BYTES .)
+
+
+state 84
+
+    (79) type -> OPERATION .
+
+    SCOLON          reduce using rule 79 (type -> OPERATION .)
+    NAT             reduce using rule 79 (type -> OPERATION .)
+    STRING          reduce using rule 79 (type -> OPERATION .)
+    INT             reduce using rule 79 (type -> OPERATION .)
+    BOOL            reduce using rule 79 (type -> OPERATION .)
+    BYTES           reduce using rule 79 (type -> OPERATION .)
+    OPERATION       reduce using rule 79 (type -> OPERATION .)
+    ADDRESS         reduce using rule 79 (type -> OPERATION .)
+    TIMESTAMP       reduce using rule 79 (type -> OPERATION .)
+    LPARENS         reduce using rule 79 (type -> OPERATION .)
+    $end            reduce using rule 79 (type -> OPERATION .)
+    RBRACKET        reduce using rule 79 (type -> OPERATION .)
+    NUMBER          reduce using rule 79 (type -> OPERATION .)
+    TEXT            reduce using rule 79 (type -> OPERATION .)
+    TRUE            reduce using rule 79 (type -> OPERATION .)
+    FALSE           reduce using rule 79 (type -> OPERATION .)
+    LBRACKET        reduce using rule 79 (type -> OPERATION .)
+    RPARENS         reduce using rule 79 (type -> OPERATION .)
+
+
+state 85
+
+    (80) type -> ADDRESS .
+
+    SCOLON          reduce using rule 80 (type -> ADDRESS .)
+    NAT             reduce using rule 80 (type -> ADDRESS .)
+    STRING          reduce using rule 80 (type -> ADDRESS .)
+    INT             reduce using rule 80 (type -> ADDRESS .)
+    BOOL            reduce using rule 80 (type -> ADDRESS .)
+    BYTES           reduce using rule 80 (type -> ADDRESS .)
+    OPERATION       reduce using rule 80 (type -> ADDRESS .)
+    ADDRESS         reduce using rule 80 (type -> ADDRESS .)
+    TIMESTAMP       reduce using rule 80 (type -> ADDRESS .)
+    LPARENS         reduce using rule 80 (type -> ADDRESS .)
+    $end            reduce using rule 80 (type -> ADDRESS .)
+    RBRACKET        reduce using rule 80 (type -> ADDRESS .)
+    NUMBER          reduce using rule 80 (type -> ADDRESS .)
+    TEXT            reduce using rule 80 (type -> ADDRESS .)
+    TRUE            reduce using rule 80 (type -> ADDRESS .)
+    FALSE           reduce using rule 80 (type -> ADDRESS .)
+    LBRACKET        reduce using rule 80 (type -> ADDRESS .)
+    RPARENS         reduce using rule 80 (type -> ADDRESS .)
+
+
+state 86
+
+    (81) type -> TIMESTAMP .
+
+    SCOLON          reduce using rule 81 (type -> TIMESTAMP .)
+    NAT             reduce using rule 81 (type -> TIMESTAMP .)
+    STRING          reduce using rule 81 (type -> TIMESTAMP .)
+    INT             reduce using rule 81 (type -> TIMESTAMP .)
+    BOOL            reduce using rule 81 (type -> TIMESTAMP .)
+    BYTES           reduce using rule 81 (type -> TIMESTAMP .)
+    OPERATION       reduce using rule 81 (type -> TIMESTAMP .)
+    ADDRESS         reduce using rule 81 (type -> TIMESTAMP .)
+    TIMESTAMP       reduce using rule 81 (type -> TIMESTAMP .)
+    LPARENS         reduce using rule 81 (type -> TIMESTAMP .)
+    $end            reduce using rule 81 (type -> TIMESTAMP .)
+    RBRACKET        reduce using rule 81 (type -> TIMESTAMP .)
+    NUMBER          reduce using rule 81 (type -> TIMESTAMP .)
+    TEXT            reduce using rule 81 (type -> TIMESTAMP .)
+    TRUE            reduce using rule 81 (type -> TIMESTAMP .)
+    FALSE           reduce using rule 81 (type -> TIMESTAMP .)
+    LBRACKET        reduce using rule 81 (type -> TIMESTAMP .)
+    RPARENS         reduce using rule 81 (type -> TIMESTAMP .)
+
+
+state 87
+
+    (82) type -> LPARENS . LPAIR type type RPARENS
+
+    LPAIR           shift and go to state 108
+
+
+state 88
 
     (6) execution -> compound_statement SCOLON .
     (9) compound_statement -> compound_statement SCOLON . stmt
@@ -1474,28 +1613,37 @@ state 79
     (52) stmt -> . MAP body
     (53) stmt -> . ITER body
     (54) stmt -> . GET
-    (55) stmt -> . IF_CONS body body
-    (56) stmt -> . SOME
-    (57) stmt -> . NONE type
-    (58) stmt -> . LEFT type
-    (59) stmt -> . RIGHT type
-    (60) stmt -> . CONS
-    (61) stmt -> . NIL type
-    (62) stmt -> . NOT
-    (63) stmt -> . EXEC
-    (64) stmt -> . STEPS_TO_QUOTA
-    (65) stmt -> . NOW
-    (66) stmt -> . CONTRACT type
-    (67) stmt -> . HASH_KEY
-    (68) stmt -> . BLAKE2B
-    (69) stmt -> . SHA256
-    (70) stmt -> . SHA512
-    (71) stmt -> . CHECK_SIGNATURE
-    (81) stmt -> . DIP body
-    (82) stmt -> . PUSH type value
-    (83) stmt -> . FAILWITH
-    (84) stmt -> . FAIL
-    (85) stmt -> . PRINTER
+    (55) stmt -> . IF_LEFT body body
+    (56) stmt -> . IF_RIGHT body body
+    (57) stmt -> . IF_CONS body body
+    (58) stmt -> . SOME
+    (59) stmt -> . NONE type
+    (60) stmt -> . LEFT type
+    (61) stmt -> . RIGHT type
+    (62) stmt -> . CONS
+    (63) stmt -> . NIL type
+    (64) stmt -> . NOT
+    (65) stmt -> . EXEC
+    (66) stmt -> . STEPS_TO_QUOTA
+    (67) stmt -> . NOW
+    (68) stmt -> . CONTRACT type
+    (69) stmt -> . HASH_KEY
+    (70) stmt -> . BLAKE2B
+    (71) stmt -> . SHA256
+    (72) stmt -> . SHA512
+    (73) stmt -> . CHECK_SIGNATURE
+    (83) stmt -> . DIP body
+    (84) stmt -> . PUSH type value
+    (85) stmt -> . ASSERT
+    (86) stmt -> . ASSERT_EQ
+    (87) stmt -> . ASSERT_NEQ
+    (88) stmt -> . ASSERT_LT
+    (89) stmt -> . ASSERT_LTE
+    (90) stmt -> . ASSERT_GT
+    (91) stmt -> . ASSERT_GTE
+    (92) stmt -> . FAILWITH
+    (93) stmt -> . FAIL
+    (94) stmt -> . PRINTER
 
     $end            reduce using rule 6 (execution -> compound_statement SCOLON .)
     LAMBDA          shift and go to state 9
@@ -1534,42 +1682,51 @@ state 79
     MAP             shift and go to state 42
     ITER            shift and go to state 43
     GET             shift and go to state 44
-    IF_CONS         shift and go to state 45
-    SOME            shift and go to state 46
-    NONE            shift and go to state 47
-    LEFT            shift and go to state 48
-    RIGHT           shift and go to state 49
-    CONS            shift and go to state 50
-    NIL             shift and go to state 51
-    NOT             shift and go to state 52
-    EXEC            shift and go to state 53
-    STEPS_TO_QUOTA  shift and go to state 54
-    NOW             shift and go to state 55
-    CONTRACT        shift and go to state 56
-    HASH_KEY        shift and go to state 57
-    BLAKE2B         shift and go to state 58
-    SHA256          shift and go to state 59
-    SHA512          shift and go to state 60
-    CHECK_SIGNATURE shift and go to state 61
-    DIP             shift and go to state 62
-    PUSH            shift and go to state 63
-    FAILWITH        shift and go to state 64
-    FAIL            shift and go to state 65
-    PRINTER         shift and go to state 66
+    IF_LEFT         shift and go to state 45
+    IF_RIGHT        shift and go to state 46
+    IF_CONS         shift and go to state 47
+    SOME            shift and go to state 48
+    NONE            shift and go to state 49
+    LEFT            shift and go to state 50
+    RIGHT           shift and go to state 51
+    CONS            shift and go to state 52
+    NIL             shift and go to state 53
+    NOT             shift and go to state 54
+    EXEC            shift and go to state 55
+    STEPS_TO_QUOTA  shift and go to state 56
+    NOW             shift and go to state 57
+    CONTRACT        shift and go to state 58
+    HASH_KEY        shift and go to state 59
+    BLAKE2B         shift and go to state 60
+    SHA256          shift and go to state 61
+    SHA512          shift and go to state 62
+    CHECK_SIGNATURE shift and go to state 63
+    DIP             shift and go to state 64
+    PUSH            shift and go to state 65
+    ASSERT          shift and go to state 66
+    ASSERT_EQ       shift and go to state 67
+    ASSERT_NEQ      shift and go to state 68
+    ASSERT_LT       shift and go to state 69
+    ASSERT_LTE      shift and go to state 70
+    ASSERT_GT       shift and go to state 71
+    ASSERT_GTE      shift and go to state 72
+    FAILWITH        shift and go to state 73
+    FAIL            shift and go to state 74
+    PRINTER         shift and go to state 75
 
-    stmt                           shift and go to state 98
+    stmt                           shift and go to state 109
 
-state 80
+state 89
 
     (10) body -> LBRACKET compound_statement . SCOLON RBRACKET
     (11) body -> LBRACKET compound_statement . RBRACKET
     (9) compound_statement -> compound_statement . SCOLON stmt
 
-    SCOLON          shift and go to state 99
-    RBRACKET        shift and go to state 100
+    SCOLON          shift and go to state 110
+    RBRACKET        shift and go to state 111
 
 
-state 81
+state 90
 
     (12) body -> LBRACKET RBRACKET .
 
@@ -1579,32 +1736,32 @@ state 81
     LBRACKET        reduce using rule 12 (body -> LBRACKET RBRACKET .)
 
 
-state 82
+state 91
 
     (13) stmt -> LAMBDA type . type body
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 101
+    type                           shift and go to state 112
 
-state 83
+state 92
 
     (48) stmt -> EMPTY_SET type .
 
@@ -1613,32 +1770,32 @@ state 83
     RBRACKET        reduce using rule 48 (stmt -> EMPTY_SET type .)
 
 
-state 84
+state 93
 
     (51) stmt -> EMPTY_MAP type . type
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 102
+    type                           shift and go to state 113
 
-state 85
+state 94
 
     (52) stmt -> MAP body .
 
@@ -1647,7 +1804,7 @@ state 85
     RBRACKET        reduce using rule 52 (stmt -> MAP body .)
 
 
-state 86
+state 95
 
     (53) stmt -> ITER body .
 
@@ -1656,74 +1813,96 @@ state 86
     RBRACKET        reduce using rule 53 (stmt -> ITER body .)
 
 
-state 87
+state 96
 
-    (55) stmt -> IF_CONS body . body
+    (55) stmt -> IF_LEFT body . body
     (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
     (11) body -> . LBRACKET compound_statement RBRACKET
     (12) body -> . LBRACKET RBRACKET
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 103
+    body                           shift and go to state 114
 
-state 88
+state 97
 
-    (57) stmt -> NONE type .
+    (56) stmt -> IF_RIGHT body . body
+    (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
+    (11) body -> . LBRACKET compound_statement RBRACKET
+    (12) body -> . LBRACKET RBRACKET
 
-    SCOLON          reduce using rule 57 (stmt -> NONE type .)
-    $end            reduce using rule 57 (stmt -> NONE type .)
-    RBRACKET        reduce using rule 57 (stmt -> NONE type .)
+    LBRACKET        shift and go to state 8
 
+    body                           shift and go to state 115
 
-state 89
+state 98
 
-    (58) stmt -> LEFT type .
+    (57) stmt -> IF_CONS body . body
+    (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
+    (11) body -> . LBRACKET compound_statement RBRACKET
+    (12) body -> . LBRACKET RBRACKET
 
-    SCOLON          reduce using rule 58 (stmt -> LEFT type .)
-    $end            reduce using rule 58 (stmt -> LEFT type .)
-    RBRACKET        reduce using rule 58 (stmt -> LEFT type .)
+    LBRACKET        shift and go to state 8
 
+    body                           shift and go to state 116
 
-state 90
+state 99
 
-    (59) stmt -> RIGHT type .
+    (59) stmt -> NONE type .
 
-    SCOLON          reduce using rule 59 (stmt -> RIGHT type .)
-    $end            reduce using rule 59 (stmt -> RIGHT type .)
-    RBRACKET        reduce using rule 59 (stmt -> RIGHT type .)
-
-
-state 91
-
-    (61) stmt -> NIL type .
-
-    SCOLON          reduce using rule 61 (stmt -> NIL type .)
-    $end            reduce using rule 61 (stmt -> NIL type .)
-    RBRACKET        reduce using rule 61 (stmt -> NIL type .)
+    SCOLON          reduce using rule 59 (stmt -> NONE type .)
+    $end            reduce using rule 59 (stmt -> NONE type .)
+    RBRACKET        reduce using rule 59 (stmt -> NONE type .)
 
 
-state 92
+state 100
 
-    (66) stmt -> CONTRACT type .
+    (60) stmt -> LEFT type .
 
-    SCOLON          reduce using rule 66 (stmt -> CONTRACT type .)
-    $end            reduce using rule 66 (stmt -> CONTRACT type .)
-    RBRACKET        reduce using rule 66 (stmt -> CONTRACT type .)
-
-
-state 93
-
-    (81) stmt -> DIP body .
-
-    SCOLON          reduce using rule 81 (stmt -> DIP body .)
-    $end            reduce using rule 81 (stmt -> DIP body .)
-    RBRACKET        reduce using rule 81 (stmt -> DIP body .)
+    SCOLON          reduce using rule 60 (stmt -> LEFT type .)
+    $end            reduce using rule 60 (stmt -> LEFT type .)
+    RBRACKET        reduce using rule 60 (stmt -> LEFT type .)
 
 
-state 94
+state 101
 
-    (82) stmt -> PUSH type . value
+    (61) stmt -> RIGHT type .
+
+    SCOLON          reduce using rule 61 (stmt -> RIGHT type .)
+    $end            reduce using rule 61 (stmt -> RIGHT type .)
+    RBRACKET        reduce using rule 61 (stmt -> RIGHT type .)
+
+
+state 102
+
+    (63) stmt -> NIL type .
+
+    SCOLON          reduce using rule 63 (stmt -> NIL type .)
+    $end            reduce using rule 63 (stmt -> NIL type .)
+    RBRACKET        reduce using rule 63 (stmt -> NIL type .)
+
+
+state 103
+
+    (68) stmt -> CONTRACT type .
+
+    SCOLON          reduce using rule 68 (stmt -> CONTRACT type .)
+    $end            reduce using rule 68 (stmt -> CONTRACT type .)
+    RBRACKET        reduce using rule 68 (stmt -> CONTRACT type .)
+
+
+state 104
+
+    (83) stmt -> DIP body .
+
+    SCOLON          reduce using rule 83 (stmt -> DIP body .)
+    $end            reduce using rule 83 (stmt -> DIP body .)
+    RBRACKET        reduce using rule 83 (stmt -> DIP body .)
+
+
+state 105
+
+    (84) stmt -> PUSH type . value
     (20) value -> . NUMBER
     (21) value -> . bool
     (22) value -> . TEXT
@@ -1731,55 +1910,55 @@ state 94
     (18) bool -> . TRUE
     (19) bool -> . FALSE
 
-    NUMBER          shift and go to state 105
-    TEXT            shift and go to state 107
-    LPARENS         shift and go to state 108
-    TRUE            shift and go to state 109
-    FALSE           shift and go to state 110
+    NUMBER          shift and go to state 118
+    TEXT            shift and go to state 120
+    LPARENS         shift and go to state 121
+    TRUE            shift and go to state 122
+    FALSE           shift and go to state 123
 
-    value                          shift and go to state 104
-    bool                           shift and go to state 106
+    value                          shift and go to state 117
+    bool                           shift and go to state 119
 
-state 95
+state 106
 
     (4) code_decl -> CODE body .
 
     $end            reduce using rule 4 (code_decl -> CODE body .)
 
 
-state 96
+state 107
 
     (3) contract_decl -> PARAMETER type SCOLON . STORAGE type SCOLON
 
-    STORAGE         shift and go to state 111
+    STORAGE         shift and go to state 124
 
 
-state 97
+state 108
 
-    (80) type -> LPARENS LPAIR . type type RPARENS
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (82) type -> LPARENS LPAIR . type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 112
+    type                           shift and go to state 125
 
-state 98
+state 109
 
     (9) compound_statement -> compound_statement SCOLON stmt .
 
@@ -1788,7 +1967,7 @@ state 98
     RBRACKET        reduce using rule 9 (compound_statement -> compound_statement SCOLON stmt .)
 
 
-state 99
+state 110
 
     (10) body -> LBRACKET compound_statement SCOLON . RBRACKET
     (9) compound_statement -> compound_statement SCOLON . stmt
@@ -1828,30 +2007,39 @@ state 99
     (52) stmt -> . MAP body
     (53) stmt -> . ITER body
     (54) stmt -> . GET
-    (55) stmt -> . IF_CONS body body
-    (56) stmt -> . SOME
-    (57) stmt -> . NONE type
-    (58) stmt -> . LEFT type
-    (59) stmt -> . RIGHT type
-    (60) stmt -> . CONS
-    (61) stmt -> . NIL type
-    (62) stmt -> . NOT
-    (63) stmt -> . EXEC
-    (64) stmt -> . STEPS_TO_QUOTA
-    (65) stmt -> . NOW
-    (66) stmt -> . CONTRACT type
-    (67) stmt -> . HASH_KEY
-    (68) stmt -> . BLAKE2B
-    (69) stmt -> . SHA256
-    (70) stmt -> . SHA512
-    (71) stmt -> . CHECK_SIGNATURE
-    (81) stmt -> . DIP body
-    (82) stmt -> . PUSH type value
-    (83) stmt -> . FAILWITH
-    (84) stmt -> . FAIL
-    (85) stmt -> . PRINTER
+    (55) stmt -> . IF_LEFT body body
+    (56) stmt -> . IF_RIGHT body body
+    (57) stmt -> . IF_CONS body body
+    (58) stmt -> . SOME
+    (59) stmt -> . NONE type
+    (60) stmt -> . LEFT type
+    (61) stmt -> . RIGHT type
+    (62) stmt -> . CONS
+    (63) stmt -> . NIL type
+    (64) stmt -> . NOT
+    (65) stmt -> . EXEC
+    (66) stmt -> . STEPS_TO_QUOTA
+    (67) stmt -> . NOW
+    (68) stmt -> . CONTRACT type
+    (69) stmt -> . HASH_KEY
+    (70) stmt -> . BLAKE2B
+    (71) stmt -> . SHA256
+    (72) stmt -> . SHA512
+    (73) stmt -> . CHECK_SIGNATURE
+    (83) stmt -> . DIP body
+    (84) stmt -> . PUSH type value
+    (85) stmt -> . ASSERT
+    (86) stmt -> . ASSERT_EQ
+    (87) stmt -> . ASSERT_NEQ
+    (88) stmt -> . ASSERT_LT
+    (89) stmt -> . ASSERT_LTE
+    (90) stmt -> . ASSERT_GT
+    (91) stmt -> . ASSERT_GTE
+    (92) stmt -> . FAILWITH
+    (93) stmt -> . FAIL
+    (94) stmt -> . PRINTER
 
-    RBRACKET        shift and go to state 113
+    RBRACKET        shift and go to state 126
     LAMBDA          shift and go to state 9
     DROP            shift and go to state 10
     DUP             shift and go to state 11
@@ -1888,32 +2076,41 @@ state 99
     MAP             shift and go to state 42
     ITER            shift and go to state 43
     GET             shift and go to state 44
-    IF_CONS         shift and go to state 45
-    SOME            shift and go to state 46
-    NONE            shift and go to state 47
-    LEFT            shift and go to state 48
-    RIGHT           shift and go to state 49
-    CONS            shift and go to state 50
-    NIL             shift and go to state 51
-    NOT             shift and go to state 52
-    EXEC            shift and go to state 53
-    STEPS_TO_QUOTA  shift and go to state 54
-    NOW             shift and go to state 55
-    CONTRACT        shift and go to state 56
-    HASH_KEY        shift and go to state 57
-    BLAKE2B         shift and go to state 58
-    SHA256          shift and go to state 59
-    SHA512          shift and go to state 60
-    CHECK_SIGNATURE shift and go to state 61
-    DIP             shift and go to state 62
-    PUSH            shift and go to state 63
-    FAILWITH        shift and go to state 64
-    FAIL            shift and go to state 65
-    PRINTER         shift and go to state 66
+    IF_LEFT         shift and go to state 45
+    IF_RIGHT        shift and go to state 46
+    IF_CONS         shift and go to state 47
+    SOME            shift and go to state 48
+    NONE            shift and go to state 49
+    LEFT            shift and go to state 50
+    RIGHT           shift and go to state 51
+    CONS            shift and go to state 52
+    NIL             shift and go to state 53
+    NOT             shift and go to state 54
+    EXEC            shift and go to state 55
+    STEPS_TO_QUOTA  shift and go to state 56
+    NOW             shift and go to state 57
+    CONTRACT        shift and go to state 58
+    HASH_KEY        shift and go to state 59
+    BLAKE2B         shift and go to state 60
+    SHA256          shift and go to state 61
+    SHA512          shift and go to state 62
+    CHECK_SIGNATURE shift and go to state 63
+    DIP             shift and go to state 64
+    PUSH            shift and go to state 65
+    ASSERT          shift and go to state 66
+    ASSERT_EQ       shift and go to state 67
+    ASSERT_NEQ      shift and go to state 68
+    ASSERT_LT       shift and go to state 69
+    ASSERT_LTE      shift and go to state 70
+    ASSERT_GT       shift and go to state 71
+    ASSERT_GTE      shift and go to state 72
+    FAILWITH        shift and go to state 73
+    FAIL            shift and go to state 74
+    PRINTER         shift and go to state 75
 
-    stmt                           shift and go to state 98
+    stmt                           shift and go to state 109
 
-state 100
+state 111
 
     (11) body -> LBRACKET compound_statement RBRACKET .
 
@@ -1923,7 +2120,7 @@ state 100
     LBRACKET        reduce using rule 11 (body -> LBRACKET compound_statement RBRACKET .)
 
 
-state 101
+state 112
 
     (13) stmt -> LAMBDA type type . body
     (10) body -> . LBRACKET compound_statement SCOLON RBRACKET
@@ -1932,9 +2129,9 @@ state 101
 
     LBRACKET        shift and go to state 8
 
-    body                           shift and go to state 114
+    body                           shift and go to state 127
 
-state 102
+state 113
 
     (51) stmt -> EMPTY_MAP type type .
 
@@ -1943,25 +2140,43 @@ state 102
     RBRACKET        reduce using rule 51 (stmt -> EMPTY_MAP type type .)
 
 
-state 103
+state 114
 
-    (55) stmt -> IF_CONS body body .
+    (55) stmt -> IF_LEFT body body .
 
-    SCOLON          reduce using rule 55 (stmt -> IF_CONS body body .)
-    $end            reduce using rule 55 (stmt -> IF_CONS body body .)
-    RBRACKET        reduce using rule 55 (stmt -> IF_CONS body body .)
-
-
-state 104
-
-    (82) stmt -> PUSH type value .
-
-    SCOLON          reduce using rule 82 (stmt -> PUSH type value .)
-    $end            reduce using rule 82 (stmt -> PUSH type value .)
-    RBRACKET        reduce using rule 82 (stmt -> PUSH type value .)
+    SCOLON          reduce using rule 55 (stmt -> IF_LEFT body body .)
+    $end            reduce using rule 55 (stmt -> IF_LEFT body body .)
+    RBRACKET        reduce using rule 55 (stmt -> IF_LEFT body body .)
 
 
-state 105
+state 115
+
+    (56) stmt -> IF_RIGHT body body .
+
+    SCOLON          reduce using rule 56 (stmt -> IF_RIGHT body body .)
+    $end            reduce using rule 56 (stmt -> IF_RIGHT body body .)
+    RBRACKET        reduce using rule 56 (stmt -> IF_RIGHT body body .)
+
+
+state 116
+
+    (57) stmt -> IF_CONS body body .
+
+    SCOLON          reduce using rule 57 (stmt -> IF_CONS body body .)
+    $end            reduce using rule 57 (stmt -> IF_CONS body body .)
+    RBRACKET        reduce using rule 57 (stmt -> IF_CONS body body .)
+
+
+state 117
+
+    (84) stmt -> PUSH type value .
+
+    SCOLON          reduce using rule 84 (stmt -> PUSH type value .)
+    $end            reduce using rule 84 (stmt -> PUSH type value .)
+    RBRACKET        reduce using rule 84 (stmt -> PUSH type value .)
+
+
+state 118
 
     (20) value -> NUMBER .
 
@@ -1976,7 +2191,7 @@ state 105
     RPARENS         reduce using rule 20 (value -> NUMBER .)
 
 
-state 106
+state 119
 
     (21) value -> bool .
 
@@ -1991,7 +2206,7 @@ state 106
     RPARENS         reduce using rule 21 (value -> bool .)
 
 
-state 107
+state 120
 
     (22) value -> TEXT .
 
@@ -2006,14 +2221,14 @@ state 107
     RPARENS         reduce using rule 22 (value -> TEXT .)
 
 
-state 108
+state 121
 
     (23) value -> LPARENS . PAIR_CONSTRUCTOR value value RPARENS
 
-    PAIR_CONSTRUCTOR shift and go to state 115
+    PAIR_CONSTRUCTOR shift and go to state 128
 
 
-state 109
+state 122
 
     (18) bool -> TRUE .
 
@@ -2028,7 +2243,7 @@ state 109
     RPARENS         reduce using rule 18 (bool -> TRUE .)
 
 
-state 110
+state 123
 
     (19) bool -> FALSE .
 
@@ -2043,57 +2258,57 @@ state 110
     RPARENS         reduce using rule 19 (bool -> FALSE .)
 
 
-state 111
+state 124
 
     (3) contract_decl -> PARAMETER type SCOLON STORAGE . type SCOLON
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 116
+    type                           shift and go to state 129
 
-state 112
+state 125
 
-    (80) type -> LPARENS LPAIR type . type RPARENS
-    (72) type -> . NAT
-    (73) type -> . STRING
-    (74) type -> . INT
-    (75) type -> . BOOL
-    (76) type -> . BYTES
-    (77) type -> . OPERATION
-    (78) type -> . ADDRESS
-    (79) type -> . TIMESTAMP
-    (80) type -> . LPARENS LPAIR type type RPARENS
+    (82) type -> LPARENS LPAIR type . type RPARENS
+    (74) type -> . NAT
+    (75) type -> . STRING
+    (76) type -> . INT
+    (77) type -> . BOOL
+    (78) type -> . BYTES
+    (79) type -> . OPERATION
+    (80) type -> . ADDRESS
+    (81) type -> . TIMESTAMP
+    (82) type -> . LPARENS LPAIR type type RPARENS
 
-    NAT             shift and go to state 70
-    STRING          shift and go to state 71
-    INT             shift and go to state 72
-    BOOL            shift and go to state 73
-    BYTES           shift and go to state 74
-    OPERATION       shift and go to state 75
-    ADDRESS         shift and go to state 76
-    TIMESTAMP       shift and go to state 77
-    LPARENS         shift and go to state 78
+    NAT             shift and go to state 79
+    STRING          shift and go to state 80
+    INT             shift and go to state 81
+    BOOL            shift and go to state 82
+    BYTES           shift and go to state 83
+    OPERATION       shift and go to state 84
+    ADDRESS         shift and go to state 85
+    TIMESTAMP       shift and go to state 86
+    LPARENS         shift and go to state 87
 
-    type                           shift and go to state 117
+    type                           shift and go to state 130
 
-state 113
+state 126
 
     (10) body -> LBRACKET compound_statement SCOLON RBRACKET .
 
@@ -2103,7 +2318,7 @@ state 113
     LBRACKET        reduce using rule 10 (body -> LBRACKET compound_statement SCOLON RBRACKET .)
 
 
-state 114
+state 127
 
     (13) stmt -> LAMBDA type type body .
 
@@ -2112,7 +2327,7 @@ state 114
     RBRACKET        reduce using rule 13 (stmt -> LAMBDA type type body .)
 
 
-state 115
+state 128
 
     (23) value -> LPARENS PAIR_CONSTRUCTOR . value value RPARENS
     (20) value -> . NUMBER
@@ -2122,30 +2337,30 @@ state 115
     (18) bool -> . TRUE
     (19) bool -> . FALSE
 
-    NUMBER          shift and go to state 105
-    TEXT            shift and go to state 107
-    LPARENS         shift and go to state 108
-    TRUE            shift and go to state 109
-    FALSE           shift and go to state 110
+    NUMBER          shift and go to state 118
+    TEXT            shift and go to state 120
+    LPARENS         shift and go to state 121
+    TRUE            shift and go to state 122
+    FALSE           shift and go to state 123
 
-    value                          shift and go to state 118
-    bool                           shift and go to state 106
+    value                          shift and go to state 131
+    bool                           shift and go to state 119
 
-state 116
+state 129
 
     (3) contract_decl -> PARAMETER type SCOLON STORAGE type . SCOLON
 
-    SCOLON          shift and go to state 119
+    SCOLON          shift and go to state 132
 
 
-state 117
+state 130
 
-    (80) type -> LPARENS LPAIR type type . RPARENS
+    (82) type -> LPARENS LPAIR type type . RPARENS
 
-    RPARENS         shift and go to state 120
+    RPARENS         shift and go to state 133
 
 
-state 118
+state 131
 
     (23) value -> LPARENS PAIR_CONSTRUCTOR value . value RPARENS
     (20) value -> . NUMBER
@@ -2155,54 +2370,54 @@ state 118
     (18) bool -> . TRUE
     (19) bool -> . FALSE
 
-    NUMBER          shift and go to state 105
-    TEXT            shift and go to state 107
-    LPARENS         shift and go to state 108
-    TRUE            shift and go to state 109
-    FALSE           shift and go to state 110
+    NUMBER          shift and go to state 118
+    TEXT            shift and go to state 120
+    LPARENS         shift and go to state 121
+    TRUE            shift and go to state 122
+    FALSE           shift and go to state 123
 
-    value                          shift and go to state 121
-    bool                           shift and go to state 106
+    value                          shift and go to state 134
+    bool                           shift and go to state 119
 
-state 119
+state 132
 
     (3) contract_decl -> PARAMETER type SCOLON STORAGE type SCOLON .
 
     CODE            reduce using rule 3 (contract_decl -> PARAMETER type SCOLON STORAGE type SCOLON .)
 
 
-state 120
+state 133
 
-    (80) type -> LPARENS LPAIR type type RPARENS .
+    (82) type -> LPARENS LPAIR type type RPARENS .
 
-    SCOLON          reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    NAT             reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    STRING          reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    INT             reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    BOOL            reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    BYTES           reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    OPERATION       reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    ADDRESS         reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    TIMESTAMP       reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    LPARENS         reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    $end            reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    RBRACKET        reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    NUMBER          reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    TEXT            reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    TRUE            reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    FALSE           reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    LBRACKET        reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
-    RPARENS         reduce using rule 80 (type -> LPARENS LPAIR type type RPARENS .)
+    SCOLON          reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    NAT             reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    STRING          reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    INT             reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    BOOL            reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    BYTES           reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    OPERATION       reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    ADDRESS         reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    TIMESTAMP       reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    LPARENS         reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    $end            reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    RBRACKET        reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    NUMBER          reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    TEXT            reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    TRUE            reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    FALSE           reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    LBRACKET        reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
+    RPARENS         reduce using rule 82 (type -> LPARENS LPAIR type type RPARENS .)
 
 
-state 121
+state 134
 
     (23) value -> LPARENS PAIR_CONSTRUCTOR value value . RPARENS
 
-    RPARENS         shift and go to state 122
+    RPARENS         shift and go to state 135
 
 
-state 122
+state 135
 
     (23) value -> LPARENS PAIR_CONSTRUCTOR value value RPARENS .
 

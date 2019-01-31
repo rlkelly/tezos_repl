@@ -86,8 +86,8 @@ tokens = (
     ### Union Operations
     'LEFT',
     'RIGHT',
-    # 'IF_LEFT',
-    # 'IF_RIGHT',
+    'IF_LEFT',
+    'IF_RIGHT',
 
     ### Operations on Lists
     'CONS',
@@ -139,6 +139,25 @@ tokens = (
     ### DEBUG
     'PRINTER',
 
+    ### Assertion Macros
+    'ASSERT',
+    'ASSERT_EQ',
+    'ASSERT_NEQ',
+    'ASSERT_LT',
+    'ASSERT_LTE',
+    'ASSERT_GT',
+    'ASSERT_GTE',
+    'ASSERT_CMPEQ',
+    'ASSERT_CMPNEQ',
+    'ASSERT_CMPLT',
+    'ASSERT_CMPLTE',
+    'ASSERT_CMPGT',
+    'ASSERT_CMPGTE',
+    'ASSERT_NONE',
+    'ASSERT_SOME',
+    'ASSERT_LEFT',
+    'ASSERT_RIGHT'
+
     ### type decl
     'PARAMETER',
     'STORAGE',
@@ -156,6 +175,7 @@ t_PUSH        = 'PUSH'
 t_LAMBDA      = 'LAMBDA'
 t_EXEC        = 'EXEC'
 t_DIP         = 'DI*P'
+t_DUP         = 'DU*P'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -212,6 +232,8 @@ t_NONE          = 'NONE'
 ### Union Operations
 t_LEFT          = 'LEFT'
 t_RIGHT         = 'RIGHT'
+t_IF_LEFT       = 'IF_LEFT'
+t_IF_RIGHT      = 'IF_RIGHT'
 
 ### List Operations
 t_CONS          = 'CONS'
@@ -228,6 +250,25 @@ t_SHA256          = 'SHA256'
 t_SHA512          = 'SHA512'
 t_CHECK_SIGNATURE = 'CHECK_SIGNATURE'
 
+### Assertion Macros
+t_ASSERT          = 'ASSERT'
+t_ASSERT_EQ       = 'ASSERT_EQ'
+t_ASSERT_NEQ      = 'ASSERT_NEQ'
+t_ASSERT_LT       = 'ASSERT_LT'
+t_ASSERT_LTE      = 'ASSERT_LTE'
+t_ASSERT_GT       = 'ASSERT_GT'
+t_ASSERT_GTE      = 'ASSERT_GTE'
+
+t_ASSERT_CMPEQ    = 'ASSERT_CMPEQ'
+t_ASSERT_CMPNEQ   = 'ASSERT_CMPNEQ'
+t_ASSERT_CMPLT    = 'ASSERT_CMPLT'
+t_ASSERT_CMPLTE   = 'ASSERT_CMPLTE'
+t_ASSERT_CMPGT    = 'ASSERT_CMPGT'
+t_ASSERT_CMPGTE   = 'ASSERT_CMPGTE'
+t_ASSERT_NONE     = 'ASSERT_NONE'
+t_ASSERT_SOME     = 'ASSERT_SOME'
+t_ASSERT_LEFT     = 'ASSERT_LEFT'
+t_ASSERT_RIGHT    = 'ASSERT_RIGHT'
 
 t_NAT         = 'nat'
 t_STRING      = 'string'
@@ -354,8 +395,9 @@ def p_statement_drop(t):
 
 def p_statement_dup(t):
     'stmt : DUP'
+    u_count = len(t[1]) - 2
     def exec_dup(stack):
-        stack.append(stack[-1])
+        stack.append(stack[u_count * -1])
         return stack
     t[0] = exec_dup
 
@@ -397,19 +439,20 @@ def p_statement_generic_comparison(t):
         | GE  '''
     generic_comparison = t[1]
     def exec_generic(stack):
+        top = stack.pop()
         assert isinstance(stack[-1], Int)
         if generic_comparison == 'EQ':
-            stack[-1] = Bool(stack[-1] == 0)
+            stack.append(Bool(top == Int(0)))
         elif generic_comparison == 'NEQ':
-            stack[-1] = Bool(stack[-1] != 0)
+            stack.append(Bool(top != Int(0)))
         elif generic_comparison == 'LT':
-            stack[-1] = Bool(stack[-1] < 0)
+            stack.append(Bool(top < Int(0)))
         elif generic_comparison == 'GT':
-            stack[-1] = Bool(stack[-1] > 0)
+            stack.append(Bool(top > Int(0)))
         elif generic_comparison == 'LE':
-            stack[-1] = Bool(stack[-1] <= 0)
+            stack.append(Bool(top <= Int(0)))
         elif generic_comparison == 'GE':
-            stack[-1] = Bool(stack[-1] >= 0)
+            stack.append(Bool(top >= Int(0)))
         return stack
     t[0] = exec_generic
 
@@ -446,12 +489,10 @@ def p_boolean_comparison(t):
 def p_compare_operation(t):
     'stmt : COMPARE'
     def exec_compare(stack):
-        top = stack.pop(-1)
-        if type(top) in (Int, Nat):
+        value = stack.pop(-1)
+        if type(top) in (Int, Nat, String, Timestamp, Mutez, Bytes, KeyHash):
             value2 = stack.pop(-1)
-            stack.append(value.compare(value2))
-        elif isintance(top, String):
-            value = stack.pop(-1)
+            assert type(value2) == type(value1)
             stack.append(value.compare(value2))
         else:
             print('Invalid Stack State')
@@ -623,6 +664,27 @@ def p_map_operations(t):
         return stack
     t[0] = exec_map_op
 
+def p_if_left_right(t):
+    '''stmt : IF_LEFT body body
+        | IF_RIGHT body body'''
+    command = t[0]
+    first_body = t[2]
+    second_body = t[3]
+
+    def exec_if_left_right(stack):
+        top = stack.pop(-1)
+        assert isinstance(top, Or)
+        if top.isleft:
+            stack.append(top)
+            for arg in first_body:
+                stack = arg(stack)
+        else:
+            stack.append(top)
+            for arg in second_body:
+                stack = arg(stack)
+        return stack
+    t[0] = exec_if_left_right
+
 def p_if_cons(t):
     'stmt : IF_CONS body body'
     first_body = t[2]
@@ -638,6 +700,8 @@ def p_if_cons(t):
             stack.append(top)
             for arg in first_body:
                 stack = arg(stack)
+        return stack
+    t[0] = exec_if_cons
 
 def p_option_operations(t):
     '''stmt : SOME
@@ -837,6 +901,129 @@ def p_statement_push(t):
         return stack
     t[0] = exec_push
 
+def p_assertion_macros(t):
+    '''stmt : ASSERT
+        | ASSERT_EQ
+        | ASSERT_NEQ
+        | ASSERT_LT
+        | ASSERT_LTE
+        | ASSERT_GT
+        | ASSERT_GTE'''
+    command = t[1]
+    def exec_assert(stack):
+        top = stack.pop()
+        if command == 'ASSERT':
+            assert isinstance(top, Bool)
+            if top == Bool(True):
+                return
+            else:
+                print('FAIL')
+                stack.clear()
+        else:
+            if command == 'ASSERT_EQ':
+                if top != Int(0):
+                    print('FAIL')
+                    stack.clear()
+            elif command == 'ASSERT_NEQ':
+                if top == Int(0):
+                    print('FAIL')
+                    stack.clear()
+            elif command == 'ASSERT_LT':
+                if top >= Int(0):
+                    print('FAIL')
+                    stack.clear()
+            elif command == 'ASSERT_LTE':
+                if top > Int(0):
+                    print('FAIL')
+                    stack.clear()
+            elif command == 'ASSERT_GT':
+                if top <= Int(0):
+                    print('FAIL')
+                    stack.clear()
+            elif command == 'ASSERT_GTE':
+                if top < Int(0):
+                    print('FAIL')
+                    stack.clear()
+        return stack
+    t[0] = exec_assert
+
+def p_assert_type_macros(t):
+    '''stmt : ASSERT_NONE
+            | ASSERT_SOME
+            | ASSERT_LEFT
+            | ASSERT_RIGHT'''
+    command = t[1]
+    def exec_assert_type(stack):
+        top = stack.pop()
+        if command == 'ASSERT_NONE':
+            if not isinstance(top, NoneType):
+                stack.clear()
+                print('FAIL')
+        elif command == 'ASSERT_SOME':
+            if not isinstance(top, Some):
+                stack.clear()
+                print('FAIL')
+        elif command == 'ASSERT_LEFT':
+            assert isinstance(top, Or)
+            if not top.isleft:
+                stack.clear()
+                print('FAIL')
+        elif command == 'ASSERT_RIGHT':
+            assert isinstance(top, Or)
+            if not top.isright:
+                stack.clear()
+                print('FAIL')
+        return stack
+    t[0] = exec_assert_type
+
+def p_assertioncmp_macros(t):
+    '''stmt : ASSERT_CMPEQ
+            | ASSERT_CMPNEQ
+            | ASSERT_CMPLT
+            | ASSERT_CMPLTE
+            | ASSERT_CMPGT
+            | ASSERT_CMPGTE'''
+    command = t[1]
+    def exec_compare(stack):
+        top = stack.pop(-1)
+        if type(top) in (Int, Nat, String, Timestamp, Mutez, Bytes, KeyHash):
+            value = stack.pop(-1)
+            assert type(value) == type(top)
+            stack.append(top.compare(value))
+        else:
+            print('Invalid Stack State')
+        return stack
+
+    def exec_assertcmp(stack):
+        stack = exec_compare(stack)
+        command = command.replace('CMP', '')
+        if command == 'ASSERT_EQ':
+            if top != Int(0):
+                print('FAIL')
+                stack.clear()
+        elif command == 'ASSERT_NEQ':
+            if top == Int(0):
+                print('FAIL')
+                stack.clear()
+        elif command == 'ASSERT_LT':
+            if top >= Int(0):
+                print('FAIL')
+                stack.clear()
+        elif command == 'ASSERT_LTE':
+            if top > Int(0):
+                print('FAIL')
+                stack.clear()
+        elif command == 'ASSERT_GT':
+            if top <= Int(0):
+                print('FAIL')
+                stack.clear()
+        elif command == 'ASSERT_GTE':
+            if top < Int(0):
+                print('FAIL')
+                stack.clear()
+        return stack
+    t[0] = exec_assertcmp
+
 def p_statement_failwith(t):
     '''stmt : FAILWITH
             | FAIL'''
@@ -848,7 +1035,8 @@ def p_statement_failwith(t):
             top = Unit
         print(f'fail with {top}')
         print('new stack\n\n')
-        return []
+        stack.clear()
+        return stack
 
     t[0] = exec_failwith
 

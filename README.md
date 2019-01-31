@@ -5,14 +5,13 @@ This is just a simple repl in python to interact with a michelson stack machine.
 
 
 ### TODO:
-    - Annotations
-    - Macros
-    - Domain Specific Types
-    - Operations on contracts
-    - Syntactic Sugar
-    - Assertion Macros
-    - Improve Parser for Indentation
+    - Syntactic Sugar (nested pairs, destructuring, accessing)
+    - (SET_CAR, SET_CDR, IF_SOME, SET_C[AD]+R, MAP_CAR, MAP_CDR, MAP_C[AD]+R)
+    - Check Domain Specific Types
     - Improve Data Type Model
+    - Operations on contracts
+    - Improve Parser for Indentation
+    - Annotations
 
 I'm adding some stuff for debugging.  Calling `%PRINT%;` will print the stack in your contract to stdout.  It parses like regular logic.
 
