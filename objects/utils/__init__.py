@@ -1,3 +1,5 @@
+from .hash import check_signature
+
 def deep_compare(first, second):
     try:
         if type(first) == Pair:

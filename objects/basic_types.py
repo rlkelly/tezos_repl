@@ -1,5 +1,5 @@
 from .tezos import Tezos
-
+from .utils.hash import blake2b_hash, sha256_hash, sha512_hash
 
 class Unit(Tezos):
     value = None
@@ -9,7 +9,14 @@ class Unit(Tezos):
 
 
 class Bytes(Tezos):
-    pass
+    def blake2b(self):
+        return blake2b_hash(self.value)
+
+    def sha256(self):
+        return sha256_hash(self.value)
+
+    def sha512(self):
+        return sha512_hash(self.value)
 
 
 class Operation(Tezos):
@@ -141,8 +148,22 @@ class Nat(Number, Tezos):
 class Timestamp(Nat):
     def add(self, other):
         assert isinstance(other, Int)
-        self.value = self.value + other.value
-        return self
+        return Timestamp(self.value + other.value)
+
+    def add(self, other):
+        assert type(other) in (Timestamp, Int)
+        if isinstance(other, Int):
+            return Timestamp(self.value - other.value)
+        return Int(self.value - other.value)
+
+    def compare(self, other):
+        assert isinstance(other, type(self))
+        if self.value == other.value:
+            return Int(0)
+        if self.value > other.value:
+            return Int(1)
+        if self.value < other.value:
+            return Int(-1)
 
 
 class Address(Nat):
@@ -200,7 +221,7 @@ class Int(Number, Tezos):
 
     def ediv(self, other):
         assert type(other) in (Nat, Int)
-        return return Pair(Int(self.value // other.value), Nat(self.value % other.value))
+        return Pair(Int(self.value // other.value), Nat(self.value % other.value))
 
     @property
     def type(self):

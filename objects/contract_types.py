@@ -40,11 +40,27 @@ class Contract(Tezos):
         self.value = value
 
 
-class Key():
-    pass
+class Key(object):
+    def __init__(self, value):
+        self.value = value
 
-class KeyHash():
-    pass
+    def hash_key(self):
+        return KeyHash(b58check(self.value))
+
+
+class KeyHash(object):
+    def __init__(self, value):
+        self.value = value
+
+    def compare(self, other):
+        assert isinstance(other, KeyHash)
+        if self.value < other.value:
+            return Int(-1)
+        if self.value == other.value:
+            return Int(0)
+        if self.value > other.value:
+            return Int(1)
+
 
 class Signature():
     pass

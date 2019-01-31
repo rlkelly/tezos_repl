@@ -3,12 +3,13 @@ import time
 import ply.lex as lex
 import ply.yacc as yacc
 
+from check_indents import validate_indent
 from objects import (Unit, Nat, Int, Bool,
         Map, BigMap, Timestamp, Mutez,
         NoneType, Pair, String, Bytes, Set, List, Or, Lambda,
         Operation, deep_compare)
 from objects.contract_types import Address, Contract
-from check_indents import validate_indent
+from objects.utils import check_signature
 
 tokens = (
     # reserved words
@@ -107,6 +108,13 @@ tokens = (
     'TRUE',
     'FALSE',
     'PAIR_CONSTRUCTOR',
+
+    ### Cryptographic Primitives
+    'HASH_KEY',
+    'BLAKE2B',
+    'SHA256',
+    'SHA512',
+    'CHECK_SIGNATURE',
 
     # # types
     'TIMESTAMP',
@@ -212,6 +220,14 @@ t_NIL           = 'NIL'
 ### Special Operations
 t_STEPS_TO_QUOTA = 'STEPS_TO_QUOTA'
 t_NOW            = 'NOW'
+
+### Cryptographic Primitives
+t_HASH_KEY        = 'HASH_KEY'
+t_BLAKE2B         = 'BLAKE2B'
+t_SHA256          = 'SHA256'
+t_SHA512          = 'SHA512'
+t_CHECK_SIGNATURE = 'CHECK_SIGNATURE'
+
 
 t_NAT         = 'nat'
 t_STRING      = 'string'
@@ -723,6 +739,34 @@ def p_contract_push(t):
         return stack
     t[0] = push_contract
 
+def p_cryptographic_primitives(t):
+    '''stmt : HASH_KEY
+            | BLAKE2B
+            | SHA256
+            | SHA512
+            | CHECK_SIGNATURE'''
+    command = t[1]
+    def execute_primitive(stack):
+        top = stack.pop(-1)
+        if command == 'HASH_KEY':
+            assert isinstance(top, Key)
+            stack.append(top.hash_key())
+        elif command == 'BLAKE2B':
+            assert isinstance(top, Bytes)
+            stack.append(top.blake2b())
+        elif command == 'SHA256':
+            assert isinstance(top, Bytes)
+            stack.append(top.sha256())
+        elif command == 'SHA512':
+            assert isinstance(top, Bytes)
+            stack.append(top.sha512())
+        else:
+            key = top
+            signature = stack.pop(-1)
+            msg = stack.pop(-1)
+            stack.append(Bool(check_signature(key, signature, msg)))
+        return stack
+    t[0] = execute_primitive
 
 def p_statement_type(t):
     '''type : NAT
