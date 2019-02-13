@@ -12,6 +12,8 @@ from objects.contract_types import Address, Contract
 from objects.utils import check_signature
 
 tokens = (
+    'EXIT',
+
     # reserved words
     'NUMBER',
     'TEXT',
@@ -25,6 +27,10 @@ tokens = (
     'LAMBDA',
     'EXEC',
     'DIP',
+    'PAIR_SUGAR',
+    'UNPAIR_SUGAR',
+    'SET_CAR',
+    'SET_CDR',
 
     ### Generic Comparison
     'EQ',
@@ -88,6 +94,7 @@ tokens = (
     'RIGHT',
     'IF_LEFT',
     'IF_RIGHT',
+    'IF_SOME',
 
     ### Operations on Lists
     'CONS',
@@ -156,7 +163,7 @@ tokens = (
     'ASSERT_NONE',
     'ASSERT_SOME',
     'ASSERT_LEFT',
-    'ASSERT_RIGHT'
+    'ASSERT_RIGHT',
 
     ### type decl
     'PARAMETER',
@@ -164,18 +171,24 @@ tokens = (
     'CODE',
 )
 
-# Tokens
+### My Tokens
+t_EXIT        = '(exit|EXIT)'
 
+# Tokens
 t_DROP        = 'DROP'
 t_SWAP        = 'SWAP'
-t_DUP         = 'DUP'
 t_UNIT        = 'UNIT'
 t_FAILWITH    = 'FAILWITH'
 t_PUSH        = 'PUSH'
 t_LAMBDA      = 'LAMBDA'
 t_EXEC        = 'EXEC'
-t_DIP         = 'DI*P'
-t_DUP         = 'DU*P'
+
+t_DIP          = 'DI*P'
+t_DUP          = 'DU*P'
+t_PAIR_SUGAR   = 'P[PAI]+R'
+t_UNPAIR_SUGAR = 'UN[PAI]+R'
+t_SET_CAR      = 'SET_CAR'
+t_SET_CDR      = 'SET_CDR'
 
 ### Generic Comparison
 t_EQ            = 'EQ'
@@ -234,6 +247,7 @@ t_LEFT          = 'LEFT'
 t_RIGHT         = 'RIGHT'
 t_IF_LEFT       = 'IF_LEFT'
 t_IF_RIGHT      = 'IF_RIGHT'
+t_IF_SOME       = 'IF_SOME'
 
 ### List Operations
 t_CONS          = 'CONS'
@@ -325,7 +339,6 @@ def t_newline(t):
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-
 
 def p_contract(t):
     '''contract_run : contract_decl code_decl
@@ -569,6 +582,105 @@ def p_string_operations(t):
             stack.append(third.slice(first, second))
     t[0] = exec_string_op
 
+def p_set_car(t):
+    '''stmt : SET_CAR'''
+    # CDR; SWAP; PAIR
+    def set_cdr(stack):
+        first = stack.pop(-1).right
+        second = stack.pop(-1)
+        p = Pair(second.type, type(first))
+        p((second.value, first.value))
+        stack.append(p)
+        return stack
+    t[0] = set_cdr
+
+def p_set_cdr(t):
+    '''stmt : SET_CDR'''
+    # CAR ; PAIR
+    def set_cdr(stack):
+        first = stack.pop(-1)
+        second = stack.pop(-1)
+        p = Pair(first.type, type(second))
+        p((first.value, second.value))
+        stack.append(p)
+        return stack
+    t[0] = set_cdr
+
+def p_unpair_sugar(t):
+    '''stmt : UNPAIR_SUGAR'''
+    # TODO: This only works for UNPAIR
+    unpair_sugar = list(t[1][3:])
+    def exec_unpair_values(stack):
+        left = None
+        right = None
+        top = stack.pop(-1)
+        curr_char = unpair_sugar.pop(0)
+        if curr_char == 'A':
+            left = top.left
+            while unpair_sugar:
+                curr_char = unpair_sugar.pop(0)
+                if curr_char == 'A':
+                    top = top.left
+                elif curr_char == 'I':
+                    top = top.right
+                elif curr_char == 'P':
+                    pass
+            right = top
+            stack.append(right)
+            stack.append(left)
+            return stack
+    t[0] = exec_unpair_values
+
+
+def p_pair_sugar(t):
+    '''stmt : PAIR_SUGAR'''
+    pair_sugar = list(t[1][1:])
+    def validate_tree(root):
+        if root is None:
+            return False
+        if not isinstance(root, Pair):
+            return True
+        return validate_tree(root.left) and validate_tree(root.right)
+
+    def exec_pair_sugar(stack):
+        # 'P' 'APPAII' 'R'
+        root = Pair(None, None)
+        nodes = [root]
+        curr_char = pair_sugar.pop(0)
+        active_node = root
+        while pair_sugar:
+            curr_root = nodes[-1]
+            if curr_char == 'A':
+                for curr_root in nodes:
+                    if curr_root.left is None:
+                        curr_root.left = stack.pop(-1)
+                        break
+                curr_char = pair_sugar.pop(0)
+            elif curr_char == 'I':
+                for curr_root in nodes[::-1]:
+                    if curr_root.right is None:
+                        curr_root.right = stack.pop(-1)
+                        break
+                curr_char = pair_sugar.pop(0)
+            else:
+                for curr_root in nodes:
+                    if curr_root.left is None:
+                        curr_root.left = Pair(None, None)
+                        nodes.append(curr_root.left)
+                        break
+                    if curr_root.right is None:
+                        curr_root.right = Pair(None, None)
+                        nodes.append(curr_root.right)
+                        break
+                curr_char = pair_sugar.pop(0)
+        if not validate_tree(root):
+            print('Invalid Statement')
+            stack.clear()
+        else:
+            stack.append(root)
+        return stack
+    t[0] = exec_pair_sugar
+
 def p_pair_operations(t):
     '''stmt : PAIR
             | CAR
@@ -667,23 +779,45 @@ def p_map_operations(t):
 def p_if_left_right(t):
     '''stmt : IF_LEFT body body
         | IF_RIGHT body body'''
-    command = t[0]
+    command = t[1]
     first_body = t[2]
     second_body = t[3]
 
     def exec_if_left_right(stack):
+        assert isinstance(stack[-1], Or)
+        if command == 'IS_LEFT':
+            if stack[-1].isleft:
+                for arg in first_body:
+                    stack = arg(stack)
+            else:
+                for arg in second_body:
+                    stack = arg(stack)
+        else:
+            if stack[-1].isleft:
+                for arg in second_body:
+                    stack = arg(stack)
+            else:
+                for arg in first_body:
+                    stack = arg(stack)
+    t[0] = exec_if_left_right
+
+def p_if_some(t):
+    '''stmt : IF_SOME body body'''
+    first_body = t[2]
+    second_body = t[3]
+
+    def exec_if_some(stack):
         top = stack.pop(-1)
-        assert isinstance(top, Or)
-        if top.isleft:
+        assert type(top) in (Some, NoneType)
+        if isinstance(top, Some):
             stack.append(top)
             for arg in first_body:
                 stack = arg(stack)
         else:
-            stack.append(top)
             for arg in second_body:
                 stack = arg(stack)
         return stack
-    t[0] = exec_if_left_right
+    t[0] = exec_if_some
 
 def p_if_cons(t):
     'stmt : IF_CONS body body'
@@ -841,6 +975,7 @@ def p_statement_type(t):
         | OPERATION
         | ADDRESS
         | TIMESTAMP
+        | MUTEZ
         | LPARENS LPAIR type type RPARENS '''
     if t[1] == 'nat':
         t[0] = Nat
@@ -1043,6 +1178,12 @@ def p_statement_failwith(t):
 def p_printer(t):
     'stmt : PRINTER'
     t[0] = lambda x: print(x[::-1])
+
+def p_exit(t):
+    'stmt : EXIT'
+    import sys
+    print('goodbye')
+    sys.exit()
 
 def p_error(t):
     print('syntax error')
